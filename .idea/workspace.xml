@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2800cdd-60e9-48a2-91fc-bd86f71083dd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cake-common.war" afterPath="$PROJECT_DIR$/target/cake-common.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/com/irelandlight/controller/TestController.class" afterPath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/com/irelandlight/controller/TestController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/irelandlight/controller/TestController.class" afterPath="$PROJECT_DIR$/target/classes/com/irelandlight/controller/TestController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/controller/TestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/controller/TestController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/vm/hello.vm" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/vm/hello.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/spring/spring-dao.xml" afterPath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/spring/spring-dao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cake-common/WEB-INF/vm/hello.vm" afterPath="$PROJECT_DIR$/target/cake-common/WEB-INF/vm/hello.vm" />
     </list>
     <ignored path="Irelandlight.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1082,7 +1074,7 @@
       <option name="presentableId" value="Default" />
       <updated>1478358606861</updated>
       <workItem from="1478358608187" duration="6198000" />
-      <workItem from="1478404791748" duration="4198000" />
+      <workItem from="1478404791748" duration="4312000" />
     </task>
     <servers />
   </component>
@@ -1104,7 +1096,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10396000" />
+    <option name="totallyTimeSpent" value="10510000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
