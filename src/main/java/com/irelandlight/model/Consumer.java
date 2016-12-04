@@ -1,73 +1,31 @@
 package com.irelandlight.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 消费者实体
- *
- * Created by destiny on 2016/12/2.
+ * Created  with Intellij IDEA.
+ * User: Ele_Chen
+ * Date: 2016/12/3
+ * Time: 10:30
+ * Description: 顾客信息表 .
  */
 public class Consumer {
-    /**
-     * 主键
-     */
     private Long id;
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-    /**
-     * 最后修改时间
-     */
-    private Date lastUpdate;
-    /**
-     * 逻辑删除
-     */
-    private Integer visibility;
-    /**
-     * 用户名
-     */
-    private String userName;
-    /**
-     * 密码
-     */
-    private String password;
-    /**
-     * 盐值
-     */
-    private String salt;
-    /**
-     * 昵称
-     */
-    private String nickName;
-    /**
-     * 头像
-     */
-    private String headUrl;
-    /**
-     * 积分
-     */
-    private Integer score;
-    /**
-     * 余额
-     */
-    private Double wallet;
-    /**
-     * 性别
-     */
-    private String gender;
-    /**
-     * 邮箱
-     */
-    private String email;
-    /**
-     * 电话
-     */
-    private String telephone;
-    /**
-     * 生日
-     */
-    private Date birthday;
+    private Date createTime;        //创建时间
+    private Date lastUpdate;        //最近一次更新时间
+    private Integer visibility;     //是否已删除
+    private String userName;        //用户姓名
+    private String password;        //密码
+    private String salt;            //盐值
+    private String nickName;        //昵称
+    private String headImgurl;      //头像存储位置
+    private Integer score;          //用户积分
+    private BigDecimal wallet;      //余额
+    private String gender;          //性别
+    private String email;           //用户邮箱地址
+    private String telephone;       //用户联系方式
+    private Date birthday;          //用户生日
 
     public Long getId() {
         return id;
@@ -133,12 +91,12 @@ public class Consumer {
         this.nickName = nickName;
     }
 
-    public String getHeadUrl() {
-        return headUrl;
+    public String getHeadImgurl() {
+        return headImgurl;
     }
 
-    public void setHeadUrl(String headUrl) {
-        this.headUrl = headUrl;
+    public void setHeadImgurl(String headImgurl) {
+        this.headImgurl = headImgurl;
     }
 
     public Integer getScore() {
@@ -149,11 +107,11 @@ public class Consumer {
         this.score = score;
     }
 
-    public Double getWallet() {
+    public BigDecimal getWallet() {
         return wallet;
     }
 
-    public void setWallet(Double wallet) {
+    public void setWallet(BigDecimal wallet) {
         this.wallet = wallet;
     }
 
@@ -187,26 +145,5 @@ public class Consumer {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    @Override
-    public String toString() {
-        return "Consumer{" +
-                "id=" + id +
-                ", createTime=" + createTime +
-                ", lastUpdate=" + lastUpdate +
-                ", visibility=" + visibility +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", headUrl='" + headUrl + '\'' +
-                ", score=" + score +
-                ", wallet=" + wallet +
-                ", gender='" + gender + '\'' +
-                ", email='" + email + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", birthday=" + birthday +
-                '}';
     }
 }
