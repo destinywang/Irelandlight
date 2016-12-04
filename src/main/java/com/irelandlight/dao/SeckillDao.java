@@ -1,6 +1,5 @@
 package com.irelandlight.dao;
 
-import com.irelandlight.model.Seckill;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
