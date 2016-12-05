@@ -23,6 +23,10 @@ public interface ShopCarService {
 
     //暂不提供修改用户购物车功能
 
-    //通过用户Id查询其购物车信息
+    //通过用户Id查询其购物车信息(resultType)
     public ShopCar findShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
+
+    //通过用户Id查找购物车商品详情列表(resultMap)
+    public ShopCar findShopCarGoodsDetailByConsumerId (@Param("consumerId") Long consumerId) throws Exception;
+
 }

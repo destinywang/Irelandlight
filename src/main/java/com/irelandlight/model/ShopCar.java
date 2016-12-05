@@ -1,6 +1,7 @@
 package com.irelandlight.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created  with Intellij IDEA.
@@ -16,6 +17,8 @@ public class ShopCar {
     private Date lastUpdate;    //最后修改时间
     private Integer visibility; //是否逻辑删除
     private Long consumerId;    //消费者表主键做逻辑外键
+    //map扩展
+    private List<ShopCarGoodsRelation> shopCarGoodsRelations;
 
     public Long getId() {
         return id;
@@ -55,5 +58,13 @@ public class ShopCar {
 
     public void setConsumerId(Long consumerId) {
         this.consumerId = consumerId;
+    }
+
+    public List<ShopCarGoodsRelation> getShopCarGoodsRelations() {
+        return shopCarGoodsRelations;
+    }
+
+    public void setShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) {
+        this.shopCarGoodsRelations = shopCarGoodsRelations;
     }
 }

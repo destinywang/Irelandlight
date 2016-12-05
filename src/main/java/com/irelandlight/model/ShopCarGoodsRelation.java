@@ -17,7 +17,9 @@ public class ShopCarGoodsRelation {
     private Integer visibility; //是否逻辑删除
     private Long shopCarId;     //购物车表主键做逻辑外键
     private Long goodsId;       //商品表主键做逻辑外键
-    private Integer count;      //每周商品的数量
+    private Integer count;      //每种商品的数量
+    //map扩展
+    private Goods goods;
 
     public Long getId() {
         return id;
@@ -74,4 +76,13 @@ public class ShopCarGoodsRelation {
     public void setCount(Integer count) {
         this.count = count;
     }
+
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
+
 }

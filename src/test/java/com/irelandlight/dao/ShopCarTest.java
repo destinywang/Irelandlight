@@ -1,5 +1,6 @@
 package com.irelandlight.dao;
 
+import com.irelandlight.model.ShopCar;
 import com.irelandlight.service.ShopCarService;
 import com.irelandlight.service.impl.ShopCarServiceImpl;
 import com.irelandlight.test.BaseJunitTest;
@@ -30,9 +31,10 @@ public class ShopCarTest extends BaseJunitTest {
     }
 
     @Test
-    public void mtestInsertShopCarByShopCar() throws Exception {
+    public void testFindShopCarGoodsDetailByConsumerId() throws Exception {
         Long consumerId = new Long(1001);
-        shopCarService.deleteConsumerShopCarByConsumerId(consumerId);
+        ShopCar shopCar = shopCarService.findShopCarGoodsDetailByConsumerId(consumerId);
+        System.out.println(shopCar);
     }
 }
 

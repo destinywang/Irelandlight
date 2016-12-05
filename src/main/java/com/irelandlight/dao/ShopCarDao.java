@@ -26,4 +26,7 @@ public interface ShopCarDao {
 
     //通过用户Id查询其购物车信息
     public ShopCar findShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
+
+    //通过用户Id查找购物车商品详情列表(resultMap)
+    public ShopCar findShopCarGoodsDetailByConsumerId (@Param("consumerId") Long consumerId) throws Exception;
 }

@@ -1,4 +1,6 @@
-package com.irelandlight.model;
+package com.irelandlight.po;
+
+import com.irelandlight.model.ShopCarGoodsRelation;
 
 /**
  * Created  with Intellij IDEA.

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * Time: 17:52
  * Description: 购物车service .
  */
-@Service
+@Service("shopCarService")
 public class ShopCarServiceImpl implements ShopCarService {
 
     @Autowired
@@ -34,6 +34,12 @@ public class ShopCarServiceImpl implements ShopCarService {
 
     public ShopCar findShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception {
         ShopCar shopCar = shopCarDao.findShopCarByConsumerId(consumerId);
+        return shopCar;
+    }
+
+    //通过用户Id查找购物车商品详情列表(resultMap)
+    public ShopCar findShopCarGoodsDetailByConsumerId (@Param("consumerId") Long consumerId) throws Exception{
+        ShopCar shopCar = shopCarDao.findShopCarGoodsDetailByConsumerId(consumerId);
         return shopCar;
     }
 }

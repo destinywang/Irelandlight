@@ -1,4 +1,6 @@
-package com.irelandlight.model;
+package com.irelandlight.po;
+
+import com.irelandlight.model.ShopCarGoodsRelation;
 
 /**
  * Created  with Intellij IDEA.
@@ -8,4 +10,5 @@ package com.irelandlight.model;
  * Description: 购物车详情扩展表 .
  */
 public class ShopCarGoodsRelationCustom extends ShopCarGoodsRelation {
+
 }
