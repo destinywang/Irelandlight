@@ -43,4 +43,5 @@
         WHERE
             tb_shop_car.visibility = 0 AND tb_shop_car.consumer_id = #{consumerId}
     </select>
+
 </mapper>
