@@ -10,4 +10,5 @@ package com.irelandlight.model;
 public class ShopCarCustom extends ShopCarGoodsRelation {
     //添加购物车信息扩展属性
 
+
 }

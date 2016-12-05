@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.ShopCarDao">
+
+    <sql id="All_Column_List">
+        id, createTime, lastUpdate, visibility, consumerId
+    </sql>
+
+    <sql id="visibility_true">
+        visibility = 0
+    </sql>
+
+    <sql id="visibility_false">
+        visibility = 1
+    </sql>
+
+    <sql id="check_id">
+        <if test="consumerId!=0 and consumerId !=null">
+            consumer_id = #{consumerId}
+        </if>
+    </sql>
+
+    <!--where条件之通过customerId-->
+    <sql id="Where_By_ConsumerId">
+        <where>
+            <include refid="visibility_true"/>
+            AND
+            <include refid="check_id"/>
+        </where>
+    </sql>
+
+    <!--通过用户id查找用户购物车id-->
+    <select id="findShopCarByConsumerId" parameterType="java.lang.Long" resultType="shopCarCustom">
+        SELECT
+        <include refid="All_Column_List"/>
+        FROM tb_shop_car
+        <where>
+            <include refid="Where_By_ConsumerId"/>
+        </where>
+    </select>
+
+    <!--为用户添加购物车,在用户注册后调用执行(事务处理)-->
+    <insert id="insertShopCarByConsumerId" parameterType="java.lang.Long">
+        <!-- 返回自增主键 -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        <!-- 增加用户购物车 -->
+        INSERT INTO tb_shop_car (consumer_id) VALUES (#{consumerId})
+    </insert>
+
+    <!-- 删除用户购物车 -->
+    <update id="deleteConsumerShopCar" parameterType="java.lang.Long">
+        UPDATE tb_shop_car
+        SET
+        <include refid="visibility_false"/>
+        <where>
+            <include refid="Where_By_ConsumerId"/>
+        </where>
+
+    </update>
+
+    <!--依照用户Id查找用户购物车详情(resultType)-->
+    <select id="findUserShopCarAndDetail" parameterType="java.lang.Long" resultMap="shop_car_map">
+        SELECT
+            tb_consumer.nick_name,
+            tb_goods.`name`,
+            tb_shop_car_goods_relation.count,
+            tb_goods.price,
+            tb_goods.size,
+            tb_goods_image.*
+        FROM
+            tb_consumer,
+            tb_shop_car,
+            tb_shop_car_goods_relation,
+            tb_goods,
+            tb_goods_image
+        WHERE
+            tb_consumer.id = tb_shop_car.consumer_id
+            AND tb_shop_car.id = tb_shop_car_goods_relation.shop_car_id
+            AND tb_shop_car_goods_relation.goods_id = tb_goods.id
+            AND tb_goods.id = tb_goods_image.goods_id
+            AND tb_goods_image.is_major = 1
+            AND tb_consumer.id = 1001
+    </select>
+
+
+</mapper>

@@ -348,7 +348,7 @@ CREATE TABLE `tb_order` (
   `transfer_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '用户期望的送货时间',
   `gift` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '用户希望附赠的礼物',
   `table_ware_count` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT '附赠餐具',
-  `coupon_id` int(11) unsigned NOT NULL COMMENT '活动表主键做逻辑外键',
+  `coupon_id` int(11) unsigned NOT NULL COMMENT '优惠券表主键做逻辑外键',
   `price` decimal(11,2) unsigned NOT NULL COMMENT '订单的价格',
   `transfer_begin` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '配送开始时间',
   `transfer_end` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '配送结束时间',
