@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.OrderMapper">
+    <resultMap id="tbMapToOrder" type="com.irelandlight.model.Order">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_update" property="lastUpdate"/>
+        <result column="visibility" property="visibility"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="consumer_id" property="consumerId"/>
+        <result column="address_id" property="addressId"/>
+        <result column="pay_way" property="payWay"/>
+        <result column="transfer_way" property="transferWay"/>
+        <result column="transfer_time" property="transferTime"/>
+        <result column="gift" property="gift"/>
+        <result column="table_ware_count" property="tableWareCount"/>
+        <result column="coupon_id" property="couponId"/>
+        <result column="price" property="price"/>
+        <result column="transfer_begin" property="transferBegin"/>
+        <result column="transfer_end" property="transferEnd"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+    <select id="selectOrderUnhandle" resultType="int">
+        SELECT COUNT(*) FROM tb_order WHERE status=0;
+    </select>
+    <select id="selectOrderUnpay" resultType="int">
+        SELECT COUNT(*) FROM tb_order WHERE status=1;
+    </select>
+    <select id="selectOrderUndispatch" resultType="int">
+        SELECT COUNT(*) FROM tb_order WHERE status=2;
+    </select>
+    <select id="selectOrderSucceed" resultType="int">
+        SELECT COUNT(*) FROM tb_order WHERE status=3;
+    </select>
+    <select id="selectOrderCanceled" resultType="int">
+        SELECT COUNT(*) FROM tb_order WHERE status=4;
+    </select>
+
+    <select id="selectOrderDetailByMonth" resultType="java.util.HashMap">
+        select month(create_time) mon,count(*) orderCount
+        from tb_order
+        where year(create_time)=2016
+        group by month(create_time);
+    </select>
+
+</mapper>

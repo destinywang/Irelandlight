@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irelandlight.dao.GoodsMapper">
+    <select id="selectGoodsCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM tb_goods
+    </select>
+
+    <select id="selectRecycleGoodsCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM tb_goods
+        WHERE visibility=1
+    </select>
+
+    <select id="selectPutawayGoodsCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM tb_goods
+        WHERE visibility=0
+        AND is_putaway=0
+    </select>
+
+    <select id="selectSoldOutGoodsCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM tb_goods
+        WHERE visibility=0
+        AND is_putway=1
+    </select>
+    <resultMap id="tbMapToPO" type="com.irelandlight.model.Goods">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_update" property="lastUpdate"/>
+        <result column="visibility" property="visibility"/>
+        <result column="is_putaway" property="isPutaway"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="price" property="price"/>
+        <result column="perference" property="perference"/>
+        <result column="use" property="use"/>
+        <result column="taste" property="taste"/>
+        <result column="size" property="size"/>
+        <result column="quantity" property="quantity"/>
+        <result column="sale_count" property="saleCount"/>
+        <result column="weight" property="weight"/>
+    </resultMap>
+
+    <select id="selectGoodsByName" resultMap="tbMapToPO">
+      SELECT *
+      FROM tb_goods
+      WHERE  tb_good.name=#{name}
+      ORDER BY create_time
+    </select>
+
+    <select id="selectUnPutawayGoods">
+      SELECT x.*
+      FROM tb_goods x
+      WHERE visibility=0 AND is_putaway=0 AND x.size=(
+            SELECT min(y.size)
+            FROM tb_goods y
+            WHERE x.name=y.name
+            GROUP BY y.name
+      ) ORDER BY create_time
+    </select>
+
+    <select id="selectPutawayGoods">
+      SELECT x.*
+      FROM tb_goods x
+      WHERE visibility=0 AND is_putaway=1 AND x.size=(
+            SELECT min(y.size)
+            FROM tb_goods y
+            WHERE x.name=y.name
+            GROUP BY y.name
+      ) ORDER BY create_time
+    </select>
+    <update id="updateGoods">
+      UPDATE tb_goods
+      SET last_update=sysdate(),visibility=#{visibility},is_putaway=#{isPutaway},tb_goods.name=#{name},
+      description=#{description},price=#{price},perference=#{preference},use=#{use},
+      taste=#{taste},tb_goods.size=#{size},quantity=#{quantity},sale_count=#{saleCount},weight=#{weight}
+    </update>
+
+    <insert id="insertIntoGoods">
+      <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+          SELECT LAST_INSERT_ID()
+      </selectKey>
+      INSERT INTO tb_goods
+        VALUES(now(),sysdate(),0,0,#{name},#{description},#{price},
+                #{preference},#{use},#{taste},#{size},
+                #{quantity},#{saleCount},#{weight})
+    </insert>
+
+    <delete id="deleteFromGoods" parameterType="com.irelandlight.model.Goods">
+      DELETE FROM tb_goods WHERE id=#{id}
+    </delete>
+</mapper>
