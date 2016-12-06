@@ -16,7 +16,7 @@ public class Goods {
     private String name;            //蛋糕名称
     private String description;     //蛋糕描述
     private BigDecimal price;       //单价
-    private String perference;      //蛋糕偏好
+    private String preference;      //蛋糕偏好
     private String use;             //蛋糕用途
     private String taste;           //蛋糕口味
     private String size;            //蛋糕尺寸
@@ -87,12 +87,12 @@ public class Goods {
         this.price = price;
     }
 
-    public String getPerference() {
-        return perference;
+    public String getPreference() {
+        return preference;
     }
 
-    public void setPerference(String perference) {
-        this.perference = perference;
+    public void setPreference(String preference) {
+        this.preference = preference;
     }
 
     public String getUse() {
