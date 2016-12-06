@@ -1,5 +1,6 @@
 package com.irelandlight.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.StringTokenizer;
  * Time: 11:12
  * Description: 商品表 .
  */
-public class Goods {
+public class Goods implements Serializable{
+    private static final long serialVersionUID = 7982334728700535093L;
     private Long id;                //蛋糕id
     private Date createTime;        //创建时间
     private Date lastUpdate;        //最后更新时间
@@ -152,4 +154,25 @@ public class Goods {
 
     private Integer weight;         //蛋糕权重
 
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", isPutaway=" + isPutaway +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", perference='" + perference + '\'' +
+                ", use='" + use + '\'' +
+                ", taste='" + taste + '\'' +
+                ", size='" + size + '\'' +
+                ", quantity=" + quantity +
+                ", saleCount=" + saleCount +
+                ", goodsImages=" + goodsImages +
+                ", weight=" + weight +
+                '}';
+    }
 }

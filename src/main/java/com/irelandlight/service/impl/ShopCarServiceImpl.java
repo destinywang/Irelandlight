@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * Created  with Intellij IDEA.
  * User: Ele_Chen
@@ -17,12 +19,23 @@ import org.springframework.stereotype.Service;
 @Service("shopCarService")
 public class ShopCarServiceImpl implements ShopCarService {
 
-    @Autowired
+    @Resource
     private ShopCarDao shopCarDao;
 
+    /**
+     *
+     * @param shopCar
+     * @throws Exception
+     */
     public void insertShopCarByShopCar(ShopCar shopCar) throws Exception {
         shopCarDao.insertShopCarByShopCar(shopCar);
     }
+
+    /**
+     *
+     * @param consumerId
+     * @throws Exception
+     */
 
     public void insertShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception {
         shopCarDao.insertShopCarByConsumerId(consumerId);
@@ -32,6 +45,12 @@ public class ShopCarServiceImpl implements ShopCarService {
         shopCarDao.deleteConsumerShopCarByConsumerId(consumerId);
     }
 
+    /**
+     *
+     * @param consumerId
+     * @return
+     * @throws Exception
+     */
     public ShopCar findShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception {
         ShopCar shopCar = shopCarDao.findShopCarByConsumerId(consumerId);
         return shopCar;

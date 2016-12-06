@@ -82,4 +82,18 @@ public class GoodsImage {
     public void setPosition(Integer position) {
         this.position = position;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsImage{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", isMajor=" + isMajor +
+                ", goodsId=" + goodsId +
+                ", url='" + url + '\'' +
+                ", position=" + position +
+                '}';
+    }
 }

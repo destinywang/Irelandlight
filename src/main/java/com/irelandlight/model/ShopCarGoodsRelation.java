@@ -85,4 +85,17 @@ public class ShopCarGoodsRelation {
         this.goods = goods;
     }
 
+    @Override
+    public String toString() {
+        return "ShopCarGoodsRelation{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", shopCarId=" + shopCarId +
+                ", goodsId=" + goodsId +
+                ", count=" + count +
+                ", goods=" + goods +
+                '}';
+    }
 }

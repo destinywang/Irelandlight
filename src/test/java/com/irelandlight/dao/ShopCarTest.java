@@ -1,14 +1,9 @@
 package com.irelandlight.dao;
 
 import com.irelandlight.model.ShopCar;
-import com.irelandlight.service.ShopCarService;
 import com.irelandlight.service.impl.ShopCarServiceImpl;
 import com.irelandlight.test.BaseJunitTest;
-import junit.runner.BaseTestRunner;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
@@ -25,9 +20,17 @@ public class ShopCarTest extends BaseJunitTest {
     private ShopCarServiceImpl shopCarService;
 
     @Test
-    public void testInsertShopCarByShopCar() throws Exception {
+    public void testInsertShopCarByConsumerId() throws Exception {
         Long consumerId = new Long(1001);
-        shopCarService.deleteConsumerShopCarByConsumerId(consumerId);
+        shopCarService.insertShopCarByConsumerId(consumerId);
+    }
+
+    @Test
+    public void testInsertShopCarByShopCar() throws Exception {
+        ShopCar shopCar = new ShopCar();
+        shopCar.setConsumerId(1008L);
+        shopCarService.insertShopCarByShopCar(shopCar);
+        System.out.println(shopCar.getId());
     }
 
     @Test
@@ -36,5 +39,6 @@ public class ShopCarTest extends BaseJunitTest {
         ShopCar shopCar = shopCarService.findShopCarGoodsDetailByConsumerId(consumerId);
         System.out.println(shopCar);
     }
+
 }
 

@@ -1,10 +1,14 @@
 package com.irelandlight.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import com.irelandlight.model.ShopCar;
 import com.irelandlight.service.ShopCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -31,13 +35,17 @@ public class ShopCarController {
     }
 
     @RequestMapping("findShopCarGoodsDetail")
+    @ResponseBody
     public String findShopCarGoodsDetail(Long consumerId) throws Exception {
         ShopCar shopCarGoodsDetail =  shopCarService.findShopCarGoodsDetailByConsumerId(consumerId);
-
+        //String shopCarGoodsDetailJson = JSONObject.toJSONString(shopCarGoodsDetail);
+        JSONObject json = new JSONObject();
+        json.put("goods", shopCarGoodsDetail);
+//        json.put("goodsName", );
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("shopCarGoodsDetail",shopCarGoodsDetail);
-
-        return "shopCar/shopCar";
+        return json.toJSONString();
+       // return "shopCar/shopCar";
     }
 
 

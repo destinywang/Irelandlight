@@ -67,4 +67,17 @@ public class ShopCar {
     public void setShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) {
         this.shopCarGoodsRelations = shopCarGoodsRelations;
     }
+
+    @Override
+    public String toString() {
+        return "ShopCar{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", consumerId=" + consumerId +
+                ", shopCarGoodsRelations=" + shopCarGoodsRelations +
+                '}';
+    }
+
 }
