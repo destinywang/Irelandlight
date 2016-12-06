@@ -1,35 +1,32 @@
-package com.irelandlight.controller;
+package com.irelandlight.dao;
 
-import com.irelandlight.dao.GoodsMapper;
-import com.irelandlight.dao.OrderMapper;
+import com.irelandlight.BaseJunitTest;
+import com.irelandlight.controller.GoodsMapperTest;
 import com.irelandlight.model.Goods;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.SqlOutParameter;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by mac on 2016/12/5.
+ * Created by mac on 2016/12/6.
  */
-@Controller
-public class GoodsMapperTest {
+public class GoodsDaoTest extends BaseJunitTest{
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
     private GoodsMapper goodsMapper;
 
-    @RequestMapping("/queryTest")
-    public void testSel(){
+    @Test
+    public void testMethod(){
         System.out.println(orderMapper.selectOrderCanceled());
         System.out.println(orderMapper.selectOrderSucceed());
         System.out.println(orderMapper.selectOrderUnpay());
         System.out.println(orderMapper.selectOrderUnhandle());
 
-        List<Map<Object,Object>>  orderList=orderMapper.selectOrderDetailByMonth();
+        List<Map<Object,Object>> orderList=orderMapper.selectOrderDetailByMonth();
 
         for (Map<Object,Object> map:orderList) {
             for (Map.Entry<Object, Object> entry : map.entrySet()) {
@@ -69,5 +66,6 @@ public class GoodsMapperTest {
 
         // System.out.println(good.getId());
     }
+
 
 }

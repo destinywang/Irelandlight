@@ -25,8 +25,9 @@ public interface GoodsMapper {
     List<Goods> selectPutawayGoods();
     //修改商品中的字段值
     void updateGoods(@Param("goods") Goods goods);
-    //将商品添加到tb_goods表中
+    //将商品添加到tb_goods表中 @Param("goods")
     void insertIntoGoods(@Param("goods") Goods goods);
+    void insertIntoGoodsByParam(Goods goods);
     //将商品从tb_goods表中删除
     void deleteFromGoods(@Param("goods") Goods goods);
 }

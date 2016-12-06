@@ -74,13 +74,13 @@
     <update id="updateGoods">
       UPDATE tb_goods
       SET last_update=sysdate(),visibility=#{goods.visibility},is_putaway=#{goods.isPutaway},tb_goods.name=#{goods.name},
-      description=#{goods.description},price=#{goods.price},preference=#{goods.preference},use=#{goods.use},
+      description=#{goods.description},price=#{goods.price},preference=#{goods.preference},tb_goods.use=#{goods.use},
       taste=#{goods.taste},tb_goods.size=#{goods.size},quantity=#{goods.quantity},sale_count=#{goods.saleCount},weight=#{goods.weight}
       WHERE id=#{goods.id}
     </update>
 
-    <insert id="insertIntoGoods">
-      <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+    <insert id="insertIntoGoods" >
+      <selectKey keyProperty="goods.id" order="AFTER" resultType="java.lang.Long">
           SELECT LAST_INSERT_ID()
       </selectKey>
       INSERT INTO tb_goods
@@ -97,6 +97,23 @@
         #{goods.saleCount},#{goods.weight})
     </insert>
 
+    <insert id="insertIntoGoodsByParam" parameterType="com.irelandlight.model.Goods">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO tb_goods
+        (create_time,last_update,
+        visibility,is_putaway,
+        tb_goods.name,description,price,preference,
+        tb_goods.use,taste,size,quantity,
+        sale_count,weight)
+        VALUES
+        (now(),now(),
+        0,0,
+        #{name},#{description},#{price},#{preference},
+        #{use},#{taste},#{size},#{quantity},
+        #{saleCount},#{weight})
+    </insert>
     <delete id="deleteFromGoods" >
       DELETE FROM tb_goods WHERE id=#{id}
     </delete>
