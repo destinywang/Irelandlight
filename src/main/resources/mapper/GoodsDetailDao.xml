@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper>
+    <!--
+          List<GoodsImage> queryGoodsImage(Integer id);
+          List<GoodsVO> queryGoodsDetail(Integer id);
+          List<Comment> queryGoodsComment(Integer id);
+    -->
+   <resultMap id="goodsDetail" type="com.irelandlight.model.vo.GoodsInfoVO">
+       <id column="tb_goods.id" jdbcType="int" property="goodsId"/>
+       <result column="tb_goods.name" jdbcType="varchar" property="goodsName"/>
+       <result column="tb_goods.description" jdbcType="varchar" property="goodsDescription"/>
+       <result column="tb_goods.quantity" jdbcType="int" property="goodsQuantity"/>
+   </resultMap>
+    <resultMap id="goodsSizePrice" type="com.irelandlight.model.vo.SizePrice">
+        <result column="goods_id" jdbcType="int" property="goodsId"/>
+        <result column="goods_price" jdbcType="decimal" property="goodsPrice"/>
+        <result column="goods_size" jdbcType="varchar" property="goodsSize"/>
+    </resultMap>
+    <!--商品轮播图-->
+    <select id="queryGoodsImage" parameterType="int" resultType="com.irelandlight.model.GoodsImage">
+        SELECT * FROM tb_goods_image WHERE visibility=0 AND goods_id=#{id} ORDER BY `position`
+    </select>
+
+    <!--查询商品具体信息-->
+    <select id="queryGoodsDetail" parameterType="int" resultMap="goodsDetail">
+        SELECT tb_goods.id,tb_goods.name,tb_goods.description,tb_goods.quantity
+        FROM tb_goods
+        WHERE tb_goods.id=#{id}
+             AND tb_goods.visibility=0
+    </select>
+    <!--查询该商品的价格尺寸表-->
+    <select id="querySizePrice" parameterType="int" resultMap="goodsSizePrice">
+        SELECT goods_id,goods_price,goods_size FROM tb_size_price WHERE visibility=0 AND goods_id=#{id}
+    </select>
+
+    <!--查询关于该商品的全部评论-->
+    <select id="queryGoodsComment" parameterType="int" resultType="com.irelandlight.model.Comment">
+        SELECT * FROM tb_comment WHERE goods_id=#{id} AND visibility=0
+    </select>
+
+    <!--添加评论-->
+    <insert id="addComment" parameterType="com.irelandlight.model.Comment">
+        INSERT INTO VALUE (`#{id}`,`#{createTime}`,`#{lastUpdate}`,`#{visibility}`,
+        `#{content}`,`#{consumerId}`,`#{productorId}`,`#{goodsId}`,`#{commentedId}`)
+    </insert>
+</mapper>

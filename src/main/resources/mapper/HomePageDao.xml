@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irelandlight.dao.HomePageDao">
+
+    <resultMap id="newsResult" type="com.irelandlight.model.vo.NewsVO">
+        <result column="tb_news.content" jdbcType="varchar" property="newsContent"/>
+        <result column="tb_news.title" jdbcType="varchar" property="newsTitle"/>
+        <result column="tb_productor.user_name" jdbcType="varchar" property="newsProductorName"/>
+    </resultMap>
+    <resultMap id="goodsResult" type="com.irelandlight.model.vo.GoodsVO">
+        <id column="tb_goods.id" jdbcType="int" property="goodsId"/>
+        <result column="tb_goods_image.url" jdbcType="varchar" property="goodsImageUrl"/>
+        <result column="tb_goods.name" jdbcType="varchar" property="goodsName"/>
+        <result column="tb_size_price.price" jdbcType="decimal" property="goodsPrice"/>
+    </resultMap>
+    <!--查询首页轮播图-->
+    <select id="queryHomePageImage" resultType="com.irelandlight.model.HomePageImage">
+        SELECT * FORM tb_homepage_image WHERE  visibility=0 ORDER BY position
+    </select>
+    <!--查询公告-->
+    <select id="queryNews" resultMap="newsResult">
+       SELECT tb_news.content,tb_news.title,tb_productor.user_name
+           FROM tb_news,tb_productor
+           WHERE  tb_news.visibility=0 AND tb_productor.visibility=0
+                 AND tb_news.productor_id=tb_productor.id
+    </select>
+    <!--查询热门商品列表-->
+    <select id="queryHotGoods"  resultMap="goodsResult">
+        SELECT tb_goods.id,tb_goods.name,tb_goods_image.url,tb_size_price.price
+           FROM tb_goods,tb_goods_image,tb_size_price
+            WHERE  tb_goods.visibility=0 AND  tb_goods_image.visibility=0 AND tb_size_price.visibility=0
+                  AND  tb_goods.id=tb_goods_image.goods_id
+                  AND  tb_goods.id=tb_size_price.goods_id
+                  AND  tb_goods_image.is_major=1
+                  AND  tb_goods_size_price.is_default=1
+             ORDER BY tb_goods.weight DESC ,tb_goods.sale_count DESC
+             LIMIT 0,6
+    </select>
+</mapper>

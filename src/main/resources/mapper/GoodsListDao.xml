@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper>
+<!--
+   List<GoodsVO> queryAllGoods();
+   List<GoodsVO> queryBySearchGoods(String searchBox);
+   List<GoodsVO> queryFilterGoods(FilterGoodsVO filter);
+-->
+    <!--查找所有商品列表的结果-->
+    <resultMap id="GoodsResult" type="com.irelandlight.model.vo.GoodsVO">
+        <id column="tb_goods.id" jdbcType="int" property="goodsId"/>
+        <result column="tb_goods_image.url" jdbcType="varchar" property="goodsImageUrl"/>
+        <result column="tb_goods.name" jdbcType="varchar" property="goodsName"/>
+        <result column="tb_size_price.price" jdbcType="decimal" property="goodsPrice"/>
+    </resultMap>
+    <sql id="goodsSelect">
+         SELECT tb_goods.id,tb_goods.name,tb_goods_image.url,tb_size_price.price
+           FROM tb_goods,tb_goods_image,tb_size_price
+    </sql>
+    <sql id="goodsWhere">
+            WHERE  tb_goods.visibility=0 AND  tb_goods_image.visibility=0 AND tb_size_price.visibility=0
+                  AND  tb_goods.id=tb_goods_image.goods_id
+                  AND  tb_goods.id=tb_size_price.goods_id
+                  AND  tb_goods_image.is_major=1
+                  AND  tb_goods_size_price.is_default=1
+    </sql>
+    <sql id="goodsOrderBy">
+             ORDER BY tb_goods.weight DESC ,tb_goods.sale_count DESC
+    </sql>
+
+    <!--查询所有商品-->
+    <select id="queryAllGoods" resultMap="GoodsResult">
+        <include refid="goodsSelect"/>
+        <include refid="goodsWhere"/>
+        <include refid="goodsOrderBy"/>
+    </select>
+
+    <!--根据搜索框进行查询-->
+    <select id="queryBySearchGoods" parameterType="String" resultMap="GoodsResult">
+        <include refid="goodsSelect"/>
+        <include refid="goodsWhere"/>
+        AND tb_goods.name LIKE #{searchBox}
+        <include refid="goodsOrderBy"/>
+    </select>
+
+    <!--根据筛选条件进行查询-->
+    <select id="queryFilterGoods" parameterType="com.irelandlight.model.vo.FilterGoodsVO" resultMap="GoodsResult">
+        <include refid="goodsSelect"/>
+        <include refid="goodsWhere"/>
+        <if test="use!=null" >
+            AND tb_goods.use = #{use}
+        </if>
+        <if test="taste!=null">
+            AND tb_goods.taste=#{taste}
+        </if>
+        <if test="perference !=null">
+            AND tb_goods.perferenc=#{perference}
+        </if>
+        <include refid="goodsOrderBy"/>
+    </select>
+
+</mapper>

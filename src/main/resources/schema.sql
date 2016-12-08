@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50713
 File Encoding         : 65001
 
-Date: 2016-12-03 23:01:30
+Date: 2016-12-04 22:53:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -348,7 +348,7 @@ CREATE TABLE `tb_order` (
   `transfer_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '用户期望的送货时间',
   `gift` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '用户希望附赠的礼物',
   `table_ware_count` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT '附赠餐具',
-  `coupon_id` int(11) unsigned NOT NULL COMMENT '活动表主键做逻辑外键',
+  `coupon_id` int(11) unsigned NOT NULL COMMENT '优惠券表主键做逻辑外键',
   `price` decimal(11,2) unsigned NOT NULL COMMENT '订单的价格',
   `transfer_begin` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '配送开始时间',
   `transfer_end` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '配送结束时间',
@@ -413,7 +413,7 @@ CREATE TABLE `tb_productor` (
 -- ----------------------------
 INSERT INTO `tb_productor` VALUES ('1', '2016-12-03 13:47:06', '2016-12-03 14:35:35', '0', 'admin', '123456', '23435');
 INSERT INTO `tb_productor` VALUES ('2', '2016-12-03 13:47:51', '2016-12-03 14:35:37', '0', 'boss', '123456', '23454');
-INSERT INTO `tb_productor` VALUES ('3', '2016-12-03 13:49:03', '2016-12-03 13:49:03', '0', 'boss\swife', '123456', '23135');
+INSERT INTO `tb_productor` VALUES ('3', '2016-12-03 13:49:03', '2016-12-03 13:49:03', '0', 'boss\'swife', '123456', '23135');
 
 -- ----------------------------
 -- Table structure for tb_productor_log
@@ -454,11 +454,11 @@ CREATE TABLE `tb_shop_car` (
 -- ----------------------------
 -- Records of tb_shop_car
 -- ----------------------------
-INSERT INTO `tb_shop_car` VALUES ('1', '2016-12-03 00:13:59', '2016-12-03 00:13:59', '0', '1');
-INSERT INTO `tb_shop_car` VALUES ('2', '2016-12-03 00:14:12', '2016-12-03 00:14:12', '0', '2');
-INSERT INTO `tb_shop_car` VALUES ('3', '2016-12-03 00:14:13', '2016-12-03 00:14:13', '0', '3');
-INSERT INTO `tb_shop_car` VALUES ('4', '2016-12-03 00:14:14', '2016-12-03 00:14:14', '0', '4');
-INSERT INTO `tb_shop_car` VALUES ('5', '2016-12-03 21:16:16', '2016-12-03 21:16:16', '0', '5');
+INSERT INTO `tb_shop_car` VALUES ('1', '2016-12-03 00:13:59', '2016-12-04 19:47:22', '0', '1001');
+INSERT INTO `tb_shop_car` VALUES ('2', '2016-12-03 00:14:12', '2016-12-04 19:47:28', '0', '1002');
+INSERT INTO `tb_shop_car` VALUES ('3', '2016-12-03 00:14:13', '2016-12-04 19:47:30', '0', '1003');
+INSERT INTO `tb_shop_car` VALUES ('4', '2016-12-03 00:14:14', '2016-12-04 19:47:32', '0', '1004');
+INSERT INTO `tb_shop_car` VALUES ('5', '2016-12-03 21:16:16', '2016-12-04 19:47:35', '0', '1005');
 
 -- ----------------------------
 -- Table structure for tb_shop_car_goods_relation
