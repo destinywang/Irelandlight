@@ -23,6 +23,14 @@ public interface GoodsMapper {
     List<Goods> selectUnPutawayGoods();
     //查询已上架商品
     List<Goods> selectPutawayGoods();
+
+
+
+    //test
+    List<Goods> selectGoods();
+
+
+
     //修改商品中的字段值
     void updateGoods(@Param("goods") Goods goods);
     //将商品添加到tb_goods表中 @Param("goods")

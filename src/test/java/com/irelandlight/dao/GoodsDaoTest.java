@@ -25,6 +25,7 @@ public class GoodsDaoTest extends BaseJunitTest{
         System.out.println(orderMapper.selectOrderSucceed());
         System.out.println(orderMapper.selectOrderUnpay());
         System.out.println(orderMapper.selectOrderUnhandle());
+        List<Goods> itemsList= goodsMapper.selectGoods();
 
         List<Map<Object,Object>> orderList=orderMapper.selectOrderDetailByMonth();
 
