@@ -4,10 +4,10 @@ package com.irelandlight.model.vo;
  * Created by mac on 2016/12/8.
  */
 public class ItemsInfo {
-    private int goodsTotal;
-    private int upedGoods;
-    private int unUpGoods;
-    private int goodsComment;
+    private int goodsTotal; //商品总数
+    private int upedGoods;  //已上架商品
+    private int unUpGoods;  //未上架商品
+    private int goodsComment;   //商品的品论总数
 
     public int getGoodsTotal() {
         return goodsTotal;

@@ -33,7 +33,7 @@ public class AdminOperatedLog{
 
     @Pointcut("execution(* com.irelandlight.service..*.*(..))")     //service层的切入点
     public void serviceAspect(){}
-    @Pointcut("execution(* com.irelandlight.controller.*(..))")     //controller层的切入点
+    @Pointcut("execution(* com.irelandlight.controller.*.*(..))")     //controller层的切入点
     public void controllerAspect(){}
 
 
@@ -43,24 +43,31 @@ public class AdminOperatedLog{
         //获取请求对象
         HttpServletRequest request=((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //从请求对象中获取session对象
-        HttpSession session=request.getSession();
-        //从HttpSession对象中获得管理员的id或者获得整个管理员对象
-        Productor productor=(Productor) session.getAttribute("CURRENT_PRODUCTOR");
-        //获取远程调用者的ip地址
-        String ip=request.getRemoteAddr();
-        String operation=jp.getSignature().getName();
-        String para="";
-        if(jp.getArgs()!=null&&jp.getArgs().length>0){
-            for(int i=0;i<jp.getArgs().length;i++){
-                para+=JSON.toJSONString(jp.getArgs()[i])+"/";
+        if(request==null){
+            System.out.println("未查获的httpServletRequest对象");
+            logger.info("未查获的httpServletRequest对象");
+        }else{
+            HttpSession session=request.getSession();
+            //从HttpSession对象中获得管理员的id或者获得整个管理员对象
+            Productor productor=(Productor) session.getAttribute("CURRENT_PRODUCTOR");
+            if(productor!=null){
+                //获取远程调用者的ip地址
+                String ip=request.getRemoteAddr();
+                String operation=jp.getSignature().getName();
+                StringBuffer para=new StringBuffer();
+                if(jp.getArgs()!=null&&jp.getArgs().length>0){
+                    for(int i=0;i<jp.getArgs().length;i++){
+                        para.append(JSON.toJSONString(jp.getArgs()[i])+"/");
+                    }
+                }
+                String info="Requestor:"+productor.getUserName()+"--Address:"+ip+"--Operation:"+operation+"--Parem:"+para;
+                logger.info(info);
+                ProductorLog productorLog=new ProductorLog();
+                productorLog.setContent(info);
+                productorLog.setProductorId(productor.getId());
+                pOperatinonLogMapper.insertOperation(productorLog);
             }
         }
-        String info="Requestor:"+productor.getUserName()+"--Address:"+ip+"--Operation:"+operation+"--Parem:"+para;
-        logger.info(info);
-        ProductorLog productorLog=new ProductorLog();
-        productorLog.setContent(info);
-        productorLog.setProductorId(productor.getId());
-        pOperatinonLogMapper.insertOperation(productorLog);
 
     }
 

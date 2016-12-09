@@ -41,26 +41,7 @@ public class GoodsMapperTest {
         System.out.println(orderMapper.selectOrderByOrderNum("cx06143047").getRemark());
 
         List<Goods> goodsList=goodsMapper.selectPutawayGoods();
-        for (Goods goods:goodsList){
-            System.out.println("已经上架的商品为:"+goods.getName()+" size:"+goods.getSize());
-        }
-        goodsList=goodsMapper.selectUnPutawayGoods();
 
-        for (Goods goods:goodsList){
-            System.out.println("未上架的商品为:"+goods.getName()+" size:"+goods.getSize());
-        }
-        Goods good=new Goods();
-        good.setIsPutaway(1);
-        good.setName("香");
-        good.setDescription("吃");
-        good.setPreference("绿绿的，很美味");
-        good.setPrice(new BigDecimal(223.56));
-        good.setUse("啦啦");
-        good.setTaste("哈哈");
-        good.setSize("2");
-        good.setQuantity(58);
-        good.setSaleCount(77);
-        good.setWeight(3);
         //goodsMapper.insertIntoGoods(good);
 
         //  System.out.println(good.getId());

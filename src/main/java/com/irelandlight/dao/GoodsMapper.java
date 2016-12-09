@@ -1,9 +1,12 @@
 package com.irelandlight.dao;
 
 import com.irelandlight.model.Goods;
+import com.irelandlight.model.GoodsSizePrice;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mac on 2016/12/3.
@@ -23,14 +26,14 @@ public interface GoodsMapper {
     List<Goods> selectUnPutawayGoods();
     //查询已上架商品
     List<Goods> selectPutawayGoods();
-
-
-
-    //test
-    List<Goods> selectGoods();
-
-
-
+    //按照商品id查找商品尺寸与价格的对应关系
+    List<GoodsSizePrice> selectPWSizePriceMapByGoodsId(@Param("goodsId") Long goodsId);
+    //按照商品id查找商品尺寸与价格的对应关系
+    List<GoodsSizePrice> selectUPWSizePriceMapByGoodsId(@Param("goodsId") Long goodsId);
+    //按照商品id查找商品头像的url
+    String selectGoodsHeadImgUrlByGoodsId(@Param("goodsId") Long goodsId);
+    //查询商品的评价总数
+    int selectGoodsComment();
     //修改商品中的字段值
     void updateGoods(@Param("goods") Goods goods);
     //将商品添加到tb_goods表中 @Param("goods")

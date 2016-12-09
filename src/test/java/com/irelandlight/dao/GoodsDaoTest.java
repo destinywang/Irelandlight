@@ -3,10 +3,14 @@ package com.irelandlight.dao;
 import com.irelandlight.BaseJunitTest;
 import com.irelandlight.controller.GoodsMapperTest;
 import com.irelandlight.model.Goods;
+import com.irelandlight.model.GoodsSizePrice;
+import com.irelandlight.model.vo.ContainerItem;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,53 +24,54 @@ public class GoodsDaoTest extends BaseJunitTest{
     private GoodsMapper goodsMapper;
 
     @Test
-    public void testMethod(){
+    public void testMethod() {
         System.out.println(orderMapper.selectOrderCanceled());
         System.out.println(orderMapper.selectOrderSucceed());
         System.out.println(orderMapper.selectOrderUnpay());
         System.out.println(orderMapper.selectOrderUnhandle());
-        List<Goods> itemsList= goodsMapper.selectGoods();
+        List<Map<Object, Object>> orderList = orderMapper.selectOrderDetailByMonth();
 
-        List<Map<Object,Object>> orderList=orderMapper.selectOrderDetailByMonth();
-
-        for (Map<Object,Object> map:orderList) {
+        for (Map<Object, Object> map : orderList) {
             for (Map.Entry<Object, Object> entry : map.entrySet()) {
                 System.out.println(entry.getKey() + ":" + entry.getValue());
             }
         }
 
+        List<ContainerItem> itemsList = new ArrayList<ContainerItem>();
 
-        System.out.println(orderMapper.selectOrderByOrderNum("cx06143047").getRemark());
+        List<Goods> goodsList = goodsMapper.selectPutawayGoods();
 
-        List<Goods> goodsList=goodsMapper.selectPutawayGoods();
-        for (Goods goods:goodsList){
-            System.out.println("已经上架的商品为:"+goods.getName()+" size:"+goods.getSize());
+        if (goodsList != null) {
+            for (Goods goods : goodsList) {
+                ContainerItem containerItem = new ContainerItem();
+                List<GoodsSizePrice> listGoodSizeInfo = goodsMapper.selectPWSizePriceMapByGoodsId(goods.getId());
+                addGoodsInfoToContainerItem(containerItem, goods, listGoodSizeInfo);
+                //将查到的这个加入到试图展示层的list中
+                itemsList.add(containerItem);
+            }
         }
-        goodsList=goodsMapper.selectUnPutawayGoods();
-
-        for (Goods goods:goodsList){
-            System.out.println("未上架的商品为:"+goods.getName()+" size:"+goods.getSize());
-        }
-        Goods good=new Goods();
-        good.setIsPutaway(1);
-        good.setName("香");
-        good.setDescription("吃");
-        good.setPreference("绿绿的，很美味");
-        good.setPrice(new BigDecimal(223.56));
-        good.setUse("啦啦");
-        good.setTaste("哈哈");
-        good.setSize("2");
-        good.setQuantity(58);
-        good.setSaleCount(77);
-        good.setWeight(3);
-        //goodsMapper.insertIntoGoods(good);
-
-        //  System.out.println(good.getId());
-
-        // goodsMapper.insertIntoGoodsByParam(good);
-
-        // System.out.println(good.getId());
+        System.out.println(itemsList);
     }
-
+    private void addGoodsInfoToContainerItem(ContainerItem containerItem,Goods goods,List<GoodsSizePrice> listGoodSizeInfo){
+        //给查找出来的商品信息填充到试图展示层的vo对象当中
+        containerItem.setDescription(goods.getDescription());
+        containerItem.setQuantity(goods.getQuantity());
+        containerItem.setGoodsId(goods.getId());
+        containerItem.setGoodsName(goods.getName());
+        containerItem.setLastUpdate(goods.getLastUpdate());
+        containerItem.setWeight(goods.getWeight());
+        //根据商品id查找商品主图
+        containerItem.setGoodsImgUrl(goodsMapper.selectGoodsHeadImgUrlByGoodsId(goods.getId()));
+        List<Map<String ,BigDecimal>> sizePriceMapList=new ArrayList<Map<String, BigDecimal>>();
+        //查找当前商品的尺寸和价格
+        if(listGoodSizeInfo!=null){
+            for(GoodsSizePrice item:listGoodSizeInfo){
+                Map<String,BigDecimal> map=new HashMap<String, BigDecimal>();
+                map.put(item.getSize(),item.getPrice());
+                sizePriceMapList.add(map);
+            }
+        }
+        containerItem.setPriceMapSize(sizePriceMapList);
+    }
 
 }

@@ -15,13 +15,12 @@ public class Goods {
     private Integer isPutaway;      //是否上架  0表示未上架，1表示上架
     private String name;            //蛋糕名称
     private String description;     //蛋糕描述
-    private BigDecimal price;       //单价
     private String preference;      //蛋糕偏好
     private String use;             //蛋糕用途
     private String taste;           //蛋糕口味
-    private String size;            //蛋糕尺寸
     private Integer quantity;       //库存
     private Integer saleCount;      //销售量
+    private Integer status;         //商品的状态
 
     public Long getId() {
         return id;
@@ -79,12 +78,12 @@ public class Goods {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getPreference() {
@@ -109,14 +108,6 @@ public class Goods {
 
     public void setTaste(String taste) {
         this.taste = taste;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 
     public Integer getQuantity() {
