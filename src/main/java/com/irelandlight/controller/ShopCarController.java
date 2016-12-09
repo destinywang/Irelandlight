@@ -1,8 +1,6 @@
 package com.irelandlight.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
-import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import com.irelandlight.model.ShopCar;
 import com.irelandlight.service.ShopCarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
  * User: Ele_Chen
  * Date: 2016/12/5
  * Time: 18:09
- * Description: 目的... .
+ * Description: shopCar controller .
  */
 
 @Controller
@@ -28,7 +26,7 @@ public class ShopCarController {
 
     @RequestMapping("findShopCar")
     public String findShopCarByConsumerId(Long consumerId) throws Exception {
-        shopCarService.findShopCarByConsumerId(consumerId);
+        shopCarService.findShopCarDetailByConsumerId(consumerId);
 
 
         return "shopCar/shopCar";
@@ -41,8 +39,8 @@ public class ShopCarController {
         //String shopCarGoodsDetailJson = JSONObject.toJSONString(shopCarGoodsDetail);
         //创建json对象
         JSONObject json = new JSONObject();
-        //给json添加数据对象        json.put("goods", shopCarGoodsDetail);
-//        json.put("goodsName", );
+        //给json添加数据对象
+        // json.put("goods", shopCarGoodsDetail);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("shopCarGoodsDetail",shopCarGoodsDetail);
         return json.toJSONString();

@@ -1,4 +1,4 @@
-package com.irelandlight.dao;
+package com.irelandlight.service;
 
 /**
  * Created by destiny on 2016/12/2.

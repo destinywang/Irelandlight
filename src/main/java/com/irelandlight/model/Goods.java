@@ -30,6 +30,7 @@ public class Goods{
     private List<GoodsImage> goodsImages;
     private List<GoodsSize> goodsSizes;
 
+
     public Long getId() {
         return id;
     }

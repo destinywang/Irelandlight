@@ -5,7 +5,7 @@
 <mapper namespace="com.irelandlight.dao.ShopCarDao">
 
     <!--购物车map-->
-    <resultMap id="shop_car_detail" type="com.irelandlight.model.ShopCar">
+    <resultMap id="shop_car_all_detail" type="com.irelandlight.model.ShopCar">
         <!--ShopCar-->
         <id column="id" property="id"/>
         <result column="create_time" property="createTime"/>
@@ -48,12 +48,51 @@
                     <result column="url" property="url"/>
                     <result column="position" property="position"/>
                 </collection>
+                <collection property="goodsSize" ofType="com.irelandlight.model.GoodsSize">
+                    <id column="id" property="id"/>
+                    <result column="create_time" property="createTime"/>
+                    <result column="last_update" property="lastUpdate"/>
+                    <result column="visibility" property="visibility"/>
+                    <result column="i_major" property="isMajor"/>
+                    <result column="goods_id" property="goodsId"/>
+                    <result column="url" property="url"/>
+                    <result column="position" property="position"/>
+                </collection>
             </association>
         </collection>
     </resultMap>
 
+    <!--购物车 view map-->
+    <resultMap id="shop_car_detail" type="com.irelandlight.model.ShopCar">
+        <!--购物车信息-->
+        <id column="shopCarId" property="id"/>
+        <!--购物车详情信息 (一对多)-->
+        <collection property="shopCarGoodsRelations" ofType="com.irelandlight.model.ShopCarGoodsRelation">
+            <!--ShopCarGoodsRelation-->
+            <id column="id" property="id"/>
+            <result column="shop_car_id" property="shopCarId"/>
+            <result column="goods_id" property="goodsId"/>
+            <result column="size" property="size"/>
+            <result column="count" property="count"/>
+            <!--商品信息 (一对一)-->
+            <association property="goods" javaType="com.irelandlight.model.Goods">
+                <id column="goodsId" property="id"/>
+                <result column="name" property="name"/>
+                    <!--商品图片信息 (一对多)-->
+                    <collection property="goodsImages" ofType="com.irelandlight.model.GoodsImage">
+                        <id column="id" property="id"/>
+                        <result column="url" property="url"/>
+                    </collection>
 
-    <!--添加用户购物车(ShopCar)-->
+                    <collection property="goodsSizes" ofType="com.irelandlight.model.GoodsSize">
+                        <id column="id" property="id"/>
+                        <result column="price" property="price"/>
+                    </collection>
+            </association>
+        </collection>
+    </resultMap>
+
+    <!--添加用户购物车(ShopCar) 返回主键-->
     <insert id="insertShopCarByShopCar" parameterType="com.irelandlight.model.ShopCar">
         <!-- 返回自增主键 -->
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -93,29 +132,30 @@
             tb_shop_car.visibility = 0 AND tb_shop_car.consumer_id = #{consumerId}
     </select>
     
-    <!--查找购物车详情列表(resultMap)-->
+    <!--通过用户Id查找购物车商品详情列表(resultMap)-->
     <select id="findShopCarGoodsDetailByConsumerId" parameterType="java.lang.Long" resultMap="shop_car_detail">
         SELECT
-            tb_shop_car.id,
-            tb_consumer.nick_name,
-            tb_goods.`name`  ,
+            tb_shop_car.id shopCarId,
+            tb_goods.id goodsId,
+            tb_goods.`name`,
             tb_shop_car_goods_relation.count,
-            tb_goods.price,
-            tb_goods.size,
-            tb_goods_image.*
+            tb_shop_car_goods_relation.size,
+            tb_goods_size.price,
+            tb_goods_image.url
         FROM
-            tb_consumer,
             tb_shop_car,
             tb_shop_car_goods_relation,
             tb_goods,
+            tb_goods_size,
             tb_goods_image
         WHERE
-            tb_consumer.id = tb_shop_car.consumer_id
-            AND tb_shop_car.id = tb_shop_car_goods_relation.shop_car_id
+            tb_shop_car.id = tb_shop_car_goods_relation.shop_car_id
             AND tb_shop_car_goods_relation.goods_id = tb_goods.id
+            AND tb_shop_car_goods_relation.size = tb_goods_size.size
             AND tb_goods.id = tb_goods_image.goods_id
-            AND tb_goods_image.is_major = 1
-            AND tb_consumer.id = #{consumerId};
+            AND tb_goods.id = tb_goods_size.goods_id
+            AND tb_goods_image.position = 1
+            AND tb_shop_car.consumer_id = #{consumerId}
     </select>
-    
+
 </mapper>

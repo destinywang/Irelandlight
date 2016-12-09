@@ -1,7 +1,6 @@
 package com.irelandlight.service;
 
 import com.irelandlight.model.ShopCarGoodsRelation;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  * User: Ele_Chen
  * Date: 2016/12/8
  * Time: 15:18
- * Description: 目的... .
+ * Description: 购物车详情service接口.
  */
 public interface ShopCarGoodsRelationService {
 
@@ -21,10 +20,10 @@ public interface ShopCarGoodsRelationService {
     public void deleteShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception;
 
     //批量删除某购物车中某商品详情
-    public void batchdeleteShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) throws  Exception;
+    public void batchDeleteShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) throws  Exception;
 
     //查找购物车详情
-    public ShopCarGoodsRelation findShopCarGoodsRelationByShopCarId(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception;
+    public List<ShopCarGoodsRelation> findShopCarGoodsRelationByShopCarId(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception;
 
     //添加购物车请求
     public void insertGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception;

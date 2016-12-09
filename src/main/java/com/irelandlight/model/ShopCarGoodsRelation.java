@@ -79,14 +79,6 @@ public class ShopCarGoodsRelation {
         this.count = count;
     }
 
-    public Goods getGoods() {
-        return goods;
-    }
-
-    public void setGoods(Goods goods) {
-        this.goods = goods;
-    }
-
     public String getSize() {
         return size;
     }
@@ -101,5 +93,13 @@ public class ShopCarGoodsRelation {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
     }
 }
