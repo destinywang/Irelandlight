@@ -39,8 +39,9 @@ public class ShopCarController {
     public String findShopCarGoodsDetail(Long consumerId) throws Exception {
         ShopCar shopCarGoodsDetail =  shopCarService.findShopCarGoodsDetailByConsumerId(consumerId);
         //String shopCarGoodsDetailJson = JSONObject.toJSONString(shopCarGoodsDetail);
+        //创建json对象
         JSONObject json = new JSONObject();
-        json.put("goods", shopCarGoodsDetail);
+        //给json添加数据对象        json.put("goods", shopCarGoodsDetail);
 //        json.put("goodsName", );
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("shopCarGoodsDetail",shopCarGoodsDetail);

@@ -4,7 +4,363 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.irelandlight.dao.OrderDao">
 
+    <!--订单的所有信息-->
+    <select id="" resultType="com.irelandlight.model.Order">
+        SELECT
+            *
+        FROM
+            tb_order;
+    </select>
 
+    <!--查找订单-->
+    <select id="findOrderByConsumerId" parameterType="java.lang.Long" resultType="com.irelandlight.model.Order">
+        SELECT
+            *
+        FROM
+            tb_order
+        WHERE
+            tb_order.consumer_id = #{consumerId}
+    </select>
 
+    <!--查找用户有效订单-->
+    <select id="findOrderByConsumerId" parameterType="java.lang.Long" resultType="com.irelandlight.model.Order">
+        SELECT
+        *
+        FROM
+          tb_order
+        WHERE
+          tb_order.visibility = 0
+        AND
+          tb_order.consumer_id = #{consumerId}
+    </select>
+
+    <!--查看用户订单详情-->
+    <select id="findOrder" parameterType="java.lang.Long" parameterMap="order_map">
+        SELECT
+            tb_consumer.id cId,
+            tb_order.id Oid,
+            tb_address.id aId,
+            tb_order_goods_relation.id og_Id,
+            tb_goods.id gId,
+            tb_goods_image.id giId
+        FROM
+            tb_consumer,
+            tb_order,
+            tb_order_goods_relation,
+            tb_goods,
+            tb_goods_image,
+            tb_address,
+            tb_coupon
+        WHERE
+            tb_consumer.id = tb_order.consumer_id
+        AND tb_consumer.id = tb_address.consumer_id
+        AND tb_consumer.id = tb_coupon.consumer_id
+        AND tb_order.id = tb_order_goods_relation.order_id
+        AND tb_order_goods_relation.goods_id = tb_goods.id
+        AND tb_goods.id = tb_goods_image.goods_id
+        AND tb_address.id = tb_order.address_id
+        AND tb_goods_image.position = 1
+        AND tb_consumer.id = #{consumerId}
+    </select>
+
+    <!--增加订单（下单）-->
+    <insert id="insertOrder" parameterType="com.irelandlight.model.Order">
+        INSERT INTO tb_order (
+            order_number,
+            consumer_id,
+            address_id,
+            pay_way,
+            transfer_way,
+        transfer_time,
+            gift,
+            table_ware_count,
+            coupon_id,
+            price,
+            remark
+        )
+        VALUES
+            (#{orderNumber},#{consumerId},#{addressId},#{payWay},#{transferWay},#{transferTime},#{gift},#{tableWareCount},#{couponId},#{price},#{remark});
+    </insert>
+
+    <!--所有订单map-->
+    <resultMap id="user_all_order_detail" type="com.irelandlight.model.Consumer">
+        <!--consumer-->
+        <id column="consumerId" property="id"/>
+        <collection property="orders" ofType="com.irelandlight.model.Consumer">
+            <!--order-->
+            <id column="orderId" property="id"/>
+            <result column="remark" property="remark"/>
+            <result column="status" property="status"/>
+            <!--收货地址-->
+            <association property="address" javaType="com.irelandlight.model.Address">
+                <id column="addressId" property="id"/>
+                <result column="province" property="province"/>
+                <result column="city" property="city"/>
+                <result column="district" property="district"/>
+                <result column="street" property="street"/>
+                <result column="post" property="post"/>
+                <result column="detail" property="detail"/>
+                <result column="consumerName" property="consumerName"/>
+                <result column="consumerPhone" property="consumerPhone"/>
+            </association>
+            <!--优惠券-->
+            <association property="coupon" javaType="com.irelandlight.model.Coupon">
+                <id column="couponId" property="id"/>
+                <result column="target" property="target"/>
+                <result column="reduce" property="reduce"/>
+            </association>
+            <!--订单详情信息 (一对多)-->
+            <collection property="orderGoodsRelations" ofType="com.irelandlight.model.OrderGoodsRelation">
+                <!--orderGoodsRelations-->
+                <id column="OrderGoodsRelationId" property="id"/>
+                <result column="goodsId" property="goodsId"/>
+                <result column="goodsCount" property="count"/>
+                <!--商品信息 (一对一)-->
+                <association property="goods" javaType="com.irelandlight.model.Goods">
+                    <id column="goodsId1" property="id"/>
+                    <result column="goodName" property="goodName"/>
+                    <!--商品图片信息 (一对多)-->
+                    <collection property="goodsImages" ofType="com.irelandlight.model.GoodsImage">
+                        <id column="GoodsImageId" property="id"/>
+                        <result column="goodsImg" property="url"/>
+                    </collection>
+                    <!--商品尺寸信息 (一对多)-->
+                    <collection property="goodsSizes" ofType="com.irelandlight.model.GoodsSize">
+                        <id column="GoodsSizeId" property="id"/>
+                        <result column="goodSize" property="size"/>
+                        <result column="price" property="price"/>
+                    </collection>
+                </association>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <!--查找某个用户的所有订单详情-->
+    <select id="findAllOrderByConsumerId" parameterType="java.lang.Long" resultMap="user_all_order_detail">
+        SELECT
+        tb_consumer.id consumerId,
+
+        tb_address.id addressId,
+        tb_address.consumerName consumerName,
+        tb_address.consumerPhone consumerPhone,
+        tb_address.province province,
+        tb_address.city city,
+        tb_address.district district,
+        tb_address.street street,
+        tb_address.post post,
+        tb_address.detail detail,
+
+        tb_order.id orderId,
+        tb_order.orderNumber orderNumber,
+        tb_order.remark,
+        tb_order.status,
+
+        tb_coupon.id couponId,
+        tb_coupon.target,
+        tb_coupon.reduce,
+
+        tb_order_goods_relation.id OrderGoodsRelationId,
+        tb_order_goods_relation.goods_id goodsId,
+        tb_order_goods_relation.count goodsCount,
+
+        tb_goods.id goodsId1,
+        tb_goods.`name` goodName,
+
+        tb_goods_size.id GoodsSizeId
+        tb_goods_size.size goodSize,
+        tb_goods_size.price goodPrice,
+
+        tb_goods_image.id = GoodsImageId,
+        tb_goods_image.url goodsImg
+        FROM
+        tb_consumer,
+        tb_order,
+        tb_order_goods_relation,
+        tb_goods,
+        tb_goods_image,
+        tb_goods_size,
+        tb_coupon,
+        tb_address
+        WHERE
+        tb_consumer.id= tb_order.consumerId,
+        AND tb_order_goods_relation.order_id = tb_order.id
+        AND tb_goods.id = tb_order_goods_relation.goods_id
+        AND tb_goods_image.goods_id = tb_goods.id
+        AND tb_goods_size.goods_id = tb_goods.id
+        AND tb_address.id = tb_order.address_id
+        AND tb_order_goods_relation.order_id = tb_order.id
+        AND tb_order_goods_relation.size = tb_goods_size.size
+        AND tb_order_goods_relation.goods_id = tb_goods_size.goods_id
+        AND tb_order.coupon_id = tb_coupon.id
+        AND tb_goods_image.position = 1
+        AND tb_consumer.id = #{consumerId}
+    </select>
+
+    <!--一个订单的map-->
+    <resultMap id="one_order_detail" type="com.irelandlight.model.Order">
+        <!--order-->
+        <id column="orderId" property="id"/>
+        <result column="remark" property="remark"/>
+        <result column="status" property="status"/>
+        <!--收货地址-->
+        <association property="address" javaType="com.irelandlight.model.Address">
+            <id column="addressId" property="id"/>
+            <result column="province" property="province"/>
+            <result column="city" property="city"/>
+            <result column="district" property="district"/>
+            <result column="street" property="street"/>
+            <result column="post" property="post"/>
+            <result column="detail" property="detail"/>
+            <result column="consumerName" property="consumerName"/>
+            <result column="consumerPhone" property="consumerPhone"/>
+        </association>
+        <!--优惠券-->
+        <association property="coupon" javaType="com.irelandlight.model.Coupon">
+            <id column="couponId" property="id"/>
+            <result column="target" property="target"/>
+            <result column="reduce" property="reduce"/>
+        </association>
+        <!--订单详情信息 (一对多)-->
+        <collection property="orderGoodsRelations" ofType="com.irelandlight.model.OrderGoodsRelation">
+            <!--orderGoodsRelations-->
+            <id column="OrderGoodsRelationId" property="id"/>
+            <result column="goodsId" property="goodsId"/>
+            <result column="goodsCount" property="count"/>
+            <!--商品信息 (一对一)-->
+            <association property="goods" javaType="com.irelandlight.model.Goods">
+                <id column="goodsId1" property="id"/>
+                <result column="goodName" property="goodName"/>
+                <!--商品图片信息 (一对多)-->
+                <collection property="goodsImages" ofType="com.irelandlight.model.GoodsImage">
+                    <id column="GoodsImageId" property="id"/>
+                    <result column="goodsImg" property="url"/>
+                </collection>
+                <!--商品尺寸信息 (一对多)-->
+                <collection property="goodsSizes" ofType="com.irelandlight.model.GoodsSize">
+                    <id column="GoodsSizeId" property="id"/>
+                    <result column="goodSize" property="size"/>
+                    <result column="price" property="price"/>
+                </collection>
+            </association>
+        </collection>
+    </resultMap>
+    <!--查询用户的某个订单详情-->
+    <select id="oneOrderDetail" parameterType="java.lang.Long" resultMap="one_order_detail">
+        SELECT
+        tb_address.id addressId,
+        tb_address.consumerName consumerName,
+        tb_address.consumerPhone consumerPhone,
+        tb_address.province province,
+        tb_address.city city,
+        tb_address.district district,
+        tb_address.street street,
+        tb_address.post post,
+        tb_address.detail detail,
+
+        tb_order.id orderId,
+        tb_order.orderNumber orderNumber,
+        tb_order.remark,
+        tb_order.status,
+
+        tb_coupon.id couponId,
+        tb_coupon.target,
+        tb_coupon.reduce,
+
+        tb_order_goods_relation.id OrderGoodsRelationId,
+        tb_order_goods_relation.goods_id goodsId,
+        tb_order_goods_relation.count goodsCount,
+
+        tb_goods.id goodsId1,
+        tb_goods.`name` goodName,
+
+        tb_goods_size.id GoodsSizeId
+        tb_goods_size.size goodSize,
+        tb_goods_size.price goodPrice,
+
+        tb_goods_image.id = GoodsImageId,
+        tb_goods_image.url goodsImg
+        FROM
+        tb_order,
+        tb_order_goods_relation,
+        tb_goods,
+        tb_goods_image,
+        tb_goods_size,
+        tb_coupon,
+        tb_address
+        WHERE
+        tb_order_goods_relation.order_id = tb_order.id
+        AND tb_goods.id = tb_order_goods_relation.goods_id
+        AND tb_goods_image.goods_id = tb_goods.id
+        AND tb_goods_size.goods_id = tb_goods.id
+        AND tb_address.id = tb_order.address_id
+        AND tb_order_goods_relation.order_id = tb_order.id
+        AND tb_order_goods_relation.size = tb_goods_size.size
+        AND tb_order_goods_relation.goods_id = tb_goods_size.goods_id
+        AND tb_order.coupon_id = tb_coupon.id
+        AND tb_goods_image.position = 1
+        AND tb_order.consumer_id = 1002
+        AND tb_order.id = 1;
+    </select>
+
+    <!--查询用户的某种状态的订单信息-->
+    <select id="findOneStatusOrder" parameterType="com.irelandlight.model.Order" resultMap="user_all_order_detail">
+        SELECT
+        tb_consumer.id consumerId,
+
+        tb_address.id addressId,
+        tb_address.consumerName consumerName,
+        tb_address.consumerPhone consumerPhone,
+        tb_address.province province,
+        tb_address.city city,
+        tb_address.district district,
+        tb_address.street street,
+        tb_address.post post,
+        tb_address.detail detail,
+
+        tb_order.id orderId,
+        tb_order.orderNumber orderNumber,
+        tb_order.remark,
+        tb_order.status,
+
+        tb_coupon.id couponId,
+        tb_coupon.target,
+        tb_coupon.reduce,
+
+        tb_order_goods_relation.id OrderGoodsRelationId,
+        tb_order_goods_relation.goods_id goodsId,
+        tb_order_goods_relation.count goodsCount,
+
+        tb_goods.id goodsId1,
+        tb_goods.`name` goodName,
+
+        tb_goods_size.id GoodsSizeId
+        tb_goods_size.size goodSize,
+        tb_goods_size.price goodPrice,
+
+        tb_goods_image.id = GoodsImageId,
+        tb_goods_image.url goodsImg
+        FROM
+        tb_consumer,
+        tb_order,
+        tb_order_goods_relation,
+        tb_goods,
+        tb_goods_image,
+        tb_goods_size,
+        tb_coupon,
+        tb_address
+        WHERE
+        tb_order_goods_relation.order_id = tb_order.id
+        AND tb_goods.id = tb_order_goods_relation.goods_id
+        AND tb_goods_image.goods_id = tb_goods.id
+        AND tb_goods_size.goods_id = tb_goods.id
+        AND tb_address.id = tb_order.address_id
+        AND tb_order_goods_relation.order_id = tb_order.id
+        AND tb_order_goods_relation.size = tb_goods_size.size
+        AND tb_order_goods_relation.goods_id = tb_goods_size.goods_id
+        AND tb_order.coupon_id = tb_coupon.id
+        AND tb_goods_image.position = 1
+        AND tb_order.consumer_id = #{consumerId}
+        AND tb_order.`status` = #{status};
+    </select>
 
 </mapper>

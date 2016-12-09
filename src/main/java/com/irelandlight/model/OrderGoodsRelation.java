@@ -1,6 +1,7 @@
 package com.irelandlight.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created  with Intellij IDEA.
@@ -17,7 +18,9 @@ public class OrderGoodsRelation {
     private Long orderId;           //订单表主键做逻辑外键
     private Long goodsId;           //商品表主建做逻辑外键
     private Integer count;          //订单商品数量
-
+    private String size;            //蛋糕尺寸
+    //map扩展
+    private Goods goods;
 
     public Long getId() {
         return id;
@@ -73,5 +76,13 @@ public class OrderGoodsRelation {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }

@@ -2,6 +2,7 @@ package com.irelandlight.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created  with Intellij IDEA.
@@ -26,6 +27,9 @@ public class Consumer {
     private String email;           //用户邮箱地址
     private String telephone;       //用户联系方式
     private Date birthday;          //用户生日
+    private Integer DefaultAddressId;//默认地址标示
+    //map扩展
+    private List<Order> orders;
 
     public Long getId() {
         return id;
@@ -145,5 +149,13 @@ public class Consumer {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public Integer getDefaultAddressId() {
+        return DefaultAddressId;
+    }
+
+    public void setDefaultAddressId(Integer defaultAddressId) {
+        DefaultAddressId = defaultAddressId;
     }
 }

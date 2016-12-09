@@ -4,4 +4,35 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.irelandlight.dao.OrderGoodsRelationDao">
 
+
+
+
+    <!--增加订单（下单）-->
+    <insert id="insertOrder" parameterType="com.irelandlight.model.Order">
+        INSERT INTO tb_order (
+            order_number,
+            consumer_id,
+            address_id,
+            pay_way,
+            transfer_way,
+            transfer_time,
+            gift,
+            table_ware_count,
+            coupon_id,
+            price,
+            remark
+        )
+        VALUES
+            (#{},1003,3,1,1,NOW(),'生日帽',4,3,138,'快点送来');
+    </insert>
+
+    <!--修改订单-->
+    <!--<update id="">-->
+
+    <!--</update>-->
+
+    <!--删除订单-->
+    <!--<update id="">-->
+
+    <!--</update>-->
 </mapper>

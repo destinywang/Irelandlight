@@ -2,6 +2,7 @@ package com.irelandlight.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created  with Intellij IDEA.
@@ -29,6 +30,10 @@ public class Order {
     private Date transferEnd;       //配送结束时间
     private Integer status;         //订单状态
     private String remark;          //消费者的留言
+    //map扩展
+    private Address address;
+    private Coupon coupon;
+    private List<OrderGoodsRelation> orderGoodsRelations;
 
     public Long getId() {
         return id;
@@ -172,5 +177,29 @@ public class Order {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Coupon getCoupon() {
+        return coupon;
+    }
+
+    public void setCoupon(Coupon coupon) {
+        this.coupon = coupon;
+    }
+
+    public List<OrderGoodsRelation> getOrderGoodsRelations() {
+        return orderGoodsRelations;
+    }
+
+    public void setOrderGoodsRelations(List<OrderGoodsRelation> orderGoodsRelations) {
+        this.orderGoodsRelations = orderGoodsRelations;
     }
 }

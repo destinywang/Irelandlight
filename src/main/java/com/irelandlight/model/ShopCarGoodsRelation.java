@@ -18,6 +18,8 @@ public class ShopCarGoodsRelation {
     private Long shopCarId;     //购物车表主键做逻辑外键
     private Long goodsId;       //商品表主键做逻辑外键
     private Integer count;      //每种商品的数量
+    private String size;        //蛋糕尺寸
+    private Integer status;     //购物车商品状态
     //map扩展
     private Goods goods;
 
@@ -85,17 +87,19 @@ public class ShopCarGoodsRelation {
         this.goods = goods;
     }
 
-    @Override
-    public String toString() {
-        return "ShopCarGoodsRelation{" +
-                "id=" + id +
-                ", createTime=" + createTime +
-                ", lastUpdate=" + lastUpdate +
-                ", visibility=" + visibility +
-                ", shopCarId=" + shopCarId +
-                ", goodsId=" + goodsId +
-                ", count=" + count +
-                ", goods=" + goods +
-                '}';
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

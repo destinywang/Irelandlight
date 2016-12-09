@@ -13,8 +13,7 @@ import java.util.StringTokenizer;
  * Time: 11:12
  * Description: 商品表 .
  */
-public class Goods implements Serializable{
-    private static final long serialVersionUID = 7982334728700535093L;
+public class Goods{
     private Long id;                //蛋糕id
     private Date createTime;        //创建时间
     private Date lastUpdate;        //最后更新时间
@@ -22,15 +21,14 @@ public class Goods implements Serializable{
     private Integer isPutaway;      //是否上架  0表示未上架，1表示上架
     private String name;            //蛋糕名称
     private String description;     //蛋糕描述
-    private BigDecimal price;       //单价
     private String perference;      //蛋糕偏好
     private String use;             //蛋糕用途
     private String taste;           //蛋糕口味
-    private String size;            //蛋糕尺寸
     private Integer quantity;       //库存
     private Integer saleCount;      //销售量
     //map扩展
     private List<GoodsImage> goodsImages;
+    private List<GoodsSize> goodsSizes;
 
     public Long getId() {
         return id;
@@ -88,14 +86,6 @@ public class Goods implements Serializable{
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
     public String getPerference() {
         return perference;
     }
@@ -120,14 +110,6 @@ public class Goods implements Serializable{
         this.taste = taste;
     }
 
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
     public Integer getQuantity() {
         return quantity;
     }
@@ -144,35 +126,19 @@ public class Goods implements Serializable{
         this.saleCount = saleCount;
     }
 
-    public Integer getWeight() {
-        return weight;
+    public List<GoodsImage> getGoodsImages() {
+        return goodsImages;
     }
 
-    public void setWeight(Integer weight) {
-        this.weight = weight;
+    public void setGoodsImages(List<GoodsImage> goodsImages) {
+        this.goodsImages = goodsImages;
     }
 
-    private Integer weight;         //蛋糕权重
+    public List<GoodsSize> getGoodsSizes() {
+        return goodsSizes;
+    }
 
-    @Override
-    public String toString() {
-        return "Goods{" +
-                "id=" + id +
-                ", createTime=" + createTime +
-                ", lastUpdate=" + lastUpdate +
-                ", visibility=" + visibility +
-                ", isPutaway=" + isPutaway +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", perference='" + perference + '\'' +
-                ", use='" + use + '\'' +
-                ", taste='" + taste + '\'' +
-                ", size='" + size + '\'' +
-                ", quantity=" + quantity +
-                ", saleCount=" + saleCount +
-                ", goodsImages=" + goodsImages +
-                ", weight=" + weight +
-                '}';
+    public void setGoodsSizes(List<GoodsSize> goodsSizes) {
+        this.goodsSizes = goodsSizes;
     }
 }

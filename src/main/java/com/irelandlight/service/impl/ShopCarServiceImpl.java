@@ -1,8 +1,11 @@
 package com.irelandlight.service.impl;
 
 import com.irelandlight.dao.ShopCarDao;
+import com.irelandlight.dao.ShopCarGoodsRelationDao;
 import com.irelandlight.model.ShopCar;
+import com.irelandlight.model.ShopCarGoodsRelation;
 import com.irelandlight.service.ShopCarService;
+import org.apache.ibatis.annotations.Lang;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,9 @@ public class ShopCarServiceImpl implements ShopCarService {
 
     @Resource
     private ShopCarDao shopCarDao;
+
+    @Resource
+    private ShopCarGoodsRelationDao shopCarGoodsRelationDao;
 
     /**
      *
@@ -61,4 +67,6 @@ public class ShopCarServiceImpl implements ShopCarService {
         ShopCar shopCar = shopCarDao.findShopCarGoodsDetailByConsumerId(consumerId);
         return shopCar;
     }
+
+
 }

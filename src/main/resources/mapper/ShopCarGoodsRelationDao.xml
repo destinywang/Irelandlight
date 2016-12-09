@@ -13,10 +13,11 @@
         INSERT INTO tb_shop_car_goods_relation (
 			tb_shop_car_goods_relation.shop_car_id,
 			tb_shop_car_goods_relation.goods_id,
-			tb_shop_car_goods_relation.count
+			tb_shop_car_goods_relation.count,
+			tb_shop_car_goods_relation.size
 		)
 		VALUES
-			(#{shopCarId}, #{goodsId}, #{count})
+			(#{shopCarId}, #{goodsId}, #{count},#{size})
     </insert>
 
     <!--将添加的商品有,修改原来的购物车商品详情-->
@@ -24,46 +25,80 @@
     <update id="updateShopCarGoodsRelation"
 			parameterType="com.irelandlight.model.ShopCarGoodsRelation">
 		UPDATE tb_shop_car_goods_relation
-		SET tb_shop_car_goods_relation.count = 3
+		SET tb_shop_car_goods_relation.count = #{count}
+		SET tb_shop_car_goods_relation.size = #{size}
 		WHERE
 			tb_shop_car_goods_relation.visibility = 0
 		AND tb_shop_car_goods_relation.shop_car_id = 5
 		AND tb_shop_car_goods_relation.goods_id = 2
+		AND tb_shop_car_goods_relation.size = 2
 	</update>
 
 	<!--删除购物车详情-->
 	<update id="deleteShopCarGoodsRelation"
-			parameterType="">
+			parameterType="deleteShopCarGoodsRelations">
 		UPDATE tb_shop_car_goods_relation
 		SET tb_shop_car_goods_relation.visibility = 1
 		WHERE
 			tb_shop_car_goods_relation.visibility = 0
-		AND tb_shop_car_goods_relation.shop_car_id = 5
-		AND tb_shop_car_goods_relation.goods_id = 2
+		AND tb_shop_car_goods_relation.shop_car_id = #{shopCarId}
+		AND tb_shop_car_goods_relation.goods_id = #{goodsId}
+		AND tb_shop_car_goods_relation.size = #{size}
 	</update>
 
 	<!--批量删除某购物车中某商品详情-->
-	<update id="deleteShopCarGoodsRelations"
-			parameterType="">
+	<update id="batchdeleteShopCarGoodsRelations"
+			parameterType="java.util.List">
 		UPDATE tb_shop_car_goods_relation
 		SET tb_shop_car_goods_relation.visibility = 1
 		WHERE
-			tb_shop_car_goods_relation.visibility = 0
-		AND tb_shop_car_goods_relation.shop_car_id = 5
-		AND tb_shop_car_goods_relation.goods_id IN (1, 2)
+
+		<foreach collection="goodsList" item="goods" separator="or">
+			shopCarId = #{shopCarId}
+			AND tb_shop_car_goods_relation.goods_id = #{goodsId}
+			AND tb_shop_car_goods_relation.size = #{size}
+		</foreach>
+
+			<!--tb_shop_car_goods_relation.visibility = 0-->
+		<!--AND tb_shop_car_goods_relation.shop_car_id = #{shopCarId}-->
+		<!--AND tb_shop_car_goods_relation.goods_id IN (-->
+		<!--<foreach collection="goodsIds" item="goodId" separator=",">-->
+			<!--#{goodId}-->
+		<!--</foreach>-->
+		<!--AND tb_shop_car_goods_relation.goods_id IN (-->
+		<!--<foreach collection="goodsSizes" item="goodId" separator=",">-->
+			<!--#{size}-->
+		<!--</foreach>-->
+		<!--)-->
 	</update>
 
 	<!--查找购物车详情-->
-	<select id="findShopCarGoodsRelationByShopCarId"
-			parameterType="java.lang.Long"
+	<select id="findShopCarGoodsRelationByShopCarGoodsRelation"
+			parameterType="com.irelandlight.model.ShopCarGoodsRelation"
 			resultType="com.irelandlight.model.ShopCarGoodsRelation">
 		SELECT
-			id,	shop_car_id , goods_id , count
+			id,	shop_car_id , goods_id , size , count , status
 		FROM
 			tb_shop_car_goods_relation
 		WHERE
 			tb_shop_car_goods_relation.visibility = 0
-		AND tb_shop_car_goods_relation.shop_car_id = #{}
+		AND tb_shop_car_goods_relation.shop_car_id = #{shopCarId}
+		AND tb_shop_var_goods_relation.goods_id = #{goodsId}
 	</select>
+
+
+
+	<!--购物车结算（修改shopCarGoodsrelation表中商品的status字段。）-->
+	<update id="addToOrder" parameterType="java.util.List">
+		UPDATE tb_shop_car_goods_relation SET tb_shop_car_goods_relation.status = 1
+		WHERE
+		<foreach collection="goodsList" item="goods" separator="or">
+			shopCarId = #{shopCarId}
+			AND tb_shop_car_goods_relation.goods_id = #{goodsId}
+			AND tb_shop_car_goods_relation.size = #{size}
+		</foreach>
+	</update>
+
+
 
 </mapper>

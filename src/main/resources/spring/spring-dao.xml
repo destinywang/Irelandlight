@@ -46,4 +46,5 @@ http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springfr
         <property name="basePackage" value="com.irelandlight.dao"/>
     </bean>
 
+    <context:component-scan base-package="com.irelandlight.dao"/>
 </beans>

@@ -21,7 +21,6 @@ public class Address {
     private String post;            //邮编
     private String detail;          //详细地址
     private Long consumerId;        //消费者表单的主键做逻辑外键
-    private Integer isDefault;      //默认地址标示
     private String consumerName;    //收货人姓名
     private String consumerPhone;   //收货人联系方式
 
@@ -111,14 +110,6 @@ public class Address {
 
     public void setConsumerId(Long consumerId) {
         this.consumerId = consumerId;
-    }
-
-    public Integer getIsDefault() {
-        return isDefault;
-    }
-
-    public void setIsDefault(Integer isDefault) {
-        this.isDefault = isDefault;
     }
 
     public String getConsumerName() {
