@@ -11,11 +11,11 @@
     </select>
 
     <select id="selectPutawayGoodsCount" resultType="int">
-        <![CDATA[SELECT COUNT(*) FROM tb_goods WHERE visibility=0AND is_putaway=0]]>
+        <![CDATA[SELECT COUNT(*) FROM tb_goods WHERE visibility=0 AND is_putaway=0]]>
     </select>
 
     <select id="selectSoldOutGoodsCount" resultType="int">
-        <![CDATA[SELECT COUNT(*)FROM tb_goods WHERE visibility=0 AND is_putway=1]]>
+        <![CDATA[SELECT COUNT(*)FROM tb_goods WHERE visibility=0 AND is_putaway=1]]>
     </select>
     <select id="selectGoodsComment" resultType="int">
         <![CDATA[
@@ -94,6 +94,30 @@
        SELECT tb_goods_image.url FROM tb_goods_image WHERE visibility=0 AND goods_id=#{goodsId} AND tb_goods_image.position=0
    </select>
 
+    <update id="updateGoodsByIds">
+      UPDATE tb_goods SET tb_goods.is_putaway=#{putFlag}
+      <where>
+          tb_goods.id in
+          <foreach collection="ids" item="id" index="index" open="(" separator="," close=")">
+                 #{id}
+          </foreach> AND visibility=0
+      </where>
+    </update>
+
+    <update id="updateGoodsByIdsAndSize">
+        UPDATE tb_goods_size SET tb_goods_size.is_putaway=#{putFlag}
+         <where>
+             <foreach collection="goodsIdMapSize.keys" item="id" index="index" open="(" close=")" separator="OR">
+                 tb_goods_size.goods_id=#{id} AND tb_goods_size.size IN
+                 <foreach collection="goodsIdMapSize[id]" index="indes_list" item="gSize" open="(" separator="," close=")">
+                     #{gSize}
+                 </foreach>
+             </foreach>
+         </where>
+    </update>
+
+
+
 
 
     <update id="updateGoods">
@@ -131,7 +155,7 @@
         visibility,is_putaway,
         tb_goods.name,description,price,preference,
         tb_goods.use,taste,size,quantity,
-        sale_count,weight)
+        sale_count,weight,tb_goods.status)
         VALUES
         (now(),now(),
         0,0,

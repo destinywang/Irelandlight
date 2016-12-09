@@ -5,9 +5,13 @@ import com.irelandlight.controller.GoodsMapperTest;
 import com.irelandlight.model.Goods;
 import com.irelandlight.model.GoodsSizePrice;
 import com.irelandlight.model.vo.ContainerItem;
+import com.irelandlight.model.vo.ItemsInfo;
+import com.irelandlight.service.GoodsContainerService;
+import com.qiniu.streaming.model.ActivityRecords;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,8 +27,29 @@ public class GoodsDaoTest extends BaseJunitTest{
     @Autowired
     private GoodsMapper goodsMapper;
 
+    @Resource
+    private GoodsContainerService goodsContainerService;
+
     @Test
     public void testMethod() {
+        List<Long> ids=new ArrayList<Long>();
+        ids.add(new Long(1));
+        ids.add(new Long(2));
+        ids.add(new Long(3));
+        goodsMapper.updateGoodsByIds(ids,1);
+
+        List<String> sizeList=new ArrayList<String>();
+        sizeList.add("1");
+        sizeList.add("2");
+        List<String> sizlist2=new ArrayList<String>();
+        sizlist2.add("1");
+        sizlist2.add("3");
+        Map<Long,List<String>> goodSizeMap=new HashMap<Long, List<String>>();
+        goodSizeMap.put(new Long(1),sizeList);
+        goodSizeMap.put(new Long(2),sizlist2);
+        goodsMapper.updateGoodsByIdsAndSize(goodSizeMap,1);
+
+
         System.out.println(orderMapper.selectOrderCanceled());
         System.out.println(orderMapper.selectOrderSucceed());
         System.out.println(orderMapper.selectOrderUnpay());
@@ -50,6 +75,7 @@ public class GoodsDaoTest extends BaseJunitTest{
                 itemsList.add(containerItem);
             }
         }
+        ItemsInfo itemsInfo =goodsContainerService.searchForGoodsCountInfo();
         System.out.println(itemsList);
     }
     private void addGoodsInfoToContainerItem(ContainerItem containerItem,Goods goods,List<GoodsSizePrice> listGoodSizeInfo){

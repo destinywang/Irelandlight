@@ -34,6 +34,16 @@ public interface GoodsMapper {
     String selectGoodsHeadImgUrlByGoodsId(@Param("goodsId") Long goodsId);
     //查询商品的评价总数
     int selectGoodsComment();
+    //按照指定的id列表将商品批量上架
+    void updateGoodsByIds(@Param("ids") List<Long> ids,@Param("putFlag") int putFlag);
+    //按照制定的商品id和size更改商品的上架属性
+    void updateGoodsByIdsAndSize(@Param("goodsIdMapSize")  Map<Long,List<String>> goodsIdMapSize,@Param("putFlag") int putFlag);
+
+
+
+
+
+
     //修改商品中的字段值
     void updateGoods(@Param("goods") Goods goods);
     //将商品添加到tb_goods表中 @Param("goods")

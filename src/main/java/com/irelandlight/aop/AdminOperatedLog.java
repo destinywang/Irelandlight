@@ -31,22 +31,25 @@ public class AdminOperatedLog{
 
     private static final Logger logger= LoggerFactory.getLogger(AdminOperatedLog.class);
 
-    @Pointcut("execution(* com.irelandlight.service..*.*(..))")     //service层的切入点
+    @Pointcut("execution(* com.irelandlight.service.*.*(..))")     //service层的切入点
     public void serviceAspect(){}
     @Pointcut("execution(* com.irelandlight.controller.*.*(..))")     //controller层的切入点
     public void controllerAspect(){}
 
-
-    @Before(value = "serviceAspect()")
     //前置通知，在连接点方法执行之前执行
+    @Before(value = "serviceAspect()")
     public void doBefore(JoinPoint jp){
+        System.out.println(jp.getSignature().getName());
+        ServletRequestAttributes servletRequestAttributes=(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+
         //获取请求对象
-        HttpServletRequest request=((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
         //从请求对象中获取session对象
-        if(request==null){
-            System.out.println("未查获的httpServletRequest对象");
-            logger.info("未查获的httpServletRequest对象");
+        if(servletRequestAttributes==null){
+            System.out.println("未查获的servletRequestAttributes对象");
+            logger.info("未查获的servletRequestAttributes对象");
         }else{
+            HttpServletRequest request=servletRequestAttributes.getRequest();
             HttpSession session=request.getSession();
             //从HttpSession对象中获得管理员的id或者获得整个管理员对象
             Productor productor=(Productor) session.getAttribute("CURRENT_PRODUCTOR");

@@ -5,6 +5,8 @@ import com.irelandlight.model.Goods;
 import com.irelandlight.model.GoodsSizePrice;
 import com.irelandlight.model.vo.ContainerItem;
 import com.irelandlight.model.vo.ItemsInfo;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
@@ -17,6 +19,7 @@ import java.util.Map;
 /**
  * Created by mac on 2016/12/6.
  */
+@Service
 public class GoodsContainerService {
     @Resource
     private GoodsMapper goodsMapper;
@@ -69,6 +72,14 @@ public class GoodsContainerService {
         }
         return itemsList;
     }
+
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
+    public void putawayAllGoods(List<Long> ids){
+
+    }
+
+
+
 
     private void addGoodsInfoToContainerItem(ContainerItem containerItem,Goods goods,List<GoodsSizePrice> listGoodSizeInfo){
         //给查找出来的商品信息填充到试图展示层的vo对象当中
