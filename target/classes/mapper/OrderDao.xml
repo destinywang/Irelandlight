@@ -7,7 +7,7 @@
     <resultMap id="user_all_order_detail" type="com.irelandlight.model.Consumer">
         <!--consumer-->
         <id column="consumerId" property="id"/>
-        <collection property="orders" ofType="com.irelandlight.model.Consumer">
+        <collection property="orders" ofType="com.irelandlight.model.Order">
             <!--order-->
             <id column="orderId" property="id"/>
             <result column="remark" property="remark"/>
@@ -39,7 +39,7 @@
                 <!--商品信息 (一对一)-->
                 <association property="goods" javaType="com.irelandlight.model.Goods">
                     <id column="goodsId1" property="id"/>
-                    <result column="goodName" property="goodName"/>
+                    <result column="goodsName" property="name"/>
                     <!--商品图片信息 (一对多)-->
                     <collection property="goodsImages" ofType="com.irelandlight.model.GoodsImage">
                         <id column="GoodsImageId" property="id"/>
@@ -47,9 +47,9 @@
                     </collection>
                     <!--商品尺寸信息 (一对多)-->
                     <collection property="goodsSizes" ofType="com.irelandlight.model.GoodsSize">
-                        <id column="GoodsSizeId" property="id"/>
-                        <result column="goodSize" property="size"/>
-                        <result column="price" property="price"/>
+                        <id column="goodsSizeId" property="id"/>
+                        <result column="goodsSize" property="size"/>
+                        <result column="goodsPrice" property="price"/>
                     </collection>
                 </association>
             </collection>
@@ -89,7 +89,7 @@
             <!--商品信息 (一对一)-->
             <association property="goods" javaType="com.irelandlight.model.Goods">
                 <id column="goodsId1" property="id"/>
-                <result column="goodName" property="goodName"/>
+                <result column="goodsName" property="name"/>
                 <!--商品图片信息 (一对多)-->
                 <collection property="goodsImages" ofType="com.irelandlight.model.GoodsImage">
                     <id column="GoodsImageId" property="id"/>
@@ -135,37 +135,14 @@
           tb_order.consumer_id = #{consumerId}
     </select>
 
-    <!--&lt;!&ndash;查看用户订单详情&ndash;&gt;-->
-    <!--<select id="findOrderDetail" parameterType="java.lang.Long" parameterMap="order_map">-->
-        <!--SELECT-->
-            <!--tb_consumer.id cId,-->
-            <!--tb_order.id Oid,-->
-            <!--tb_address.id aId,-->
-            <!--tb_order_goods_relation.id og_Id,-->
-            <!--tb_goods.id gId,-->
-            <!--tb_goods_image.id giId-->
-        <!--FROM-->
-            <!--tb_consumer,-->
-            <!--tb_order,-->
-            <!--tb_order_goods_relation,-->
-            <!--tb_goods,-->
-            <!--tb_goods_image,-->
-            <!--tb_address,-->
-            <!--tb_coupon-->
-        <!--WHERE-->
-            <!--tb_consumer.id = tb_order.consumer_id-->
-        <!--AND tb_consumer.id = tb_address.consumer_id-->
-        <!--AND tb_consumer.id = tb_coupon.consumer_id-->
-        <!--AND tb_order.id = tb_order_goods_relation.order_id-->
-        <!--AND tb_order_goods_relation.goods_id = tb_goods.id-->
-        <!--AND tb_goods.id = tb_goods_image.goods_id-->
-        <!--AND tb_address.id = tb_order.address_id-->
-        <!--AND tb_goods_image.position = 1-->
-        <!--AND tb_consumer.id = #{consumerId}-->
-    <!--</select>-->
-
     <!--增加订单（下单） 返回订单ID -->
     <insert id="insertOrder" parameterType="com.irelandlight.model.Order">
+
+        <!-- 增加订单主键 -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
         INSERT INTO tb_order (
             order_number,
             consumer_id,
@@ -182,60 +159,57 @@
         VALUES
             (#{orderNumber},#{consumerId},#{addressId},#{payWay},#{transferWay},#{transferTime},#{gift},
             #{tableWareCount},#{couponId},#{price},#{remark})
-        <!-- 增加订单主键 -->
-        <selectKey keyColumn="id" order="AFTER" resultType="java.lang.Long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+
     </insert>
 
     <!--查找某个用户的所有订单详情-->
-    <select id="findAllOrderByConsumerId" resultMap="user_all_order_detail">
+    <select id="findAllOrderDetailByConsumerId" resultMap="user_all_order_detail">
         SELECT
-        tb_consumer.id consumerId,
+          tb_consumer.id consumerId,
 
-        tb_address.id addressId,
-        tb_address.consumerName consumerName,
-        tb_address.consumerPhone consumerPhone,
-        tb_address.province province,
-        tb_address.city city,
-        tb_address.district district,
-        tb_address.street street,
-        tb_address.post post,
-        tb_address.detail detail,
+          tb_address.id addressId,
+          tb_address.consumer_name consumerName,
+          tb_address.consumer_phone consumerPhone,
+          tb_address.province province,
+          tb_address.city city,
+          tb_address.district district,
+          tb_address.street street,
+          tb_address.post post,
+          tb_address.detail detail,
 
-        tb_order.id orderId,
-        tb_order.orderNumber orderNumber,
-        tb_order.remark,
-        tb_order.status,
+          tb_order.id orderId,
+          tb_order.order_number orderNumber,
+          tb_order.remark,
+          tb_order.status,
 
-        tb_coupon.id couponId,
-        tb_coupon.target,
-        tb_coupon.reduce,
+          tb_coupon.id couponId,
+          tb_coupon.target,
+          tb_coupon.reduce,
 
-        tb_order_goods_relation.id OrderGoodsRelationId,
-        tb_order_goods_relation.goods_id goodsId,
-        tb_order_goods_relation.count goodsCount,
+          tb_order_goods_relation.id OrderGoodsRelationId,
+          tb_order_goods_relation.goods_id goodsId,
+          tb_order_goods_relation.count goodsCount,
 
-        tb_goods.id goodsId1,
-        tb_goods.`name` goodName,
+          tb_goods.id goodsId1,
+          tb_goods.`name` goodsName,
 
-        tb_goods_size.id GoodsSizeId
-        tb_goods_size.size goodSize,
-        tb_goods_size.price goodPrice,
+          tb_goods_size.id goodsSizeId,
+          tb_goods_size.size goodsSize,
+          tb_goods_size.price goodsPrice,
 
-        tb_goods_image.id = GoodsImageId,
-        tb_goods_image.url goodsImg
+          tb_goods_image.id  GoodsImageId,
+          tb_goods_image.url goodsImg
         FROM
-        tb_consumer,
-        tb_order,
-        tb_order_goods_relation,
-        tb_goods,
-        tb_goods_image,
-        tb_goods_size,
-        tb_coupon,
-        tb_address
+          tb_consumer,
+          tb_order,
+          tb_order_goods_relation,
+          tb_goods,
+          tb_goods_image,
+          tb_goods_size,
+          tb_coupon,
+          tb_address
         WHERE
-        tb_consumer.id= tb_order.consumerId,
+          tb_consumer.id= tb_order.consumer_id
         AND tb_order_goods_relation.order_id = tb_order.id
         AND tb_goods.id = tb_order_goods_relation.goods_id
         AND tb_goods_image.goods_id = tb_goods.id
@@ -252,109 +226,111 @@
     <!--查询用户的某个订单详情-->
     <select id="findOneOrderDetail"  resultMap="one_order_detail">
         SELECT
-        tb_address.id addressId,
-        tb_address.consumerName consumerName,
-        tb_address.consumerPhone consumerPhone,
-        tb_address.province province,
-        tb_address.city city,
-        tb_address.district district,
-        tb_address.street street,
-        tb_address.post post,
-        tb_address.detail detail,
+          tb_address.id addressId,
+          tb_address.consumer_name consumerName,
+          tb_address.consumer_phone consumerPhone,
+          tb_address.province province,
+          tb_address.city city,
+          tb_address.district district,
+          tb_address.street street,
+          tb_address.post post,
+          tb_address.detail detail,
 
-        tb_order.id orderId,
-        tb_order.orderNumber orderNumber,
-        tb_order.remark,
-        tb_order.status,
+          tb_order.id orderId,
+          tb_order.order_number orderNumber,
+          tb_order.remark,
+          tb_order.status,
 
-        tb_coupon.id couponId,
-        tb_coupon.target,
-        tb_coupon.reduce,
+          tb_coupon.id couponId,
+          tb_coupon.target,
+          tb_coupon.reduce,
 
-        tb_order_goods_relation.id OrderGoodsRelationId,
-        tb_order_goods_relation.goods_id goodsId,
-        tb_order_goods_relation.count goodsCount,
+          tb_order_goods_relation.id OrderGoodsRelationId,
+          tb_order_goods_relation.goods_id goodsId,
+          tb_order_goods_relation.count goodsCount,
 
-        tb_goods.id goodsId1,
-        tb_goods.`name` goodName,
+          tb_goods.id goodsId1,
+          tb_goods.`name` goodsName,
 
-        tb_goods_size.id GoodsSizeId
-        tb_goods_size.size goodSize,
-        tb_goods_size.price goodPrice,
+          tb_goods_size.id goodsSizeId,
+          tb_goods_size.size goodsSize,
+          tb_goods_size.price goodPrice,
 
-        tb_goods_image.id = GoodsImageId,
-        tb_goods_image.url goodsImg
+          tb_goods_image.id  goodsImageId,
+          tb_goods_image.url goodsImg
         FROM
-        tb_order,
-        tb_order_goods_relation,
-        tb_goods,
-        tb_goods_image,
-        tb_goods_size,
-        tb_coupon,
-        tb_address
+          tb_order,
+          tb_order_goods_relation,
+          tb_goods,
+          tb_goods_image,
+          tb_goods_size,
+          tb_coupon,
+          tb_address
         WHERE
-        tb_order_goods_relation.order_id = tb_order.id
-        AND tb_goods.id = tb_order_goods_relation.goods_id
-        AND tb_goods_image.goods_id = tb_goods.id
-        AND tb_goods_size.goods_id = tb_goods.id
-        AND tb_address.id = tb_order.address_id
-        AND tb_order_goods_relation.order_id = tb_order.id
-        AND tb_order_goods_relation.size = tb_goods_size.size
-        AND tb_order_goods_relation.goods_id = tb_goods_size.goods_id
-        AND tb_order.coupon_id = tb_coupon.id
-        AND tb_goods_image.position = 1
-        AND tb_order.consumer_id = 1002
-        AND tb_order.id = 1
+          tb_order_goods_relation.order_id = tb_order.id
+          AND tb_goods.id = tb_order_goods_relation.goods_id
+          AND tb_goods_image.goods_id = tb_goods.id
+          AND tb_goods_size.goods_id = tb_goods.id
+          AND tb_address.id = tb_order.address_id
+          AND tb_order_goods_relation.order_id = tb_order.id
+          AND tb_order_goods_relation.size = tb_goods_size.size
+          AND tb_order_goods_relation.goods_id = tb_goods_size.goods_id
+          AND tb_order.coupon_id = tb_coupon.id
+          AND tb_goods_image.position = 1
+          AND tb_order.id = #{orderId}
+          AND tb_order.consumer_id = #{consumerId}
+
     </select>
 
     <!--查询用户的某种状态的订单信息-->
-    <select id="findOneStatusOrder"  resultMap="user_all_order_detail">
+    <select id="findOneStatusOrderDetail"  resultMap="user_all_order_detail">
         SELECT
-        tb_consumer.id consumerId,
+          tb_consumer.id consumerId,
 
-        tb_address.id addressId,
-        tb_address.consumerName consumerName,
-        tb_address.consumerPhone consumerPhone,
-        tb_address.province province,
-        tb_address.city city,
-        tb_address.district district,
-        tb_address.street street,
-        tb_address.post post,
-        tb_address.detail detail,
+          tb_address.id addressId,
+          tb_address.consumer_name consumerName,
+          tb_address.consumer_phone consumerPhone,
+          tb_address.province province,
+          tb_address.city city,
+          tb_address.district district,
+          tb_address.street street,
+          tb_address.post post,
+          tb_address.detail detail,
 
-        tb_order.id orderId,
-        tb_order.orderNumber orderNumber,
-        tb_order.remark,
-        tb_order.status,
+          tb_order.id orderId,
+          tb_order.order_number orderNumber,
+          tb_order.remark,
+          tb_order.status,
 
-        tb_coupon.id couponId,
-        tb_coupon.target,
-        tb_coupon.reduce,
+          tb_coupon.id couponId,
+          tb_coupon.target,
+          tb_coupon.reduce,
 
-        tb_order_goods_relation.id OrderGoodsRelationId,
-        tb_order_goods_relation.goods_id goodsId,
-        tb_order_goods_relation.count goodsCount,
+          tb_order_goods_relation.id OrderGoodsRelationId,
+          tb_order_goods_relation.goods_id goodsId,
+          tb_order_goods_relation.count goodsCount,
 
-        tb_goods.id goodsId1,
-        tb_goods.`name` goodName,
+          tb_goods.id goodsId1,
+          tb_goods.`name` goodsName,
 
-        tb_goods_size.id GoodsSizeId
-        tb_goods_size.size goodSize,
-        tb_goods_size.price goodPrice,
+          tb_goods_size.id goodsSizeId,
+          tb_goods_size.size goodsSize,
+          tb_goods_size.price goodsPrice,
 
-        tb_goods_image.id = GoodsImageId,
-        tb_goods_image.url goodsImg
+          tb_goods_image.id  GoodsImageId,
+          tb_goods_image.url goodsImg
         FROM
-        tb_consumer,
-        tb_order,
-        tb_order_goods_relation,
-        tb_goods,
-        tb_goods_image,
-        tb_goods_size,
-        tb_coupon,
-        tb_address
+          tb_consumer,
+          tb_order,
+          tb_order_goods_relation,
+          tb_goods,
+          tb_goods_image,
+          tb_goods_size,
+          tb_coupon,
+          tb_address
         WHERE
-        tb_order_goods_relation.order_id = tb_order.id
+          tb_consumer.id= tb_order.consumer_id
+        AND tb_order_goods_relation.order_id = tb_order.id
         AND tb_goods.id = tb_order_goods_relation.goods_id
         AND tb_goods_image.goods_id = tb_goods.id
         AND tb_goods_size.goods_id = tb_goods.id
@@ -363,8 +339,9 @@
         AND tb_order_goods_relation.size = tb_goods_size.size
         AND tb_order_goods_relation.goods_id = tb_goods_size.goods_id
         AND tb_order.coupon_id = tb_coupon.id
+        AND tb_order.visibility = 0
         AND tb_goods_image.position = 1
-        AND tb_order.consumer_id = #{consumerId}
+        AND tb_consumer.id = #{consumerId}
         AND tb_order.`status` = #{status}
     </select>
 </mapper>

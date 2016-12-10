@@ -16,7 +16,7 @@ import java.util.List;
 public interface OrderGoodsRelationService {
 
     //添加订单详情
-    public void insertOrderDetail(@Param("orderId") Long orderId , @Param("shopCarGoodsRelation")List<ShopCarGoodsRelation> shopCarGoodsRelation )throws Exception;
+    public void insertOrderDetail(@Param("orderId") Long orderId , @Param("shopCarGoodsRelations")List<ShopCarGoodsRelation> shopCarGoodsRelations )throws Exception;
 
     //立即购买
     public void buyNow(@Param("orderGoodsRelation")OrderGoodsRelation orderGoodsRelation) throws Exception;

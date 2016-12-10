@@ -21,7 +21,8 @@ public class ShopCarTest extends BaseJunitTest {
     @Test
     public void testInsertShopCarByConsumerId() throws Exception {
         Long consumerId = new Long(1009);
-        shopCarService.insertShopCarByConsumerId(consumerId);
+        Long id = shopCarService.insertShopCarByConsumerId(consumerId);
+        System.out.println(id);
     }
 
     @Test
@@ -29,7 +30,7 @@ public class ShopCarTest extends BaseJunitTest {
         ShopCar shopCar = new ShopCar();
         shopCar.setConsumerId(1010L);
         shopCarService.insertShopCarByShopCar(shopCar);
-        System.out.println(shopCar.getId());
+        System.out.println("test:"+shopCar.getId());
     }
 
     @Test

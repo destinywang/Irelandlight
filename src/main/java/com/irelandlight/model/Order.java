@@ -202,4 +202,6 @@ public class Order {
     public void setOrderGoodsRelations(List<OrderGoodsRelation> orderGoodsRelations) {
         this.orderGoodsRelations = orderGoodsRelations;
     }
+
+
 }

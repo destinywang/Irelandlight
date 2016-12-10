@@ -52,7 +52,7 @@ public interface OrderDao {
      * @throws Exception
      */
     //查找某个用户的所有订单详情
-    public Consumer findAllOrderByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
+    public Consumer findAllOrderDetailByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
 
     /**
      * 查询用户的某个订单详情 findOneOrderDetail
@@ -61,7 +61,7 @@ public interface OrderDao {
      * @throws Exception
      */
     //查询用户的某个订单详情
-    public Order findOneOrderDetail( @Param("consumerId") Long consumerId  ) throws Exception;
+    public Order findOneOrderDetail( @Param("consumerId") Long consumerId , @Param("orderId") Long orderId ) throws Exception;
 
 
     /**
@@ -72,14 +72,16 @@ public interface OrderDao {
      * @throws Exception
      */
     //查询用户的某种状态的订单信息
-    public Consumer findOneStatusOrder( @Param("consumerId") Long consumerId , @Param("status") Integer status  ) throws Exception;
+    public Consumer findOneStatusOrderDetail( @Param("consumerId") Long consumerId , @Param("status") Integer status  ) throws Exception;
 
     /**
      * 增加订单（下单） insertOrder
      * @param order 订单参数
      * @throws Exception
+     *
+     * insert 添加，返回自增主键时候，参数不能添加@param 注释，否则自增主键无法绑定到原对象。
      */
     //增加订单（下单） 返回订单ID
-    public void insertOrder( @Param("order") Order order )throws Exception;
+    public void insertOrder(Order order )throws Exception;
 
 }

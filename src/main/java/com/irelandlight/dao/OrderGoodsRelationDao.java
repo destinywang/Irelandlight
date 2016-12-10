@@ -26,7 +26,7 @@ public interface OrderGoodsRelationDao {
      * @throws Exception
      */
     //添加订单详情
-    public void insertOrderDetail( @Param("orderId") Long orderId , @Param("shopCarGoodsRelation")List<ShopCarGoodsRelation> shopCarGoodsRelation )throws Exception;
+    public void insertOrderDetail( @Param("orderId") Long orderId , @Param("shopCarGoodsRelations")List<ShopCarGoodsRelation> shopCarGoodsRelation )throws Exception;
 
 
     /**

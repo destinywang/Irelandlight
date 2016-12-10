@@ -101,7 +101,7 @@
         <!-- 增加用户购物车 -->
         INSERT INTO tb_shop_car (consumer_id)
         VALUES
-            (#{consumerId})
+            (#{shopCar.consumerId})
     </insert>
 
     <!--添加用户购物车(用户id) 返回主键 -->

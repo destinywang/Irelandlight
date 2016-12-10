@@ -158,4 +158,12 @@ public class Consumer {
     public void setDefaultAddressId(Integer defaultAddressId) {
         DefaultAddressId = defaultAddressId;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }

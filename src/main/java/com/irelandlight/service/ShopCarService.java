@@ -16,7 +16,7 @@ public interface ShopCarService {
     public void insertShopCarByShopCar(ShopCar shopCar) throws Exception;
 
     //添加用户购物车(用户id) 返回主键
-    public void insertShopCarByConsumerId( @Param("consumerId") Long consumerId) throws Exception;
+    public Long insertShopCarByConsumerId( @Param("consumerId") Long consumerId) throws Exception;
 
     //删除用户购物车
     public void deleteConsumerShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception;

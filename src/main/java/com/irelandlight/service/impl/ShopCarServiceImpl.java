@@ -32,6 +32,7 @@ public class ShopCarServiceImpl implements ShopCarService {
      */
     public void insertShopCarByShopCar(ShopCar shopCar) throws Exception {
         shopCarDao.insertShopCarByShopCar(shopCar);
+        System.out.println(shopCar.getId());
     }
 
     /**
@@ -40,8 +41,8 @@ public class ShopCarServiceImpl implements ShopCarService {
      * @throws Exception
      */
 
-    public void insertShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception {
-        shopCarDao.insertShopCarByConsumerId(consumerId);
+    public Long  insertShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception {
+       return shopCarDao.insertShopCarByConsumerId(consumerId);
     }
 
     public void deleteConsumerShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception {

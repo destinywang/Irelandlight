@@ -14,10 +14,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShopCarDao {
     //添加用户购物车(ShopCar) 返回主键
-    public void insertShopCarByShopCar(ShopCar shopCar) throws Exception;
+    public void insertShopCarByShopCar(@Param("shopCar")ShopCar shopCar) throws Exception;
 
     //添加用户购物车(用户id) 返回主键
-    public void insertShopCarByConsumerId( @Param("consumerId") Long consumerId) throws Exception;
+    public Long insertShopCarByConsumerId( @Param("consumerId") Long consumerId) throws Exception;
 
     //删除用户购物车
     public void deleteConsumerShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception;

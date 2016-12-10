@@ -14,7 +14,7 @@ import java.util.List;
  * User: Ele_Chen
  * Date: 2016/12/9
  * Time: 18:16
- * Description: 目的... .
+ * Description: 购物车详情service测试.
  */
 public class ShopCarGoodsRelationTest extends BaseJunitTest {
 

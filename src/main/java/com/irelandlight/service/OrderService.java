@@ -19,20 +19,20 @@ public interface OrderService {
     public List<Order> findAllOrder() throws Exception;
 
     //查找某个用户的所有订单
-    public List<Order> findOrderByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
+    public List<Order> findOrderByConsumerId(Long consumerId) throws Exception;
 
     //查找用户有效订单
-    public List<Order> findValidOrderByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
+    public List<Order> findValidOrderByConsumerId(Long consumerId) throws Exception;
 
     //查找某个用户的所有订单详情
-    public Consumer findAllOrderByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
+    public Consumer findAllOrderDetailByConsumerId(Long consumerId) throws Exception;
 
     //查询用户的某个订单详情
-    public Order findOneOrderDetail( @Param("consumerId") Long consumerId  ) throws Exception;
+    public Order findOneOrderDetail(Long consumerId ,Long orderId ) throws Exception;
 
     //查询用户的某种状态的订单信息
-    public Consumer findOneStatusOrder( @Param("consumerId") Long consumerId , @Param("status") Integer status  ) throws Exception;
+    public Consumer findOneStatusOrderDetail(Long consumerId ,Integer status) throws Exception;
 
     //增加订单（下单） 返回订单ID
-    public void insertOrder(@Param("order") Order order )throws Exception;
+    public Long insertOrder(Order order )throws Exception;
 }

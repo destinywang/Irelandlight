@@ -40,22 +40,24 @@ public class OrderServiceImpl implements OrderService {
         return orders;
     }
 
-    public Consumer findAllOrderByConsumerId(Long consumerId) throws Exception {
-        Consumer consumer = orderDao.findAllOrderByConsumerId(consumerId);
+    public Consumer findAllOrderDetailByConsumerId(Long consumerId) throws Exception {
+        Consumer consumer = orderDao.findAllOrderDetailByConsumerId(consumerId);
         return consumer;
     }
 
-    public Order findOneOrderDetail(Long consumerId) throws Exception {
-        Order order = orderDao.findOneOrderDetail(consumerId);
+    public Order findOneOrderDetail(Long consumerId ,Long orderId ) throws Exception {
+        Order order = orderDao.findOneOrderDetail(consumerId,orderId);
         return order;
     }
 
-    public Consumer findOneStatusOrder(Long consumerId, Integer status) throws Exception {
-        Consumer consumer = orderDao.findOneStatusOrder(consumerId,status);
-        return null;
+    public Consumer findOneStatusOrderDetail(Long consumerId, Integer status) throws Exception {
+        Consumer consumer = orderDao.findOneStatusOrderDetail(consumerId,status);
+        return consumer;
     }
 
-    public void insertOrder(Order order) throws Exception {
+    public Long insertOrder(Order order) throws Exception {
         orderDao.insertOrder(order);
+        System.out.println(order.getId());
+        return order.getId();
     }
 }
