@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irelandlight.dao.POperatinonLogMapper">
+
+  <insert id="insertOperation">
+        <selectKey order="AFTER" keyProperty="productorLog.id" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+       </selectKey>
+      INSERT INTO tb_productor_log(create_time,last_update,visibility,productor_id,content)
+      VALUES (now(),sysdate(),#{productorLog.visibility},#{productorLog.productorId},#{productorLog.content})
+  </insert>
+
+
+  <select id="selectOperationByPid" resultType="java.lang.String">
+      SELECT content FROM tb_productor_log WHERE productor_id=#{pid} ORDER BY create_time
+  </select>
+
+</mapper>

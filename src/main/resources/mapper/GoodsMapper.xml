@@ -146,6 +146,22 @@
         #{goods.saleCount},#{goods.weight},#{goods.status})
     </insert>
 
+    <insert id="insertIntoGoodsImg">
+      INSERT INTO tb_goods_image(create_time,last_update,goods_id,url,tb_goods_image.position) VALUES
+      <foreach collection="imgUrlMap.keys" item="imgUrl" index="map_index" open="" separator="," close="">
+          (now(),sysdate(),#{id},#{imgUrl}, #{imgUrlMap[imgUrl]})
+      </foreach>
+    </insert>
+
+    <insert id="insertIotoGoodsSizePrice">
+        INSERT INTO tb_goods_size(create_time,last_update,goods_id,size,price) VALUES
+        <foreach collection="sizeMapPrice.keys" item="size" index="map_index" open="" separator="," close="">
+            (now(),sysdate(),#{id},#{size}, #{sizeMapPrice[size]})
+        </foreach>
+    </insert>
+
+
+
     <insert id="insertIntoGoodsByParam" parameterType="com.irelandlight.model.Goods">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()

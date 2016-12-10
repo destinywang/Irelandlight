@@ -32,6 +32,21 @@ public class GoodsDaoTest extends BaseJunitTest{
 
     @Test
     public void testMethod() {
+
+
+//        Map<String,Integer> goodImg=new HashMap<String, Integer>();
+//        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg",1);
+//        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/9d45443a-89fd-4aff-8563-1e59d835025c.jpg",2);
+//        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/267b16d4-36aa-4040-a8e5-a2c88205e2b8.jpg",3);
+//        goodsMapper.insertIntoGoodsImg(new Long(3),goodImg);
+
+        Map<String,BigDecimal> sizeMapPrice=new HashMap<String, BigDecimal>();
+        sizeMapPrice.put("2",new BigDecimal(36.90));
+        sizeMapPrice.put("4",new BigDecimal(74.90));
+        sizeMapPrice.put("5",new BigDecimal(180.90));
+        goodsMapper.insertIotoGoodsSizePrice(new Long(2),sizeMapPrice);
+
+
         List<Long> ids=new ArrayList<Long>();
         ids.add(new Long(1));
         ids.add(new Long(2));
@@ -100,4 +115,15 @@ public class GoodsDaoTest extends BaseJunitTest{
         containerItem.setPriceMapSize(sizePriceMapList);
     }
 
+    @Test
+    public void testMap(){
+
+        Map<String,Integer> goodImg=new HashMap<String, Integer>();
+        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg",0);
+        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/9d45443a-89fd-4aff-8563-1e59d835025c.jpg",2);
+        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/267b16d4-36aa-4040-a8e5-a2c88205e2b8.jpg",3);
+        System.out.println(goodImg.get("http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg"));
+        System.out.println(goodImg.get("http://ohlu5erjk.bkt.clouddn.com/9d45443a-89fd-4aff-8563-1e59d835025c.jpg"));
+        System.out.println(goodImg.get("http://ohlu5erjk.bkt.clouddn.com/267b16d4-36aa-4040-a8e5-a2c88205e2b8.jpg"));
+    }
 }

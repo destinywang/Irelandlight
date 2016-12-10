@@ -42,7 +42,7 @@
     <select id="selectOrderDetailByMonth" resultType="java.util.HashMap">
         select month(create_time) mon,count(*) orderCount
         from tb_order
-        where year(create_time)=2016
+        where year(create_time)=year(sysdate())
         group by month(create_time);
     </select>
     <select id="selectOrderByOrderNum" resultMap="tbMapToOrder">
