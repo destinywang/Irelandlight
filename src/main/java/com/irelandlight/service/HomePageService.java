@@ -15,7 +15,8 @@ import java.util.List;
  */
 @Service
 public class HomePageService {
-    @Autowired
+
+    @Resource
     private HomePageDao homePageDao;
 
     /**

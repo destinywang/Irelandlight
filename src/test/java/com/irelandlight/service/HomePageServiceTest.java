@@ -20,11 +20,12 @@ public class HomePageServiceTest {
 
     private static final Logger logger = LoggerFactory.getLogger(HomePageServiceTest.class);
 
-    @Autowired
-    private HomePageService homePageService;
+    @Resource
+    private GoodsDetailService goodsDetailService;
 
     @Test
     public void testQueryHotGoods() {
+        System.out.println(goodsDetailService);
         //logger.info(homePageService.queryHotGoods().toString());
         /*
         List<HomePageImage> homePageImages=homePageService.queryHomePageImage();

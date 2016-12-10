@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * Created by Zichu on 2016/12/8.
  */
-@Service(value = "goodsDetailService")
+@Service
 public class GoodsDetailService {
 
-    @Autowired
+    @Resource
     private GoodsDetailDao goodsDetailDao;
 
     /**

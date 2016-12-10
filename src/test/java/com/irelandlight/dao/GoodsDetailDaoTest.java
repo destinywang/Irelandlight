@@ -19,8 +19,10 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring/spring-dao.xml")
 public class GoodsDetailDaoTest {
+
     @Resource
     private GoodsDetailDao goodsDetailDao;
+
     @Test
     public void testQueryGoodsImage() {
         System.out.println(12);
