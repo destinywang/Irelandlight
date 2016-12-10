@@ -2,6 +2,7 @@ package com.irelandlight.dao;
 
 import com.irelandlight.model.vo.FilterGoodsVO;
 import com.irelandlight.model.vo.GoodsVO;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * 蛋糕名录页
  * Created by Zichu on 2016/12/6.
  */
+@Repository
 public interface GoodsListDao {
     /**
      * 查询全部商品信息

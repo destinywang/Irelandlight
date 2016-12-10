@@ -1,25 +1,48 @@
 package com.irelandlight.service;
 
+import com.irelandlight.dao.GoodsDetailDao;
 import com.irelandlight.model.GoodsImage;
-import com.irelandlight.model.vo.GoodsVO;
+import com.irelandlight.model.vo.GoodsAll;
+import com.irelandlight.model.vo.GoodsInfo;
+import com.irelandlight.model.vo.SizePrice;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * Created by Zichu on 2016/12/8.
  */
-public interface GoodsDetailService {
-    /**
-     * 查询商品的轮播图
-     * @param id
-     * @return 返回该商品id对应的图片列表
-     */
-    List<GoodsImage> queryGoodsImage(int id);
+@Service(value = "goodsDetailService")
+public class GoodsDetailService {
+
+    @Autowired
+    private GoodsDetailDao goodsDetailDao;
 
     /**
-     * 查询商品的全部信息
+     * 返回商品的轮播图
      * @param id
      * @return
      */
-    List<GoodsVO> queryGoodsDetail(int id);
+    List<GoodsImage> queryGoodsImage(int id){
+        return goodsDetailDao.queryGoodsImage(id);
+    }
+
+    /**
+     * 查询某个商品的全部信息
+     * @param id
+     * @return
+     */
+    void  queryGoodsDetail(int id){
+        GoodsInfo goodsInfo=goodsDetailDao.queryGoodsDetail(id);
+        List<SizePrice> sizePrices=goodsDetailDao.querySizePrice(id);
+        GoodsAll goodsAll=new GoodsAll();
+        goodsAll.setGoodsInfo(goodsInfo);
+        goodsAll.setSizePrices(sizePrices);
+        System.out.println(goodsAll);
+
+    }
+
+
 }

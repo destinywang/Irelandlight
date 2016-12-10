@@ -41,4 +41,14 @@ public class GoodsVO {
     public void setGoodsPrice(double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsVO{" +
+                "goodsId=" + goodsId +
+                ", goodsImageUrl='" + goodsImageUrl + '\'' +
+                ", goodsName='" + goodsName + '\'' +
+                ", goodsPrice=" + goodsPrice +
+                '}';
+    }
 }

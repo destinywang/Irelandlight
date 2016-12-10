@@ -1,9 +1,12 @@
 package com.irelandlight.dao;
 
 import com.irelandlight.model.Comment;
-import com.irelandlight.model.Goods;
 import com.irelandlight.model.GoodsImage;
+import com.irelandlight.model.vo.CommentFrom;
+import com.irelandlight.model.vo.CommentGoods;
+import com.irelandlight.model.vo.GoodsInfo;
 import com.irelandlight.model.vo.SizePrice;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,6 +14,7 @@ import java.util.List;
  * 蛋糕详情
  * Created by Zichu on 2016/12/6.
  */
+@Repository
 public interface GoodsDetailDao {
     /**
      * 查询商品的轮播图
@@ -24,7 +28,7 @@ public interface GoodsDetailDao {
      * @param id
      * @return 返回该商品id对应的信息
      */
-    List<Goods> queryGoodsDetail(int id);
+    GoodsInfo queryGoodsDetail(int id);
 
     /**
      * 查询该商品的价格尺寸表
@@ -34,12 +38,18 @@ public interface GoodsDetailDao {
     List<SizePrice> querySizePrice(int id);
 
     /**
-     * 查询评论
-     * @param id
-     * @return 返回该商品的全部评论
+     * 查询对商品的评论
+     * @param id 商品的ic
+     * @return
      */
-    List<Comment> queryGoodsComment(int id);
+    List<CommentGoods> queryCommentGoods(int id);
 
+    /**
+     * 查询对评论的评论
+     * @param id 商品的id
+     * @return
+     */
+    List<CommentFrom> queryCommentComment(int id);
     /**
      * 添加对评论的评论
      * @param comment

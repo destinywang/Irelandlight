@@ -1,30 +1,44 @@
 package com.irelandlight.service;
 
+import com.irelandlight.dao.HomePageDao;
 import com.irelandlight.model.HomePageImage;
 import com.irelandlight.model.vo.GoodsVO;
 import com.irelandlight.model.vo.NewsVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * Created by Zichu on 2016/12/8.
  */
-public interface HomePageService {
-    /**
-     * 返回首页轮播图信息，将其位置顺序排好
-     * @return
-     */
-    List<HomePageImage> queryHomePageImage();
+@Service
+public class HomePageService {
+    @Autowired
+    private HomePageDao homePageDao;
 
     /**
-     * 返回公告的信息
+     * 返回热门商品列表，共6个，排好序
      * @return
      */
-    List<NewsVO> queryNews();
+    public List<GoodsVO> queryHotGoods() {
+        return homePageDao.queryHotGoods();
+    }
 
     /**
-     * 查询6个热门商品信息
+     * 返回公告信息，包含内容，标题及发布的管理员名字
      * @return
      */
-    List<GoodsVO> queryHotGoods();
+    public List<NewsVO> queryNews() {
+        return homePageDao.queryNews();
+    }
+
+    /**
+     * 返回首页轮播图，按位置顺序排好
+     * @return
+     */
+    public List<HomePageImage> queryHomePageImage() {
+        return homePageDao.queryHomePageImage();
+    }
 }

@@ -40,4 +40,14 @@ public class GoodsInfo {
     public int getGoodsQuantity() {
         return goodsQuantity;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsInfo{" +
+                "goodsName='" + goodsName + '\'' +
+                ", goodsId=" + goodsId +
+                ", goodsDescription='" + goodsDescription + '\'' +
+                ", goodsQuantity=" + goodsQuantity +
+                '}';
+    }
 }

@@ -4,9 +4,11 @@ package com.irelandlight.model.vo;
  * Created by Zichu on 2016/12/8.
  */
 public class SizePrice {
-    private double goodsPrice;
-    private String goodsSize;
     private int goodsId;
+    private String goodsSize;
+    private double goodsPrice;
+
+
 
     public double getGoodsPrice() {
         return goodsPrice;
@@ -30,5 +32,14 @@ public class SizePrice {
 
     public void setGoodsId(int goodsId) {
         this.goodsId = goodsId;
+    }
+
+    @Override
+    public String toString() {
+        return "SizePrice{" +
+                "goodsId=" + goodsId +
+                ", goodsSize='" + goodsSize + '\'' +
+                ", goodsPrice=" + goodsPrice +
+                '}';
     }
 }

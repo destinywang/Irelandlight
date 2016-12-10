@@ -3,6 +3,7 @@ package com.irelandlight.dao;
 import com.irelandlight.model.HomePageImage;
 import com.irelandlight.model.vo.GoodsVO;
 import com.irelandlight.model.vo.NewsVO;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * 首页
  * Created by Zichu on 2016/12/6.
  */
+@Repository
 public interface HomePageDao {
     /**
      * 查询首页轮播图

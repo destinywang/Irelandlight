@@ -10,7 +10,6 @@ public class GoodsImage {
     private Date createTime;        //创建时间
     private Date lastUpdate;        //最后更新时间
     private Integer visibility;     //表示是否已删除
-    private Integer isMajor;        //是否为主图
     private Long goodsId;           //所属商品
     private String url;             //图片链接
     private Integer position;       //在轮播图中的位置
@@ -47,14 +46,6 @@ public class GoodsImage {
         this.visibility = visibility;
     }
 
-    public Integer getIsMajor() {
-        return isMajor;
-    }
-
-    public void setIsMajor(Integer isMajor) {
-        this.isMajor = isMajor;
-    }
-
     public Long getGoodsId() {
         return goodsId;
     }
@@ -77,5 +68,18 @@ public class GoodsImage {
 
     public void setPosition(Integer position) {
         this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return "GoodsImage{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", goodsId=" + goodsId +
+                ", url='" + url + '\'' +
+                ", position=" + position +
+                '}';
     }
 }

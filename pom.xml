@@ -7,6 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>cake-common Maven Webapp</name>
     <url>http://maven.apache.org</url>
+
     <dependencies>
         <!-- 使用注解的方式运行jUnit，因此改成4.11 -->
         <dependency>

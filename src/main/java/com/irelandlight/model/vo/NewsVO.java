@@ -31,4 +31,13 @@ public class NewsVO {
     public void setNewsProductorName(String newsProductorName) {
         this.newsProductorName = newsProductorName;
     }
+
+    @Override
+    public String toString() {
+        return "NewsVO{" +
+                "newsContent='" + newsContent + '\'' +
+                ", newsTitle='" + newsTitle + '\'' +
+                ", newsProductorName='" + newsProductorName + '\'' +
+                '}';
+    }
 }
