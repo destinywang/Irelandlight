@@ -22,11 +22,23 @@ public class OrderGoodsRelationServiceImpl implements OrderGoodsRelationService 
     @Resource
     private OrderGoodsRelationDao orderGoodsRelationDao;
 
-
+    /**
+     * 添加订单详情 insertOrderDetail
+     * @param orderId
+     * @param shopCarGoodsRelation
+     * @throws Exception
+     */
+    //添加订单详情
     public void insertOrderDetail(Long orderId, List<ShopCarGoodsRelation> shopCarGoodsRelation) throws Exception {
         orderGoodsRelationDao.insertOrderDetail(orderId,shopCarGoodsRelation);
     }
 
+    /**
+     * 立刻购买 buyNow
+     * @param orderGoodsRelation
+     * @throws Exception
+     */
+    //立刻购买
     public void buyNow(OrderGoodsRelation orderGoodsRelation) throws Exception {
         orderGoodsRelationDao.buyNow(orderGoodsRelation);
     }

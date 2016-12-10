@@ -26,36 +26,51 @@ public class ShopCarServiceImpl implements ShopCarService {
     private ShopCarGoodsRelationDao shopCarGoodsRelationDao;
 
     /**
-     *
+     * 添加用户购物车 返回主键 insertShopCarByShopCar
      * @param shopCar
      * @throws Exception
      */
     public void insertShopCarByShopCar(ShopCar shopCar) throws Exception {
         shopCarDao.insertShopCarByShopCar(shopCar);
-        System.out.println(shopCar.getId());
     }
 
     /**
-     *
+     * 添加用户购物车 insertShopCarByConsumerId
      * @param consumerId
      * @throws Exception
      */
-
-    public Long  insertShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception {
-       return shopCarDao.insertShopCarByConsumerId(consumerId);
+    public void  insertShopCarByConsumerId(Long consumerId) throws Exception {
+       shopCarDao.insertShopCarByConsumerId(consumerId);
     }
 
-    public void deleteConsumerShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception {
-        shopCarDao.deleteConsumerShopCarByConsumerId(consumerId);
+    /**
+     * 删除用户购物车 deleteShopCarByConsumerId
+     * @param consumerId
+     * @throws Exception
+     */
+    public void deleteShopCarByConsumerId(Long consumerId) throws Exception {
+        shopCarDao.deleteShopCarByConsumerId(consumerId);
     }
 
+    /**
+     * 通过用户Id查找购物车商品详情列表(resultMap) findShopCarGoodsDetailByConsumerId
+     * @param consumerId
+     * @return
+     * @throws Exception
+     */
     //通过用户Id查找购物车商品详情列表(resultMap)
-    public ShopCar findShopCarGoodsDetailByConsumerId (@Param("consumerId") Long consumerId) throws Exception{
+    public ShopCar findShopCarGoodsDetailByConsumerId (Long consumerId) throws Exception{
         ShopCar shopCar = shopCarDao.findShopCarGoodsDetailByConsumerId(consumerId);
         return shopCar;
     }
 
-    public ShopCar findShopCarDetailByConsumerId(@Param("consumerId") Long consumerId) throws Exception {
+    /**
+     * 通过用户Id查询其购物车信息 findShopCarDetailByConsumerId
+     * @param consumerId
+     * @return ShopCar
+     * @throws Exception
+     */
+    public ShopCar findShopCarDetailByConsumerId(Long consumerId) throws Exception {
         return  shopCarDao.findShopCarDetailByConsumerId(consumerId);
     }
 

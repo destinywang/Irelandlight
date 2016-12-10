@@ -106,16 +106,12 @@
 
     <!--添加用户购物车(用户id) 返回主键 -->
     <insert id="insertShopCarByConsumerId" parameterType="java.lang.Long">
-        <!-- 返回自增主键 -->
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
         <!-- 增加用户购物车 -->
         INSERT INTO tb_shop_car (consumer_id) VALUES (#{consumerId})
     </insert>
 
     <!--删除用户购物车-->
-    <update id="deleteConsumerShopCarByConsumerId" parameterType="java.lang.Long">
+    <update id="deleteShopCarByConsumerId" parameterType="java.lang.Long">
         UPDATE tb_shop_car
         SET tb_shop_car.visibility = 1
         WHERE

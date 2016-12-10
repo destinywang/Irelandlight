@@ -13,6 +13,9 @@ import java.util.List;
  */
 public interface ShopCarGoodsRelationService {
 
+    //添加购物车详情
+    public void insertGoodsWithNo(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception;
+
     //修改购物车商品信息
     public void updateShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception;
 

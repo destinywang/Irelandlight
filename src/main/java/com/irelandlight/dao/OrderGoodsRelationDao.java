@@ -17,8 +17,6 @@ import java.util.List;
 @Repository
 public interface OrderGoodsRelationDao {
 
-
-
     /**
      * 添加订单详情 insertOrderDetail
      * @param orderId 需要插入的订单id

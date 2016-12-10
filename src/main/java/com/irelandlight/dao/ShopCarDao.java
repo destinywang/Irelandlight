@@ -13,20 +13,49 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ShopCarDao {
+
+    /**
+     * 添加用户购物车(ShopCar) 返回主键 insertShopCarByShopCar
+     * @param shopCar 用于主键返回
+     * @throws Exception
+     */
     //添加用户购物车(ShopCar) 返回主键
     public void insertShopCarByShopCar(@Param("shopCar")ShopCar shopCar) throws Exception;
 
-    //添加用户购物车(用户id) 返回主键
-    public Long insertShopCarByConsumerId( @Param("consumerId") Long consumerId) throws Exception;
 
+    /**
+     * 添加用户购物车 insertShopCarByConsumerId
+     * @param consumerId
+     * @throws Exception
+     */
+    //添加用户购物车(用户id)
+    public void insertShopCarByConsumerId( @Param("consumerId") Long consumerId) throws Exception;
+
+    /**
+     * 删除用户购物车 deleteConsumerShopCarByConsumerId
+     * @param consumerId
+     * @throws Exception
+     */
     //删除用户购物车
-    public void deleteConsumerShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
+    public void deleteShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
 
     //暂不提供修改用户购物车功能
 
+    /**
+     * 通过用户Id查询其购物车信息 findShopCarDetailByConsumerId
+     * @param consumerId
+     * @return
+     * @throws Exception
+     */
     //通过用户Id查询其购物车信息
     public ShopCar findShopCarDetailByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
 
+    /**
+     * 通过用户Id查找购物车商品详情列表(resultMap) findShopCarGoodsDetailByConsumerId
+     * @param consumerId
+     * @return
+     * @throws Exception
+     */
     //通过用户Id查找购物车商品详情列表(resultMap)
     public ShopCar findShopCarGoodsDetailByConsumerId (@Param("consumerId") Long consumerId) throws Exception;
 }

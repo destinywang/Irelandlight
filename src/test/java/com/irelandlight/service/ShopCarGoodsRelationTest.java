@@ -21,6 +21,17 @@ public class ShopCarGoodsRelationTest extends BaseJunitTest {
     @Resource
     private ShopCarGoodsRelationServiceImpl shopCarGoodsRelationService;
 
+
+    @Test
+    public void testInsertGoodsWithNo()throws Exception{
+        ShopCarGoodsRelation shopCarGoodsRelation = new ShopCarGoodsRelation();
+        shopCarGoodsRelation.setCount(10);
+        shopCarGoodsRelation.setSize("3");
+        shopCarGoodsRelation.setGoodsId(2L);
+        shopCarGoodsRelation.setShopCarId(5L);
+        shopCarGoodsRelationService.insertGoodsWithNo(shopCarGoodsRelation);
+    }
+
     @Test
     public void testUpdateShopCarGoodsRelation() throws Exception {
         ShopCarGoodsRelation shopCarGoodsRelation = new ShopCarGoodsRelation();
@@ -28,7 +39,6 @@ public class ShopCarGoodsRelationTest extends BaseJunitTest {
         shopCarGoodsRelation.setSize("3");
         shopCarGoodsRelation.setGoodsId(2L);
         shopCarGoodsRelation.setShopCarId(5L);
-        System.out.println(shopCarGoodsRelation+"998");
         shopCarGoodsRelationService.updateShopCarGoodsRelation(shopCarGoodsRelation);
     }
 
@@ -80,6 +90,5 @@ public class ShopCarGoodsRelationTest extends BaseJunitTest {
         shopCarGoodsRelation.setShopCarId(1L);
         shopCarGoodsRelationService.insertGoodsRelation(shopCarGoodsRelation);
     }
-
 
 }
