@@ -19,6 +19,7 @@ import java.util.List;
 public class HomePageDaoTest {
     @Resource
     private HomePageDao homePageDao;
+
     @Test
     public void testQueryHomePageImage() {
         List<HomePageImage> homePageImages=homePageDao.queryHomePageImage();
