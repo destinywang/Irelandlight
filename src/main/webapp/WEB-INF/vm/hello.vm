@@ -1,5 +1,10 @@
 <html>
 <body>
 <h2>Hello Worldddddd!</h2>
+<form action="hello.action" method="post">
+    title:<input type="text" name="title"><br/>
+    content:<input type="text" name="content"><br/>
+    <input type="submit" value="保存">
+</form>
 </body>
 </html>

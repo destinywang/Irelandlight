@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.NewsMapper">
+    <!--保存新的公告-->
+    <insert id="insertNews" parameterType="com.irelandlight.model.News" >
+        insert into tb_news(title,content,productor_id) values(#{title},#{content},#{productorId})
+    </insert>
+    <!--查询所有的公告-->
+    <select id="selectAllNews" parameterType="com.irelandlight.model.News" resultType="com.irelandlight.model.News" >
+            SELECT id,title,content FROM tb_news WHERE visibility=0
+    </select>
+    <!--假删除公告-->
+    <update id="delateNews"  parameterType="java.lang.Long">
+            UPDATE tb_news SET visibility=1 WHERE id=#{id}
+    </update>
+</mapper>

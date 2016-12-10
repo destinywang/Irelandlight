@@ -8,10 +8,11 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
-
+    <context:component-scan base-package="com.irelandlight.controller" />
     <!-- 扫描service包下的所有的使用注解的类型 -->
-    <context:component-scan base-package="com.irelandlight.service"/>
-
+    <context:component-scan base-package="com.irelandlight.service.impl"/>
+    <bean id="newsService" class="com.irelandlight.service.impl.NewsServiceImpl"/>
+    <bean id="goodsService" class="com.irelandlight.service.impl.GoodsServiceImpl"/>
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <!-- 注入数据库连接池 -->

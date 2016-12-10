@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.GoodsMapper">
+    <!--查询所有商品的id和name-->
+    <select id="selectSomeGoods" parameterType="com.irelandlight.model.vo.SomeGoods" resultType="com.irelandlight.model.vo.SomeGoods">
+        SELECT id,name FROM tb_goods
+    </select>
+    <!--修改商品的权重-->
+    <update id="updateGoodsWeight" parameterType="java.lang.Long">
+        UPDATE tb_goods SET weight=#{weight} WHERE id=#{id}
+    </update>
+</mapper>
