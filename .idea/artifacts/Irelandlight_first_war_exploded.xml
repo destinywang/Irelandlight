@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="cake-common-first:war exploded">
+  <artifact type="exploded-war" name="Irelandlight-first:war exploded">
     <output-path>$PROJECT_DIR$/target/cake-common</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="cake-common-first" />
+          <element id="module-output" name="Irelandlight-first" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.12" />
@@ -58,7 +58,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/cake-common/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="cake-common-first/web/Web" />
+      <element id="javaee-facet-resources" facet="Irelandlight-first/web/Web" />
     </root>
   </artifact>
 </component>

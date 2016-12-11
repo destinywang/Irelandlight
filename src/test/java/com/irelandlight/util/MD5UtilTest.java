@@ -14,7 +14,7 @@ public class MD5UtilTest {
     @Test
     public void testMd5Encode() {
         try {
-            System.out.println(MD5Util.md5Encode("123"));
+            System.out.println(MD5Util.getMd5("123"));
         } catch (Exception e) {
             e.printStackTrace();
         }
