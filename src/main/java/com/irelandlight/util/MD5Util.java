@@ -8,27 +8,32 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MD5Util {
 
-    public static String md5Encode(String inStr) throws Exception {
-        MessageDigest md5 = null;
+    //静态方法，便于作为工具类
+    public static String getMd5(String plainText) {
         try {
-            md5 = MessageDigest.getInstance("MD5");
-        } catch (Exception e) {
-            System.out.println(e.toString());
-            e.printStackTrace();
-            return "";
-        }
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(plainText.getBytes());
+            byte b[] = md.digest();
 
-        byte[] byteArray = inStr.getBytes("UTF-8");
-        byte[] md5Bytes = md5.digest(byteArray);
-        StringBuffer hexValue = new StringBuffer();
-        for (int i = 0; i < md5Bytes.length; i++) {
-            int val = ((int) md5Bytes[i]) & 0xff;
-            if (val < 16) {
-                hexValue.append("0");
+            int i;
+
+            StringBuffer buf = new StringBuffer("");
+            for (int offset = 0; offset < b.length; offset++) {
+                i = b[offset];
+                if (i < 0)
+                    i += 256;
+                if (i < 16)
+                    buf.append("0");
+                buf.append(Integer.toHexString(i));
             }
-            hexValue.append(Integer.toHexString(val));
+            //32位加密
+            return buf.toString();
+            // 16位的加密
+            //return buf.toString().substring(8, 24);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
         }
-        return hexValue.toString();
-    }
 
+    }
 }
