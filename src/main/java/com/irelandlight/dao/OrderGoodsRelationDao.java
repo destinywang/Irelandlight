@@ -2,6 +2,7 @@ package com.irelandlight.dao;
 
 import com.irelandlight.model.OrderGoodsRelation;
 import com.irelandlight.model.ShopCarGoodsRelation;
+import com.irelandlight.vo.ShopCarOrderVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -24,7 +25,7 @@ public interface OrderGoodsRelationDao {
      * @throws Exception
      */
     //添加订单详情
-    public void insertOrderDetail( @Param("orderId") Long orderId , @Param("shopCarGoodsRelations")List<ShopCarGoodsRelation> shopCarGoodsRelation )throws Exception;
+    public void insertOrderDetail( @Param("orderId") Long orderId, @Param("shopCarGoodsRelations") List<ShopCarGoodsRelation> shopCarGoodsRelations)throws Exception;
 
 
     /**

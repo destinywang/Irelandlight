@@ -45,4 +45,6 @@ http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springfr
         <!-- 给出扫描DAO接口包 -->
         <property name="basePackage" value="com.irelandlight.dao"/>
     </bean>
+
+    <context:component-scan base-package="com.irelandlight.dao"/>
 </beans>

@@ -84,10 +84,10 @@ public class ShopCarGoodsRelationTest extends BaseJunitTest {
     @Test
     public void testInsertGoodsRelation() throws Exception {
         ShopCarGoodsRelation shopCarGoodsRelation = new ShopCarGoodsRelation();
-        shopCarGoodsRelation.setCount(10);
-        shopCarGoodsRelation.setSize("4");
-        shopCarGoodsRelation.setGoodsId(2L);
         shopCarGoodsRelation.setShopCarId(1L);
+        shopCarGoodsRelation.setGoodsId(1L);
+        shopCarGoodsRelation.setSize("2");
+        shopCarGoodsRelation.setCount(4);
         shopCarGoodsRelationService.insertGoodsRelation(shopCarGoodsRelation);
     }
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.CouponDao">
+    <!--查询用户可用的优惠券-->
+    <select id="findCouponByConsumerId" resultType="com.irelandlight.model.Coupon">
+        SELECT
+          tb_coupon.target,
+          tb_coupon.reduce,
+          tb_coupon.content
+        FROM
+          tb_coupon
+        WHERE
+          tb_coupon.visibility = 0
+          AND tb_coupon.consumer_id = #{consumerId}
+    </select>
+
+</mapper>

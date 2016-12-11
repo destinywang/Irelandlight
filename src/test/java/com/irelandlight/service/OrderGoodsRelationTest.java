@@ -38,7 +38,7 @@ public class OrderGoodsRelationTest extends BaseJunitTest {
         shopCarGoodsRelations.add(shopCarGoodsRelation);
         shopCarGoodsRelations.add(shopCarGoodsRelation2);
 
-        orderGoodsRelationService.insertOrderDetail(2L,shopCarGoodsRelations);
+        //orderGoodsRelationService.insertOrderDetail(2L,shopCarGoodsRelations);
 
     }
 

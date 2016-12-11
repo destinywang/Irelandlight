@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.ShopCarGoodsRelationDao">
+
+    <!--购物车详情sql-->
+    <!--给用户添加购物车详情(先查找用户购物车是否有该商品,有则修改,无则添加 )-->
+    <!--将添加的商品没有,则直接添加-->
+    <insert id="insertGoodsWithNo"
+            parameterType="com.irelandlight.model.ShopCarGoodsRelation">
+        INSERT INTO tb_shop_car_goods_relation (
+			tb_shop_car_goods_relation.shop_car_id,
+			tb_shop_car_goods_relation.goods_id,
+			tb_shop_car_goods_relation.count,
+			tb_shop_car_goods_relation.size
+		)
+		VALUES
+			(#{shopCarGoodsRelation.shopCarId}, #{shopCarGoodsRelation.goodsId}, #{shopCarGoodsRelation.count},#{shopCarGoodsRelation.size})
+    </insert>
+
+    <!--将添加的商品有,修改原来的购物车商品详情-->
+    <!--修改某购物车中某商品详情-->
+    <update id="updateShopCarGoodsRelation">
+		UPDATE tb_shop_car_goods_relation
+        SET tb_shop_car_goods_relation.count = #{shopCarGoodsRelation.count}
+        WHERE
+          tb_shop_car_goods_relation.visibility = 0
+          AND tb_shop_car_goods_relation.shop_car_id = #{shopCarGoodsRelation.shopCarId}
+          AND tb_shop_car_goods_relation.goods_id = #{shopCarGoodsRelation.goodsId}
+          AND tb_shop_car_goods_relation.size = #{shopCarGoodsRelation.size}
+	</update>
+
+    <!--删除购物车详情-->
+    <update id="deleteShopCarGoodsRelation">
+		UPDATE tb_shop_car_goods_relation
+		SET tb_shop_car_goods_relation.visibility = 1
+		WHERE
+			tb_shop_car_goods_relation.visibility = 0
+		AND tb_shop_car_goods_relation.shop_car_id = #{shopCarGoodsRelation.shopCarId}
+		AND tb_shop_car_goods_relation.goods_id = #{shopCarGoodsRelation.goodsId}
+		AND tb_shop_car_goods_relation.size = #{shopCarGoodsRelation.size}
+	</update>
+
+    <!--批量删除某购物车中某商品详情-->
+    <update id="batchDeleteShopCarGoodsRelations"
+            parameterType="java.util.List">
+        UPDATE tb_shop_car_goods_relation
+        SET tb_shop_car_goods_relation.visibility = 1
+        WHERE
+
+        <foreach collection="shopCarGoodsRelations" item="goods" separator="or">
+            ( shop_car_id = #{goods.shopCarId} AND tb_shop_car_goods_relation.goods_id = #{goods.goodsId} AND tb_shop_car_goods_relation.size = #{goods.size} )
+        </foreach>
+    </update>
+
+    <!--查找购物车详情-->
+    <select id="findShopCarGoodsRelationByShopCarGoodsRelation"
+            parameterType="com.irelandlight.model.ShopCarGoodsRelation"
+            resultType="com.irelandlight.model.ShopCarGoodsRelation">
+		SELECT
+			id,	shop_car_id , goods_id , size , count , status
+		FROM
+			tb_shop_car_goods_relation
+		WHERE
+			tb_shop_car_goods_relation.visibility = 0
+		AND tb_shop_car_goods_relation.shop_car_id = #{shopCarGoodsRelation.shopCarId}
+	</select>
+
+    <!--查找用户购物车是否有相同的商品-->
+    <select id="findSameGoodsRelation"
+            parameterType="com.irelandlight.model.ShopCarGoodsRelation"
+            resultType="com.irelandlight.model.ShopCarGoodsRelation">
+        SELECT
+        id,	shop_car_id , goods_id , size , count , status
+        FROM
+        tb_shop_car_goods_relation
+        WHERE
+        tb_shop_car_goods_relation.visibility = 0
+        AND tb_shop_car_goods_relation.shop_car_id = #{shopCarGoodsRelation.shopCarId}
+        AND tb_shop_car_goods_relation.goods_id = #{shopCarGoodsRelation.goodsId}
+        AND tb_shop_car_goods_relation.size = #{shopCarGoodsRelation.size}
+    </select>
+
+    <!--购物车下单后删除购物车信息（修改shopCarGoodsRelation表中商品的status字段。）-->
+    <update id="addOrderFinish" parameterType="java.util.List">
+        UPDATE tb_shop_car_goods_relation
+        SET tb_shop_car_goods_relation.status = 2
+        WHERE
+        shop_car_id = #{shopCarGoodsRelation.shopCarId}
+        <foreach collection="shopCarGoodsRelations" item="goods" separator="or">
+            AND tb_shop_car_goods_relation.goods_id = #{goods.goodsId}
+            AND tb_shop_car_goods_relation.size = #{goods.size}
+        </foreach>
+    </update>
+
+</mapper>

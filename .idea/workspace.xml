@@ -2,25 +2,53 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2800cdd-60e9-48a2-91fc-bd86f71083dd" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/po/ShopCarCustom.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/po/ShopCarGoodsRelationCustom.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ShopCarGoodsRelationQueryVo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ShopCarQueryVo.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Incredile.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/controller/OrderController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/AddressDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/CouponDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/AddressService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/CouponService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/AddressServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/CouponServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/util/MakeOrderNum.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ShopCarOrderVo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mapper/AddressDao.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CouponDao.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/vm/error.vm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/vm/succeed.vm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/irelandlight/json/MakeJSONString.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/irelandlight/service/AddressTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/irelandlight/service/CouponTest.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/Irelandlight_war.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/Irelandlight_war_exploded.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cake-common.war" afterPath="$PROJECT_DIR$/target/cake-common.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/irelandlight/service/OrderGoodsRelationService.class" afterPath="$PROJECT_DIR$/target/classes/com/irelandlight/service/OrderGoodsRelationService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/irelandlight/service/OrderService.class" afterPath="$PROJECT_DIR$/target/classes/com/irelandlight/service/OrderService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/irelandlight/service/impl/OrderGoodsRelationServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/irelandlight/service/impl/OrderGoodsRelationServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/irelandlight/service/impl/OrderServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/irelandlight/service/impl/OrderServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/irelandlight/service/impl/ShopCarGoodsRelationServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/irelandlight/service/impl/ShopCarGoodsRelationServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/com/irelandlight/service/OrderGoodsRelationTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/irelandlight/service/OrderGoodsRelationTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/com/irelandlight/service/OrderTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/irelandlight/service/OrderTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/com/irelandlight/service/ShopCarGoodsRelationTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/irelandlight/service/ShopCarGoodsRelationTest.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderGoodsRelationDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderGoodsRelationDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/ShopCarDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/ShopCarDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/ShopCarGoodsRelationDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/ShopCarGoodsRelationDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderGoodsRelationService.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderGoodsRelationService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderService.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/ShopCarGoodsRelationService.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/ShopCarGoodsRelationService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/ShopCarService.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/ShopCarService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderGoodsRelationServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderGoodsRelationServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/ShopCarGoodsRelationServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/ShopCarGoodsRelationServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/ShopCarServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/ShopCarServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/ShopCarDao.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/ShopCarDao.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/OrderDao.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/OrderDao.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-service.xml" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-service.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderGoodsRelationTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderGoodsRelationTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarGoodsRelationTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarGoodsRelationTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cake-common/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/target/cake-common/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/jdbc.properties" afterPath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/jdbc.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/mybatis-config.xml" afterPath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/mybatis-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/spring/spring-dao.xml" afterPath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/spring/spring-dao.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/spring/spring-service.xml" afterPath="$PROJECT_DIR$/target/cake-common/WEB-INF/classes/spring/spring-service.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mapper/OrderDao.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/OrderDao.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/spring/spring-service.xml" afterPath="$PROJECT_DIR$/target/classes/spring/spring-service.xml" />
     </list>
     <ignored path="Irelandlight.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,26 +84,42 @@
     </PATH>
   </component>
   <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="ShopCarTest.java" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarTest.java">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="232">
+                    <caret line="26" column="9" lean-forward="true" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
     <window id="2">
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="ShopCarGoodsRelationDao.xml" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/ShopCarGoodsRelationDao.xml">
+            <file leaf-file-name="OrderTest.java" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderTest.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="730">
-                    <caret line="92" column="56" lean-forward="false" selection-start-line="92" selection-start-column="56" selection-end-line="92" selection-end-column="56" />
+                  <state relative-caret-position="191">
+                    <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
                     <folding>
-                      <element signature="n#insert#0;n#mapper#0;n#!!top" expanded="false" />
-                      <element signature="n#update#0;n#mapper#0;n#!!top" expanded="false" />
-                      <element signature="n#update#1;n#mapper#0;n#!!top" expanded="false" />
-                      <element signature="n#select#0;n#mapper#0;n#!!top" expanded="false" />
-                      <element signature="n#select#1;n#mapper#0;n#!!top" expanded="false" />
-                      <marker date="1481293651421" expanded="false" signature="442:782" ph="INSERT INTO tb_shop_car_goods_relation... " />
-                      <marker date="1481293651421" expanded="true" signature="901:1327" ph="UPDATE tb_sh... " />
-                      <marker date="1481293651421" expanded="true" signature="1406:1766" ph="UPDATE tb_sh... " />
-                      <marker date="1481293651421" expanded="false" signature="2512:2743" ph="SELECT id, s... " />
-                      <marker date="1481293651421" expanded="true" signature="2972:3393" ph="SELECT id, s... " />
+                      <element signature="method#testFindAllOrder#0;class#OrderTest#0" expanded="false" />
+                      <element signature="method#testFindOrderByConsumerId#0;class#OrderTest#0" expanded="false" />
+                      <element signature="method#testFindValidOrderByConsumerId#0;class#OrderTest#0" expanded="false" />
+                      <element signature="method#testFindAllOrderDetailByConsumerId#0;class#OrderTest#0" expanded="false" />
+                      <element signature="method#testFindOneOrderDetail#0;class#OrderTest#0" expanded="false" />
+                      <element signature="method#testFindOneStatusOrderDetail#0;class#OrderTest#0" expanded="false" />
+                      <element signature="method#testInsertOrder#0;class#OrderTest#0" expanded="false" />
+                      <element signature="method#testPlaceAnOrder#0;class#OrderTest#0" expanded="false" />
                     </folding>
                   </state>
                 </provider>
@@ -92,14 +136,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OrderServiceImpl.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderServiceImpl.java">
+      <file leaf-file-name="OrderController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/controller/OrderController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="98" column="24" lean-forward="true" selection-start-line="98" selection-start-column="24" selection-end-line="98" selection-end-column="24" />
+            <state relative-caret-position="587">
+              <caret line="77" column="41" lean-forward="true" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#644#650#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MakeJSONString.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/json/MakeJSONString.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -112,6 +167,7 @@
         <option value="AnnotationType" />
         <option value="package-info" />
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -142,25 +198,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/anno/Time.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/anno/Ha.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/controller/TestController.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/dao/TestSeckillDao.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/dao/SeckillDaoTest.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/jdbc.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/schema.sql" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/model/ShopCarCustom.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/dao/ConsumerDaoTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/test/BaseJunitTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/po/ShopCarGoodsRelationCustom.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ShopCarGoodsRelationQueryVo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ShopCarQueryVo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/po/ShopCarCustom.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/spring/spring-manager.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/dao/ShopCarTest.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/model/GoodsImage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/model/Address.java" />
         <option value="$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/model/OrderGoodsRelation.java" />
@@ -172,27 +209,46 @@
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/controller/ShopCarController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/model/Consumer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/model/Order.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/52c3f9ab-b9ec-47e9-9202-1e6696dbaa65/console.sql" />
-        <option value="$PROJECT_DIR$/src/main/resources/spring/spring-service.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderDao.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/OrderDao.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/OrderGoodsRelationDao.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderGoodsRelationTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/ShopCarGoodsRelationDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderGoodsRelationService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderGoodsRelationDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/ShopCarDao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/ShopCarDao.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/ShopCarService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderGoodsRelationServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/ShopCarServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/ShopCarGoodsRelationService.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarGoodsRelationTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/ShopCarGoodsRelationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/AddressDao.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/AddressService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/AddressDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/AddressServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/service/AddressTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/CouponDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/ConponServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/CouponServiceImpl.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/52c3f9ab-b9ec-47e9-9202-1e6696dbaa65/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/CouponService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/CouponDao.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/service/CouponTest.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/OrderGoodsRelationDao.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderGoodsRelationTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderGoodsRelationDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/OrderDao.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderGoodsRelationService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderGoodsRelationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderService.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarGoodsRelationTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ShopCarOrderVo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/util/MakeOrderNum.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/spring/spring-service.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/succeed.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/vm/succeed.vm" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/vm/error.vm" />
+        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/json/MakeJSONString.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/irelandlight/controller/OrderController.java" />
       </list>
     </option>
   </component>
@@ -344,6 +400,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -426,6 +483,84 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="irelandlight" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="json" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Irelandlight" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Irelandlight" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Irelandlight" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Irelandlight" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Irelandlight" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Irelandlight" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -453,100 +588,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="irelandlight" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Irelandlight" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Irelandlight" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irelandlight" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Irelandlight" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Irelandlight" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irelandlight" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Irelandlight" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Irelandlight" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irelandlight" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -554,12 +595,11 @@
       </pane>
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="settings.editor.selected.configurable" value="database.data.csv.formats" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -568,8 +608,12 @@
     <property name="SearchEverywhereHistoryKey" value="findShopCarDetailByConsumerId&#9;PSI&#9;JAVA://com.irelandlight.dao.ShopCarDao#findShopCarDetailByConsumerId&#10;manager&#9;FILE&#9;file:///Users/destiny/IdeaProjects/Irelandlight/src/main/resources/spring/spring-manager.xml&#10;Service&#9;FILE&#9;file:///Users/destiny/IdeaProjects/Irelandlight/src/main/resources/spring/spring-service.xml" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="js.eslint.eslintPackage" value="" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\cake\Irelandlight\src\main\webapp\WEB-INF\vm" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.irelandlight.service" />
     </key>
@@ -585,15 +629,72 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ShopCarGoodsRelationTest.testInsertGoodsWithNo">
-    <configuration default="false" name="OrderTest.testInsertOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Tomcat Server.SmallTom">
+    <configuration default="false" name="MakeOrderNum" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="com.irelandlight.util.MakeOrderNum" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Irelandlight-first" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="AddressTest.testFindAddressByConsumerId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="Irelandlight-first" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.irelandlight.service" />
+      <option name="MAIN_CLASS_NAME" value="com.irelandlight.service.AddressTest" />
+      <option name="METHOD_NAME" value="testFindAddressByConsumerId" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="CouponTest.TestFindCouponByConsumerId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="Irelandlight-first" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.irelandlight.service" />
+      <option name="MAIN_CLASS_NAME" value="com.irelandlight.service.CouponTest" />
+      <option name="METHOD_NAME" value="TestFindCouponByConsumerId" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="OrderTest.testPlaceAnOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="Irelandlight-first" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.irelandlight.service" />
       <option name="MAIN_CLASS_NAME" value="com.irelandlight.service.OrderTest" />
-      <option name="METHOD_NAME" value="testInsertOrder" />
+      <option name="METHOD_NAME" value="testPlaceAnOrder" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -607,77 +708,14 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="ShopCarTest.testInsertShopCarByShopCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="Irelandlight-first" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.irelandlight.service" />
-      <option name="MAIN_CLASS_NAME" value="com.irelandlight.service.ShopCarTest" />
-      <option name="METHOD_NAME" value="testInsertShopCarByShopCar" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="OrderGoodsRelationTest.testInsertOrderDetail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="Irelandlight-first" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.irelandlight.service" />
-      <option name="MAIN_CLASS_NAME" value="com.irelandlight.service.OrderGoodsRelationTest" />
-      <option name="METHOD_NAME" value="testInsertOrderDetail" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="OrderGoodsRelationTest.testBuyNow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="Irelandlight-first" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.irelandlight.service" />
-      <option name="MAIN_CLASS_NAME" value="com.irelandlight.service.OrderGoodsRelationTest" />
-      <option name="METHOD_NAME" value="testBuyNow" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="ShopCarGoodsRelationTest.testInsertGoodsWithNo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ShopCarGoodsRelationTest.testInsertGoodsRelation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="Irelandlight-first" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.irelandlight.service" />
       <option name="MAIN_CLASS_NAME" value="com.irelandlight.service.ShopCarGoodsRelationTest" />
-      <option name="METHOD_NAME" value="testInsertGoodsWithNo" />
+      <option name="METHOD_NAME" value="testInsertGoodsRelation" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -896,10 +934,12 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <configuration default="false" name="destiny" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.8" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.8">
+    <configuration default="false" name="SmallTom" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.8" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.8">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="Irelandlight:war">
+        <artifact name="Irelandlight-first:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
@@ -966,25 +1006,25 @@
       </ConfigurationWrapper>
       <method>
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="Irelandlight:war" />
+          <artifact name="Irelandlight-first:war exploded" />
         </option>
       </method>
     </configuration>
     <list size="6">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.destiny" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.OrderTest.testInsertOrder" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.ShopCarTest.testInsertShopCarByShopCar" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.OrderGoodsRelationTest.testInsertOrderDetail" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.OrderGoodsRelationTest.testBuyNow" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.ShopCarGoodsRelationTest.testInsertGoodsWithNo" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.SmallTom" />
+      <item index="1" class="java.lang.String" itemvalue="Application.MakeOrderNum" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.AddressTest.testFindAddressByConsumerId" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.CouponTest.TestFindCouponByConsumerId" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.OrderTest.testPlaceAnOrder" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.ShopCarGoodsRelationTest.testInsertGoodsRelation" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ShopCarGoodsRelationTest.testInsertGoodsWithNo" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.OrderGoodsRelationTest.testBuyNow" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.OrderGoodsRelationTest.testInsertOrderDetail" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.OrderTest.testInsertOrder" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ShopCarTest.testInsertShopCarByShopCar" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.OrderTest.testPlaceAnOrder" />
+        <item index="1" class="java.lang.String" itemvalue="Application.MakeOrderNum" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ShopCarGoodsRelationTest.testInsertGoodsRelation" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.CouponTest.TestFindCouponByConsumerId" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.AddressTest.testFindAddressByConsumerId" />
       </list>
     </recent_temporary>
   </component>
@@ -1029,43 +1069,44 @@
       <workItem from="1481282891826" duration="17585000" />
       <workItem from="1481300573034" duration="1637000" />
       <workItem from="1481332591623" duration="20533000" />
+      <workItem from="1481415559580" duration="29664000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="OrderGoodsRelationTest_testBuyNow - 2016.12.10 at 12h 04m 16s.xml">
-      <configuration name="OrderGoodsRelationTest.testBuyNow" configurationId="JUnit" />
+    <history-entry file="CouponTest_TestFindCouponByConsumerId - 2016.12.11 at 09h 52m 07s.xml">
+      <configuration name="CouponTest.TestFindCouponByConsumerId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrderGoodsRelationTest_testInsertOrderDetail - 2016.12.10 at 11h 44m 55s.xml">
-      <configuration name="OrderGoodsRelationTest.testInsertOrderDetail" configurationId="JUnit" />
+    <history-entry file="CouponTest_TestFindCouponByConsumerId - 2016.12.11 at 09h 52m 22s.xml">
+      <configuration name="CouponTest.TestFindCouponByConsumerId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrderGoodsRelationTest_testInsertOrderDetail - 2016.12.10 at 11h 49m 06s.xml">
-      <configuration name="OrderGoodsRelationTest.testInsertOrderDetail" configurationId="JUnit" />
+    <history-entry file="CouponTest_TestFindCouponByConsumerId - 2016.12.11 at 09h 53m 34s.xml">
+      <configuration name="CouponTest.TestFindCouponByConsumerId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrderGoodsRelationTest_testInsertOrderDetail - 2016.12.10 at 11h 50m 01s.xml">
-      <configuration name="OrderGoodsRelationTest.testInsertOrderDetail" configurationId="JUnit" />
+    <history-entry file="OrderTest_testPlaceAnOrder - 2016.12.11 at 13h 38m 51s.xml">
+      <configuration name="OrderTest.testPlaceAnOrder" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrderGoodsRelationTest_testInsertOrderDetail - 2016.12.10 at 11h 51m 11s.xml">
-      <configuration name="OrderGoodsRelationTest.testInsertOrderDetail" configurationId="JUnit" />
+    <history-entry file="OrderTest_testPlaceAnOrder - 2016.12.11 at 14h 15m 53s.xml">
+      <configuration name="OrderTest.testPlaceAnOrder" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrderGoodsRelationTest_testInsertOrderDetail - 2016.12.10 at 11h 53m 37s.xml">
-      <configuration name="OrderGoodsRelationTest.testInsertOrderDetail" configurationId="JUnit" />
+    <history-entry file="OrderTest_testPlaceAnOrder - 2016.12.11 at 14h 25m 53s.xml">
+      <configuration name="OrderTest.testPlaceAnOrder" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrderGoodsRelationTest_testInsertOrderDetail - 2016.12.10 at 11h 59m 24s.xml">
-      <configuration name="OrderGoodsRelationTest.testInsertOrderDetail" configurationId="JUnit" />
+    <history-entry file="OrderTest_testPlaceAnOrder - 2016.12.11 at 14h 27m 04s.xml">
+      <configuration name="OrderTest.testPlaceAnOrder" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrderGoodsRelationTest_testInsertOrderDetail - 2016.12.10 at 12h 00m 29s.xml">
-      <configuration name="OrderGoodsRelationTest.testInsertOrderDetail" configurationId="JUnit" />
+    <history-entry file="OrderTest_testPlaceAnOrder - 2016.12.11 at 16h 24m 54s.xml">
+      <configuration name="OrderTest.testPlaceAnOrder" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ShopCarGoodsRelationTest_testInsertGoodsWithNo - 2016.12.10 at 16h 58m 58s.xml">
-      <configuration name="ShopCarGoodsRelationTest.testInsertGoodsWithNo" configurationId="JUnit" />
+    <history-entry file="ShopCarGoodsRelationTest_testInsertGoodsRelation - 2016.12.11 at 14h 20m 34s.xml">
+      <configuration name="ShopCarGoodsRelationTest.testInsertGoodsRelation" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ShopCarGoodsRelationTest_testInsertGoodsWithNo - 2016.12.10 at 17h 01m 00s.xml">
-      <configuration name="ShopCarGoodsRelationTest.testInsertGoodsWithNo" configurationId="JUnit" />
+    <history-entry file="ShopCarGoodsRelationTest_testInsertGoodsRelation - 2016.12.11 at 14h 22m 09s.xml">
+      <configuration name="ShopCarGoodsRelationTest.testInsertGoodsRelation" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="178678000" />
+    <option name="totallyTimeSpent" value="208342000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1078,7 +1119,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1089,21 +1130,21 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905984" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3186937" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31756756" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20945945" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17040598" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18963675" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20930232" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20886752" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36486486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47522524" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1174,22 +1215,28 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderTest.java</url>
-          <line>58</line>
-          <properties />
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarTest.java</url>
           <line>31</line>
           <properties />
           <option name="timeStamp" value="50" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/AddressTest.java</url>
+          <line>25</line>
+          <properties />
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/CouponTest.java</url>
+          <line>24</line>
+          <properties />
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="51" />
+      <option name="time" value="57" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1198,270 +1245,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/model/Consumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="31" column="30" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/model/Order.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2904">
-          <caret line="205" column="0" lean-forward="false" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1188#1189#0" expanded="false" />
-            <element signature="e#1213#1214#0" expanded="false" />
-            <element signature="e#1247#1248#0" expanded="false" />
-            <element signature="e#1275#1276#0" expanded="false" />
-            <element signature="e#1310#1311#0" expanded="false" />
-            <element signature="e#1343#1344#0" expanded="false" />
-            <element signature="e#1393#1394#0" expanded="false" />
-            <element signature="e#1437#1438#0" expanded="false" />
-            <element signature="e#1472#1473#0" expanded="false" />
-            <element signature="e#1505#1506#0" expanded="false" />
-            <element signature="e#1555#1556#0" expanded="false" />
-            <element signature="e#1599#1600#0" expanded="false" />
-            <element signature="e#1637#1638#0" expanded="false" />
-            <element signature="e#1670#1671#0" expanded="false" />
-            <element signature="e#1723#1724#0" expanded="false" />
-            <element signature="e#1767#1768#0" expanded="false" />
-            <element signature="e#1805#1806#0" expanded="false" />
-            <element signature="e#1839#1840#0" expanded="false" />
-            <element signature="e#1893#1894#0" expanded="false" />
-            <element signature="e#1939#1940#0" expanded="false" />
-            <element signature="e#1974#1975#0" expanded="false" />
-            <element signature="e#2007#2008#0" expanded="false" />
-            <element signature="e#2057#2058#0" expanded="false" />
-            <element signature="e#2101#2102#0" expanded="false" />
-            <element signature="e#2135#2136#0" expanded="false" />
-            <element signature="e#2167#2168#0" expanded="false" />
-            <element signature="e#2215#2216#0" expanded="false" />
-            <element signature="e#2257#2258#0" expanded="false" />
-            <element signature="e#2291#2292#0" expanded="false" />
-            <element signature="e#2320#2321#0" expanded="false" />
-            <element signature="e#2365#2366#0" expanded="false" />
-            <element signature="e#2401#2402#0" expanded="false" />
-            <element signature="e#2440#2441#0" expanded="false" />
-            <element signature="e#2474#2475#0" expanded="false" />
-            <element signature="e#2529#2530#0" expanded="false" />
-            <element signature="e#2575#2576#0" expanded="false" />
-            <element signature="e#2614#2615#0" expanded="false" />
-            <element signature="e#2649#2650#0" expanded="false" />
-            <element signature="e#2705#2706#0" expanded="false" />
-            <element signature="e#2753#2754#0" expanded="false" />
-            <element signature="e#2784#2785#0" expanded="false" />
-            <element signature="e#2811#2812#0" expanded="false" />
-            <element signature="e#2851#2852#0" expanded="false" />
-            <element signature="e#2883#2884#0" expanded="false" />
-            <element signature="e#2925#2926#0" expanded="false" />
-            <element signature="e#2962#2963#0" expanded="false" />
-            <element signature="e#3023#3024#0" expanded="false" />
-            <element signature="e#3075#3076#0" expanded="false" />
-            <element signature="e#3108#3109#0" expanded="false" />
-            <element signature="e#3139#3140#0" expanded="false" />
-            <element signature="e#3185#3186#0" expanded="false" />
-            <element signature="e#3225#3226#0" expanded="false" />
-            <element signature="e#3261#3262#0" expanded="false" />
-            <element signature="e#3289#3290#0" expanded="false" />
-            <element signature="e#3335#3336#0" expanded="false" />
-            <element signature="e#3369#3370#0" expanded="false" />
-            <element signature="e#3407#3408#0" expanded="false" />
-            <element signature="e#3443#3444#0" expanded="false" />
-            <element signature="e#3499#3500#0" expanded="false" />
-            <element signature="e#3549#3550#0" expanded="false" />
-            <element signature="e#3585#3586#0" expanded="false" />
-            <element signature="e#3619#3620#0" expanded="false" />
-            <element signature="e#3671#3672#0" expanded="false" />
-            <element signature="e#3717#3718#0" expanded="false" />
-            <element signature="e#3751#3752#0" expanded="false" />
-            <element signature="e#3780#3781#0" expanded="false" />
-            <element signature="e#3825#3826#0" expanded="false" />
-            <element signature="e#3861#3862#0" expanded="false" />
-            <element signature="e#3894#3895#0" expanded="false" />
-            <element signature="e#3923#3924#0" expanded="false" />
-            <element signature="e#3967#3968#0" expanded="false" />
-            <element signature="e#4003#4004#0" expanded="false" />
-            <element signature="e#4038#4039#0" expanded="false" />
-            <element signature="e#4068#4069#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4153#4154#0" expanded="false" />
-            <element signature="e#4186#4187#0" expanded="false" />
-            <element signature="e#4215#4216#0" expanded="false" />
-            <element signature="e#4259#4260#0" expanded="false" />
-            <element signature="e#4295#4296#0" expanded="false" />
-            <element signature="e#4359#4360#0" expanded="false" />
-            <element signature="e#4401#4402#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.3.0/mybatis-3.3.0.jar!/org/apache/ibatis/session/defaults/DefaultSqlSessionFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/1.2.2/mybatis-spring-1.2.2.jar!/org/mybatis/spring/SqlSessionTemplate.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="160" column="0" lean-forward="false" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.3.0/mybatis-3.3.0.jar!/org/apache/ibatis/session/Configuration.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="642" column="0" lean-forward="false" selection-start-line="642" selection-start-column="0" selection-end-line="642" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.3.0/mybatis-3.3.0.jar!/org/apache/ibatis/mapping/MappedStatement.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.3.0/mybatis-3.3.0.jar!/org/apache/ibatis/binding/MapperMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.3.0/mybatis-3.3.0.jar!/org/apache/ibatis/binding/MapperProxy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/52c3f9ab-b9ec-47e9-9202-1e6696dbaa65/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1161">
-          <caret line="58" column="33" lean-forward="true" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="766">
-          <caret line="48" column="4" lean-forward="false" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-service.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" column="66" lean-forward="false" selection-start-line="12" selection-start-column="66" selection-end-line="12" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/model/ShopCar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="e#531#532#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/runners/model/FrameworkMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#841#1035#0" expanded="true" />
-            <element signature="e#1034#1035#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/internal/runners/statements/InvokeMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-test/4.1.7.RELEASE/spring-test-4.1.7.RELEASE.jar!/org/springframework/test/context/junit4/statements/RunBeforeTestMethodCallbacks.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.1.7.RELEASE/spring-core-4.1.7.RELEASE.jar!/org/springframework/util/Assert.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2.jar!/org/apache/commons/logging/impl/Jdk14Logger.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding>
-            <element signature="e#3071#3072#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-test/4.1.7.RELEASE/spring-test-4.1.7.RELEASE.jar!/org/springframework/test/context/DefaultTestContext.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding>
-            <element signature="e#2352#2353#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.1.7.RELEASE/spring-core-4.1.7.RELEASE.jar!/org/springframework/core/annotation/AnnotationUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-test/4.1.7.RELEASE/spring-test-4.1.7.RELEASE.jar!/org/springframework/test/context/jdbc/SqlScriptsTestExecutionListener.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-test/4.1.7.RELEASE/spring-test-4.1.7.RELEASE.jar!/org/springframework/test/context/TestContextManager.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="138" column="111" lean-forward="false" selection-start-line="138" selection-start-column="111" selection-end-line="138" selection-end-column="111" />
-          <folding>
-            <element signature="e#1952#1953#0" expanded="true" />
-            <element signature="e#1991#1992#0" expanded="true" />
-            <element signature="e#2863#2864#0" expanded="true" />
-            <element signature="e#2913#2914#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1469,7 +1256,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="26" column="45" lean-forward="false" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1477,7 +1263,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1485,7 +1270,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1493,7 +1277,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="21" column="45" lean-forward="false" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1501,14 +1284,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="179" column="43" lean-forward="false" selection-start-line="179" selection-start-column="43" selection-end-line="179" selection-end-column="43" />
-          <folding>
-            <element signature="e#1904#1905#0" expanded="true" />
-            <element signature="e#1956#1957#0" expanded="true" />
-            <element signature="e#4681#4816#0" expanded="true" />
-            <element signature="e#4815#4816#0" expanded="true" />
-            <element signature="e#5056#5204#0" expanded="true" />
-            <element signature="e#5203#5204#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1516,7 +1291,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1524,67 +1298,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="485">
           <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="611">
-          <caret line="78" column="32" lean-forward="false" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/OrderDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="6" column="80" lean-forward="false" selection-start-line="6" selection-start-column="80" selection-end-line="6" selection-end-column="80" />
-          <folding>
-            <element signature="n#resultMap#0;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#collection#0;n#association#0;n#collection#0;n#collection#0;n#resultMap#0;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#resultMap#1;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#association#0;n#resultMap#1;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#association#1;n#resultMap#1;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#select#0;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#select#1;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#select#2;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#insert#0;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#select#3;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#select#4;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#select#5;n#mapper#0;n#!!top" expanded="false" />
-            <marker date="1481340244310" expanded="true" signature="5631:5685" ph="SELECT * FRO... tb_order" />
-            <marker date="1481340244310" expanded="true" signature="5808:5925" ph="SELECT * FRO... tb_order" />
-            <marker date="1481340244310" expanded="true" signature="6057:6212" ph="SELECT * FRO... tb_order" />
-            <marker date="1481340244310" expanded="true" signature="6501:6973" ph="INSERT INTO tb_order... " />
-            <marker date="1481340244310" expanded="true" signature="7106:9011" ph="SELECT tb_co... tb_consumer" />
-            <marker date="1481340244310" expanded="true" signature="9125:10984" ph="SELECT tb_ad... tb_order" />
-            <marker date="1481340244310" expanded="true" signature="10984:10985" ph="SELECT tb_ad... tb_order" />
-            <marker date="1481340244310" expanded="true" signature="11113:13096" ph="SELECT tb_co... tb_consumer" />
-            <marker date="1481340244310" expanded="true" signature="11130:13096" ph="SELECT tb_co... tb_consumer" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderGoodsRelationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-          <folding>
-            <element signature="e#689#711#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/OrderGoodsRelationDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="6" column="14" lean-forward="false" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="14" />
-          <folding>
-            <marker date="1481342341838" expanded="true" signature="687:886" ph="INSERT INTO tb_order_goods_relation... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1600,39 +1313,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderGoodsRelationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="809">
-          <caret line="44" column="49" lean-forward="false" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/controller/ShopCarController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="28" column="52" lean-forward="false" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/dao/ShopCarDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="44" column="24" lean-forward="true" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1640,14 +1320,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="587">
           <caret line="54" column="7" lean-forward="true" selection-start-line="49" selection-start-column="4" selection-end-line="54" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1664,67 +1336,6 @@
             <marker date="1481359900684" expanded="true" signature="6045:6175" ph="SELECT * FRO... tb_shop_car" />
             <marker date="1481359900684" expanded="true" signature="6355:7194" ph="SELECT tb_sh... tb_shop_car" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/ShopCarGoodsRelationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/ShopCarGoodsRelationDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="730">
-          <caret line="92" column="56" lean-forward="false" selection-start-line="92" selection-start-column="56" selection-end-line="92" selection-end-column="56" />
-          <folding>
-            <element signature="n#insert#0;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#update#0;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#update#1;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#select#0;n#mapper#0;n#!!top" expanded="false" />
-            <element signature="n#select#1;n#mapper#0;n#!!top" expanded="false" />
-            <marker date="1481293651421" expanded="false" signature="442:782" ph="INSERT INTO tb_shop_car_goods_relation... " />
-            <marker date="1481293651421" expanded="true" signature="901:1327" ph="UPDATE tb_sh... " />
-            <marker date="1481293651421" expanded="true" signature="1406:1766" ph="UPDATE tb_sh... " />
-            <marker date="1481293651421" expanded="false" signature="2512:2743" ph="SELECT id, s... " />
-            <marker date="1481293651421" expanded="true" signature="2972:3393" ph="SELECT id, s... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarGoodsRelationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderGoodsRelationDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderGoodsRelationServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="37" column="32" lean-forward="true" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1750,12 +1361,369 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/AddressService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="98" column="24" lean-forward="true" selection-start-line="98" selection-start-column="24" selection-end-line="98" selection-end-column="24" />
+        <state relative-caret-position="360">
+          <caret line="15" column="64" lean-forward="false" selection-start-line="15" selection-start-column="64" selection-end-line="15" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/dao/AddressDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/52c3f9ab-b9ec-47e9-9202-1e6696dbaa65/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/CouponService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="13" column="3" lean-forward="true" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/AddressServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/CouponServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/AddressDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="24" selection-end-column="9" />
+          <folding>
+            <marker date="1481418247189" expanded="true" signature="332:754" ph="SELECT tb_ad... tb_address" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/AddressTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/dao/CouponDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/CouponDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="46" lean-forward="false" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+          <folding>
+            <marker date="1481421174632" expanded="true" signature="330:554" ph="SELECT tb_co... tb_coupon" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/CouponTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/model/Coupon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/ShopCarGoodsRelationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderGoodsRelationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="40" column="10" lean-forward="false" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/dao/ShopCarDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="44" column="24" lean-forward="true" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderGoodsRelationDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="27" column="86" lean-forward="true" selection-start-line="27" selection-start-column="86" selection-end-line="27" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/OrderGoodsRelationDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="22" />
+          <folding>
+            <marker date="1481342341838" expanded="true" signature="687:886" ph="INSERT INTO tb_order_goods_relation... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/dao/OrderDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="80" column="19" lean-forward="false" selection-start-line="80" selection-start-column="19" selection-end-line="80" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderGoodsRelationServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/OrderDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="159" column="124" lean-forward="false" selection-start-line="159" selection-start-column="124" selection-end-line="159" selection-end-column="124" />
+          <folding>
+            <element signature="n#resultMap#0;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#collection#0;n#association#0;n#collection#0;n#collection#0;n#resultMap#0;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#resultMap#1;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#association#0;n#resultMap#1;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#association#1;n#resultMap#1;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#select#0;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#select#1;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#select#2;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#select#3;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#select#4;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#select#5;n#mapper#0;n#!!top" expanded="false" />
+            <marker date="1481436946772" expanded="true" signature="5631:5685" ph="SELECT * FRO... tb_order" />
+            <marker date="1481436946772" expanded="true" signature="5808:5925" ph="SELECT * FRO... tb_order" />
+            <marker date="1481436946772" expanded="true" signature="6057:6212" ph="SELECT * FRO... tb_order" />
+            <marker date="1481436946772" expanded="true" signature="6501:6960" ph="INSERT INTO tb_order... " />
+            <marker date="1481436946772" expanded="true" signature="7093:8998" ph="SELECT tb_co... tb_consumer" />
+            <marker date="1481436946772" expanded="true" signature="9112:10971" ph="SELECT tb_ad... tb_order" />
+            <marker date="1481436946772" expanded="true" signature="10971:10972" ph="SELECT tb_ad... tb_order" />
+            <marker date="1481436946772" expanded="true" signature="11100:13083" ph="SELECT tb_co... tb_consumer" />
+            <marker date="1481436946772" expanded="true" signature="11117:13083" ph="SELECT tb_co... tb_consumer" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/ShopCarGoodsRelationDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="78" column="45" lean-forward="false" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="45" />
+          <folding>
+            <element signature="n#insert#0;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#update#0;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#update#1;n#mapper#0;n#!!top" expanded="false" />
+            <element signature="n#select#0;n#mapper#0;n#!!top" expanded="false" />
+            <marker date="1481293651421" expanded="false" signature="442:782" ph="INSERT INTO tb_shop_car_goods_relation... " />
+            <marker date="1481293651421" expanded="true" signature="901:1327" ph="UPDATE tb_sh... " />
+            <marker date="1481293651421" expanded="true" signature="1406:1766" ph="UPDATE tb_sh... " />
+            <marker date="1481293651421" expanded="false" signature="2512:2743" ph="SELECT id, s... " />
+            <marker date="1481293651421" expanded="true" signature="2972:3393" ph="SELECT id, s... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderGoodsRelationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/impl/OrderServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="130" column="27" lean-forward="true" selection-start-line="130" selection-start-column="27" selection-end-line="130" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-service.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ShopCarOrderVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/util/MakeOrderNum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarGoodsRelationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="90" column="72" lean-forward="false" selection-start-line="90" selection-start-column="72" selection-end-line="90" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/controller/ShopCarController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/service/OrderService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="635">
+          <caret line="81" column="28" lean-forward="false" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/succeed.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vm/hello.vm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vm/succeed.vm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vm/error.vm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="9" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/json/MakeJSONString.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/ShopCarTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="26" column="9" lean-forward="true" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/irelandlight/service/OrderTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="method#testFindAllOrder#0;class#OrderTest#0" expanded="false" />
+            <element signature="method#testFindOrderByConsumerId#0;class#OrderTest#0" expanded="false" />
+            <element signature="method#testFindValidOrderByConsumerId#0;class#OrderTest#0" expanded="false" />
+            <element signature="method#testFindAllOrderDetailByConsumerId#0;class#OrderTest#0" expanded="false" />
+            <element signature="method#testFindOneOrderDetail#0;class#OrderTest#0" expanded="false" />
+            <element signature="method#testFindOneStatusOrderDetail#0;class#OrderTest#0" expanded="false" />
+            <element signature="method#testInsertOrder#0;class#OrderTest#0" expanded="false" />
+            <element signature="method#testPlaceAnOrder#0;class#OrderTest#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/controller/OrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="77" column="41" lean-forward="true" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#644#650#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1766,11 +1734,11 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>Irelandlight:war</last-edited>
+          <last-edited>Irelandlight-first:war</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.41182795" />
                 <option value="0.5" />
               </list>
             </option>

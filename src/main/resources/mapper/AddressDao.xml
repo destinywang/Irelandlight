@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.AddressDao">
+    <!--查询用户的收货地址-->
+    <select id="findAddressByConsumerId" resultType="com.irelandlight.model.Address">
+        SELECT
+          tb_address.id addressId,
+          tb_address.consumer_name,
+          tb_address.consumer_phone,
+          tb_address.province,
+          tb_address.city,
+          tb_address.district,
+          tb_address.street,
+          tb_address.post,
+          tb_address.detail
+        FROM
+          tb_address
+        WHERE
+          tb_address.visibility = 0
+        AND tb_address.consumer_id = #{consumerId}
+    </select>
+
+</mapper>

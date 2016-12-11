@@ -2,6 +2,7 @@ package com.irelandlight.service;
 
 import com.irelandlight.model.Consumer;
 import com.irelandlight.model.Order;
+import com.irelandlight.vo.ShopCarOrderVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -76,5 +77,7 @@ public interface OrderService {
      * @throws Exception
      */
     //增加订单（下单） 返回订单ID
-    public void insertOrder(Order order )throws Exception;
+    public void insertOrder(Order order)throws Exception;
+
+    public void placeAnOrder(ShopCarOrderVo shopCarOrderVo) throws Exception;
 }

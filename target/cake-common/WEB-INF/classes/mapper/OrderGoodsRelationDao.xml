@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.OrderGoodsRelationDao">
+
+    <!--添加订单详情-->
+    <insert id="insertOrderDetail" >
+        INSERT INTO tb_order_goods_relation (order_id, goods_id, size, count )
+        VALUES
+        <foreach collection="shopCarGoodsRelations" item="shopCarGoodsRelation" index="index" separator="," >
+            (#{orderId},#{shopCarGoodsRelation.goodsId},#{shopCarGoodsRelation.size},#{shopCarGoodsRelation.count})
+        </foreach>
+    </insert>
+
+    <!--立即购买-->
+    <insert id="buyNow">
+        INSERT INTO tb_order_goods_relation (order_id,goods_id,size, count )
+        VALUES(#{orderGoodsRelation.orderId},#{orderGoodsRelation.goodsId},#{orderGoodsRelation.size},#{orderGoodsRelation.count})
+    </insert>
+
+    <!--用户删除某个订单后，删除订单详情-->
+
+</mapper>

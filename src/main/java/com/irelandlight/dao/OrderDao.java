@@ -2,6 +2,8 @@ package com.irelandlight.dao;
 
 import com.irelandlight.model.Consumer;
 import com.irelandlight.model.Order;
+import com.irelandlight.model.OrderGoodsRelation;
+import com.irelandlight.vo.ShopCarOrderVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -82,6 +84,6 @@ public interface OrderDao {
      * insert 添加，返回自增主键时候，参数不能添加@param 注释，否则自增主键无法绑定到原对象。
      */
     //增加订单（下单） 返回订单ID
-    public void insertOrder(Order order )throws Exception;
+    public void insertOrder(Order order)throws Exception;
 
 }

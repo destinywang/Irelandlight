@@ -157,8 +157,7 @@
             remark
         )
         VALUES
-            (#{orderNumber},#{consumerId},#{addressId},#{payWay},#{transferWay},#{transferTime},#{gift},
-            #{tableWareCount},#{couponId},#{price},#{remark})
+            (#{orderNumber},#{consumerId},#{addressId},#{payWay},#{transferWay},#{transferTime},#{gift},#{tableWareCount},#{couponId},#{price},#{remark})
 
     </insert>
 

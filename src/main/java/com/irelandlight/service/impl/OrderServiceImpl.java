@@ -5,7 +5,11 @@ import com.irelandlight.dao.OrderGoodsRelationDao;
 import com.irelandlight.model.Consumer;
 import com.irelandlight.model.Order;
 import com.irelandlight.service.OrderService;
+import com.irelandlight.service.ShopCarGoodsRelationService;
+import com.irelandlight.util.MakeOrderNum;
+import com.irelandlight.vo.ShopCarOrderVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,6 +28,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Resource
     private OrderGoodsRelationDao orderGoodsRelationDao;
+
+    @Resource
+    private ShopCarGoodsRelationService shopCarGoodsRelationService;
+
 
     /**
      * 查找所有订单 findAllorder
@@ -101,4 +109,36 @@ public class OrderServiceImpl implements OrderService {
     public void insertOrder(Order order) throws Exception {
         orderDao.insertOrder(order);
     }
+
+    /**
+     * 下单过程：
+     * 用户购物车商品选中添加订单中，当点击去结算，发送购物车选择商品信息，更改所选购物车商品的状态为待加入订单详情（状态字：2），
+     * 返回填写订单信息，点击去结算，先做订单信息生成，再从用户购物车选择该用户状态字为2 的购物车商品信息。
+     * 为其添加订单号，插入订单详情列表，删除购物车商品详情
+     * 完成订单创建。
+     */
+
+    /**
+     *
+     * 下单过程2：
+     * 给用户
+     *
+     */
+
+    @Transactional
+    public void placeAnOrder(ShopCarOrderVo shopCarOrderVo) throws Exception{
+
+        //利用工具类生成订单号，添加到订单中
+        String orderNum = MakeOrderNum.makeOrderNum();
+        shopCarOrderVo.getOrder().setOrderNumber(orderNum);
+        //生成订单，返回主键
+        insertOrder(shopCarOrderVo.getOrder());
+        //添加订单详情
+        orderGoodsRelationDao.insertOrderDetail(shopCarOrderVo.getOrder().getId() ,shopCarOrderVo.getShopCarGoodsRelations());
+        //删除购物车已购商品信息
+        shopCarGoodsRelationService.batchDeleteShopCarGoodsRelations(shopCarOrderVo.getShopCarGoodsRelations());
+
+    }
+
+
 }

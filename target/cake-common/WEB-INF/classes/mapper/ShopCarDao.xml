@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.ShopCarDao">
+
+    <!--购物车map-->
+    <resultMap id="shop_car_all_detail" type="com.irelandlight.model.ShopCar">
+        <!--ShopCar-->
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_update" property="lastUpdate"/>
+        <result column="visibility" property="visibility"/>
+        <result column="consumer_id" property="consumerId"/>
+        <!--购物车详情信息 (一对多)-->
+        <collection property="shopCarGoodsRelations" ofType="com.irelandlight.model.ShopCarGoodsRelation">
+            <!--ShopCarGoodsRelation-->
+            <id column="id" property="id"/>
+            <result column="create_time" property="createTime"/>
+            <result column="last_update" property="lastUpdate"/>
+            <result column="visibility" property="visibility"/>
+            <result column="shop_car_id" property="shopCarId"/>
+            <result column="goods_id" property="goodsId"/>
+            <result column="count" property="count"/>
+            <!--商品信息 (一对一)-->
+            <association property="goods" javaType="com.irelandlight.model.Goods">
+                <id column="id" property="id"/>
+                <result column="create_time" property="createTime"/>
+                <result column="last_update" property="lastUpdate"/>
+                <result column="visibility" property="visibility"/>
+                <result column="name" property="name"/>
+                <result column="description" property="description"/>
+                <result column="price" property="price"/>
+                <result column="perference" property="perference"/>
+                <result column="use" property="use"/>
+                <result column="taste" property="taste"/>
+                <result column="size" property="size"/>
+                <result column="quantity" property="quantity"/>
+                <result column="saleCount" property="saleCount"/>
+                <!--商品图片信息 (一对多)-->
+                <collection property="goodsImages" ofType="com.irelandlight.model.GoodsImage">
+                    <id column="id" property="id"/>
+                    <result column="create_time" property="createTime"/>
+                    <result column="last_update" property="lastUpdate"/>
+                    <result column="visibility" property="visibility"/>
+                    <result column="i_major" property="isMajor"/>
+                    <result column="goods_id" property="goodsId"/>
+                    <result column="url" property="url"/>
+                    <result column="position" property="position"/>
+                </collection>
+                <collection property="goodsSize" ofType="com.irelandlight.model.GoodsSize">
+                    <id column="id" property="id"/>
+                    <result column="create_time" property="createTime"/>
+                    <result column="last_update" property="lastUpdate"/>
+                    <result column="visibility" property="visibility"/>
+                    <result column="i_major" property="isMajor"/>
+                    <result column="goods_id" property="goodsId"/>
+                    <result column="url" property="url"/>
+                    <result column="position" property="position"/>
+                </collection>
+            </association>
+        </collection>
+    </resultMap>
+
+    <!--购物车 view map-->
+    <resultMap id="shop_car_detail" type="com.irelandlight.model.ShopCar">
+        <!--购物车信息-->
+        <id column="shopCarId" property="id"/>
+        <!--购物车详情信息 (一对多)-->
+        <collection property="shopCarGoodsRelations" ofType="com.irelandlight.model.ShopCarGoodsRelation">
+            <!--ShopCarGoodsRelation-->
+            <id column="id" property="id"/>
+            <result column="shop_car_id" property="shopCarId"/>
+            <result column="goods_id" property="goodsId"/>
+            <result column="size" property="size"/>
+            <result column="count" property="count"/>
+            <!--商品信息 (一对一)-->
+            <association property="goods" javaType="com.irelandlight.model.Goods">
+                <id column="goodsId" property="id"/>
+                <result column="name" property="name"/>
+                    <!--商品图片信息 (一对多)-->
+                    <collection property="goodsImages" ofType="com.irelandlight.model.GoodsImage">
+                        <id column="id" property="id"/>
+                        <result column="url" property="url"/>
+                    </collection>
+
+                    <collection property="goodsSizes" ofType="com.irelandlight.model.GoodsSize">
+                        <id column="id" property="id"/>
+                        <result column="price" property="price"/>
+                    </collection>
+            </association>
+        </collection>
+    </resultMap>
+
+    <!--添加用户购物车(ShopCar) 返回主键-->
+    <insert id="insertShopCarByShopCar" parameterType="com.irelandlight.model.ShopCar">
+        <!-- 返回自增主键 -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        <!-- 增加用户购物车 -->
+        INSERT INTO tb_shop_car (consumer_id)
+        VALUES
+            (#{shopCar.consumerId})
+    </insert>
+
+    <!--添加用户购物车(用户id) 返回主键 -->
+    <insert id="insertShopCarByConsumerId" parameterType="java.lang.Long">
+        <!-- 增加用户购物车 -->
+        INSERT INTO tb_shop_car (consumer_id) VALUES (#{consumerId})
+    </insert>
+
+    <!--删除用户购物车-->
+    <update id="deleteShopCarByConsumerId" parameterType="java.lang.Long">
+        UPDATE tb_shop_car
+        SET tb_shop_car.visibility = 1
+        WHERE
+            tb_shop_car.consumer_id = #{consumerId};
+    </update>
+
+    <!--暂不提供修改用户购物车功能-->
+
+    <!--通过用户Id查询其购物车信息-->
+    <select id="findShopCarDetailByConsumerId" parameterType="java.lang.Long" resultType="com.irelandlight.model.ShopCar">
+        SELECT *
+        FROM tb_shop_car
+        WHERE
+            tb_shop_car.visibility = 0 AND tb_shop_car.consumer_id = #{consumerId}
+    </select>
+    
+    <!--通过用户Id查找购物车商品详情列表(resultMap)-->
+    <select id="findShopCarGoodsDetailByConsumerId" parameterType="java.lang.Long" resultMap="shop_car_detail">
+        SELECT
+            tb_shop_car.id shopCarId,
+            tb_goods.id goodsId,
+            tb_goods.`name`,
+            tb_shop_car_goods_relation.count,
+            tb_shop_car_goods_relation.size,
+            tb_goods_size.price,
+            tb_goods_image.url
+        FROM
+            tb_shop_car,
+            tb_shop_car_goods_relation,
+            tb_goods,
+            tb_goods_size,
+            tb_goods_image
+        WHERE
+            tb_shop_car.id = tb_shop_car_goods_relation.shop_car_id
+            AND tb_shop_car_goods_relation.goods_id = tb_goods.id
+            AND tb_shop_car_goods_relation.size = tb_goods_size.size
+            AND tb_goods.id = tb_goods_image.goods_id
+            AND tb_goods.id = tb_goods_size.goods_id
+            AND tb_goods_image.position = 1
+            AND tb_shop_car.consumer_id = #{consumerId}
+    </select>
+
+</mapper>
