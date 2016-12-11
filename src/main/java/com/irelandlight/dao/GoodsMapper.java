@@ -26,7 +26,8 @@ public interface GoodsMapper {
     List<Goods> selectUnPutawayGoods();
     //查询已上架商品
     List<Goods> selectPutawayGoods();
-    //按照商品id查找商品尺寸与价格的对应关系
+    //按照商品id查找商品尺寸与价格的对应关系-==
+    
     List<GoodsSizePrice> selectPWSizePriceMapByGoodsId(@Param("goodsId") Long goodsId);
     //按照商品id查找商品尺寸与价格的对应关系
     List<GoodsSizePrice> selectUPWSizePriceMapByGoodsId(@Param("goodsId") Long goodsId);
@@ -43,7 +44,11 @@ public interface GoodsMapper {
     //http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg
     void insertIntoGoodsImg(@Param("id")Long id,@Param("imgUrlMap") Map<String,Integer> imgUrlMap);
     //
+    void updateGoodsImg(@Param("id")Long id,@Param("imgUrlMap") Map<String,Integer> imgUrlMap);
+    //
     void insertIotoGoodsSizePrice(@Param("id") Long id,@Param("sizeMapPrice")Map<String,BigDecimal> sizeMapPrice);
+    //
+    void updateGoodsSizePrice(@Param("id") Long id,@Param("sizeMapPrice")Map<String,BigDecimal> sizeMapPrice);
     //修改商品中的字段值
     void updateGoods(@Param("goods") Goods goods);
     //将商品添加到tb_goods表中 @Param("goods")

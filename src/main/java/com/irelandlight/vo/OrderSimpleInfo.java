@@ -1,4 +1,4 @@
-package com.irelandlight.model.vo;
+package com.irelandlight.vo;
 
 import java.util.Date;
 

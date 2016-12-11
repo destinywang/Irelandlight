@@ -3,12 +3,13 @@ package com.irelandlight.service;
 import com.irelandlight.dao.GoodsMapper;
 import com.irelandlight.model.Goods;
 import com.irelandlight.model.GoodsSizePrice;
-import com.irelandlight.model.vo.ContainerItem;
-import com.irelandlight.model.vo.ItemsInfo;
+import com.irelandlight.vo.ContainerItem;
+import com.irelandlight.vo.ItemsInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ public class GoodsContainerService {
     private GoodsMapper goodsMapper;
 
     //设置该操作为只读操作，总是以非事务的方式运行，并且会挂起任何已经存在的事务
-    @Transactional(propagation = Propagation.NOT_SUPPORTED,readOnly = true)
-    public ItemsInfo searchForGoodsCountInfo(){                        //查找商品的基本统计信息
-        ItemsInfo goodsCountInfo=new ItemsInfo();
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    public ItemsInfo searchForGoodsCountInfo() {                        //查找商品的基本统计信息
+        ItemsInfo goodsCountInfo = new ItemsInfo();
         goodsCountInfo.setGoodsTotal(goodsMapper.selectGoodsCount());
         goodsCountInfo.setUpedGoods(goodsMapper.selectPutawayGoodsCount());
         goodsCountInfo.setUnUpGoods(goodsMapper.selectSoldOutGoodsCount());
@@ -36,17 +37,17 @@ public class GoodsContainerService {
     }
 
     //设置该操作为只读操作，总是以非事务的方式运行，并且会挂起任何已经存在的事务
-    @Transactional(propagation = Propagation.NOT_SUPPORTED,readOnly = true)
-    public List<ContainerItem> searchForPutawayGoods(){                 //为商品下架页面提供已经上架的商品
-        List<ContainerItem> itemsList=new ArrayList<ContainerItem>();
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    public List<ContainerItem> searchForPutawayGoods() {                 //为商品下架页面提供已经上架的商品
+        List<ContainerItem> itemsList = new ArrayList<ContainerItem>();
 
-        List<Goods> goodsList=goodsMapper.selectPutawayGoods();
+        List<Goods> goodsList = goodsMapper.selectPutawayGoods();
 
-        if(goodsList!=null) {
+        if (goodsList != null) {
             for (Goods goods : goodsList) {
-                ContainerItem containerItem=new ContainerItem();
-                List<GoodsSizePrice> listGoodSizeInfo=goodsMapper.selectPWSizePriceMapByGoodsId(goods.getId());
-                addGoodsInfoToContainerItem(containerItem,goods,listGoodSizeInfo);
+                ContainerItem containerItem = new ContainerItem();
+                List<GoodsSizePrice> listGoodSizeInfo = goodsMapper.selectPWSizePriceMapByGoodsId(goods.getId());
+                addGoodsInfoToContainerItem(containerItem, goods, listGoodSizeInfo);
                 //将查到的这个加入到试图展示层的list中
                 itemsList.add(containerItem);
             }
@@ -55,17 +56,17 @@ public class GoodsContainerService {
     }
 
     //设置该操作为只读操作，总是以非事务的方式运行，并且会挂起任何已经存在的事务
-    @Transactional(propagation = Propagation.NOT_SUPPORTED,readOnly = true)
-    public List<ContainerItem> searchForUnPutawayGoods(){                 //为商品下架页面提供已经上架的商品
-        List<ContainerItem> itemsList=new ArrayList<ContainerItem>();
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    public List<ContainerItem> searchForUnPutawayGoods() {                 //为商品下架页面提供已经上架的商品
+        List<ContainerItem> itemsList = new ArrayList<ContainerItem>();
 
-        List<Goods> goodsList=goodsMapper.selectUnPutawayGoods();
+        List<Goods> goodsList = goodsMapper.selectUnPutawayGoods();
 
-        if(goodsList!=null) {
+        if (goodsList != null) {
             for (Goods goods : goodsList) {
-                ContainerItem containerItem=new ContainerItem();
-                List<GoodsSizePrice> listGoodSizeInfo=goodsMapper.selectUPWSizePriceMapByGoodsId(goods.getId());
-                addGoodsInfoToContainerItem(containerItem,goods,listGoodSizeInfo);
+                ContainerItem containerItem = new ContainerItem();
+                List<GoodsSizePrice> listGoodSizeInfo = goodsMapper.selectUPWSizePriceMapByGoodsId(goods.getId());
+                addGoodsInfoToContainerItem(containerItem, goods, listGoodSizeInfo);
                 //将查到的这个加入到试图展示层的list中
                 itemsList.add(containerItem);
             }
@@ -73,15 +74,39 @@ public class GoodsContainerService {
         return itemsList;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
-    public void putawayAllGoods(List<Long> ids){
+    //批量上架
+    //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void putawayAllGoods(Map<Long, List<String>> idMappingSize) {
+        if (idMappingSize != null && !idMappingSize.isEmpty()) {
+            List<Long> ids = new ArrayList<Long>();
+            ids.addAll(idMappingSize.keySet());
+            goodsMapper.updateGoodsByIds(ids, 1);
+            goodsMapper.updateGoodsByIdsAndSize(idMappingSize, 1);
+        }
+    }
+
+    //批量下架
+    //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void aleoutAllGoods(Map<Long, List<String>> idMappingSize) {
+        if (idMappingSize != null && !idMappingSize.isEmpty()) {
+            List<Long> ids = new ArrayList<Long>();
+            ids.addAll(idMappingSize.keySet());
+            goodsMapper.updateGoodsByIds(ids, 0);
+            goodsMapper.updateGoodsByIdsAndSize(idMappingSize, 0);
+        }
+    }
+
+    //添加商品
+    //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    private void addGoods(ContainerItem containerItem, Map<String, Integer> imgMapPosition, Map<String, BigDecimal> sizeMapPrice) {
 
     }
 
 
-
-
-    private void addGoodsInfoToContainerItem(ContainerItem containerItem,Goods goods,List<GoodsSizePrice> listGoodSizeInfo){
+    private void addGoodsInfoToContainerItem(ContainerItem containerItem, Goods goods, List<GoodsSizePrice> listGoodSizeInfo) {
         //给查找出来的商品信息填充到试图展示层的vo对象当中
         containerItem.setDescription(goods.getDescription());
         containerItem.setQuantity(goods.getQuantity());
@@ -91,16 +116,14 @@ public class GoodsContainerService {
         containerItem.setWeight(goods.getWeight());
         //根据商品id查找商品主图
         containerItem.setGoodsImgUrl(goodsMapper.selectGoodsHeadImgUrlByGoodsId(goods.getId()));
-        List<Map<String ,BigDecimal>> sizePriceMapList=new ArrayList<Map<String, BigDecimal>>();
+        Map<String, BigDecimal> map = new HashMap<String, BigDecimal>();
         //查找当前商品的尺寸和价格
-        if(listGoodSizeInfo!=null){
-            for(GoodsSizePrice item:listGoodSizeInfo){
-                Map<String,BigDecimal> map=new HashMap<String, BigDecimal>();
-                map.put(item.getSize(),item.getPrice());
-                sizePriceMapList.add(map);
+        if (listGoodSizeInfo != null) {
+            for (GoodsSizePrice item : listGoodSizeInfo) {
+                map.put(item.getSize(), item.getPrice());
             }
         }
-        containerItem.setPriceMapSize(sizePriceMapList);
+        containerItem.setPriceMapSize(map);
     }
 
 

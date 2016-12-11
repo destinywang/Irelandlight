@@ -1,11 +1,7 @@
-package com.irelandlight.model.vo;
-
-import com.irelandlight.model.Goods;
-import com.irelandlight.model.GoodsImage;
+package com.irelandlight.vo;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,7 +11,7 @@ public class ContainerItem {
     private String goodsImgUrl;
     private Long goodsId;
     private String goodsName;
-    private List<Map<String,BigDecimal>> priceMapSize;    //键为尺寸，值为价格
+    private Map<String,BigDecimal> priceMapSize;    //键为尺寸，值为价格
     private Integer weight;
     private String description;
     private Integer quantity;
@@ -46,11 +42,11 @@ public class ContainerItem {
         this.goodsName = goodsName;
     }
 
-    public List<Map<String, BigDecimal>> getPriceMapSize() {
+    public Map<String, BigDecimal> getPriceMapSize() {
         return priceMapSize;
     }
 
-    public void setPriceMapSize(List<Map<String, BigDecimal>> priceMapSize) {
+    public void setPriceMapSize(Map<String, BigDecimal> priceMapSize) {
         this.priceMapSize = priceMapSize;
     }
 

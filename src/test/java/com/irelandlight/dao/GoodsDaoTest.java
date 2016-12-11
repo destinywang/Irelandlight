@@ -1,13 +1,11 @@
 package com.irelandlight.dao;
 
 import com.irelandlight.BaseJunitTest;
-import com.irelandlight.controller.GoodsMapperTest;
 import com.irelandlight.model.Goods;
 import com.irelandlight.model.GoodsSizePrice;
-import com.irelandlight.model.vo.ContainerItem;
-import com.irelandlight.model.vo.ItemsInfo;
+import com.irelandlight.vo.ContainerItem;
+import com.irelandlight.vo.ItemsInfo;
 import com.irelandlight.service.GoodsContainerService;
-import com.qiniu.streaming.model.ActivityRecords;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,16 +33,16 @@ public class GoodsDaoTest extends BaseJunitTest{
 
 
 //        Map<String,Integer> goodImg=new HashMap<String, Integer>();
-//        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg",1);
-//        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/9d45443a-89fd-4aff-8563-1e59d835025c.jpg",2);
+//        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg",2);
+//        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/9d45443a-89fd-4aff-8563-1e59d835025c.jpg",1);
 //        goodImg.put("http://ohlu5erjk.bkt.clouddn.com/267b16d4-36aa-4040-a8e5-a2c88205e2b8.jpg",3);
-//        goodsMapper.insertIntoGoodsImg(new Long(3),goodImg);
+//        goodsMapper.updateGoodsImg(new Long(3),goodImg);
 
         Map<String,BigDecimal> sizeMapPrice=new HashMap<String, BigDecimal>();
-        sizeMapPrice.put("2",new BigDecimal(36.90));
-        sizeMapPrice.put("4",new BigDecimal(74.90));
-        sizeMapPrice.put("5",new BigDecimal(180.90));
-        goodsMapper.insertIotoGoodsSizePrice(new Long(2),sizeMapPrice);
+        sizeMapPrice.put("2",new BigDecimal(30));
+        sizeMapPrice.put("4",new BigDecimal(61.90));
+        sizeMapPrice.put("5",new BigDecimal(78.90));
+        goodsMapper.updateGoodsSizePrice(new Long(2),sizeMapPrice);
 
 
         List<Long> ids=new ArrayList<Long>();
@@ -84,7 +82,7 @@ public class GoodsDaoTest extends BaseJunitTest{
         if (goodsList != null) {
             for (Goods goods : goodsList) {
                 ContainerItem containerItem = new ContainerItem();
-                List<GoodsSizePrice> listGoodSizeInfo = goodsMapper.selectPWSizePriceMapByGoodsId(goods.getId());
+                List<GoodsSizePrice> listGoodSizeInfo = goodsMapper.selectUPWSizePriceMapByGoodsId(goods.getId());
                 addGoodsInfoToContainerItem(containerItem, goods, listGoodSizeInfo);
                 //将查到的这个加入到试图展示层的list中
                 itemsList.add(containerItem);
@@ -103,16 +101,14 @@ public class GoodsDaoTest extends BaseJunitTest{
         containerItem.setWeight(goods.getWeight());
         //根据商品id查找商品主图
         containerItem.setGoodsImgUrl(goodsMapper.selectGoodsHeadImgUrlByGoodsId(goods.getId()));
-        List<Map<String ,BigDecimal>> sizePriceMapList=new ArrayList<Map<String, BigDecimal>>();
         //查找当前商品的尺寸和价格
+        Map<String,BigDecimal> map=new HashMap<String, BigDecimal>();
         if(listGoodSizeInfo!=null){
             for(GoodsSizePrice item:listGoodSizeInfo){
-                Map<String,BigDecimal> map=new HashMap<String, BigDecimal>();
                 map.put(item.getSize(),item.getPrice());
-                sizePriceMapList.add(map);
             }
         }
-        containerItem.setPriceMapSize(sizePriceMapList);
+        containerItem.setPriceMapSize(map);
     }
 
     @Test
