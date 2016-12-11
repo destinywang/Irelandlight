@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>json交互测试</title>
+<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+//请求json，输出是json
+function requestJson(){
+	
+	$.ajax({
+		type:'post',
+		url:'${pageContext.request.contextPath }/requestJson.action',
+		contentType:'application/json;charset=utf-8',
+		//数据格式是json串，商品信息
+		data:'{"name":"手机","price":999}',
+		success:function(data){//返回json结果
+            console.log(data);
+            alert(data);
+		}
+		
+	});
+	
+	
+}
+
+$(function() {
+    $("#upload").change(function() {
+        var $file = $(this);
+        var fileObj = $file[0];
+        var windowURL = window.URL || window.webkitURL;
+        var imgURL;
+        var $img = $("#view");
+
+        if(fileObj && fileObj.files && fileObj.files[0]){
+            imgURL = windowURL.createObjectURL(fileObj.files[0]);
+            $img.attr('src',imgURL);
+        }else{
+            imgURL = $file.val();
+            var imgObj = document.getElementById("view");
+// 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中
+// 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+            imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+            imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+        }
+    });
+});
+
+//请求key/value，输出是json
+function responseJson(){
+	
+	$.ajax({
+		type:'post',
+		url:'${pageContext.request.contextPath }/responseJson.action',
+		//请求是key/value这里不需要指定contentType，因为默认就 是key/value类型
+		//contentType:'application/json;charset=utf-8',
+		//数据格式是json串，商品信息
+		data:'name=手机&price=999',
+		success:function(data){//返回json结果
+			alert(data.name);
+		}
+		
+	});
+	
+}
+</script>
+</head>
+<body>
+<input type="button" onclick="requestJson()" value="请求json，输出是json"/>
+<input type="button" onclick="responseJson()" value="请求key/value，输出是json"/>
+
+    <form action="/uplodaFile" method="post" enctype="multipart/form-data">
+        <input id="upload" type="file" name="imgFile" />
+        <div class="img_container">
+            <img id="view" width="60" height="60">
+        </div>
+        <input id="upload2" type="file" name="imgFile" />
+        <input id="upload3" type="file" name="imgFile" />
+        <input id="upload4" type="file" name="imgFile" />
+        <input id="lalal" type="submit" value="upload" name="uoload"/>
+    </form>
+</body>
+</html>

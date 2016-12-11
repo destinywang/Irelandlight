@@ -38,12 +38,12 @@ public interface GoodsMapper {
     void updateGoodsByIds(@Param("ids") List<Long> ids,@Param("putFlag") int putFlag);
     //按照制定的商品id和size更改商品的上架属性
     void updateGoodsByIdsAndSize(@Param("goodsIdMapSize")  Map<Long,List<String>> goodsIdMapSize,@Param("putFlag") int putFlag);
-
-
-
-
-
-
+    //http://ohlu5erjk.bkt.clouddn.com/267b16d4-36aa-4040-a8e5-a2c88205e2b8.jpg
+    //http://ohlu5erjk.bkt.clouddn.com/9d45443a-89fd-4aff-8563-1e59d835025c.jpg
+    //http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg
+    void insertIntoGoodsImg(@Param("id")Long id,@Param("imgUrlMap") Map<String,Integer> imgUrlMap);
+    //
+    void insertIotoGoodsSizePrice(@Param("id") Long id,@Param("sizeMapPrice")Map<String,BigDecimal> sizeMapPrice);
     //修改商品中的字段值
     void updateGoods(@Param("goods") Goods goods);
     //将商品添加到tb_goods表中 @Param("goods")
