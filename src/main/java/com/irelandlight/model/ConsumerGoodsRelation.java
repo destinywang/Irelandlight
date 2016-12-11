@@ -3,7 +3,11 @@ package com.irelandlight.model;
 import java.util.Date;
 
 /**
- * Created by mac on 2016/12/3.
+ * Created  with Intellij IDEA.
+ * User: Ele_Chen
+ * Date: 2016/12/3
+ * Time: 11:12
+ * Description: 收藏夹表 .
  */
 public class ConsumerGoodsRelation {
     private Long id;
@@ -12,7 +16,6 @@ public class ConsumerGoodsRelation {
     private Integer visibility;     //是否逻辑删除
     private Long consumerId;        //消费者表主键做逻辑外键
     private Long goodsId;           //商品表主键做逻辑外键
-    private Integer count;          //每种商品的数量
 
 
     public Long getId() {
@@ -61,13 +64,5 @@ public class ConsumerGoodsRelation {
 
     public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
     }
 }

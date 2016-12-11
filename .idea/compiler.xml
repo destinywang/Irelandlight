@@ -22,11 +22,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="cake-common-first" />
+        <module name="Irelandlight" />
+        <module name="Irelandlight-first" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="cake-common-first" target="1.5" />
+      <module name="Irelandlight" target="1.5" />
+      <module name="Irelandlight-first" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

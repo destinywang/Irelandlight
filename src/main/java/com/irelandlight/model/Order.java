@@ -1,12 +1,14 @@
 package com.irelandlight.model;
 
-import org.relaxng.datatype.DatatypeException;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Created by mac on 2016/12/3.
+ * Created  with Intellij IDEA.
+ * User: Ele_Chen
+ * Date: 2016/12/3
+ * Time: 10:11
+ * Description: 订单需求表 .
  */
 public class Order {
     private Long id;
@@ -21,7 +23,7 @@ public class Order {
     private String transferTime;    //用户期望的配送时间
     private String gift;            //用户期望的附赠礼物
     private Integer tableWareCount; //附赠餐具数
-    private Long couponId;        //活动表id做逻辑外键
+    private Long couponId;          //优惠券id做逻辑外键
     private BigDecimal price;       //订单费用
     private Date transferBegin;     //配送开始时间
     private Date transferEnd;       //配送结束时间

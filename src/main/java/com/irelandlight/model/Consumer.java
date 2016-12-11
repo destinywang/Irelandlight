@@ -4,7 +4,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Created by mac on 2016/12/3.
+ * Created  with Intellij IDEA.
+ * User: Ele_Chen
+ * Date: 2016/12/3
+ * Time: 10:30
+ * Description: 顾客信息表 .
  */
 public class Consumer {
     private Long id;
@@ -55,12 +59,12 @@ public class Consumer {
         this.visibility = visibility;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -79,12 +83,12 @@ public class Consumer {
         this.salt = salt;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getHeadImgurl() {
