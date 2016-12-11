@@ -2,10 +2,7 @@ package com.irelandlight.dao;
 
 import com.irelandlight.model.Comment;
 import com.irelandlight.model.GoodsImage;
-import com.irelandlight.model.vo.CommentFrom;
-import com.irelandlight.model.vo.CommentGoods;
-import com.irelandlight.model.vo.GoodsInfo;
-import com.irelandlight.model.vo.SizePrice;
+import com.irelandlight.model.vo.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -37,19 +34,13 @@ public interface GoodsDetailDao {
      */
     List<SizePrice> querySizePrice(int id);
 
-    /**
-     * 查询对商品的评论
-     * @param id 商品的ic
-     * @return
-     */
     List<CommentGoods> queryCommentGoods(int id);
-
     /**
-     * 查询对评论的评论
-     * @param id 商品的id
+     * 查询评论的所有
+     * @param id
      * @return
      */
-    List<CommentFrom> queryCommentComment(int id);
+    List<ReplyVO> queryComments(int id);
     /**
      * 添加对评论的评论
      * @param comment

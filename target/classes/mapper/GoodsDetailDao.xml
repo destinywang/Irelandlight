@@ -22,12 +22,15 @@
         <result column="content" property="goodsContent"/>
         <result column="nick_name" property="consumerName"/>
     </resultMap>
-    <resultMap id="commentComment" type="com.irelandlight.model.vo.CommentFrom">
-        <id column="id" property="id"/>
-        <result column="content" property="commentContent"/>
-        <result column="nick_name" property="fromName"/>
-        <result column="commented_id" property="commentId"/>
+
+    <resultMap id="comments" type="com.irelandlight.model.vo.ReplyVO">
+        <result column="reply" property="replyContent"/>
+        <result column="source_id" property="sourceId"/>
+        <result column="from_nick" property="fromNickName"/>
+        <result column="to_nick" property="toNickName"/>
+        <result column="reply_id" property="replyId"/>
     </resultMap>
+
     <!--商品轮播图-->
     <select id="queryGoodsImage" parameterType="int" resultType="com.irelandlight.model.GoodsImage">
         SELECT * FROM tb_goods_image WHERE visibility=0 AND goods_id=#{id} ORDER BY `position`
@@ -49,7 +52,7 @@
 
     <!--
           查询对该商品的评论（不包括对评论的评论）
-    -->
+          -->
     <select id="queryCommentGoods" parameterType="int" resultMap="commentGoods">
         SELECT tb_comment.content,tb_comment.id,tb_consumer.nick_name
         FROM tb_comment
@@ -57,9 +60,9 @@
         ON tb_comment.consumer_id=tb_consumer.id
         WHERE tb_comment.visibility=0 AND tb_consumer.visibility=0
         AND  tb_comment.goods_id=#{id}
-        AND  tb_comment.commented_id is null
     </select>
-    <!--查询评论的评论-->
+    <!--
+    查询评论的评论
     <select id="queryCommentComment" parameterType="int" resultMap="commentComment">
       SELECT tb_comment.id,tb_comment.content,tb_comment.commented_id,tb_consumer.nick_name
       FROM tb_comment
@@ -68,6 +71,21 @@
       WHERE tb_comment.commented_id=#{id}
       AND tb_comment.commented_id is not null
     </select>
+    -->
+    <!--查询评论的评论-->
+    <select id="queryComments" parameterType="int" resultMap="comments">
+        SELECT tb_reply.reply,tb_reply.source_id,a.nick_name from_nick,b.nick_name to_nick,tb_reply.id as reply_id
+        FROM tb_comment,tb_reply
+        LEFT JOIN
+        tb_consumer a
+        ON  a.id=tb_reply.from_id
+        LEFT JOIN
+        tb_consumer b
+        ON  b.id=tb_reply.to_id
+        WHERE
+        tb_comment.goods_id=#{id}
+        AND source_id=tb_comment.id
+</select>
     <!--添加评论-->
     <insert id="addComment" parameterType="com.irelandlight.model.Comment">
         INSERT INTO VALUE (`#{id}`,`#{createTime}`,`#{lastUpdate}`,`#{visibility}`,
