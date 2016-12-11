@@ -17,6 +17,4 @@ public interface OrderMapper {
     public int selectOrderCanceled();   //查询被取消订单数  4
     public List <Map<Object,Object>> selectOrderDetailByMonth(); //按月查询每月订单数
     public Order selectOrderByOrderNum(@Param("orderNo") String orderNo); //按照订单编号查找订单
-
-
 }

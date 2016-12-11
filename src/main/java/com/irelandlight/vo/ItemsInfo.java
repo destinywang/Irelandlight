@@ -1,4 +1,4 @@
-package com.irelandlight.model.vo;
+package com.irelandlight.vo;
 
 /**
  * Created by mac on 2016/12/8.
