@@ -45,8 +45,39 @@
         where year(create_time)=year(sysdate())
         group by month(create_time);
     </select>
-    <select id="selectOrderByOrderNum" resultMap="tbMapToOrder">
+    <select id="selectOrderByOrderNo" resultMap="tbMapToOrder">
         SELECT * FROM tb_order WHERE order_number=#{orderNo}
     </select>
+
+    <resultMap id="simpOrderInfo" type="com.irelandlight.vo.OrderSimpleInfo">
+        <result column="order_id" property="id"/>
+        <result column="order_create_time" property="createTime"/>
+        <result column="consumer_id" property="consumerId"/>
+        <result column="user_name" property="usrName"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="status" property="orderStatus"/>
+    </resultMap>
+
+    <select id="selectOrderSimpleInfo" resultMap="simpOrderInfo">
+         select tb_order.id order_id,tb_order.create_time order_create_time,consumer_id,user_name,order_number,status
+         from tb_order,tb_consumer
+         where tb_order.consumer_id=tb_consumer.id;
+    </select>
+
+
+    <select id="selectOrderDetailById" resultType="com.irelandlight.vo.OrderDetail">
+
+      select tb_order.id orderId,tb_order.order_number orderNo,tb_consumer.id userId,tb_order.transfer_way transferWay,tb_order.create_time createTime,tb_order.`status` status,transfer_begin transferBegin,transfer_end transferEnd,
+        transfer_time transferTime,tb_order.price orderSum,tb_address.consumer_name userName,province,city,district,street,detail,post,tb_address.consumer_phone telephone,remark
+      from tb_order,tb_consumer,tb_address
+      where tb_order.consumer_id=#{orderId} and tb_consumer.id=tb_order.consumer_id and tb_address.id=tb_order.address_id
+    </select>
+
+    <select id="selectOrderGoodsDetailById" resultType="com.irelandlight.vo.OrderGoodsDetail">
+        select tb_order_goods_relation.goods_id goodsId,tb_goods.`name` goodsName,tb_order_goods_relation.size goodSize,tb_goods_size.price price,tb_order_goods_relation.count
+        from tb_order_goods_relation,tb_goods_size,tb_goods
+        where tb_order_goods_relation.order_id=#{orderId} and tb_goods.id=tb_order_goods_relation.goods_id and tb_order_goods_relation.goods_id=tb_goods_size.goods_id and tb_order_goods_relation.size=tb_goods_size.size
+    </select>
+
 
 </mapper>

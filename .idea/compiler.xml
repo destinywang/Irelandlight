@@ -10,9 +10,8 @@
         <module name="Irelandlight-first" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="cake-common-first" target="1.5" />
-      <module name="Irelandlight-first" target="1.5" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="Irelandlight-first" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

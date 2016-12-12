@@ -8,10 +8,19 @@ import java.util.Date;
 public class OrderSimpleInfo {
     private Long id;
     private Date createTime;        //创建时间
-    private Date lastUpdate;        //最后更新时间
     private Long consumerId;        //消费者id做逻辑外键
+    private String usrName;         //客户账号
     private String orderNumber;     //订单编号
-    private Integer status;         //订单状态
+    private Integer orderStatus;         //订单状态
+
+    public String getUsrName() {
+        return usrName;
+    }
+
+    public void setUsrName(String usrName) {
+        this.usrName = usrName;
+    }
+
 
     public Long getId() {
         return id;
@@ -24,17 +33,8 @@ public class OrderSimpleInfo {
     public Date getCreateTime() {
         return createTime;
     }
-
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public Date getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
     }
 
     public Long getConsumerId() {
@@ -53,11 +53,11 @@ public class OrderSimpleInfo {
         this.orderNumber = orderNumber;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

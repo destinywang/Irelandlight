@@ -1,5 +1,6 @@
 package com.irelandlight.aop;
 
+
 import com.alibaba.fastjson.JSON;
 import com.irelandlight.dao.POperatinonLogMapper;
 import com.irelandlight.model.Productor;
@@ -15,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -60,7 +59,7 @@ public class AdminOperatedLog{
                 StringBuffer para=new StringBuffer();
                 if(jp.getArgs()!=null&&jp.getArgs().length>0){
                     for(int i=0;i<jp.getArgs().length;i++){
-                        para.append(JSON.toJSONString(jp.getArgs()[i])+"/");
+                       para.append(JSON.toJSONString(jp.getArgs()[i])+"/");
                     }
                 }
                 String info="Requestor:"+productor.getUserName()+"--Address:"+ip+"--Operation:"+operation+"--Parem:"+para;

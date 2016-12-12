@@ -1,6 +1,9 @@
 package com.irelandlight.dao;
 
 import com.irelandlight.model.Order;
+import com.irelandlight.vo.OrderDetail;
+import com.irelandlight.vo.OrderGoodsDetail;
+import com.irelandlight.vo.OrderSimpleInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,5 +19,8 @@ public interface OrderMapper {
     public int selectOrderSucceed();    //查询交易成功订单数 3
     public int selectOrderCanceled();   //查询被取消订单数  4
     public List <Map<Object,Object>> selectOrderDetailByMonth(); //按月查询每月订单数
-    public Order selectOrderByOrderNum(@Param("orderNo") String orderNo); //按照订单编号查找订单
+    public Order selectOrderByOrderNo(@Param("orderNo") String orderNo); //按照订单编号查找订单
+    public List<OrderSimpleInfo> selectOrderSimpleInfo();
+    public OrderDetail selectOrderDetailById(@Param("orderId") Long orderId);
+    public List<OrderGoodsDetail> selectOrderGoodsDetailById(@Param("orderId")Long orderId);
 }

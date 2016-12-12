@@ -21,7 +21,9 @@
     <select id="selectPutawayGoodsCount" resultType="int">
         <![CDATA[
 
+
         SELECT COUNT(*) FROM tb_goods WHERE visibility=0 AND is_putaway=0
+
 
         ]]>
     </select>
@@ -29,18 +31,18 @@
     <select id="selectSoldOutGoodsCount" resultType="int">
         <![CDATA[
 
+
         SELECT COUNT(*)FROM tb_goods WHERE visibility=0 AND is_putaway=1
+
 
         ]]>
     </select>
     <select id="selectGoodsComment" resultType="int">
         <![CDATA[
 
-
                 SELECT count(*)
                 FROM tb_comment
                 WHERE  visibility=0
-
 
         ]]>
     </select>
@@ -78,10 +80,16 @@
         <![CDATA[
 
 
+
+
+
                 SELECT *
                 FROM tb_goods
                 WHERE visibility=0 AND tb_goods.name=#{name}
                 ORDER BY create_time
+
+
+
 
 
         ]]>
@@ -91,10 +99,16 @@
       <![CDATA[
 
 
+
+
+
                 SELECT *
                 FROM tb_goods
                 WHERE visibility=0 AND tb_goods.is_putaway=0
                 ORDER BY create_time
+
+
+
 
 
         ]]>
@@ -104,10 +118,16 @@
       <![CDATA[
 
 
+
+
+
                 SELECT *
                 FROM tb_goods
                 WHERE  visibility=0 AND tb_goods.is_putaway=1
                 ORDER BY create_time
+
+
+
 
 
         ]]>
@@ -175,15 +195,44 @@
         #{goods.use},#{goods.taste},#{goods.quantity},
         #{goods.saleCount},#{goods.weight},#{goods.status})
     </insert>
-    <update id="updateGoodsImg" >
-        <foreach collection="imgUrlMap" item="position" index="imgUrl" open="" separator=";" close="">
-            UPDATE tb_goods_image SET last_update=sysdate(),tb_goods_image.position=#{position} WHERE goods_id=#{id} AND url=#{imgUrl}
+    <update id="updateGoodsImg">
+        update tb_goods_image
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="position=case" suffix="end,">
+                <foreach collection="imgUrlMap" index="imgUrl" item="pos" open="" close="" separator="">
+                    <if test="imgUrl!=null">
+                        <if test="pos!=null">
+                            WHEN goods_id=#{id} AND url=#{imgUrl} THEN #{pos}
+                        </if>
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        ,last_update=sysdate()
+        WHERE goods_id=#{id} AND
+        <foreach collection="imgUrlMap" index="imgUrl" item="pos" open="(" close=")" separator="OR">
+            url=#{imgUrl}
         </foreach>
     </update>
 
+
     <update id="updateGoodsSizePrice">
-        <foreach collection="sizeMapPrice" item="price" index="size" open="" separator=";" close="">
-            UPDATE tb_goods_size SET last_update=sysdate(),price=#{price} WHERE goods_id=#{id} AND size=#{size}
+        update tb_goods_size
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="price=case" suffix="end,">
+                <foreach collection="sizeMapPrice" item="price" index="size" open="" separator="" close="">
+                    <if test="size!=null">
+                        <if test="price!=null">
+                            WHEN goods_id=#{id} AND size=#{size} THEN #{price}
+                        </if>
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        ,last_update=sysdate()
+        WHERE goods_id=#{id} AND
+        <foreach collection="sizeMapPrice" item="price" index="size" open="(" separator="OR" close=")">
+            size=#{size}
         </foreach>
     </update>
 

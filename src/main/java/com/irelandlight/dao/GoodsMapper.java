@@ -27,7 +27,7 @@ public interface GoodsMapper {
     //查询已上架商品
     List<Goods> selectPutawayGoods();
     //按照商品id查找商品尺寸与价格的对应关系-==
-    
+
     List<GoodsSizePrice> selectPWSizePriceMapByGoodsId(@Param("goodsId") Long goodsId);
     //按照商品id查找商品尺寸与价格的对应关系
     List<GoodsSizePrice> selectUPWSizePriceMapByGoodsId(@Param("goodsId") Long goodsId);
