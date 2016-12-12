@@ -16,4 +16,12 @@
           AND tb_coupon.consumer_id = #{consumerId}
     </select>
 
+    <!--删除优惠券-->
+    <update id="deleteCoupon" >
+        UPDATE tb_coupon
+        SET tb_coupon.visibility = 1
+        WHERE id = #{conponId}
+        AND consumer_id = #{consumerId}
+    </update>
+
 </mapper>

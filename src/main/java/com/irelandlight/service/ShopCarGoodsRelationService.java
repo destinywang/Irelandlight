@@ -29,7 +29,7 @@ public interface ShopCarGoodsRelationService {
     public List<ShopCarGoodsRelation> findShopCarGoodsRelationByShopCarId(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception;
 
     //添加购物车请求
-    public void insertGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception;
+    public void insertGoodsRelation(Long comsumerId ,ShopCarGoodsRelation shopCarGoodsRelation) throws Exception;
 
 
 }

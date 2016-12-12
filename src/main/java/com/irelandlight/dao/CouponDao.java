@@ -11,7 +11,7 @@ import java.util.List;
  * User: Ele_Chen
  * Date: 2016/12/11
  * Time: 9:23
- * Description: 目的... .
+ * Description: 优惠券dao .
  */
 @Repository
 public interface CouponDao {
@@ -23,4 +23,13 @@ public interface CouponDao {
      * @throws Exception
      */
     public List<Coupon> findCouponByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
+
+
+    /**
+     * 删除已用优惠券 deleteCoupon
+     * @param consumerId 用户id
+     * @param couponId 优惠券id
+     * @throws Exception
+     */
+    public void deleteCoupon(@Param("consumerId") Long consumerId,@Param("couponId") Long couponId) throws Exception;
 }

@@ -88,7 +88,7 @@ public class ShopCarGoodsRelationTest extends BaseJunitTest {
         shopCarGoodsRelation.setGoodsId(1L);
         shopCarGoodsRelation.setSize("2");
         shopCarGoodsRelation.setCount(4);
-        shopCarGoodsRelationService.insertGoodsRelation(shopCarGoodsRelation);
+        shopCarGoodsRelationService.insertGoodsRelation(1002L,shopCarGoodsRelation);
     }
 
 }

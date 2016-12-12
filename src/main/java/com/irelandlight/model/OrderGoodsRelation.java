@@ -85,4 +85,12 @@ public class OrderGoodsRelation {
     public void setSize(String size) {
         this.size = size;
     }
+
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
 }

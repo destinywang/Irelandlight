@@ -1,8 +1,10 @@
 package com.irelandlight.service.impl;
 
 import com.irelandlight.dao.ShopCarGoodsRelationDao;
+import com.irelandlight.model.ShopCar;
 import com.irelandlight.model.ShopCarGoodsRelation;
 import com.irelandlight.service.ShopCarGoodsRelationService;
+import com.irelandlight.service.ShopCarService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,6 +19,9 @@ import java.util.List;
  */
 @Service
 public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationService {
+
+    @Resource
+    private ShopCarService shopCarService;
 
     @Resource
     private ShopCarGoodsRelationDao shopCarGoodsRelationDao;
@@ -73,11 +78,13 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @param shopCarGoodsRelation
      * @throws Exception
      */
-    public void insertGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception{
+    public void insertGoodsRelation(Long comsumerId ,ShopCarGoodsRelation shopCarGoodsRelation) throws Exception{
         //查找用户购物车商品（通过购物车id + 商品id + 商品size） 如果有则返回的该商品详情
         ShopCarGoodsRelation shopCarGoodsRelation1 = shopCarGoodsRelationDao.findSameGoodsRelation(shopCarGoodsRelation);
         //判断时候有 有则更新， 无则添加
         if(shopCarGoodsRelation1==null){
+            ShopCar shopCar = shopCarService.findShopCarDetailByConsumerId(comsumerId);
+            shopCarGoodsRelation.setShopCarId(shopCar.getId());
             shopCarGoodsRelationDao.insertGoodsWithNo(shopCarGoodsRelation);
         }else {
             shopCarGoodsRelation1.setCount(shopCarGoodsRelation1.getCount()+shopCarGoodsRelation.getCount());

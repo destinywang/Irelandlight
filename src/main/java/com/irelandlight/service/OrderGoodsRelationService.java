@@ -30,6 +30,7 @@ public interface OrderGoodsRelationService {
      * @param orderGoodsRelation
      * @throws Exception
      */
+
     //立即购买
     public void buyNow(@Param("orderGoodsRelation")OrderGoodsRelation orderGoodsRelation) throws Exception;
 
