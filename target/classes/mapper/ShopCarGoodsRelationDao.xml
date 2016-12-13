@@ -48,7 +48,6 @@
         UPDATE tb_shop_car_goods_relation
         SET tb_shop_car_goods_relation.visibility = 1
         WHERE
-
         <foreach collection="shopCarGoodsRelations" item="goods" separator="or">
             ( shop_car_id = #{goods.shopCarId} AND tb_shop_car_goods_relation.goods_id = #{goods.goodsId} AND tb_shop_car_goods_relation.size = #{goods.size} )
         </foreach>

@@ -66,7 +66,7 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
     /**
      * 查找用户购物车商品详情 findShopCarGoodsRelationByShopCarId
      * @param shopCarGoodsRelation
-     * @return
+     * @return List<ShopCarGoodsRelation> 购物车商品详情列表
      * @throws Exception
      */
     public List<ShopCarGoodsRelation> findShopCarGoodsRelationByShopCarId(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
@@ -78,12 +78,12 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @param shopCarGoodsRelation
      * @throws Exception
      */
-    public void insertGoodsRelation(Long comsumerId ,ShopCarGoodsRelation shopCarGoodsRelation) throws Exception{
+    public void insertGoodsRelation(Long consumerId ,ShopCarGoodsRelation shopCarGoodsRelation) throws Exception{
         //查找用户购物车商品（通过购物车id + 商品id + 商品size） 如果有则返回的该商品详情
         ShopCarGoodsRelation shopCarGoodsRelation1 = shopCarGoodsRelationDao.findSameGoodsRelation(shopCarGoodsRelation);
-        //判断时候有 有则更新， 无则添加
+        //判断时候有 有则更新， 无则添加0
         if(shopCarGoodsRelation1==null){
-            ShopCar shopCar = shopCarService.findShopCarDetailByConsumerId(comsumerId);
+            ShopCar shopCar = shopCarService.findShopCarDetailByConsumerId(consumerId);
             shopCarGoodsRelation.setShopCarId(shopCar.getId());
             shopCarGoodsRelationDao.insertGoodsWithNo(shopCarGoodsRelation);
         }else {

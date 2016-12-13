@@ -34,23 +34,26 @@ public class ShopCarController {
     @Resource
     private ShopCarGoodsRelationService shopCarGoodsRelationService;
 
-
+    @ResponseBody
     @RequestMapping("findShopCar")
     public String findShopCarByConsumerId()throws Exception {
-        shopCarService.findShopCarDetailByConsumerId(consumerId.get());
-        return "succeed";
+        consumerId.set(1002L);
+        ShopCar shopCar = shopCarService.findShopCarDetailByConsumerId(consumerId.get());
+
+        return JSONObject.toJSONString(shopCar);
     }
 
     //查询用户购物车详情
-    @RequestMapping("findShopCarGoodsDetail")
+    @RequestMapping(value = "findShopCarGoodsDetail", produces ="text/json;charset=utf-8")
     @ResponseBody
     public String findShopCarGoodsDetail()throws Exception {
+        consumerId.set(1002L);
         ShopCar shopCarGoodsDetail =  shopCarService.findShopCarGoodsDetailByConsumerId(consumerId.get());
         //String shopCarGoodsDetailJson = JSONObject.toJSONString(shopCarGoodsDetail);
         //创建json对象
         JSONObject json = new JSONObject();
         //给json添加数据对象
-        // json.put("goods", shopCarGoodsDetail);
+        json.put("goods", shopCarGoodsDetail);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("shopCarGoodsDetail",shopCarGoodsDetail);
         return json.toJSONString();
@@ -69,8 +72,9 @@ public class ShopCarController {
     }
 
     //商品批量移出购物车
+    @ResponseBody
     @RequestMapping(value = "removeGoodsFromShopCar")
-    public String removeGoodsFromShopCar(List<ShopCarGoodsRelation> shopCarGoodsRelations)throws Exception{
+    public String removeGoodsFromShopCar(@RequestBody List<ShopCarGoodsRelation> shopCarGoodsRelations)throws Exception{
         shopCarGoodsRelationService.batchDeleteShopCarGoodsRelations(shopCarGoodsRelations);
         JSONObject code = new JSONObject();
         code.put("statusCode",1);
