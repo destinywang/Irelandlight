@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by mac on 2016/12/6.
@@ -24,8 +21,6 @@ public class GoodsDaoTest extends BaseJunitTest{
     @Autowired
     private GoodsMapper goodsMapper;
 
-    @Resource
-    private GoodsContainerService goodsContainerService;
 
     @Test
     public void testMethod() {
@@ -97,10 +92,17 @@ public class GoodsDaoTest extends BaseJunitTest{
                 itemsList.add(containerItem);
             }
         }
-        ItemsInfo itemsInfo =goodsContainerService.searchForGoodsCountInfo();
+
         OrderDetail orderDetail=orderMapper.selectOrderDetailById(new Long(1002));
 
         List<OrderGoodsDetail> orderGoodsDetails=orderMapper.selectOrderGoodsDetailById(new Long(1));
+        OrderModify orderModify=new OrderModify();
+        orderModify.setOrderStatus(2);
+        orderModify.setTransferBegin(new Date(System.currentTimeMillis()));
+        orderModify.setTransferEnd(new Date(System.currentTimeMillis()));
+        orderModify.setTransferWay(2);
+        orderMapper.updateOrder(new Long(1),orderModify);
+
         System.out.println(itemsList);
     }
     private void addGoodsInfoToContainerItem(ContainerItem containerItem,Goods goods,List<GoodsSizePrice> listGoodSizeInfo){

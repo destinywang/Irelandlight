@@ -3,9 +3,11 @@ package com.irelandlight.dao;
 import com.irelandlight.model.Order;
 import com.irelandlight.vo.OrderDetail;
 import com.irelandlight.vo.OrderGoodsDetail;
+import com.irelandlight.vo.OrderModify;
 import com.irelandlight.vo.OrderSimpleInfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,5 +24,11 @@ public interface OrderMapper {
     public Order selectOrderByOrderNo(@Param("orderNo") String orderNo); //按照订单编号查找订单
     public List<OrderSimpleInfo> selectOrderSimpleInfo();
     public OrderDetail selectOrderDetailById(@Param("orderId") Long orderId);
+
     public List<OrderGoodsDetail> selectOrderGoodsDetailById(@Param("orderId")Long orderId);
+    public void updateTransferBegin(@Param("orderId") Long orderId, @Param("transferBegin")Date transferBegin);
+    public void updateStatus(@Param("orderId")Long orderId,@Param("newStatus")Integer newStatus);
+    public void updateTransferEnd(@Param("orderId")Long orderId,@Param("transferEnd")Date transferEnd);
+    public void updateTransferWay(@Param("orderId")Long orderId,@Param("transferWay")Integer transferWay);
+    public void updateOrder(@Param("orderId")Long orderId, @Param("orderModify")OrderModify orderModify);
 }

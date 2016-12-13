@@ -79,5 +79,19 @@
         where tb_order_goods_relation.order_id=#{orderId} and tb_goods.id=tb_order_goods_relation.goods_id and tb_order_goods_relation.goods_id=tb_goods_size.goods_id and tb_order_goods_relation.size=tb_goods_size.size
     </select>
 
+    <update id="updateOrder">
+        UPDATE tb_order SET status=#{orderModify.orderStatus},transfer_begin=#{orderModify.transferBegin},transfer_end=#{orderModify.transferEnd},transfer_way=#{orderModify.transferWay}
+        WHERE id=#{orderId}
+    </update>
+
+    <update id="updateTransferBegin">
+        UPDATE tb_order SET transfer_begin=#{transferBegin} WHERE id=#{orderId}
+    </update>
+    <update id="updateTransferEnd">
+        UPDATE tb_order SET transfer_end=#{transferEnd} WHERE id=#{orderId}
+    </update>
+    <update id="updateStatus">
+        UPDATE tb_order SET status=#{newStatus} WHERE id=#{orderId}
+    </update>
 
 </mapper>

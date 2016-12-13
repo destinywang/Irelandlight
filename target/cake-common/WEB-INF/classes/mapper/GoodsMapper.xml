@@ -3,26 +3,48 @@
 <mapper namespace="com.irelandlight.dao.GoodsMapper">
 
     <select id="selectGoodsCount" resultType="int">
-        <![CDATA[SELECT COUNT(*) FROM tb_goods]]>
+        <![CDATA[
+
+        SELECT COUNT(*) FROM tb_goods
+
+        ]]>
     </select>
 
     <select id="selectRecycleGoodsCount" resultType="int">
-        <![CDATA[SELECT COUNT(*) FROM tb_goods WHERE visibility=1]]>
+        <![CDATA[
+
+        SELECT COUNT(*) FROM tb_goods WHERE visibility=1
+
+        ]]>
     </select>
 
     <select id="selectPutawayGoodsCount" resultType="int">
-        <![CDATA[SELECT COUNT(*) FROM tb_goods WHERE visibility=0 AND is_putaway=0]]>
+        <![CDATA[
+
+
+        SELECT COUNT(*) FROM tb_goods WHERE visibility=0 AND is_putaway=0
+
+
+        ]]>
     </select>
 
     <select id="selectSoldOutGoodsCount" resultType="int">
-        <![CDATA[SELECT COUNT(*)FROM tb_goods WHERE visibility=0 AND is_putaway=1]]>
+        <![CDATA[
+
+
+        SELECT COUNT(*)FROM tb_goods WHERE visibility=0 AND is_putaway=1
+
+
+        ]]>
     </select>
     <select id="selectGoodsComment" resultType="int">
         <![CDATA[
+
                 SELECT count(*)
                 FROM tb_comment
                 WHERE  visibility=0
-       ]]>
+
+        ]]>
     </select>
 
 
@@ -44,7 +66,6 @@
     </resultMap>
 
 
-
     <resultMap id="tbMapToGoodsSizePricePO" type="com.irelandlight.model.GoodsSizePrice">
         <id column="id" property="id"/>
         <result column="create_time" property="createTime"/>
@@ -57,29 +78,59 @@
 
     <select id="selectGoodsByName" resultMap="tbMapToGoodsPO">
         <![CDATA[
+
+
+
+
+
                 SELECT *
                 FROM tb_goods
                 WHERE visibility=0 AND tb_goods.name=#{name}
                 ORDER BY create_time
+
+
+
+
+
         ]]>
     </select>
 
     <select id="selectUnPutawayGoods" resultMap="tbMapToGoodsPO">
       <![CDATA[
+
+
+
+
+
                 SELECT *
                 FROM tb_goods
                 WHERE visibility=0 AND tb_goods.is_putaway=0
                 ORDER BY create_time
-       ]]>
+
+
+
+
+
+        ]]>
     </select>
 
     <select id="selectPutawayGoods" resultMap="tbMapToGoodsPO">
       <![CDATA[
+
+
+
+
+
                 SELECT *
                 FROM tb_goods
                 WHERE  visibility=0 AND tb_goods.is_putaway=1
                 ORDER BY create_time
-       ]]>
+
+
+
+
+
+        ]]>
     </select>
 
     <select id="selectPWSizePriceMapByGoodsId" resultMap="tbMapToGoodsSizePricePO">
@@ -90,89 +141,115 @@
         SELECT * FROM tb_goods_size WHERE visibility=0 AND goods_id=#{goodsId} AND tb_goods_size.is_putaway=0
     </select>
 
-   <select id="selectGoodsHeadImgUrlByGoodsId" resultType="java.lang.String">
+    <select id="selectGoodsHeadImgUrlByGoodsId" resultType="java.lang.String">
        SELECT tb_goods_image.url FROM tb_goods_image WHERE visibility=0 AND goods_id=#{goodsId} AND tb_goods_image.position=0
    </select>
 
     <update id="updateGoodsByIds">
-      UPDATE tb_goods SET tb_goods.is_putaway=#{putFlag}
-      <where>
-          tb_goods.id in
-          <foreach collection="ids" item="id" index="index" open="(" separator="," close=")">
-                 #{id}
-          </foreach> AND visibility=0
-      </where>
+        UPDATE tb_goods SET tb_goods.is_putaway=#{putFlag}
+        <where>
+            tb_goods.id in
+            <foreach collection="ids" item="id" index="index" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+            AND visibility=0
+        </where>
     </update>
 
     <update id="updateGoodsByIdsAndSize">
         UPDATE tb_goods_size SET tb_goods_size.is_putaway=#{putFlag}
-         <where>
-             <foreach collection="goodsIdMapSize.keys" item="id" index="index" open="(" close=")" separator="OR">
-                 tb_goods_size.goods_id=#{id} AND tb_goods_size.size IN
-                 <foreach collection="goodsIdMapSize[id]" index="indes_list" item="gSize" open="(" separator="," close=")">
-                     #{gSize}
-                 </foreach>
-             </foreach>
-         </where>
+        <where>
+            <foreach collection="goodsIdMapSize.keys" item="id" index="index" open="(" close=")" separator="OR">
+                tb_goods_size.goods_id=#{id} AND tb_goods_size.size IN
+                <foreach collection="goodsIdMapSize[id]" index="indes_list" item="gSize" open="(" separator=","
+                         close=")">
+                    #{gSize}
+                </foreach>
+            </foreach>
+        </where>
     </update>
-
-
-
 
 
     <update id="updateGoods">
       UPDATE tb_goods
       SET last_update=sysdate(),visibility=#{goods.visibility},is_putaway=#{goods.isPutaway},tb_goods.name=#{goods.name},
-      description=#{goods.description},price=#{goods.price},preference=#{goods.preference},tb_goods.use=#{goods.use},
-      taste=#{goods.taste},tb_goods.size=#{goods.size},quantity=#{goods.quantity},sale_count=#{goods.saleCount},weight=#{goods.weight}
+      description=#{goods.description},preference=#{goods.preference},tb_goods.use=#{goods.use},
+      taste=#{goods.taste},quantity=#{goods.quantity},sale_count=#{goods.saleCount},weight=#{goods.weight}
       WHERE id=#{goods.id}
     </update>
 
-    <insert id="insertIntoGoods" >
-      <selectKey keyProperty="goods.id" order="AFTER" resultType="java.lang.Long">
-          SELECT LAST_INSERT_ID()
-      </selectKey>
-      INSERT INTO tb_goods
+    <insert id="insertIntoGoods">
+        <selectKey keyProperty="goods.id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO tb_goods
         (create_time,last_update,
         visibility,is_putaway,
         tb_goods.name,description,preference,
         tb_goods.use,taste,quantity,
         sale_count,weight,tb_goods.status)
         VALUES
-        (now(),now(),
+        (now(),sysdate(),
         0,0,
         #{goods.name},#{goods.description},#{goods.preference},
         #{goods.use},#{goods.taste},#{goods.quantity},
         #{goods.saleCount},#{goods.weight},#{goods.status})
     </insert>
+    <update id="updateGoodsImg">
+        update tb_goods_image
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="position=case" suffix="end,">
+                <foreach collection="imgUrlMap" index="imgUrl" item="pos" open="" close="" separator="">
+                    <if test="imgUrl!=null">
+                        <if test="pos!=null">
+                            WHEN goods_id=#{id} AND url=#{imgUrl} THEN #{pos}
+                        </if>
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        ,last_update=sysdate()
+        WHERE goods_id=#{id} AND
+        <foreach collection="imgUrlMap" index="imgUrl" item="pos" open="(" close=")" separator="OR">
+            url=#{imgUrl}
+        </foreach>
+    </update>
+
+
+    <update id="updateGoodsSizePrice">
+        update tb_goods_size
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="price=case" suffix="end,">
+                <foreach collection="sizeMapPrice" item="price" index="size" open="" separator="" close="">
+                    <if test="size!=null">
+                        <if test="price!=null">
+                            WHEN goods_id=#{id} AND size=#{size} THEN #{price}
+                        </if>
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        ,last_update=sysdate()
+        WHERE goods_id=#{id} AND
+        <foreach collection="sizeMapPrice" item="price" index="size" open="(" separator="OR" close=")">
+            size=#{size}
+        </foreach>
+    </update>
 
     <insert id="insertIntoGoodsImg">
-      INSERT INTO tb_goods_image(create_time,last_update,goods_id,url,tb_goods_image.position) VALUES
-      <foreach collection="imgUrlList.keys" item="imgUrl" index="map_index" open="(" separator="," close=")">
-          now(),sysdate(),#{id},#{imgUrl},#{imgUrlList[imgUrl]}
-      </foreach>
+        INSERT INTO tb_goods_image(create_time,last_update,goods_id,url,tb_goods_image.position) VALUES
+        <foreach collection="imgUrlMap" item="position" index="imgUrl" open="" separator="," close="">
+            (now(),sysdate(),#{id},#{imgUrl}, #{position})
+        </foreach>
     </insert>
 
-
-
-    <insert id="insertIntoGoodsByParam" parameterType="com.irelandlight.model.Goods">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        INSERT INTO tb_goods
-        (create_time,last_update,
-        visibility,is_putaway,
-        tb_goods.name,description,price,preference,
-        tb_goods.use,taste,size,quantity,
-        sale_count,weight,tb_goods.status)
-        VALUES
-        (now(),now(),
-        0,0,
-        #{name},#{description},#{preference},
-        #{use},#{taste},#{quantity},
-        #{saleCount},#{weight},#{status})
+    <insert id="insertIotoGoodsSizePrice">
+        INSERT INTO tb_goods_size(create_time,last_update,goods_id,size,price) VALUES
+        <foreach collection="sizeMapPrice" item="price" index="size" open="" separator="," close="">
+            (now(),sysdate(),#{id},#{size}, #{price})
+        </foreach>
     </insert>
-    <delete id="deleteFromGoods" >
+    <delete id="deleteFromGoods">
       DELETE FROM tb_goods WHERE id=#{id}
     </delete>
 </mapper>

@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class OrderSimpleInfo {
     private Long id;
-    private Date createTime;        //创建时间
+    private Date createTime;        //下单时间
     private Long consumerId;        //消费者id做逻辑外键
     private String usrName;         //客户账号
     private String orderNumber;     //订单编号

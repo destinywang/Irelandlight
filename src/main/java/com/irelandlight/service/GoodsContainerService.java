@@ -1,6 +1,7 @@
 package com.irelandlight.service;
 
 import com.irelandlight.dao.GoodsMapper;
+import com.irelandlight.manager.ContextException;
 import com.irelandlight.model.Goods;
 import com.irelandlight.model.GoodsSizePrice;
 import com.irelandlight.vo.ContainerItem;
@@ -76,32 +77,46 @@ public class GoodsContainerService {
 
     //批量上架
     //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
-    public void putawayAllGoods(Map<Long, List<String>> idMappingSize) {
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED,rollbackFor = ContextException.class)
+    public void putawayAllGoods(Map<Long, List<String>> idMappingSize) throws Exception {
         if (idMappingSize != null && !idMappingSize.isEmpty()) {
             List<Long> ids = new ArrayList<Long>();
             ids.addAll(idMappingSize.keySet());
             goodsMapper.updateGoodsByIds(ids, 1);
             goodsMapper.updateGoodsByIdsAndSize(idMappingSize, 1);
+        } else {
+            throw new ContextException("上架失败，请传入尺寸价格映射关系！");
         }
     }
 
     //批量下架
     //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
-    public void aleoutAllGoods(Map<Long, List<String>> idMappingSize) {
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED,rollbackFor = ContextException.class)
+    public void saleoutAllGoods(Map<Long, List<String>> idMappingSize) throws Exception {
         if (idMappingSize != null && !idMappingSize.isEmpty()) {
             List<Long> ids = new ArrayList<Long>();
             ids.addAll(idMappingSize.keySet());
             goodsMapper.updateGoodsByIds(ids, 0);
             goodsMapper.updateGoodsByIdsAndSize(idMappingSize, 0);
+        } else {
+            throw new ContextException("下架失败，请传入尺寸价格映射关系！");
         }
     }
 
     //添加商品
     //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
-    private void addGoods(ContainerItem containerItem, Map<String, Integer> imgMapPosition, Map<String, BigDecimal> sizeMapPrice) {
+    private void addGoods(Goods goods, Map<String, Integer> imgMapPosition,Map<String,BigDecimal> sizeMapPrice)throws Exception {
+
+        if(goods!=null){
+            goodsMapper.insertIntoGoods(goods);
+            if(goods.getId()!=null){
+                goodsMapper.insertIntoGoodsImg(goods.getId(),imgMapPosition);
+                goodsMapper.insertIotoGoodsSizePrice(goods.getId(),sizeMapPrice);
+            }
+        }else {
+            throw new ContextException("请传入商品信息");
+        }
 
     }
 
@@ -125,6 +140,5 @@ public class GoodsContainerService {
         }
         containerItem.setPriceMapSize(map);
     }
-
 
 }
