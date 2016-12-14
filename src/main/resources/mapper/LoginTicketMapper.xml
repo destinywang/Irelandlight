@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irelandlight.dao.LoginTicketDao">
+
+    <!-- table name -->
+    <sql id="loginTicket_tableName">
+        tb_login_ticket
+    </sql>
+
+    <sql id="loginTicket_selectColumn">
+        id,
+        create_time,
+        last_update,
+        visibility,
+        consumer_id,
+        expried,
+        ticket,
+        status
+    </sql>
+
+    <sql id="loginTicket_insertColumn">
+        create_time,
+        last_update,
+        visibility,
+        consumer_id,
+        expried,
+        ticket,
+        status
+    </sql>
+
+    <!--
+     - ===================================================
+     - 当用户登录时
+     - 在tb_login_ticket表中
+     - 插入一条记录
+     - ===================================================
+     -->
+    <insert id="addTicket" parameterType="com.irelandlight.model.LoginTicket"
+            keyColumn="id" useGeneratedKeys="true">
+        INSERT INTO <include refid="loginTicket_tableName"/>
+        (create_time, last_update, visibility, consumer_id, expried, ticket, status)
+        VALUES
+        (NOW(), NOW(), #{visibility}, #{consumerId}, #{expried}, #{ticket}, #{status})
+    </insert>
+
+    <!--
+     - ===================================================
+     - 通过ticket字段
+     - 在tb_login_ticket表中
+     - 查找一条记录
+     - ===================================================
+     -->
+    <select id="getByTicket" resultType="com.irelandlight.model.LoginTicket">
+        SELECT
+        <include refid="loginTicket_selectColumn"/>
+        FROM
+        <include refid="loginTicket_tableName"/>
+        WHERE ticket = #{ticket}
+        ORDER BY create_time DESC
+        LIMIT 0, 1
+    </select>
+
+    <!--
+     - ===================================================
+     - 通过ticket字段
+     - 在tb_login_ticket表中
+     - 查找一条记录
+     - ===================================================
+     -->
+    <update id="updateStatus">
+        UPDATE
+        <include refid="loginTicket_tableName"/>
+        SET status = #{status}
+        WHERE ticket = #{ticket}
+    </update>
+
+</mapper>
