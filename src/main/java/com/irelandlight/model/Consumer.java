@@ -146,4 +146,25 @@ public class Consumer {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+
+    @Override
+    public String toString() {
+        return "Consumer{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", headImgurl='" + headImgurl + '\'' +
+                ", score=" + score +
+                ", wallet=" + wallet +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", birthday=" + birthday +
+                '}';
+    }
 }

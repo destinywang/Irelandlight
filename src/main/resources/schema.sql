@@ -98,6 +98,7 @@ CREATE TABLE `tb_consumer` (
   `birthday` datetime NOT NULL COMMENT '生日',
   `default_address_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name` (`user_name`),
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_last_update` (`last_update`) USING BTREE,
   KEY `idx_user_name` (`user_name`) USING BTREE,

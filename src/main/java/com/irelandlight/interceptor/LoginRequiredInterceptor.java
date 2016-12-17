@@ -14,10 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <p>LoginRequiredInterceptor based implementation of the
  * <tt>HandlerInterceptor</tt>.
+ *
  * This implementation is used to <strong>judge the
  * login-status of current thread</strong></p>
  *
- * <p></p>
+ * <p>In this Interceptor,
+ * we can judge the status in preHandler,
+ * and we just do nothing in postHandler and afterCompletion</p>
  *
  * @author destiny
  * @see org.springframework.web.servlet.HandlerInterceptor

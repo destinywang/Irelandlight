@@ -14,7 +14,7 @@
         last_update,
         visibility,
         consumer_id,
-        expried,
+        expired,
         ticket,
         status
     </sql>
@@ -24,7 +24,7 @@
         last_update,
         visibility,
         consumer_id,
-        expried,
+        expired,
         ticket,
         status
     </sql>
@@ -36,12 +36,12 @@
      - 插入一条记录
      - ===================================================
      -->
-    <insert id="addTicket" parameterType="com.irelandlight.model.LoginTicket"
+    <insert id="addLoginTicket" parameterType="com.irelandlight.model.LoginTicket"
             keyColumn="id" useGeneratedKeys="true">
         INSERT INTO <include refid="loginTicket_tableName"/>
-        (create_time, last_update, visibility, consumer_id, expried, ticket, status)
+        (create_time, last_update, visibility, consumer_id, expired, ticket, status)
         VALUES
-        (NOW(), NOW(), #{visibility}, #{consumerId}, #{expried}, #{ticket}, #{status})
+        (NOW(), NOW(), #{visibility}, #{consumerId}, #{expired}, #{ticket}, #{status})
     </insert>
 
     <!--
@@ -51,7 +51,7 @@
      - 查找一条记录
      - ===================================================
      -->
-    <select id="getByTicket" resultType="com.irelandlight.model.LoginTicket">
+    <select id="getByLoginTicket" resultType="com.irelandlight.model.LoginTicket">
         SELECT
         <include refid="loginTicket_selectColumn"/>
         FROM
@@ -63,9 +63,42 @@
 
     <!--
      - ===================================================
-     - 通过ticket字段
+     - 通过id字段
      - 在tb_login_ticket表中
      - 查找一条记录
+     - ===================================================
+     -->
+    <select id="getById" resultType="com.irelandlight.model.LoginTicket">
+        SELECT
+        <include refid="loginTicket_selectColumn"/>
+        FROM
+        <include refid="loginTicket_tableName"/>
+        WHERE id = #{id}
+    </select>
+
+    <!--
+     - ===================================================
+     - 通过ticket字段
+     - 在tb_login_ticket表中
+     - 修改一条记录的status字段
+     - ===================================================
+     -->
+    <select id="getByIdList" resultType="com.irelandlight.model.LoginTicket">
+        SELECT
+        <include refid="loginTicket_selectColumn"/>
+        FROM
+        <include refid="loginTicket_tableName"/>
+        WHERE id IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--
+     - ===================================================
+     - 通过ticket字段
+     - 在tb_login_ticket表中
+     - 修改一条记录的status字段
      - ===================================================
      -->
     <update id="updateStatus">
