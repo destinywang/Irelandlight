@@ -52,14 +52,13 @@ public class ContainerItemTest extends BaseJunitTest{
     }
     @Test
     public void testSaleoutAllGoods() throws Exception{
-        List<ContainerItem> containerItemList= goodsContainerService.searchForPutawayGoods();
+        //List<ContainerItem> containerItemList= goodsContainerService.searchForPutawayGoods();
         Map<Long,List<String>> idMappingSize=new HashMap<Long,List<String>>();
-        for (ContainerItem item:containerItemList){
+
             List<String> list=new ArrayList<String>();
             list.add("1");
             list.add("2");
-            idMappingSize.put(item.getGoodsId(),list);
-        }
+            idMappingSize.put(new Long(1),list);
         goodsContainerService.saleoutAllGoods(idMappingSize);
     }
 

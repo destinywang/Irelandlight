@@ -26,9 +26,9 @@ public interface OrderMapper {
     public OrderDetail selectOrderDetailById(@Param("orderId") Long orderId);
 
     public List<OrderGoodsDetail> selectOrderGoodsDetailById(@Param("orderId")Long orderId);
-    public void updateTransferBegin(@Param("orderId") Long orderId, @Param("transferBegin")Date transferBegin);
-    public void updateStatus(@Param("orderId")Long orderId,@Param("newStatus")Integer newStatus);
-    public void updateTransferEnd(@Param("orderId")Long orderId,@Param("transferEnd")Date transferEnd);
-    public void updateTransferWay(@Param("orderId")Long orderId,@Param("transferWay")Integer transferWay);
-    public void updateOrder(@Param("orderId")Long orderId, @Param("orderModify")OrderModify orderModify);
+    public int updateTransferBegin(@Param("orderId") Long orderId, @Param("transferBegin")Date transferBegin);
+    public int updateStatus(@Param("orderId")Long orderId,@Param("newStatus")Integer newStatus);
+    public int updateTransferEnd(@Param("orderId")Long orderId,@Param("transferEnd")Date transferEnd);
+    public int updateTransferWay(@Param("orderId")Long orderId,@Param("transferWay")Integer transferWay);
+    public int updateOrder(@Param("orderId")Long orderId, @Param("orderModify")OrderModify orderModify);
 }

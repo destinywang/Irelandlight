@@ -40,7 +40,13 @@ public class AdminOperatedLog{
     public void doBefore(JoinPoint jp){
         System.out.println(jp.getSignature().getName());
         ServletRequestAttributes servletRequestAttributes=(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-
+//
+//        System.out.println(servletRequestAttributes);
+//        HttpServletRequest requestTmp=servletRequestAttributes.getRequest();
+//        System.out.println(requestTmp.getRequestedSessionId());
+//        System.out.println(requestTmp.getRequestURI());
+//        System.out.println(requestTmp.getRemoteAddr());
+//        System.out.println(requestTmp.getRemoteHost()+requestTmp.getRemotePort());
         //获取请求对象
 
         //从请求对象中获取session对象

@@ -4,6 +4,13 @@
     http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1"
          metadata-complete="true">
+  <!--为了保证AOP中的RequestContextHolders创建的ServletRequestAttributes
+  对象调用能够得到正确的Request对象-->
+  <listener>
+    <listener-class>
+      org.springframework.web.context.request.RequestContextListener
+    </listener-class>
+  </listener>
   <!-- maven创建的servlet需要将版本修改为3.1 -->
   <!-- 配置DispatchServlet -->
   <servlet>
@@ -23,5 +30,4 @@
     <!-- 默认匹配所有的请求 -->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
 </web-app>

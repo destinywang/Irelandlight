@@ -79,57 +79,35 @@
     <select id="selectGoodsByName" resultMap="tbMapToGoodsPO">
         <![CDATA[
 
-
-
-
-
                 SELECT *
                 FROM tb_goods
                 WHERE visibility=0 AND tb_goods.name=#{name}
                 ORDER BY create_time
 
-
-
-
-
         ]]>
+    </select>
+
+    <select id="selectGoodsById" resultMap="tbMapToGoodsPO">
+        SELECT * FROM tb_goods where id=#{goodsId}
     </select>
 
     <select id="selectUnPutawayGoods" resultMap="tbMapToGoodsPO">
       <![CDATA[
-
-
-
-
 
                 SELECT *
                 FROM tb_goods
                 WHERE visibility=0 AND tb_goods.is_putaway=0
                 ORDER BY create_time
 
-
-
-
-
         ]]>
     </select>
 
     <select id="selectPutawayGoods" resultMap="tbMapToGoodsPO">
       <![CDATA[
-
-
-
-
-
                 SELECT *
                 FROM tb_goods
                 WHERE  visibility=0 AND tb_goods.is_putaway=1
                 ORDER BY create_time
-
-
-
-
-
         ]]>
     </select>
 

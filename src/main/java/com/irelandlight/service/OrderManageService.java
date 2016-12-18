@@ -43,7 +43,8 @@ public class OrderManageService {
     //设置该操作为只读操作，总是以非事务的方式运行，并且会挂起任何已经存在的事务
     @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     public OrderDetail queryOrderDetaiByOrderId(Long orderId){
-        return queryOrderDetaiByOrderId(orderId);
+
+        return orderMapper.selectOrderDetailById(orderId);
     }
 
     //设置该操作为只读操作，总是以非事务的方式运行，并且会挂起任何已经存在的事务

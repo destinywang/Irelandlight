@@ -19,7 +19,22 @@
         (2)默认提供一系列功能：数据绑定、数字和日期的format @NumberFormat,@DataTimeFormat
             xml和json默认读写支持
     -->
-    <mvc:annotation-driven conversion-service="conversionService"/>
+    <mvc:annotation-driven conversion-service="conversionService">
+        <!-- 处理responseBody 里面日期类型 -->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- 2.servlet-mapping 映射路径："/" -->
     <!-- 静态资源默认servlet配置
@@ -61,8 +76,6 @@
             </set>
         </property>
     </bean>
-
-    <bean class="com.irelandlight.manager.ContextExceptionResolver"></bean>
     <bean class="com.irelandlight.util.ImgeUploadUtil"></bean>
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver ">
         <property name="maxUploadSize">

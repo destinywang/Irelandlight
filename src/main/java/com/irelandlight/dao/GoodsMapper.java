@@ -22,6 +22,8 @@ public interface GoodsMapper {
     Integer selectSoldOutGoodsCount();
     //按照商品名称查找商品
     List<Goods> selectGoodsByName(@Param("name") String name);
+    //按照商品Id查找商品
+    Goods selectGoodsById(@Param("goodsId") Long goodsId);
     //查询未上架商品
     List<Goods> selectUnPutawayGoods();
     //查询已上架商品
