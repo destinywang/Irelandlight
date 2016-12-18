@@ -38,10 +38,22 @@
     </bean>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/vm/"/>
-        <property name="suffix" value=".vm"/>
+        <property name="prefix" value="/WEB-INF/jsp"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="com.irelandlight.controller"/>
+
+    <!-- 5.文件上传所需部件 -->
+    <bean class="com.irelandlight.util.ImgeUploadUtil"></bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver ">
+        <property name="maxUploadSize">
+            <!--设置上传文件的最大尺寸为5MB-->
+            <value>5242880</value>
+        </property>
+    </bean>
+
+
+
 </beans>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irelandlight.dao.InterMsgDaoFront">
+
+    <!-- 前台逻辑 -->
+    <select id="getMsgHistory" parameterType="Long" resultType="com.irelandlight.vo.MessageCustom">
+        SELECT content,from_id,to_id,type
+        FROM tb_message
+        WHERE from_id = #{consumer_id} OR to_id = #{consumer_id}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="getNewDeliver" parameterType="Long" resultType="com.irelandlight.vo.OrderCustom">
+        SELECT status,order_number FROM tb_order WHERE id=(
+        SELECT max(id)
+        FROM tb_order
+        WHERE consumer_id=#{consumer_id}
+        )
+    </select>
+
+    <select id="getLastestNews" resultType="String">
+        SELECT content FROM tb_news WHERE id=(
+        SELECT max(id)
+        FROM tb_news
+        )
+    </select>
+
+    <select id="getOneMsg" parameterType="Long" resultType="String">
+        SELECT content FROM tb_message WHERE id=(
+        SELECT max(id)
+        FROM tb_message
+        WHERE from_id=#{consumer_id} OR to_id=#{consumer_id}
+        )
+    </select>
+
+    <insert id="insertMsg" parameterType="com.irelandlight.vo.MessageCustom">
+        INSERT INTO tb_message (create_time, last_update, visibility, from_id, to_id, content, type)
+        VALUES (now(), now(), 0, #{fromId}, #{toId}, #{content}, #{type});
+    </insert>
+
+    <!-- 前台单人客服页面 -->
+    <!-- 获取管理员名字 -->
+    <select id="getProductorName" parameterType="Long" resultType="String">
+        SELECT user_name FROM tb_productor WHERE id = #{productor_id}
+    </select>
+
+    <!-- 获取用户头像url -->
+    <select id="getUserHeadUrl" parameterType="Long" resultType="String">
+        SELECT head_img_url FROM tb_consumer WHERE id = #{consumer_id}
+    </select>
+
+</mapper>

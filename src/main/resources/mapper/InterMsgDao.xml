@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irelandlight.dao.InterMsgDao">
+
+    <!-- 前台逻辑 -->
+    <select id="getMsgHistory" parameterType="Long" resultType="com.irelandlight.vo.MessageCustom">
+        SELECT content,from_id,to_id,type
+        FROM tb_message
+        WHERE from_id = #{consumer_id} OR to_id = #{consumer_id}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="getNewDeliver" parameterType="Long" resultType="com.irelandlight.vo.OrderCustom">
+        SELECT status,order_number FROM tb_order WHERE id=(
+        SELECT max(id)
+        FROM tb_order
+        WHERE consumer_id=#{consumer_id}
+        )
+    </select>
+
+    <select id="getLastestNews" resultType="String">
+        SELECT content FROM tb_news WHERE id=(
+        SELECT max(id)
+        FROM tb_news
+        )
+    </select>
+
+    <select id="getOneMsg" parameterType="Long" resultType="String">
+        SELECT content FROM tb_message WHERE id=(
+        SELECT max(id)
+        FROM tb_message
+        WHERE from_id=#{consumer_id} OR to_id=#{consumer_id}
+        )
+    </select>
+
+    <insert id="insertMsg" parameterType="com.irelandlight.vo.MessageCustom" ><!--resultType="int"-->
+        INSERT INTO tb_message (create_time, last_update, visibility, from_id, to_id, content, type)
+        VALUES (now(), now(), 0, #{fromId}, #{toId}, #{content}, #{type});
+    </insert>
+
+    <!-- 前台单人客服页面 -->
+    <!-- 获取管理员名字 -->
+    <select id="getProductorName" parameterType="Long" resultType="String">
+        SELECT user_name FROM tb_productor WHERE id = #{productor_id}
+    </select>
+
+    <!-- 获取用户头像url -->
+    <select id="getUserHeadUrl" parameterType="Long" resultType="String">
+        SELECT head_img_url FROM tb_consumer WHERE id = #{consumer_id}
+    </select>
+
+    <!-- 后台逻辑 -->
+    <!-- 首页管理 -->
+    <!-- 获取用户id,头像,昵称 -->
+    <select id="getConsumerList" parameterType="Long" resultType="com.irelandlight.vo.ConsumerCustomRecently">
+        SELECT id,head_img_url,nick_name
+        FROM tb_consumer
+        WHERE id IN (
+          SELECT from_id
+          FROM tb_message
+          WHERE to_id=#{productor_id}
+          ORDER BY create_time DESC
+        ) OR tb_consumer.id IN (
+          SELECT to_id
+          FROM tb_message
+          WHERE from_id=#{productor_id}
+          ORDER BY create_time DESC
+        )
+    </select>
+
+    <!-- 获取最近用户对应的最新一条消息 -->
+    <select id="getConsumerContent" parameterType="Long" resultType="String">
+        SELECT content,type
+        FROM tb_message
+        WHERE id = (
+          SELECT max(id)
+          FROM tb_message
+          WHERE to_id=#{consumer_id} OR from_id=#{consumer_id}
+        )
+    </select>
+
+    <!-- 获取最近群发消息 -->
+    <select id="getNewsRecently" resultType="com.irelandlight.vo.NewsHistory">
+        SELECT content,create_time AS time
+        FROM tb_message
+        WHERE type = 3 OR type = 4
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 获取管理员信息 -->
+    <select id="getProductorInfo" parameterType="Long" resultType="com.irelandlight.vo.ProductorCustom">
+        SELECT id AS administratorID,user_name AS administratorName
+        FROM tb_productor
+        WHERE id = #{productor_id}
+    </select>
+
+    <!-- 群发消息 -->
+    <insert id="sendAllMessage" parameterType="com.irelandlight.vo.SendAllMessage">
+        INSERT INTO tb_message(to_id,from_id,content,type)
+        VALUE
+        <foreach collection="idList" item="toId" separator=",">
+            (#{toId},#{fromId},#{content},#{type})
+        </foreach>
+    </insert>
+    
+    <!-- 单人客服页面 -->
+    <!-- 获取用户信息 -->
+    <select id="getUserInfo" parameterType="long" resultType="com.irelandlight.vo.ConsumerCustomSingle">
+        SELECT user_name,id AS userID,head_img_url AS userHeader,telephone AS userPhone,nick_name AS userNickname
+        FROM tb_consumer
+        WHERE id=#{consumer_id}
+    </select>
+
+    <!-- 获取用户所有订单 -->
+    <select id="getPurchaseHistory" parameterType="Long" resultType="com.irelandlight.vo.PurchaseHistory">
+        SELECT
+        tb_order.create_time AS buyDate,
+        tb_goods.`name` AS buyGoods
+        FROM tb_order
+          LEFT JOIN tb_order_goods_relation ON tb_order.id = tb_order_goods_relation.order_id
+          LEFT JOIN tb_goods ON tb_goods.id = tb_order_goods_relation.goods_id
+        WHERE consumer_id=#{consumer_id}
+        ORDER BY tb_order.create_time DESC
+    </select>
+
+
+
+
+
+    <!-- 测试:使用用户id查出每个用户的最新一句话,存到集合里 -->
+    <select id="getLastMsgTest" parameterType="java.util.List" resultType="String">
+
+        <foreach collection="list" item="consumer_id" >
+            SELECT content FROM tb_message WHERE to_id = #{consumer_id}
+            UNION
+            SELECT content FROM tb_message WHERE from_id = #{consumer_id}
+            ORDER BY create_time DESC
+            LIMIT 0,1
+        </foreach>
+        ORDER BY create_time DESC
+    </select>
+</mapper>
