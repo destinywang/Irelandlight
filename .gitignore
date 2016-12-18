@@ -4,8 +4,12 @@
 *.jar
 *.war
 *.ear
+
 # kdiff3 ignore
 *.orig
+
+# temporary files
+*~
 
 # maven ignore
 /target
@@ -42,6 +46,8 @@ Thumbs.db
 # *.zip
 # *.tar
 # *.tar.gz
+
+# database connector
 jdbc.properties
 
 # other

@@ -10,25 +10,25 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd  ">
     <!-- 配置SpringMVC -->
-    <!-- 1.开启SpringMVC注解模式 -->
+    <!-- 1. 开启SpringMVC注解模式 -->
     <!-- 简化配置
-        (1)自动注册DefaultAnnotationHandlerMapping,AnnotationMethonHandlerAdapter
-        (2)默认提供一系列功能：数据绑定、数字和日期的format @NumberFormat,@DataTimeFormat
+        (1) 自动注册DefaultAnnotationHandlerMapping,AnnotationMethonHandlerAdapter
+        (2) 默认提供一系列功能：数据绑定、数字和日期的format @NumberFormat,@DataTimeFormat
             xml和json默认读写支持
     -->
     <mvc:annotation-driven/>
 
-    <!-- 2.servlet-mapping 映射路径："/" -->
+    <!-- 2. servlet-mapping 映射路径："/" -->
     <!-- 静态资源默认servlet配置
-        (1)加入对静态资源的处理
-        (2)允许使用"/"做整体映射
+        (1) 加入对静态资源的处理
+        (2) 允许使用"/"做整体映射
     -->
     <mvc:default-servlet-handler/>
 
-    <!-- 3.JSP的显示ViewResolver -->
+    <!-- 3. JSP的显示ViewResolver -->
     <bean id="velocityConfigurer"
           class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="/WEB-INF/templates" />
+        <property name="resourceLoaderPath" value="/WEB-INF/templates"/>
         <property name="velocityProperties">
             <props>
                 <prop key="input.encoding">utf-8</prop>
@@ -42,6 +42,13 @@
         <property name="suffix" value=".vm"/>
     </bean>
 
-    <!-- 4.扫描web相关的bean -->
+    <!-- 4. 扫描web相关的bean -->
     <context:component-scan base-package="com.irelandlight.controller"/>
+
+    <!-- 5. 注册拦截器 -->
+    <mvc:interceptors>
+        <bean class="com.irelandlight.interceptor.LoginRequiredInterceptor"/>
+        <bean class="com.irelandlight.interceptor.PassportInterceptor"/>
+        <bean class="com.irelandlight.interceptor.ExampleInterceptor"/>
+    </mvc:interceptors>
 </beans>
