@@ -14,7 +14,8 @@ import java.util.List;
  */
 @Service
 public class GoodsListService {
-    @Autowired
+
+    @Resource
     private GoodsListDao goodsListDao;
 
     public List<GoodsVO> queryAllGoods() {

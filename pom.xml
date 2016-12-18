@@ -131,15 +131,15 @@
             <artifactId>spring-webmvc</artifactId>
             <version>4.1.7.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>4.1.7.RELEASE</version>
-        </dependency>
         <!-- 4.Spring test依赖 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <version>4.1.7.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
             <version>4.1.7.RELEASE</version>
         </dependency>
         <!-- redis客户端：Jedis -->
@@ -156,6 +156,7 @@
             <artifactId>velocity</artifactId>
             <version>1.7</version>
         </dependency>
+
 
         <dependency>
             <groupId>com.dyuproject.protostuff</groupId>
