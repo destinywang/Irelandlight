@@ -20,7 +20,7 @@
 .classpath
 
 # idea ignore
- .idea/
+.idea/
 *.ipr
 *.iml
 *.iws
@@ -51,4 +51,4 @@ Thumbs.db
 jdbc.properties
 
 # other
-# README.md
+README.md
