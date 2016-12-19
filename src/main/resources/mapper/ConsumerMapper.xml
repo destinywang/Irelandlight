@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irelandlight.dao.ConsumerDao">
+
+    <sql id="consumer_tableName">
+        tb_consumer
+    </sql>
+
+    <sql id="consumer_selectField">
+        id,
+        create_time,
+        last_update,
+        visibility,
+        user_name,
+        password,
+        salt,
+        nick_name,
+        head_img_url,
+        score,
+        wallet,
+        gender,
+        email,
+        telephone,
+        birthday,
+        default_address_id
+    </sql>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.irelandlight.model.Consumer">
+        SELECT
+        <include refid="consumer_selectField"/>
+        FROM
+        <include refid="consumer_tableName"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="getByUserName" parameterType="java.lang.String" resultType="com.irelandlight.model.Consumer">
+        SELECT
+        <include refid="consumer_selectField"/>
+        FROM
+        <include refid="consumer_tableName"/>
+        WHERE user_name = #{userName}
+        ORDER BY create_time
+        LIMIT 0, 1
+    </select>
+
+    <select id="getByIdList" parameterType="list" resultType="com.irelandlight.model.Consumer">
+        SELECT
+        <include refid="consumer_selectField"/>
+        FROM
+        <include refid="consumer_tableName"/>
+        WHERE id IN 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getByNickName" parameterType="string" resultType="com.irelandlight.model.Consumer">
+        SELECT
+        <include refid="consumer_selectField"/>
+        FROM
+        <include refid="consumer_tableName"/>
+        WHERE nick_name LIKE concat(concat('%', #{nickName}, '%'))
+    </select>
+</mapper>

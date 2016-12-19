@@ -3,7 +3,11 @@ package com.irelandlight.model;
 import java.util.Date;
 
 /**
- * Created by mac on 2016/12/3.
+ * Created  with Intellij IDEA.
+ * User: Ele_Chen
+ * Date: 2016/12/3
+ * Time: 16:48
+ * Description: 登录凭证表 .
  */
 public class LoginTicket {
     private Long id;                //
@@ -11,7 +15,6 @@ public class LoginTicket {
     private Date lastUpdate;        //最近一次更新时间
     private Integer visibility;     //是否逻辑删除
     private Long consumerId;        //消费者表主键做逻辑外键，与productor_id互斥
-    private Long productorId;       //管理者表主键做逻辑外键，与consumer_id互斥
     private Date expired;           //过期时间
     private String ticket;          //用户登录凭据
     private Integer status;         //ticket状态
@@ -56,14 +59,6 @@ public class LoginTicket {
         this.consumerId = consumerId;
     }
 
-    public Long getProductorId() {
-        return productorId;
-    }
-
-    public void setProductorId(Long productorId) {
-        this.productorId = productorId;
-    }
-
     public Date getExpired() {
         return expired;
     }
@@ -86,5 +81,19 @@ public class LoginTicket {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginTicket{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", consumerId=" + consumerId +
+                ", expired=" + expired +
+                ", ticket='" + ticket + '\'' +
+                ", status=" + status +
+                '}';
     }
 }

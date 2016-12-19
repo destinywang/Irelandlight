@@ -1,6 +1,7 @@
 package com.irelandlight.service;
 
 import com.irelandlight.dao.GoodsListDao;
+import com.irelandlight.manager.GoodsListManager;
 import com.irelandlight.model.vo.FilterGoodsVO;
 import com.irelandlight.model.vo.GoodsVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Zichu on 2016/12/8.
@@ -16,17 +18,17 @@ import java.util.List;
 public class GoodsListService {
 
     @Resource
-    private GoodsListDao goodsListDao;
+    private GoodsListManager goodsListManager;
 
-    public List<GoodsVO> queryAllGoods() {
-        return goodsListDao.queryAllGoods();
+    public Map<String,Object> queryAllGoods() {
+        return goodsListManager.queryAllGoods();
     }
 
-    public List<GoodsVO> queryBySearchGoods(String searchBox) {
-        return goodsListDao.queryBySearchGoods(searchBox);
+    public Map<String,Object> queryBySearchGoods(String searchBox) {
+        return goodsListManager.queryBySearchGoods(searchBox);
     }
 
-    public List<GoodsVO> queryFilterGoods(FilterGoodsVO filter) {
-        return goodsListDao.queryFilterGoods(filter);
+    public Map<String,Object> queryFilterGoods(FilterGoodsVO filter) {
+        return goodsListManager.queryFilterGoods(filter);
     }
 }
