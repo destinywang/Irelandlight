@@ -10,3 +10,4 @@
     2. 将Interceptor注册进controller链路
     3. 在SpringMVC配置文件中设置拦截规则
 * 暂时还不知道WebMvcConfigurerAdapter能否对普通的Spring项目进行注册
+* 暂时无法解决向github提交代码时没有contribution的问题
