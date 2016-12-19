@@ -1,10 +1,7 @@
 package com.irelandlight.dao;
 
 import com.irelandlight.model.GoodsImage;
-import com.irelandlight.model.vo.CommentFrom;
-import com.irelandlight.model.vo.CommentGoods;
-import com.irelandlight.model.vo.GoodsInfo;
-import com.irelandlight.model.vo.SizePrice;
+import com.irelandlight.model.vo.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -44,6 +41,7 @@ public class GoodsDetailDaoTest {
             System.out.println(sizePrice);
         }
     }
+
     @Test
     public void testQueryCommentGoods(){
         List<CommentGoods> commentGoodses=goodsDetailDao.queryCommentGoods(1);
@@ -52,10 +50,10 @@ public class GoodsDetailDaoTest {
         }
     }
     @Test
-    public void testQueryCommentComment(){
-        List<CommentFrom> commentFroms=goodsDetailDao.queryCommentComment(1);
-        for(CommentFrom commentFrom:commentFroms){
-            System.out.println(commentFrom);
+    public void testQueryComments(){
+        List<ReplyVO> replyVOs =goodsDetailDao.queryComments(1);
+        for(ReplyVO replyVO : replyVOs){
+            System.out.println(replyVO);
         }
     }
 

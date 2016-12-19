@@ -15,7 +15,6 @@ import java.util.List;
  */
 @Service
 public class HomePageService {
-
     @Resource
     private HomePageDao homePageDao;
 

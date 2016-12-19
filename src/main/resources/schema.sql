@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50713
 File Encoding         : 65001
 
-Date: 2016-12-09 08:02:12
+Date: 2016-12-10 15:08:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -60,9 +60,7 @@ CREATE TABLE `tb_comment` (
   `visibility` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '逻辑删除',
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '评论内容',
   `consumer_id` int(11) unsigned DEFAULT NULL COMMENT '消费者表主键做逻辑外键，与productor_id互斥',
-  `productor_id` int(11) unsigned DEFAULT NULL COMMENT '管理者表主键做逻辑外键，与consumer_id互斥',
   `goods_id` int(11) unsigned NOT NULL COMMENT '商品表主键做逻辑外键',
-  `commented_id` int(11) unsigned DEFAULT NULL COMMENT '评论表主键做逻辑外键，用于存储子环一对多关系',
   PRIMARY KEY (`id`),
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_last_update` (`last_update`) USING BTREE,
@@ -72,10 +70,9 @@ CREATE TABLE `tb_comment` (
 -- ----------------------------
 -- Records of tb_comment
 -- ----------------------------
-INSERT INTO `tb_comment` VALUES ('1', '2016-12-03 13:24:00', '2016-12-03 14:22:39', '0', '好吃好吃好吃好吃', '1001', null, '1', null);
-INSERT INTO `tb_comment` VALUES ('2', '2016-12-03 13:24:33', '2016-12-03 14:22:39', '0', '真的很好吃', null, '2', '1', '1');
-INSERT INTO `tb_comment` VALUES ('3', '2016-12-03 13:25:18', '2016-12-03 14:22:40', '0', '我也觉得好吃', '1002', null, '1', '2');
-INSERT INTO `tb_comment` VALUES ('4', '2016-12-03 13:27:16', '2016-12-03 14:22:42', '0', '这个好吃不', '1003', null, '2', null);
+INSERT INTO `tb_comment` VALUES ('1', '2016-12-03 13:24:00', '2016-12-03 14:22:39', '0', '好吃好吃好吃好吃','1001','1');
+INSERT INTO `tb_comment` VALUES ('2', '2016-12-03 13:27:16', '2016-12-03 14:22:42', '0', '这个好吃不','1003','2');
+INSERT INTO `tb_comment` VALUES ('3', '2016-12-03 14:32:23','2016-12-03 14:32:34', '0', '真的好棒啊','1003','1');
 
 -- ----------------------------
 -- Table structure for tb_consumer
@@ -183,9 +180,8 @@ CREATE TABLE `tb_goods` (
   `quantity` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '库存',
   `sale_count` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '销售量',
   `weight` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '蛋糕权重',
-  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '订单商品状态',
+  `min_price` DECIMAL (10,2) NOT NULL COMMENT '最小价格',
   PRIMARY KEY (`id`),
-  `min_price` decimal(11,2)  NOT NULL
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_last_update` (`last_update`) USING BTREE,
   KEY `idx_name` (`name`) USING BTREE
@@ -194,8 +190,8 @@ CREATE TABLE `tb_goods` (
 -- ----------------------------
 -- Records of tb_goods
 -- ----------------------------
-INSERT INTO `tb_goods` VALUES ('1', '2016-12-02 23:00:53', '2016-12-03 15:19:25', '0', '0', '脆皮朱古力蛋糕', '香甜可口的脆皮朱古力蛋糕', '脆皮', '吃', '香甜', '10', '13', '20', '','48.00');
-INSERT INTO `tb_goods` VALUES ('2', '2016-12-03 00:20:42', '2016-12-03 16:32:38', '0', '0', '奶油蛋糕', '奶油', '奶油', '吃', '奶油', '10', '33', '20', '','30.00');
+INSERT INTO `tb_goods` VALUES ('1', '2016-12-02 23:00:53', '2016-12-03 15:19:25', '0', '0', '脆皮朱古力蛋糕', '香甜可口的脆皮朱古力蛋糕', '脆皮', '吃', '香甜', '10', '13', '20', '48');
+INSERT INTO `tb_goods` VALUES ('2', '2016-12-03 00:20:42', '2016-12-03 16:32:38', '0', '0', '奶油蛋糕', '奶油', '奶油', '吃', '奶油', '10', '33', '20', '30');
 
 -- ----------------------------
 -- Table structure for tb_goods_image
@@ -410,14 +406,20 @@ CREATE TABLE `tb_order` (
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_last_update` (`last_update`) USING BTREE,
   KEY `idx_consumer_id` (`consumer_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_order
 -- ----------------------------
 INSERT INTO `tb_order` VALUES ('1', '2016-12-02 23:33:03', '2016-12-06 18:25:32', '0', 'cx04141057', '1002', '2', '1', '1', '明天中午', '生日帽', '1', '3', '170.99', '2016-12-02 23:33:03', '2016-12-02 23:33:03', '1', '来之前打电话,餐具要带齐全');
-INSERT INTO `tb_order` VALUES ('2', '2016-12-03 14:43:45', '2016-12-08 20:48:06', '0', 'cx04141058', '1002', '4', '1', '2', '今天下午', '生日牌,气球', '4', '1', '123.23', '2016-12-03 14:43:45', '2016-12-03 14:43:45', '0', '我没有留言');
+INSERT INTO `tb_order` VALUES ('2', '2016-12-03 14:43:45', '2016-12-10 09:27:14', '0', 'cx04141058', '1002', '4', '1', '2', '今天下午', '生日牌,气球', '4', '1', '123.23', '2016-12-03 14:43:45', '2016-12-03 14:43:45', '1', '我没有留言');
 INSERT INTO `tb_order` VALUES ('3', '2016-12-03 14:53:11', '2016-12-06 18:25:40', '0', 'cx04141059', '1003', '1', '2', '1', '明天中午', '生日帽', '1', '0', '170.99', '2016-12-03 14:53:11', '2016-12-03 14:53:11', '2', '我要快快收到蛋糕');
+INSERT INTO `tb_order` VALUES ('4', '2016-12-09 10:25:27', '2016-12-09 10:25:27', '0', 'cx04141060', '1003', '3', '1', '1', '2016-12-09 10:25:27', '生日帽', '4', '3', '138.00', '2016-12-09 10:25:27', '2016-12-09 10:25:27', '0', '快点送来');
+INSERT INTO `tb_order` VALUES ('5', '2016-12-10 09:51:05', '2016-12-10 09:51:05', '0', 'cx04141061', '1002', '2', '1', '1', '今天下午两点', '小礼物', '4', '2', '123.38', '2016-12-10 09:51:05', '2016-12-10 09:51:05', '0', '生日快乐');
+INSERT INTO `tb_order` VALUES ('6', '2016-12-10 09:53:42', '2016-12-10 09:53:42', '0', 'cx04141061', '1002', '2', '1', '1', '今天下午两点', '小礼物', '4', '2', '123.38', '2016-12-10 09:53:42', '2016-12-10 09:53:42', '0', '生日快乐');
+INSERT INTO `tb_order` VALUES ('7', '2016-12-10 09:54:16', '2016-12-10 09:54:16', '0', 'cx04141061', '1002', '2', '1', '1', '今天下午两点', '小礼物', '4', '2', '123.38', '2016-12-10 09:54:16', '2016-12-10 09:54:16', '0', '生日快乐');
+INSERT INTO `tb_order` VALUES ('8', '2016-12-10 11:09:21', '2016-12-10 11:09:21', '0', 'cx04141061', '1002', '2', '1', '1', '今天下午两点', '小礼物', '4', '2', '123.38', '2016-12-10 11:09:21', '2016-12-10 11:09:21', '0', '生日快乐');
+INSERT INTO `tb_order` VALUES ('9', '2016-12-10 11:24:08', '2016-12-10 11:24:08', '0', 'cx04141061', '1002', '2', '1', '1', '今天下午两点', '小礼物', '4', '2', '123.38', '2016-12-10 11:24:08', '2016-12-10 11:24:08', '0', '生日快乐');
 
 -- ----------------------------
 -- Table structure for tb_order_goods_relation
@@ -432,11 +434,11 @@ CREATE TABLE `tb_order_goods_relation` (
   `goods_id` int(11) unsigned NOT NULL COMMENT '商品表主键做逻辑外键',
   `size` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `count` int(11) NOT NULL,
-  `status` tinyint(4) unsigned NOT NULL,
+  `status` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_order_id` (`order_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_order_goods_relation
@@ -446,6 +448,9 @@ INSERT INTO `tb_order_goods_relation` VALUES ('2', '2016-12-03 14:39:51', '2016-
 INSERT INTO `tb_order_goods_relation` VALUES ('3', '2016-12-03 14:40:20', '2016-12-03 14:40:20', '0', '2', '1', '3', '1', '0');
 INSERT INTO `tb_order_goods_relation` VALUES ('4', '2016-12-03 14:55:13', '2016-12-03 14:55:13', '0', '3', '1', '5', '1', '0');
 INSERT INTO `tb_order_goods_relation` VALUES ('5', '2016-12-03 14:55:27', '2016-12-03 14:55:27', '0', '3', '2', '3', '2', '0');
+INSERT INTO `tb_order_goods_relation` VALUES ('12', '2016-12-10 12:00:29', '2016-12-10 12:00:29', '0', '2', '1', '2', '4', '0');
+INSERT INTO `tb_order_goods_relation` VALUES ('13', '2016-12-10 12:00:29', '2016-12-10 12:00:29', '0', '2', '2', '2', '6', '0');
+INSERT INTO `tb_order_goods_relation` VALUES ('14', '2016-12-10 12:04:15', '2016-12-10 12:04:15', '0', '7', '2', '3', '2', '0');
 
 -- ----------------------------
 -- Table structure for tb_productor
@@ -467,7 +472,7 @@ CREATE TABLE `tb_productor` (
 -- ----------------------------
 INSERT INTO `tb_productor` VALUES ('1', '2016-12-03 13:47:06', '2016-12-03 14:35:35', '0', 'admin', '123456', '23435');
 INSERT INTO `tb_productor` VALUES ('2', '2016-12-03 13:47:51', '2016-12-03 14:35:37', '0', 'boss', '123456', '23454');
-INSERT INTO `tb_productor` VALUES ('3', '2016-12-03 13:49:03', '2016-12-03 13:49:03', '0', 'boss_wife', '123456', '23135');
+INSERT INTO `tb_productor` VALUES ('3', '2016-12-03 13:49:03', '2016-12-03 13:49:03', '0', 'boss_swife', '123456', '23135');
 
 -- ----------------------------
 -- Table structure for tb_productor_log
@@ -492,6 +497,31 @@ INSERT INTO `tb_productor_log` VALUES ('2', '2016-12-03 14:34:54', '2016-12-03 1
 INSERT INTO `tb_productor_log` VALUES ('3', '2016-12-03 22:58:23', '2016-12-03 22:58:23', '0', '1', '修改权重');
 
 -- ----------------------------
+-- Table structure for tb_reply
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_reply`;
+CREATE TABLE `tb_reply` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `visibility` tinyint(4) NOT NULL,
+  `source_id` int(11) unsigned NOT NULL COMMENT '回复表保存对于评论的回复',
+  `reply` varchar(255) NOT NULL DEFAULT '',
+  `from_id` int(11) unsigned NOT NULL,
+  `to_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_reply
+-- ----------------------------
+INSERT INTO `tb_reply` VALUES('1','2014-12-2 12:20:23','2014-12-3 12:11:23','0','1','哦？是吗？那真棒','1002','1001');
+INSERT INTO `tb_reply` VALUES('2','2014-12-22 10:00:23','2014-12-3 12:11:43','0','1','那你可当','1001','1002');
+INSERT INTO `tb_reply` VALUES('3','2014-12-12 11:20:03','2014-12-13 2:13:35','0','1','哈哈哈，嘎嘎嘎','1003','1001');
+INSERT INTO `tb_reply` VALUES('4','2016-12-3 13:27:16','2016-12-3 14:22:42','0','2','还行吧','1002','1003');
+INSERT INTO `tb_reply` VALUES('5','2016-12-3 13:27:16','2016-12-3 14:22:42','0','5','哈哈哈哈','1001','1003');
+INSERT INTO `tb_reply` VALUES('6','2016-12-3 13:27:16','2016-12-3 14:22:42','0','5','谢谢亲','1','1003');
+-- ----------------------------
 -- Table structure for tb_shop_car
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_shop_car`;
@@ -503,7 +533,7 @@ CREATE TABLE `tb_shop_car` (
   `consumer_id` int(11) unsigned NOT NULL COMMENT '消费者表主键',
   PRIMARY KEY (`id`),
   KEY `idx_consumer_id` (`consumer_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_shop_car
@@ -515,9 +545,11 @@ INSERT INTO `tb_shop_car` VALUES ('4', '2016-12-03 00:14:14', '2016-12-04 19:47:
 INSERT INTO `tb_shop_car` VALUES ('5', '2016-12-03 21:16:16', '2016-12-04 19:47:35', '0', '1005');
 INSERT INTO `tb_shop_car` VALUES ('6', '2016-12-04 23:20:17', '2016-12-05 00:25:04', '1', '1006');
 INSERT INTO `tb_shop_car` VALUES ('7', '2016-12-04 23:23:13', '2016-12-04 23:28:23', '1', '1007');
-INSERT INTO `tb_shop_car` VALUES ('8', '2016-12-06 02:17:27', '2016-12-06 02:17:27', '0', '1001');
-INSERT INTO `tb_shop_car` VALUES ('9', '2016-12-06 10:14:31', '2016-12-06 10:14:31', '0', '1008');
-INSERT INTO `tb_shop_car` VALUES ('10', '2016-12-06 17:39:29', '2016-12-06 17:39:29', '1', '1007');
+INSERT INTO `tb_shop_car` VALUES ('21', '2016-12-10 11:12:32', '2016-12-10 11:12:32', '0', '1010');
+INSERT INTO `tb_shop_car` VALUES ('22', '2016-12-10 11:13:09', '2016-12-10 11:13:09', '0', '1010');
+INSERT INTO `tb_shop_car` VALUES ('23', '2016-12-10 11:14:15', '2016-12-10 11:14:15', '0', '1010');
+INSERT INTO `tb_shop_car` VALUES ('24', '2016-12-10 11:15:21', '2016-12-10 11:15:21', '0', '1010');
+INSERT INTO `tb_shop_car` VALUES ('25', '2016-12-10 11:15:48', '2016-12-10 11:15:48', '0', '1010');
 
 -- ----------------------------
 -- Table structure for tb_shop_car_goods_relation
@@ -532,10 +564,10 @@ CREATE TABLE `tb_shop_car_goods_relation` (
   `goods_id` int(11) unsigned NOT NULL COMMENT '商品表主键做逻辑外键',
   `size` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `count` int(11) unsigned NOT NULL COMMENT '每周商品的数量',
-  `status` tinyint(4) unsigned NOT NULL,
+  `status` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_shop_car_id` (`shop_car_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_shop_car_goods_relation
@@ -545,9 +577,10 @@ INSERT INTO `tb_shop_car_goods_relation` VALUES ('2', '2016-12-03 00:19:34', '20
 INSERT INTO `tb_shop_car_goods_relation` VALUES ('3', '2016-12-03 00:30:29', '2016-12-08 12:25:58', '0', '1', '1', '3', '1', '0');
 INSERT INTO `tb_shop_car_goods_relation` VALUES ('4', '2016-12-03 00:30:44', '2016-12-08 11:07:08', '0', '2', '2', '1', '2', '0');
 INSERT INTO `tb_shop_car_goods_relation` VALUES ('5', '2016-12-03 00:31:37', '2016-12-08 11:07:11', '0', '3', '2', '3', '2', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('6', '2016-12-05 00:54:42', '2016-12-08 11:07:12', '1', '5', '2', '3', '3', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('7', '2016-12-05 01:15:09', '2016-12-08 11:07:14', '1', '5', '1', '4', '3', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('8', '2016-12-06 17:39:30', '2016-12-08 11:08:47', '1', '5', '2', '4', '3', '0');
+INSERT INTO `tb_shop_car_goods_relation` VALUES ('6', '2016-12-05 00:54:42', '2016-12-09 22:25:17', '0', '5', '2', '3', '20', '0');
+INSERT INTO `tb_shop_car_goods_relation` VALUES ('7', '2016-12-05 01:15:09', '2016-12-09 22:24:57', '0', '5', '1', '4', '3', '0');
+INSERT INTO `tb_shop_car_goods_relation` VALUES ('8', '2016-12-06 17:39:30', '2016-12-09 22:26:11', '0', '5', '2', '4', '13', '0');
 INSERT INTO `tb_shop_car_goods_relation` VALUES ('9', '2016-12-08 12:24:34', '2016-12-08 12:24:34', '0', '1', '1', '2', '1', '0');
 INSERT INTO `tb_shop_car_goods_relation` VALUES ('10', '2016-12-08 12:44:11', '2016-12-08 12:44:11', '0', '1', '2', '1', '1', '0');
+INSERT INTO `tb_shop_car_goods_relation` VALUES ('11', '2016-12-09 22:28:23', '2016-12-09 22:28:23', '0', '1', '2', '4', '10', '0');
 SET FOREIGN_KEY_CHECKS=1;
