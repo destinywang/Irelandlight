@@ -42,6 +42,7 @@
         FROM tb_goods
         WHERE tb_goods.id=#{id}
              AND tb_goods.visibility=0
+             AND tb_goods.is_putaway=0
     </select>
     <!--查询该商品的价格尺寸表-->
     <select id="querySizePrice" parameterType="int" resultMap="goodsSizePrice">
