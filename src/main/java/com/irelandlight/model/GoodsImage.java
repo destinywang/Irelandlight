@@ -3,18 +3,13 @@ package com.irelandlight.model;
 import java.util.Date;
 
 /**
- * Created  with Intellij IDEA.
- * User: Ele_Chen
- * Date: 2016/12/3
- * Time: 11:12
- * Description: 商品图片表 .
+ * Created by mac on 2016/12/3.
  */
 public class GoodsImage {
     private Long id;
     private Date createTime;        //创建时间
     private Date lastUpdate;        //最后更新时间
     private Integer visibility;     //表示是否已删除
-    private Integer isMajor;        //是否为主图
     private Long goodsId;           //所属商品
     private String url;             //图片链接
     private Integer position;       //在轮播图中的位置
@@ -51,14 +46,6 @@ public class GoodsImage {
         this.visibility = visibility;
     }
 
-    public Integer getIsMajor() {
-        return isMajor;
-    }
-
-    public void setIsMajor(Integer isMajor) {
-        this.isMajor = isMajor;
-    }
-
     public Long getGoodsId() {
         return goodsId;
     }
@@ -81,5 +68,18 @@ public class GoodsImage {
 
     public void setPosition(Integer position) {
         this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return "GoodsImage{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", goodsId=" + goodsId +
+                ", url='" + url + '\'' +
+                ", position=" + position +
+                '}';
     }
 }

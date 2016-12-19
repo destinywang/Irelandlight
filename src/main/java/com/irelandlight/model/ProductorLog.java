@@ -3,11 +3,7 @@ package com.irelandlight.model;
 import java.util.Date;
 
 /**
- * Created  with Intellij IDEA.
- * User: Ele_Chen
- * Date: 2016/12/3
- * Time: 16:52
- * Description: 管理员操作日志表 .
+ * Created by mac on 2016/12/3.
  */
 public class ProductorLog {
     private Long id;

@@ -3,11 +3,7 @@ package com.irelandlight.model;
 import java.util.Date;
 
 /**
- * Created  with Intellij IDEA.
- * User: Ele_Chen
- * Date: 2016/12/3
- * Time: 11:12
- * Description: 客户收货地址表 .
+ * Created by mac on 2016/12/3.
  */
 public class Address {
     private Long id;
@@ -136,4 +132,11 @@ public class Address {
     public void setConsumerPhone(String consumerPhone) {
         this.consumerPhone = consumerPhone;
     }
+
+
+
+
+
+
+
 }

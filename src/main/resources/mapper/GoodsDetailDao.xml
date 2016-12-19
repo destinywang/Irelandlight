@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irelandlight.dao.GoodsDetailDao">
+    <!--
+          List<GoodsImage> queryGoodsImage(Integer id);
+          List<GoodsVO> queryGoodsDetail(Integer id);
+          List<Comment> queryGoodsComment(Integer id);
+    -->
+    <resultMap id="goodsDetail" type="com.irelandlight.model.vo.GoodsInfo">
+        <id column="id" property="goodsId"/>
+        <result column="name" property="goodsName"/>
+        <result column="description" property="goodsDescription"/>
+        <result column="quantity" property="goodsQuantity"/>
+    </resultMap>
+    <resultMap id="goodsSizePrice" type="com.irelandlight.model.vo.SizePrice">
+        <result column="id" property="goodsId"/>
+        <result column="price" property="goodsPrice"/>
+        <result column="size" property="goodsSize"/>
+    </resultMap>
+    <resultMap id="commentGoods" type="com.irelandlight.model.vo.CommentGoods">
+        <id column="id" property="commentId"/>
+        <result column="content" property="goodsContent"/>
+        <result column="nick_name" property="consumerName"/>
+    </resultMap>
+
+    <resultMap id="comments" type="com.irelandlight.model.vo.ReplyVO">
+        <result column="reply" property="replyContent"/>
+        <result column="source_id" property="sourceId"/>
+        <result column="from_nick" property="fromNickName"/>
+        <result column="to_nick" property="toNickName"/>
+        <result column="reply_id" property="replyId"/>
+    </resultMap>
+
+    <!--商品轮播图-->
+    <select id="queryGoodsImage" parameterType="int" resultType="com.irelandlight.model.GoodsImage">
+        SELECT * FROM tb_goods_image WHERE visibility=0 AND goods_id=#{id} ORDER BY `position`
+    </select>
+
+    <!--查询商品具体信息-->
+    <select id="queryGoodsDetail" parameterType="int" resultMap="goodsDetail">
+        SELECT tb_goods.id,tb_goods.name,tb_goods.description,tb_goods.quantity
+        FROM tb_goods
+        WHERE tb_goods.id=#{id}
+             AND tb_goods.visibility=0
+             AND tb_goods.is_putaway=0
+    </select>
+    <!--查询该商品的价格尺寸表-->
+    <select id="querySizePrice" parameterType="int" resultMap="goodsSizePrice">
+        SELECT goods_id,price,`size`FROM tb_goods_size
+        WHERE visibility=0 AND goods_id=#{id}
+        ORDER BY `size`
+    </select>
+
+    <!--
+          查询对该商品的评论（不包括对评论的评论）
+          -->
+    <select id="queryCommentGoods" parameterType="int" resultMap="commentGoods">
+        SELECT tb_comment.content,tb_comment.id,tb_consumer.nick_name
+        FROM tb_comment
+        INNER JOIN tb_consumer
+        ON tb_comment.consumer_id=tb_consumer.id
+        WHERE tb_comment.visibility=0 AND tb_consumer.visibility=0
+        AND  tb_comment.goods_id=#{id}
+    </select>
+    <!--
+    查询评论的评论
+    <select id="queryCommentComment" parameterType="int" resultMap="commentComment">
+      SELECT tb_comment.id,tb_comment.content,tb_comment.commented_id,tb_consumer.nick_name
+      FROM tb_comment
+      LEFT OUTER JOIN  tb_consumer
+      ON tb_comment.consumer_id=tb_consumer.id
+      WHERE tb_comment.commented_id=#{id}
+      AND tb_comment.commented_id is not null
+    </select>
+    -->
+    <!--查询评论的评论-->
+    <select id="queryComments" parameterType="int" resultMap="comments">
+        SELECT tb_reply.reply,tb_reply.source_id,a.nick_name from_nick,b.nick_name to_nick,tb_reply.id as reply_id
+        FROM tb_comment,tb_reply
+        LEFT JOIN
+        tb_consumer a
+        ON  a.id=tb_reply.from_id
+        LEFT JOIN
+        tb_consumer b
+        ON  b.id=tb_reply.to_id
+        WHERE
+        tb_comment.goods_id=#{id}
+        AND source_id=tb_comment.id
+</select>
+    <!--添加评论-->
+    <insert id="addComment" parameterType="com.irelandlight.model.Comment">
+        INSERT INTO VALUE (`#{id}`,`#{createTime}`,`#{lastUpdate}`,`#{visibility}`,
+        `#{content}`,`#{consumerId}`,`#{productorId}`,`#{goodsId}`,`#{commentedId}`)
+    </insert>
+</mapper>

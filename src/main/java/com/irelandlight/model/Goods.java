@@ -5,11 +5,7 @@ import java.util.Date;
 import java.util.StringTokenizer;
 
 /**
- * Created  with Intellij IDEA.
- * User: Ele_Chen
- * Date: 2016/12/3
- * Time: 11:12
- * Description: 商品表 .
+ * Created by mac on 2016/12/3.
  */
 public class Goods {
     private Long id;                //蛋糕id
@@ -26,6 +22,7 @@ public class Goods {
     private String size;            //蛋糕尺寸
     private Integer quantity;       //库存
     private Integer saleCount;      //销售量
+    private Integer weight;         //蛋糕权重
 
     public Long getId() {
         return id;
@@ -147,7 +144,7 @@ public class Goods {
         this.weight = weight;
     }
 
-    private Integer weight;         //蛋糕权重
+
 
 
 }
