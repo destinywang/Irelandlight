@@ -3,11 +3,7 @@ package com.irelandlight.model;
 import java.util.Date;
 
 /**
- * Created  with Intellij IDEA.
- * User: Ele_Chen
- * Date: 2016/12/3
- * Time: 11:12
- * Description: 评论表 .
+ * Created by mac on 2016/12/3.
  */
 public class Comment {
     private Long id;
@@ -19,6 +15,7 @@ public class Comment {
     private Long productorId;       //管理者表主键做逻辑外键，与consumer_id互斥
     private Long goodsId;           //商品表主键做逻辑外键
     private Long commentedId;       //评论表主键做逻辑外键，用于存储子环一对多关系
+    private Integer level;          //评论级别
 
     public Long getId() {
         return id;
@@ -92,4 +89,11 @@ public class Comment {
         this.commentedId = commentedId;
     }
 
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
 }

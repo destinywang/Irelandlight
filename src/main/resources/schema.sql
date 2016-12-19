@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50713
 File Encoding         : 65001
 
-Date: 2016-12-10 15:08:32
+Date: 2016-12-03 23:01:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,7 @@ CREATE TABLE `tb_address` (
   `post` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '邮编',
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '详细地址',
   `consumer_id` int(11) unsigned NOT NULL COMMENT '消费者表的逻辑外键',
+  `is_default` tinyint(3) unsigned NOT NULL COMMENT '默认地址标示，如果是默认地址为“1”，不是为“0”',
   `consumer_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '收货人姓名，未必会是注册用户的真实姓名',
   `consumer_phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '收货人联系方式',
   PRIMARY KEY (`id`),
@@ -42,12 +43,12 @@ CREATE TABLE `tb_address` (
 -- ----------------------------
 -- Records of tb_address
 -- ----------------------------
-INSERT INTO `tb_address` VALUES ('1', '2016-12-02 23:17:52', '2016-12-03 14:38:10', '0', '陕西省', '西安市', '长安区', '西长安街', '710100', '西安邮电大学东区', '1002', '陈象', '13279233333');
-INSERT INTO `tb_address` VALUES ('2', '2016-12-02 23:19:10', '2016-12-03 14:38:17', '0', '陕西省', '西安市', '长安区', '西长安街', '710100', '西安邮电大学', '1002', '高爽', '15809333333');
-INSERT INTO `tb_address` VALUES ('3', '2016-12-02 23:21:22', '2016-12-03 14:38:22', '0', '陕西省', '西安市', '长安区', '西长安街', '710100', '春天花园1102', '1003', '高爽', '15809243242');
-INSERT INTO `tb_address` VALUES ('4', '2016-12-02 23:22:51', '2016-12-03 15:00:34', '1', '陕西省', '西安市', '蓝田县', '孟村乡', '710521', '姚村四组', '1002', '陈象', '15129432343');
-INSERT INTO `tb_address` VALUES ('5', '2016-12-02 23:24:49', '2016-12-03 14:38:29', '0', '陕西省', '西安市', '天界', '南街', '710038', '南天门外', '1004', '张起灵', '18509432424');
-INSERT INTO `tb_address` VALUES ('6', '2016-12-02 23:27:31', '2016-12-03 14:38:36', '0', '陕西省', '西安市', '长安区', '西长安街', '710100', '西安邮电大学东区', '1001', '会长', '15596842342');
+INSERT INTO `tb_address` VALUES ('1', '2016-12-02 23:17:52', '2016-12-03 14:38:10', '0', '陕西省', '西安市', '长安区', '西长安街', '710100', '西安邮电大学东区', '1002', '1', '陈象', '13279233333');
+INSERT INTO `tb_address` VALUES ('2', '2016-12-02 23:19:10', '2016-12-03 14:38:17', '0', '陕西省', '西安市', '长安区', '西长安街', '710100', '西安邮电大学', '1002', '0', '高爽', '15809333333');
+INSERT INTO `tb_address` VALUES ('3', '2016-12-02 23:21:22', '2016-12-03 14:38:22', '0', '陕西省', '西安市', '长安区', '西长安街', '710100', '春天花园1102', '1003', '1', '高爽', '15809243242');
+INSERT INTO `tb_address` VALUES ('4', '2016-12-02 23:22:51', '2016-12-03 15:00:34', '1', '陕西省', '西安市', '蓝田县', '孟村乡', '710521', '姚村四组', '1002', '0', '陈象', '15129432343');
+INSERT INTO `tb_address` VALUES ('5', '2016-12-02 23:24:49', '2016-12-03 14:38:29', '0', '陕西省', '西安市', '天界', '南街', '710038', '南天门外', '1004', '1', '张起灵', '18509432424');
+INSERT INTO `tb_address` VALUES ('6', '2016-12-02 23:27:31', '2016-12-03 14:38:36', '0', '陕西省', '西安市', '长安区', '西长安街', '710100', '西安邮电大学东区', '1001', '1', '会长', '15596842342');
 
 -- ----------------------------
 -- Table structure for tb_comment
@@ -72,9 +73,10 @@ CREATE TABLE `tb_comment` (
 -- ----------------------------
 -- Records of tb_comment
 -- ----------------------------
-INSERT INTO `tb_comment` VALUES ('1', '2016-12-03 13:24:00', '2016-12-03 14:22:39', '0', '好吃好吃好吃好吃', '1001','1');
-INSERT INTO `tb_comment` VALUES ('2', '2016-12-03 13:27:16', '2016-12-03 14:22:42', '0', '这个好吃不', '1003',  '2');
-INSERT INTO `tb_comment` VALUES ('3', '2016-12-03 14:32:23', '2016-12-03 14:32:34', '0', '真的好棒啊', '1003',  '1');
+INSERT INTO `tb_comment` VALUES ('1', '2016-12-03 13:24:00', '2016-12-03 14:22:39', '0', '好吃好吃好吃好吃', '1001', null, '1', null);
+INSERT INTO `tb_comment` VALUES ('2', '2016-12-03 13:24:33', '2016-12-03 14:22:39', '0', '真的很好吃', null, '2', '1', '1');
+INSERT INTO `tb_comment` VALUES ('3', '2016-12-03 13:25:18', '2016-12-03 14:22:40', '0', '我也觉得好吃', '1002', null, '1', '2');
+INSERT INTO `tb_comment` VALUES ('4', '2016-12-03 13:27:16', '2016-12-03 14:22:42', '0', '这个好吃不', '1003', null, '2', null);
 
 -- ----------------------------
 -- Table structure for tb_consumer
@@ -96,7 +98,6 @@ CREATE TABLE `tb_consumer` (
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '电子邮件',
   `telephone` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '联系方式',
   `birthday` datetime NOT NULL COMMENT '生日',
-  `default_address_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_last_update` (`last_update`) USING BTREE,
@@ -107,10 +108,10 @@ CREATE TABLE `tb_consumer` (
 -- ----------------------------
 -- Records of tb_consumer
 -- ----------------------------
-INSERT INTO `tb_consumer` VALUES ('1001', '2016-12-02 05:30:35', '2016-12-03 15:16:45', '0', 'destiny', '123456', '123456', '会长', 'http://ohke25t3s.bkt.clouddn.com/22dc4faf-ed74-46e7-8491-0e0e1f5b7ba9.jpg', '999', '123.45', '男', 'destinywk@163.com', '15596825802', '1994-03-31 15:13:39', '0');
-INSERT INTO `tb_consumer` VALUES ('1002', '2016-12-02 21:44:32', '2016-12-03 15:16:56', '0', 'elechen', 'qq519211', '116322', '大象', 'http://ohke25t3s.bkt.clouddn.com/10fd8d27-98b4-46a0-9ac2-7dd818b3fee1.jpg', '232', '234.56', '男', 'cx1041684034@hotmail.com', '13279252532', '1995-02-02 15:13:46', '0');
-INSERT INTO `tb_consumer` VALUES ('1003', '2016-12-02 21:45:13', '2016-12-03 15:17:08', '0', 'glady', '123456', '123456', '爽哥', 'http://ohke25t3s.bkt.clouddn.com/7f9ee2c7-055c-43e4-8719-b1302bdd2b71.jpg', '23', '345.67', '女', '838581982@qq.com', '15809235235', '1995-06-04 15:15:47', '0');
-INSERT INTO `tb_consumer` VALUES ('1004', '2016-12-02 21:51:52', '2016-12-03 15:17:25', '0', 'laosi', '123456', '123456', '老九门', 'http://ohke25t3s.bkt.clouddn.com/506bb2c8-719c-46e7-8c4e-49e7e9a4c88d.jpg', '1', '456.78', '男', '491888888@qq.com', '18503452525', '1994-12-20 15:14:42', '0');
+INSERT INTO `tb_consumer` VALUES ('1001', '2016-12-02 05:30:35', '2016-12-03 15:16:45', '0', 'destiny', '123456', '123456', '会长', 'http://ohke25t3s.bkt.clouddn.com/22dc4faf-ed74-46e7-8491-0e0e1f5b7ba9.jpg', '999', '123.45', '男', 'destinywk@163.com', '15596825802', '1994-03-31 15:13:39');
+INSERT INTO `tb_consumer` VALUES ('1002', '2016-12-02 21:44:32', '2016-12-03 15:16:56', '0', 'elechen', 'qq519211', '116322', '大象', 'http://ohke25t3s.bkt.clouddn.com/10fd8d27-98b4-46a0-9ac2-7dd818b3fee1.jpg', '232', '234.56', '男', 'cx1041684034@hotmail.com', '13279252532', '1995-02-02 15:13:46');
+INSERT INTO `tb_consumer` VALUES ('1003', '2016-12-02 21:45:13', '2016-12-03 15:17:08', '0', 'glady', '123456', '123456', '爽哥', 'http://ohke25t3s.bkt.clouddn.com/7f9ee2c7-055c-43e4-8719-b1302bdd2b71.jpg', '23', '345.67', '女', '838581982@qq.com', '15809235235', '1995-06-04 15:15:47');
+INSERT INTO `tb_consumer` VALUES ('1004', '2016-12-02 21:51:52', '2016-12-03 15:17:25', '0', 'laosi', '123456', '123456', '老九门', 'http://ohke25t3s.bkt.clouddn.com/506bb2c8-719c-46e7-8c4e-49e7e9a4c88d.jpg', '1', '456.78', '男', '491888888@qq.com', '18503452525', '1994-12-20 15:14:42');
 
 -- ----------------------------
 -- Table structure for tb_consumer_goods_relation
@@ -123,7 +124,6 @@ CREATE TABLE `tb_consumer_goods_relation` (
   `visibility` tinyint(4) unsigned NOT NULL COMMENT '逻辑删除',
   `consumer_id` int(11) unsigned NOT NULL COMMENT '消费者表主键做逻辑外键',
   `goods_id` int(11) unsigned NOT NULL COMMENT '商品表主键做逻辑外键',
-  `size` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '商品大小',
   PRIMARY KEY (`id`),
   KEY `idx_consumer_id` (`consumer_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -131,10 +131,10 @@ CREATE TABLE `tb_consumer_goods_relation` (
 -- ----------------------------
 -- Records of tb_consumer_goods_relation
 -- ----------------------------
-INSERT INTO `tb_consumer_goods_relation` VALUES ('1', '2016-12-03 11:55:44', '2016-12-03 14:22:56', '0', '1001', '1', '');
-INSERT INTO `tb_consumer_goods_relation` VALUES ('2', '2016-12-03 11:55:53', '2016-12-03 14:22:57', '0', '1001', '2', '');
-INSERT INTO `tb_consumer_goods_relation` VALUES ('3', '2016-12-03 11:56:01', '2016-12-03 14:22:59', '0', '1002', '1', '');
-INSERT INTO `tb_consumer_goods_relation` VALUES ('4', '2016-12-03 11:56:39', '2016-12-03 14:22:58', '0', '1003', '2', '');
+INSERT INTO `tb_consumer_goods_relation` VALUES ('1', '2016-12-03 11:55:44', '2016-12-03 14:22:56', '0', '1001', '1');
+INSERT INTO `tb_consumer_goods_relation` VALUES ('2', '2016-12-03 11:55:53', '2016-12-03 14:22:57', '0', '1001', '2');
+INSERT INTO `tb_consumer_goods_relation` VALUES ('3', '2016-12-03 11:56:01', '2016-12-03 14:22:59', '0', '1002', '1');
+INSERT INTO `tb_consumer_goods_relation` VALUES ('4', '2016-12-03 11:56:39', '2016-12-03 14:22:58', '0', '1003', '2');
 
 -- ----------------------------
 -- Table structure for tb_coupon
@@ -176,13 +176,14 @@ CREATE TABLE `tb_goods` (
   `is_putaway` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '是否上架',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '商品名称',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '商品描述',
+  `price` decimal(11,2) unsigned NOT NULL COMMENT '商品单价',
   `preference` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '蛋糕偏好',
   `use` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '蛋糕用途',
   `taste` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '蛋糕口味',
+  `size` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '尺寸',
   `quantity` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '库存',
   `sale_count` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '销售量',
   `weight` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '蛋糕权重',
-  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '订单商品状态',
   PRIMARY KEY (`id`),
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_last_update` (`last_update`) USING BTREE,
@@ -192,8 +193,8 @@ CREATE TABLE `tb_goods` (
 -- ----------------------------
 -- Records of tb_goods
 -- ----------------------------
-INSERT INTO `tb_goods` VALUES ('1', '2016-12-02 23:00:53', '2016-12-03 15:19:25', '0', '0', '脆皮朱古力蛋糕', '香甜可口的脆皮朱古力蛋糕', '脆皮', '吃', '香甜', '10', '13', '20', '');
-INSERT INTO `tb_goods` VALUES ('2', '2016-12-03 00:20:42', '2016-12-03 16:32:38', '0', '0', '奶油蛋糕', '奶油', '奶油', '吃', '奶油', '10', '33', '20', '');
+INSERT INTO `tb_goods` VALUES ('1', '2016-12-02 23:00:53', '2016-12-03 15:19:25', '0', '0', '脆皮朱古力蛋糕', '香甜可口的脆皮朱古力蛋糕', '123.23', '脆皮', '吃', '香甜', '1', '10', '13', '20');
+INSERT INTO `tb_goods` VALUES ('2', '2016-12-03 00:20:42', '2016-12-03 16:32:38', '0', '0', '奶油蛋糕', '奶油', '23.88', '奶油', '吃', '奶油', '1', '10', '33', '20');
 
 -- ----------------------------
 -- Table structure for tb_goods_image
@@ -204,6 +205,7 @@ CREATE TABLE `tb_goods_image` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `last_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
   `visibility` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '逻辑删除',
+  `is_major` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '是否为主图（非轮播图）',
   `goods_id` int(11) unsigned NOT NULL COMMENT '商品表主键做逻辑外键',
   `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '图片链接',
   `position` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '在轮播图中的位置',
@@ -214,44 +216,14 @@ CREATE TABLE `tb_goods_image` (
 -- ----------------------------
 -- Records of tb_goods_image
 -- ----------------------------
-INSERT INTO `tb_goods_image` VALUES ('1', '2016-12-02 23:36:25', '2016-12-03 15:25:53', '0', '1', 'http://ohke25t3s.bkt.clouddn.com/4004fd8c-5812-4ec5-a34b-f6d529b1c5d2.jpg', '1');
-INSERT INTO `tb_goods_image` VALUES ('2', '2016-12-03 00:12:29', '2016-12-03 15:25:57', '0', '1', 'http://ohke25t3s.bkt.clouddn.com/824e2f6a-bead-4163-abe4-b8700ab8a8f3.jpeg.jpg', '2');
-INSERT INTO `tb_goods_image` VALUES ('3', '2016-12-03 00:12:43', '2016-12-03 15:25:58', '0', '1', 'http://ohke25t3s.bkt.clouddn.com/327011d1-88f4-4af0-90e3-a8b1d8fc2ed5.jpg', '3');
-INSERT INTO `tb_goods_image` VALUES ('4', '2016-12-03 00:13:04', '2016-12-03 15:25:59', '0', '1', 'http://ohke25t3s.bkt.clouddn.com/0a79f197-9a12-41b3-b432-7d832114ec1e.jpg', '4');
-INSERT INTO `tb_goods_image` VALUES ('5', '2016-12-03 00:24:19', '2016-12-03 15:26:03', '0', '2', 'http://ohke25t3s.bkt.clouddn.com/fea463d0-76b4-406a-88b4-30f9c4fce232.jpg', '1');
-INSERT INTO `tb_goods_image` VALUES ('6', '2016-12-03 00:24:26', '2016-12-03 15:26:03', '0', '2', 'http://ohke25t3s.bkt.clouddn.com/00d66a16-4d1c-4b58-ad03-5b366c3fb6cc.jpg', '2');
-INSERT INTO `tb_goods_image` VALUES ('7', '2016-12-03 00:24:27', '2016-12-03 15:26:04', '0', '2', 'http://ohke25t3s.bkt.clouddn.com/e4ce155a-8739-4d50-8ed7-17c52c0dd1ef.jpeg', '3');
-INSERT INTO `tb_goods_image` VALUES ('8', '2016-12-03 00:24:28', '2016-12-03 15:26:04', '0', '2', 'http://ohke25t3s.bkt.clouddn.com/d83aa057-574b-45d1-b764-aea7f6c1e7c7.jpeg', '4');
-
--- ----------------------------
--- Table structure for tb_goods_size
--- ----------------------------
-DROP TABLE IF EXISTS `tb_goods_size`;
-CREATE TABLE `tb_goods_size` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `last_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新',
-  `visibility` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '逻辑删除',
-  `goods_id` int(11) unsigned NOT NULL,
-  `is_putaway` tinyint(4) unsigned NOT NULL DEFAULT '0',
-  `size` varchar(255) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_create_time` (`create_time`) USING BTREE,
-  KEY `idx_goods_id` (`goods_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tb_goods_size
--- ----------------------------
-INSERT INTO `tb_goods_size` VALUES ('1', '2016-12-08 09:26:07', '2016-12-08 09:26:16', '0', '1', '0', '1', '48.00');
-INSERT INTO `tb_goods_size` VALUES ('5', '2016-12-08 09:26:28', '2016-12-08 09:26:28', '0', '1', '0', '2', '78.00');
-INSERT INTO `tb_goods_size` VALUES ('6', '2016-12-08 09:27:14', '2016-12-08 09:27:14', '0', '1', '0', '3', '108.00');
-INSERT INTO `tb_goods_size` VALUES ('7', '2016-12-08 09:27:26', '2016-12-08 09:27:26', '0', '1', '0', '4', '128.00');
-INSERT INTO `tb_goods_size` VALUES ('8', '2016-12-08 09:27:42', '2016-12-08 09:27:42', '0', '2', '0', '1', '30.00');
-INSERT INTO `tb_goods_size` VALUES ('9', '2016-12-08 09:27:55', '2016-12-08 09:27:55', '0', '2', '0', '2', '60.00');
-INSERT INTO `tb_goods_size` VALUES ('10', '2016-12-08 09:28:06', '2016-12-08 09:28:06', '0', '2', '0', '3', '85.00');
-INSERT INTO `tb_goods_size` VALUES ('11', '2016-12-08 09:28:25', '2016-12-08 09:28:25', '0', '2', '0', '4', '105.00');
+INSERT INTO `tb_goods_image` VALUES ('1', '2016-12-02 23:36:25', '2016-12-03 15:25:53', '0', '1', '1', 'http://ohke25t3s.bkt.clouddn.com/4004fd8c-5812-4ec5-a34b-f6d529b1c5d2.jpg', '1');
+INSERT INTO `tb_goods_image` VALUES ('2', '2016-12-03 00:12:29', '2016-12-03 15:25:57', '0', '0', '1', 'http://ohke25t3s.bkt.clouddn.com/824e2f6a-bead-4163-abe4-b8700ab8a8f3.jpeg.jpg', '2');
+INSERT INTO `tb_goods_image` VALUES ('3', '2016-12-03 00:12:43', '2016-12-03 15:25:58', '0', '0', '1', 'http://ohke25t3s.bkt.clouddn.com/327011d1-88f4-4af0-90e3-a8b1d8fc2ed5.jpg', '3');
+INSERT INTO `tb_goods_image` VALUES ('4', '2016-12-03 00:13:04', '2016-12-03 15:25:59', '0', '0', '1', 'http://ohke25t3s.bkt.clouddn.com/0a79f197-9a12-41b3-b432-7d832114ec1e.jpg', '4');
+INSERT INTO `tb_goods_image` VALUES ('5', '2016-12-03 00:24:19', '2016-12-03 15:26:03', '0', '1', '2', 'http://ohke25t3s.bkt.clouddn.com/fea463d0-76b4-406a-88b4-30f9c4fce232.jpg', '1');
+INSERT INTO `tb_goods_image` VALUES ('6', '2016-12-03 00:24:26', '2016-12-03 15:26:03', '0', '0', '2', 'http://ohke25t3s.bkt.clouddn.com/00d66a16-4d1c-4b58-ad03-5b366c3fb6cc.jpg', '2');
+INSERT INTO `tb_goods_image` VALUES ('7', '2016-12-03 00:24:27', '2016-12-03 15:26:04', '0', '0', '2', 'http://ohke25t3s.bkt.clouddn.com/e4ce155a-8739-4d50-8ed7-17c52c0dd1ef.jpeg', '3');
+INSERT INTO `tb_goods_image` VALUES ('8', '2016-12-03 00:24:28', '2016-12-03 15:26:04', '0', '0', '2', 'http://ohke25t3s.bkt.clouddn.com/d83aa057-574b-45d1-b764-aea7f6c1e7c7.jpeg', '4');
 
 -- ----------------------------
 -- Table structure for tb_history
@@ -277,28 +249,6 @@ INSERT INTO `tb_history` VALUES ('2', '2016-12-03 13:27:52', '2016-12-03 14:02:0
 INSERT INTO `tb_history` VALUES ('3', '2016-12-03 13:28:51', '2016-12-03 15:27:12', '1', '1002', '2');
 INSERT INTO `tb_history` VALUES ('4', '2016-12-03 13:29:16', '2016-12-03 14:02:21', '0', '1003', '1');
 INSERT INTO `tb_history` VALUES ('5', '2016-12-03 13:29:28', '2016-12-03 15:27:16', '0', '1004', '2');
-
--- ----------------------------
--- Table structure for tb_home_rotation
--- ----------------------------
-DROP TABLE IF EXISTS `tb_home_rotation`;
-CREATE TABLE `tb_home_rotation` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `last_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `visibility` tinyint(4) unsigned NOT NULL DEFAULT '0',
-  `goods_id` int(11) unsigned NOT NULL,
-  `position` int(11) unsigned NOT NULL DEFAULT '0',
-  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tb_home_rotation
--- ----------------------------
-INSERT INTO `tb_home_rotation` VALUES ('1', '2016-12-08 19:31:37', '2016-12-08 19:31:37', '0', '1', '1', 'http://ohke25t3s.bkt.clouddn.com/4004fd8c-5812-4ec5-a34b-f6d529b1c5d2.jpg');
-INSERT INTO `tb_home_rotation` VALUES ('2', '2016-12-08 19:44:58', '2016-12-08 19:44:58', '0', '2', '2', 'http://ohke25t3s.bkt.clouddn.com/fea463d0-76b4-406a-88b4-30f9c4fce232.jpg');
-INSERT INTO `tb_home_rotation` VALUES ('3', '2016-12-08 19:45:23', '2016-12-08 19:45:23', '0', '2', '3', 'http://ohke25t3s.bkt.clouddn.com/00d66a16-4d1c-4b58-ad03-5b366c3fb6cc.jpg');
 
 -- ----------------------------
 -- Table structure for tb_login_ticket
@@ -398,7 +348,7 @@ CREATE TABLE `tb_order` (
   `transfer_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '用户期望的送货时间',
   `gift` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '用户希望附赠的礼物',
   `table_ware_count` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT '附赠餐具',
-  `coupon_id` int(11) unsigned NOT NULL COMMENT '优惠券表主键做逻辑外键',
+  `coupon_id` int(11) unsigned NOT NULL COMMENT '活动表主键做逻辑外键',
   `price` decimal(11,2) unsigned NOT NULL COMMENT '订单的价格',
   `transfer_begin` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '配送开始时间',
   `transfer_end` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '配送结束时间',
@@ -408,20 +358,14 @@ CREATE TABLE `tb_order` (
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_last_update` (`last_update`) USING BTREE,
   KEY `idx_consumer_id` (`consumer_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_order
 -- ----------------------------
-INSERT INTO `tb_order` VALUES ('1', '2016-12-02 23:33:03', '2016-12-06 18:25:32', '0', 'cx04141057', '1002', '2', '1', '1', '明天中午', '生日帽', '1', '3', '170.99', '2016-12-02 23:33:03', '2016-12-02 23:33:03', '1', '来之前打电话,餐具要带齐全');
-INSERT INTO `tb_order` VALUES ('2', '2016-12-03 14:43:45', '2016-12-10 09:27:14', '0', 'cx04141058', '1002', '4', '1', '2', '今天下午', '生日牌,气球', '4', '1', '123.23', '2016-12-03 14:43:45', '2016-12-03 14:43:45', '1', '我没有留言');
-INSERT INTO `tb_order` VALUES ('3', '2016-12-03 14:53:11', '2016-12-06 18:25:40', '0', 'cx04141059', '1003', '1', '2', '1', '明天中午', '生日帽', '1', '0', '170.99', '2016-12-03 14:53:11', '2016-12-03 14:53:11', '2', '我要快快收到蛋糕');
-INSERT INTO `tb_order` VALUES ('4', '2016-12-09 10:25:27', '2016-12-09 10:25:27', '0', 'cx04141060', '1003', '3', '1', '1', '2016-12-09 10:25:27', '生日帽', '4', '3', '138.00', '2016-12-09 10:25:27', '2016-12-09 10:25:27', '0', '快点送来');
-INSERT INTO `tb_order` VALUES ('5', '2016-12-10 09:51:05', '2016-12-10 09:51:05', '0', 'cx04141061', '1002', '2', '1', '1', '今天下午两点', '小礼物', '4', '2', '123.38', '2016-12-10 09:51:05', '2016-12-10 09:51:05', '0', '生日快乐');
-INSERT INTO `tb_order` VALUES ('6', '2016-12-10 09:53:42', '2016-12-10 09:53:42', '0', 'cx04141061', '1002', '2', '1', '1', '今天下午两点', '小礼物', '4', '2', '123.38', '2016-12-10 09:53:42', '2016-12-10 09:53:42', '0', '生日快乐');
-INSERT INTO `tb_order` VALUES ('7', '2016-12-10 09:54:16', '2016-12-10 09:54:16', '0', 'cx04141061', '1002', '2', '1', '1', '今天下午两点', '小礼物', '4', '2', '123.38', '2016-12-10 09:54:16', '2016-12-10 09:54:16', '0', '生日快乐');
-INSERT INTO `tb_order` VALUES ('8', '2016-12-10 11:09:21', '2016-12-10 11:09:21', '0', 'cx04141061', '1002', '2', '1', '1', '今天下午两点', '小礼物', '4', '2', '123.38', '2016-12-10 11:09:21', '2016-12-10 11:09:21', '0', '生日快乐');
-INSERT INTO `tb_order` VALUES ('9', '2016-12-10 11:24:08', '2016-12-10 11:24:08', '0', 'cx04141061', '1002', '2', '1', '1', '今天下午两点', '小礼物', '4', '2', '123.38', '2016-12-10 11:24:08', '2016-12-10 11:24:08', '0', '生日快乐');
+INSERT INTO `tb_order` VALUES ('1', '2016-12-02 23:33:03', '2016-12-03 14:55:54', '0', 'cx04141057', '1002', '1', '1', '1', '明天中午', '生日帽', '1', '0', '170.99', '2016-12-02 23:33:03', '2016-12-02 23:33:03', '1', '来之前打电话,餐具要带齐全');
+INSERT INTO `tb_order` VALUES ('2', '2016-12-03 14:43:45', '2016-12-03 16:32:37', '0', 'cx04141058', '1004', '5', '1', '2', '今天下午', '生日牌,气球', '4', '1', '123.23', '2016-12-03 14:43:45', '2016-12-03 14:43:45', '0', '我没有留言');
+INSERT INTO `tb_order` VALUES ('3', '2016-12-03 14:53:11', '2016-12-03 16:17:59', '0', 'cx04141058', '1003', '1', '2', '1', '明天中午', '生日帽', '1', '0', '170.99', '2016-12-03 14:53:11', '2016-12-03 14:53:11', '2', '我要快快收到蛋糕');
 
 -- ----------------------------
 -- Table structure for tb_order_goods_relation
@@ -434,25 +378,20 @@ CREATE TABLE `tb_order_goods_relation` (
   `visibility` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '逻辑删除',
   `order_id` int(11) unsigned NOT NULL COMMENT '订单表主键做逻辑外键',
   `goods_id` int(11) unsigned NOT NULL COMMENT '商品表主键做逻辑外键',
-  `size` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `count` int(11) NOT NULL,
-  `status` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_create_time` (`create_time`) USING BTREE,
   KEY `idx_order_id` (`order_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_order_goods_relation
 -- ----------------------------
-INSERT INTO `tb_order_goods_relation` VALUES ('1', '2016-12-02 23:33:36', '2016-12-02 23:33:36', '0', '1', '1', '1', '1', '0');
-INSERT INTO `tb_order_goods_relation` VALUES ('2', '2016-12-03 14:39:51', '2016-12-03 14:39:51', '0', '1', '2', '2', '2', '0');
-INSERT INTO `tb_order_goods_relation` VALUES ('3', '2016-12-03 14:40:20', '2016-12-03 14:40:20', '0', '2', '1', '3', '1', '0');
-INSERT INTO `tb_order_goods_relation` VALUES ('4', '2016-12-03 14:55:13', '2016-12-03 14:55:13', '0', '3', '1', '5', '1', '0');
-INSERT INTO `tb_order_goods_relation` VALUES ('5', '2016-12-03 14:55:27', '2016-12-03 14:55:27', '0', '3', '2', '3', '2', '0');
-INSERT INTO `tb_order_goods_relation` VALUES ('12', '2016-12-10 12:00:29', '2016-12-10 12:00:29', '0', '2', '1', '2', '4', '0');
-INSERT INTO `tb_order_goods_relation` VALUES ('13', '2016-12-10 12:00:29', '2016-12-10 12:00:29', '0', '2', '2', '2', '6', '0');
-INSERT INTO `tb_order_goods_relation` VALUES ('14', '2016-12-10 12:04:15', '2016-12-10 12:04:15', '0', '7', '2', '3', '2', '0');
+INSERT INTO `tb_order_goods_relation` VALUES ('1', '2016-12-02 23:33:36', '2016-12-02 23:33:36', '0', '1', '1', '1');
+INSERT INTO `tb_order_goods_relation` VALUES ('2', '2016-12-03 14:39:51', '2016-12-03 14:39:51', '0', '1', '2', '2');
+INSERT INTO `tb_order_goods_relation` VALUES ('3', '2016-12-03 14:40:20', '2016-12-03 14:40:20', '0', '2', '1', '1');
+INSERT INTO `tb_order_goods_relation` VALUES ('4', '2016-12-03 14:55:13', '2016-12-03 14:55:13', '0', '3', '1', '1');
+INSERT INTO `tb_order_goods_relation` VALUES ('5', '2016-12-03 14:55:27', '2016-12-03 14:55:27', '0', '3', '2', '2');
 
 -- ----------------------------
 -- Table structure for tb_productor
@@ -474,7 +413,7 @@ CREATE TABLE `tb_productor` (
 -- ----------------------------
 INSERT INTO `tb_productor` VALUES ('1', '2016-12-03 13:47:06', '2016-12-03 14:35:35', '0', 'admin', '123456', '23435');
 INSERT INTO `tb_productor` VALUES ('2', '2016-12-03 13:47:51', '2016-12-03 14:35:37', '0', 'boss', '123456', '23454');
-INSERT INTO `tb_productor` VALUES ('3', '2016-12-03 13:49:03', '2016-12-03 13:49:03', '0', 'boss_swife', '123456', '23135');
+INSERT INTO `tb_productor` VALUES ('3', '2016-12-03 13:49:03', '2016-12-03 13:49:03', '0', 'boss\swife', '123456', '23135');
 
 -- ----------------------------
 -- Table structure for tb_productor_log
@@ -499,33 +438,6 @@ INSERT INTO `tb_productor_log` VALUES ('2', '2016-12-03 14:34:54', '2016-12-03 1
 INSERT INTO `tb_productor_log` VALUES ('3', '2016-12-03 22:58:23', '2016-12-03 22:58:23', '0', '1', '修改权重');
 
 -- ----------------------------
--- Table structure for tb_reply
--- ----------------------------
-DROP TABLE IF EXISTS `tb_reply`;
-CREATE TABLE `tb_reply` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `last_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `visibility` tinyint(4) NOT NULL,
-  `source_id` int(11) unsigned NOT NULL COMMENT '回复表保存对于评论的回复',
-  `reply` varchar(255) NOT NULL DEFAULT '',
-  `from_id` int(11) unsigned NOT NULL,
-  `to_id` int(11) unsigned NOT NULL,
-  `reply_id` int(11) unsigned NOT NULL COMMENT '回复表保存对评论的回复',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tb_reply
--- ----------------------------
-INSERT INTO `tb_reply` VALUES('1','2014-12-2 12:20:23','2014-12-3 12:11:23','0','1','哦？是吗？那真棒','1002','1001');
-INSERT INTO `tb_reply` VALUES('2','2014-12-22 10:00:23','2014-12-3 12:11:43','0','1','那你可当','1001','1002');
-INSERT INTO `tb_reply` VALUES('3','2014-12-12 11:20:03','2014-12-13 2:13:35','0','1','哈哈哈，嘎嘎嘎','1003','1001');
-INSERT INTO `tb_reply` VALUES('4','2016/12/3 13:27:16','	2016/12/3 14:22:42','0','2','还行吧','1002','1003')
-INSERT INTO `tb_reply` VALUES('5','2016/12/3 13:27:16','	2016/12/3 14:22:42','0','5','哈哈哈哈','1001','1003')
-INSERT INTO `tb_reply` VALUES('6	','2016/12/3 13:27:16','2016/12/3 14:22:42','0','5','谢谢亲','1','1003')
-
--- ----------------------------
 -- Table structure for tb_shop_car
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_shop_car`;
@@ -537,23 +449,16 @@ CREATE TABLE `tb_shop_car` (
   `consumer_id` int(11) unsigned NOT NULL COMMENT '消费者表主键',
   PRIMARY KEY (`id`),
   KEY `idx_consumer_id` (`consumer_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_shop_car
 -- ----------------------------
-INSERT INTO `tb_shop_car` VALUES ('1', '2016-12-03 00:13:59', '2016-12-05 18:32:48', '1', '1001');
-INSERT INTO `tb_shop_car` VALUES ('2', '2016-12-03 00:14:12', '2016-12-04 19:47:28', '0', '1002');
-INSERT INTO `tb_shop_car` VALUES ('3', '2016-12-03 00:14:13', '2016-12-04 19:47:30', '0', '1003');
-INSERT INTO `tb_shop_car` VALUES ('4', '2016-12-03 00:14:14', '2016-12-04 19:47:32', '0', '1004');
-INSERT INTO `tb_shop_car` VALUES ('5', '2016-12-03 21:16:16', '2016-12-04 19:47:35', '0', '1005');
-INSERT INTO `tb_shop_car` VALUES ('6', '2016-12-04 23:20:17', '2016-12-05 00:25:04', '1', '1006');
-INSERT INTO `tb_shop_car` VALUES ('7', '2016-12-04 23:23:13', '2016-12-04 23:28:23', '1', '1007');
-INSERT INTO `tb_shop_car` VALUES ('21', '2016-12-10 11:12:32', '2016-12-10 11:12:32', '0', '1010');
-INSERT INTO `tb_shop_car` VALUES ('22', '2016-12-10 11:13:09', '2016-12-10 11:13:09', '0', '1010');
-INSERT INTO `tb_shop_car` VALUES ('23', '2016-12-10 11:14:15', '2016-12-10 11:14:15', '0', '1010');
-INSERT INTO `tb_shop_car` VALUES ('24', '2016-12-10 11:15:21', '2016-12-10 11:15:21', '0', '1010');
-INSERT INTO `tb_shop_car` VALUES ('25', '2016-12-10 11:15:48', '2016-12-10 11:15:48', '0', '1010');
+INSERT INTO `tb_shop_car` VALUES ('1', '2016-12-03 00:13:59', '2016-12-03 00:13:59', '0', '1');
+INSERT INTO `tb_shop_car` VALUES ('2', '2016-12-03 00:14:12', '2016-12-03 00:14:12', '0', '2');
+INSERT INTO `tb_shop_car` VALUES ('3', '2016-12-03 00:14:13', '2016-12-03 00:14:13', '0', '3');
+INSERT INTO `tb_shop_car` VALUES ('4', '2016-12-03 00:14:14', '2016-12-03 00:14:14', '0', '4');
+INSERT INTO `tb_shop_car` VALUES ('5', '2016-12-03 21:16:16', '2016-12-03 21:16:16', '0', '5');
 
 -- ----------------------------
 -- Table structure for tb_shop_car_goods_relation
@@ -563,28 +468,20 @@ CREATE TABLE `tb_shop_car_goods_relation` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `last_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
-  `visibility` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '逻辑删除',
+  `visibility` tinyint(4) unsigned NOT NULL COMMENT '逻辑删除',
   `shop_car_id` int(11) unsigned NOT NULL COMMENT '购物车表主键做逻辑外键',
   `goods_id` int(11) unsigned NOT NULL COMMENT '商品表主键做逻辑外键',
-  `size` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `count` int(11) unsigned NOT NULL COMMENT '每周商品的数量',
-  `status` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_shop_car_id` (`shop_car_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_shop_car_goods_relation
 -- ----------------------------
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('1', '2016-12-03 00:19:14', '2016-12-08 11:07:04', '0', '1', '1', '1', '1', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('2', '2016-12-03 00:19:34', '2016-12-08 11:07:06', '0', '1', '2', '2', '3', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('3', '2016-12-03 00:30:29', '2016-12-08 12:25:58', '0', '1', '1', '3', '1', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('4', '2016-12-03 00:30:44', '2016-12-08 11:07:08', '0', '2', '2', '1', '2', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('5', '2016-12-03 00:31:37', '2016-12-08 11:07:11', '0', '3', '2', '3', '2', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('6', '2016-12-05 00:54:42', '2016-12-09 22:25:17', '0', '5', '2', '3', '20', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('7', '2016-12-05 01:15:09', '2016-12-09 22:24:57', '0', '5', '1', '4', '3', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('8', '2016-12-06 17:39:30', '2016-12-09 22:26:11', '0', '5', '2', '4', '13', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('9', '2016-12-08 12:24:34', '2016-12-08 12:24:34', '0', '1', '1', '2', '1', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('10', '2016-12-08 12:44:11', '2016-12-08 12:44:11', '0', '1', '2', '1', '1', '0');
-INSERT INTO `tb_shop_car_goods_relation` VALUES ('11', '2016-12-09 22:28:23', '2016-12-09 22:28:23', '0', '1', '2', '4', '10', '0');
+INSERT INTO `tb_shop_car_goods_relation` VALUES ('1', '2016-12-03 00:19:14', '2016-12-03 14:35:55', '0', '1', '1', '1');
+INSERT INTO `tb_shop_car_goods_relation` VALUES ('2', '2016-12-03 00:19:34', '2016-12-03 14:35:55', '0', '1', '2', '3');
+INSERT INTO `tb_shop_car_goods_relation` VALUES ('3', '2016-12-03 00:30:29', '2016-12-03 14:35:55', '0', '2', '1', '1');
+INSERT INTO `tb_shop_car_goods_relation` VALUES ('4', '2016-12-03 00:30:44', '2016-12-03 14:35:58', '0', '2', '2', '2');
+INSERT INTO `tb_shop_car_goods_relation` VALUES ('5', '2016-12-03 00:31:37', '2016-12-03 14:35:56', '0', '3', '2', '2');
 SET FOREIGN_KEY_CHECKS=1;

@@ -2,14 +2,9 @@ package com.irelandlight.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 /**
- * Created  with Intellij IDEA.
- * User: Ele_Chen
- * Date: 2016/12/3
- * Time: 11:12
- * Description: 商品表 .
+ * Created by mac on 2016/12/3.
  */
 public class Goods {
     private Long id;                //蛋糕id

@@ -44,4 +44,18 @@
 
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="com.irelandlight.controller"/>
+
+    <!--5.注册相关拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/login"/> <!--TODO:配置拦截器拦截路径-->
+            <bean class="com.irelandlight.interceptor.isLoginIn"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/insert"/> <!--TODO:配置拦截器拦截路径-->
+            <bean class="com.irelandlight.interceptor.insertMyHistory"></bean> <!--插入浏览记录-->
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
 </beans>

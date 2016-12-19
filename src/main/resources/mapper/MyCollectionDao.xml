@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.irelandlight.dao.MyCollectionDao">
+
+    <!--从商品详情页插入一条收藏记录-->
+    <insert id="insertMyCollection" parameterType="com.irelandlight.model.ConsumerGoodsRelation">
+        INSERT INTO tb_consumer_goods_relation (consumer_id,goods_id,size,visibility)
+        VALUES ( #{consumerId},#{goodsId}, #{size} ,0)
+    </insert>
+
+    <!--根据rid删除一条收藏记录-->
+    <update id="deleteMyCollection" parameterType="Long">
+        UPDATE tb_consumer_goods_relation
+        SET `visibility`=1
+        WHERE id=#{id}
+    </update>
+
+    <!--返回一个收藏记录集合-->
+    <select id="findCollectionTest" parameterType="Long" resultType="com.irelandlight.model.ConsumerGoodsRelation">
+        SELECT *
+        FROM tb_consumer_goods_relation
+        WHERE visibility=0 AND consumer_id=#{id}
+    </select>
+
+    <!--如果已经存在该收藏记录，则更新收藏记录时间-->
+    <update id="updateLastTime" parameterType="Long">
+        UPDATE tb_consumer_goods_relation
+        SET last_update=current_time
+        WHERE id=#{id}
+    </update>
+
+    <!--从收藏页添加一条收藏记录至购物车-->
+    <insert id="addToShopCarFromCollection" parameterType="com.irelandlight.model.ConsumerGoodsRelation">
+        INSERT INTO tb_shop_car_goods_relation
+        ( `visibility`, shop_car_id,goods_id,size,count,status )
+        VALUES ( 0, (SELECT id FROM tb_shop_car WHERE consumer_id=#{consumerId}) , #{goodsId} , #{size} ,1,0 )
+    </insert>
+
+    <!--根据goodsId,goodsSize,shopCarId查找购物车内是否有该种商品-->
+    <select id="findExistGoods" parameterType="com.irelandlight.model.ConsumerGoodsRelation" resultType="Long">
+        SELECT id
+        FROM tb_shop_car_goods_relation
+        WHERE visibility=0 AND goods_id=#{goodsId} AND size=#{size} AND shop_car_id=
+            ( SELECT id
+            FROM tb_shop_car
+            WHERE consumer_id=#{consumerId} )
+    </select>
+
+    <!--接上条,对于购物车中已经存在的商品,更改数量而非添加商品-->
+    <update id="AddGoodsCount" parameterType="Long">
+        UPDATE tb_shop_car_goods_relation
+        SET count=count+1
+        WHERE id=#{shopCarGoodsRelationId}
+    </update>
+
+    <!--根据rid批量删除收藏记录-->
+    <update id="deleteCollectionList">
+      UPDATE tb_consumer_goods_relation
+      SET visibility =1
+      <where>
+          <if test="CollectionIdList!=null">
+              id IN
+              <foreach collection="CollectionIdList" item="collection" open="(" close=")" separator=",">
+                  #{collection}
+              </foreach>
+          </if>
+      </where>
+    </update>
+
+    <!--批量添加收藏记录至购物车-->
+    <insert id="addToShopCarFromCollectionList">
+        INSERT INTO tb_shop_car_goods_relation
+        ( visibility, shop_car_id,goods_id,size,count,status )
+        VALUES
+        <foreach collection="list" item="collection" separator=",">
+            ( 0, (SELECT id FROM tb_shop_car WHERE consumer_id=#{collection.consumerId})
+            , #{collection.goodsId}, #{collection.size},1,0 )
+        </foreach>
+    </insert>
+
+    <!--查找已有收藏记录,返回一个list商品收藏集合-->
+    <select id="findMyCollection" resultType="com.irelandlight.vo.GoodDisplay">
+        SELECT
+          tb_goods.id                     goodsId,
+          tb_consumer_goods_relation.id   collectionId,
+          tb_goods_image.url              goodsImgUrl,
+          tb_goods.name                   goodsName,
+          tb_goods_size.price             goodsPrice,
+          tb_consumer_goods_relation.size size,
+          tb_consumer_goods_relation.create_time createTime
+        FROM tb_goods, tb_goods_image, tb_consumer_goods_relation,tb_goods_size
+        WHERE tb_consumer_goods_relation.`visibility` = 0 AND tb_consumer_goods_relation.consumer_id = #{consumerId}
+              AND tb_goods_image.position = 1  AND tb_goods_size.goods_id=tb_goods.id AND tb_goods_size.size =tb_consumer_goods_relation.size
+              AND tb_goods.id = tb_goods_image.goods_id AND tb_goods.id = tb_consumer_goods_relation.goods_id
+        ORDER BY createTime
+    </select>
+
+</mapper>

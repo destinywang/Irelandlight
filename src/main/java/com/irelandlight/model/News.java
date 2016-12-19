@@ -3,11 +3,7 @@ package com.irelandlight.model;
 import java.util.Date;
 
 /**
- * Created  with Intellij IDEA.
- * User: Ele_Chen
- * Date: 2016/12/3
- * Time: 16:50
- * Description: 公告表 .
+ * Created by mac on 2016/12/3.
  */
 public class News {
     private Long id;                //

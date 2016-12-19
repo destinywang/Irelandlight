@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.irelandlight.dao.MyHistoryDao">
+
+    <!--从商品详情页添加一条浏览记录-->
+    <insert id="insertMyHistory" parameterType="com.irelandlight.model.History">
+      INSERT INTO tb_history (visibility,consumer_id,goods_id)
+      VALUES ( 0,#{consumerId},#{goodsId} )
+    </insert>
+
+    <!--根据hid删除一条浏览记录-->
+    <update id="deleteMyHistory" parameterType="Long">
+        UPDATE tb_history
+        SET visibility=1
+        WHERE id=#{historyId}
+    </update>
+
+    <!--返回一个浏览记录集合-->
+    <select id="findHistoryTest" parameterType="Long" resultType="com.irelandlight.model.History">
+        SELECT *
+        FROM tb_history
+        WHERE visibility=0 AND consumer_id=#{consumerId}
+    </select>
+
+    <!--判断浏览历史里是否已有该记录-->
+    <select id="findExistHistory" parameterType="com.irelandlight.model.History" resultType="Long">
+      SELECT id
+      FROM tb_history
+      WHERE visibility=0 AND consumer_id=#{consumerId} AND goods_id=#{goodsId}
+    </select>
+
+    <!--如果已经存在,则更新浏览历史时间-->
+    <update id="updateHistoryTime" parameterType="Long">
+      UPDATE tb_history
+      SET last_update=CURRENT_TIME
+      WHERE id=#{historyId}
+    </update>
+
+    <!--将一条浏览记录信息加入收藏-->
+    <insert id="addToCollectionFromHistory" parameterType="com.irelandlight.model.History">
+      INSERT INTO  tb_consumer_goods_relation
+      ( visibility,consumer_id,goods_id,size )
+      VALUES ( 0,#{consumerId},#{goodsId}, (SELECT min(size)
+             FROM tb_goods_size
+             WHERE goods_id=#{goodsId}) )
+    </insert>
+
+    <!--判断收藏中是否已有该记录,若有返回该收藏id-->
+    <select id="findExistCollection" parameterType="com.irelandlight.model.ConsumerGoodsRelation" resultType="Long">
+      SELECT id
+      FROM tb_consumer_goods_relation
+      WHERE visibility=0 AND consumer_id=#{consumerID} AND goods_id=#{goodsId}
+    </select>
+
+    <!--如果有，更新lastupdate-->
+    <update id="updateCollectionTime" parameterType="Long">
+      UPDATE tb_consumer_goods_relation
+      SET last_update=current_time
+      WHERE id=#{id}
+    </update>
+
+    <!--根据浏览id删除多条浏览记录-->
+    <update id="deleteHistoryList">
+        UPDATE tb_history
+        SET visibility=1
+        WHERE id IN
+        <foreach collection="HistoryId" item="Id" open="(" close=")" separator=",">
+            #{Id}
+        </foreach>
+    </update>
+
+    <!--以GoodsDisplay返回浏览记录列表-->
+    <select id="findMyHistory" parameterType="Long" resultType="com.irelandlight.vo.GoodDisplay">
+        SELECT
+          tb_history.id          historyId,
+          tb_history.last_update lastUpdate,
+          tb_goods.id            goodsId,
+          tb_goods.name          goodsName,
+          tb_goods_image.url     goodsImgUrl,
+          tb_goods.min_price     goodsPrice
+        FROM tb_goods, tb_goods_image, tb_goods_size, tb_history
+        WHERE tb_history.visibility = 0 AND tb_history.consumer_id = #{consumerId} AND tb_goods_image.position = 1 AND
+              tb_goods.id = tb_goods_image.goods_id AND tb_goods.id = tb_history.goods_id AND
+              tb_goods.id = tb_goods_size.goods_id AND tb_goods_size.price = tb_goods.min_price
+        ORDER BY lastUpdate
+    </select>
+
+
+    <!--根据浏览记录id返回一条浏览记录-->
+    <select id="findMyHistoryByHistoryId" parameterType="Long" resultType="com.irelandlight.model.History">
+        SELECT *
+        FROM tb_history
+        WHERE id=#{historyId}
+    </select>
+
+</mapper>
