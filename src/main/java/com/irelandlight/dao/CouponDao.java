@@ -31,5 +31,5 @@ public interface CouponDao {
      * @param couponId 优惠券id
      * @throws Exception
      */
-    public void deleteCoupon(@Param("consumerId") Long consumerId,@Param("couponId") Long couponId) throws Exception;
+    public Integer deleteCoupon(@Param("consumerId") Long consumerId,@Param("couponId") Long couponId) throws Exception;
 }

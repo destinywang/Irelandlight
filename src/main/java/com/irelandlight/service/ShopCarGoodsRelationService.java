@@ -14,22 +14,22 @@ import java.util.List;
 public interface ShopCarGoodsRelationService {
 
     //添加购物车详情
-    public void insertGoodsWithNo(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception;
+    public Integer insertGoodsWithNo(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception;
 
     //修改购物车商品信息
-    public void updateShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception;
+    public Integer updateShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception;
 
     //删除购物车详情
-    public void deleteShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception;
+    public Integer deleteShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception;
 
     //批量删除某购物车中某商品详情
-    public void batchDeleteShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) throws  Exception;
+    public Integer batchDeleteShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) throws  Exception;
 
     //查找购物车详情
     public List<ShopCarGoodsRelation> findShopCarGoodsRelationByShopCarId(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception;
 
     //添加购物车请求
-    public void insertGoodsRelation(Long comsumerId ,ShopCarGoodsRelation shopCarGoodsRelation) throws Exception;
+    public Integer insertGoodsRelation(Long comsumerId ,ShopCarGoodsRelation shopCarGoodsRelation) throws Exception;
 
 
 }

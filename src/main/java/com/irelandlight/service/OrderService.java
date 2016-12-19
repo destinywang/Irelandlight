@@ -77,7 +77,7 @@ public interface OrderService {
      * @throws Exception
      */
     //增加订单（下单） 返回订单ID
-    public void insertOrder(Order order)throws Exception;
+    public Integer insertOrder(Order order)throws Exception;
 
-    public void placeAnOrder(ShopCarOrderVo shopCarOrderVo) throws Exception;
+    public Integer placeAnOrder(ShopCarOrderVo shopCarOrderVo) throws Exception;
 }

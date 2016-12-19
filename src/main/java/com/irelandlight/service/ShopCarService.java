@@ -18,7 +18,7 @@ public interface ShopCarService {
      * @throws Exception
      */
     //添加用户购物车(ShopCar) 返回主键
-    public void insertShopCarByShopCar(ShopCar shopCar) throws Exception;
+    public Integer insertShopCarByShopCar(ShopCar shopCar) throws Exception;
 
     /**
      * 添加用户购物车 insertShopCarByConsumerId
@@ -26,7 +26,7 @@ public interface ShopCarService {
      * @throws Exception
      */
     //添加用户购物车(用户id) 返回主键
-    public void insertShopCarByConsumerId(Long consumerId) throws Exception;
+    public Integer insertShopCarByConsumerId(Long consumerId) throws Exception;
 
     /**
      * 删除用户购物车 deleteConsumerShopCarByConsumerId
@@ -34,7 +34,7 @@ public interface ShopCarService {
      * @throws Exception
      */
     //删除用户购物车
-    public void deleteShopCarByConsumerId(Long consumerId) throws Exception;
+    public Integer deleteShopCarByConsumerId(Long consumerId) throws Exception;
 
     //暂不提供修改用户购物车功能
 

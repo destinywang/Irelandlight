@@ -2,6 +2,7 @@ package com.irelandlight.service.impl;
 
 import com.irelandlight.dao.ShopCarDao;
 import com.irelandlight.dao.ShopCarGoodsRelationDao;
+import com.irelandlight.manager.ShopCarManager;
 import com.irelandlight.model.ShopCar;
 import com.irelandlight.service.ShopCarService;
 import org.apache.ibatis.annotations.Param;
@@ -20,7 +21,7 @@ import javax.annotation.Resource;
 public class ShopCarServiceImpl implements ShopCarService {
 
     @Resource
-    private ShopCarDao shopCarDao;
+    private ShopCarManager shopCarManager;
 
     @Resource
     private ShopCarGoodsRelationDao shopCarGoodsRelationDao;
@@ -30,8 +31,11 @@ public class ShopCarServiceImpl implements ShopCarService {
      * @param shopCar
      * @throws Exception
      */
-    public void insertShopCarByShopCar(ShopCar shopCar) throws Exception {
-        shopCarDao.insertShopCarByShopCar(shopCar);
+    public Integer insertShopCarByShopCar(ShopCar shopCar) throws Exception {
+        if (shopCarManager.insertShopCarByShopCar(shopCar) == 0){
+            return 0;
+        }
+        return 1;
     }
 
     /**
@@ -39,8 +43,11 @@ public class ShopCarServiceImpl implements ShopCarService {
      * @param consumerId
      * @throws Exception
      */
-    public void  insertShopCarByConsumerId(Long consumerId) throws Exception {
-       shopCarDao.insertShopCarByConsumerId(consumerId);
+    public Integer  insertShopCarByConsumerId(Long consumerId) throws Exception {
+       if(shopCarManager.insertShopCarByConsumerId(consumerId) == 0){
+           return 0;
+       }
+       return 1;
     }
 
     /**
@@ -48,8 +55,11 @@ public class ShopCarServiceImpl implements ShopCarService {
      * @param consumerId
      * @throws Exception
      */
-    public void deleteShopCarByConsumerId(Long consumerId) throws Exception {
-        shopCarDao.deleteShopCarByConsumerId(consumerId);
+    public Integer deleteShopCarByConsumerId(Long consumerId) throws Exception {
+        if(shopCarManager.deleteShopCarByConsumerId(consumerId)==0){
+            return 0;
+        }
+        return 1;
     }
 
     /**
@@ -60,7 +70,10 @@ public class ShopCarServiceImpl implements ShopCarService {
      */
     //通过用户Id查找购物车商品详情列表(resultMap)
     public ShopCar findShopCarGoodsDetailByConsumerId (Long consumerId) throws Exception{
-        ShopCar shopCar = shopCarDao.findShopCarGoodsDetailByConsumerId(consumerId);
+        ShopCar shopCar = shopCarManager.findShopCarGoodsDetailByConsumerId(consumerId);
+        if (shopCar == null){
+            return null;
+        }
         return shopCar;
     }
 
@@ -71,7 +84,11 @@ public class ShopCarServiceImpl implements ShopCarService {
      * @throws Exception
      */
     public ShopCar findShopCarDetailByConsumerId(Long consumerId) throws Exception {
-        return  shopCarDao.findShopCarDetailByConsumerId(consumerId);
+        ShopCar shopCar = shopCarManager.findShopCarDetailByConsumerId(consumerId);
+        if (shopCar == null){
+            return null;
+        }
+        return shopCar;
     }
 
 }

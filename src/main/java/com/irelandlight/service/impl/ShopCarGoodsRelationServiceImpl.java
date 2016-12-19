@@ -1,6 +1,8 @@
 package com.irelandlight.service.impl;
 
 import com.irelandlight.dao.ShopCarGoodsRelationDao;
+import com.irelandlight.manager.ShopCarGoodsRealtionManager;
+import com.irelandlight.manager.ShopCarGoodsRelationManager;
 import com.irelandlight.model.ShopCar;
 import com.irelandlight.model.ShopCarGoodsRelation;
 import com.irelandlight.service.ShopCarGoodsRelationService;
@@ -24,24 +26,38 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
     private ShopCarService shopCarService;
 
     @Resource
-    private ShopCarGoodsRelationDao shopCarGoodsRelationDao;
-
+    private ShopCarGoodsRelationManager shopCarGoodsRelationManager;
     /**
      * 添加购物车详情
      * @param shopCarGoodsRelation
      * @throws Exception
      */
-    public void insertGoodsWithNo(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
-        shopCarGoodsRelationDao.insertGoodsWithNo(shopCarGoodsRelation);
+    public Integer insertGoodsWithNo(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
+        Integer status = shopCarGoodsRelationManager.insertGoodsWithNo(shopCarGoodsRelation);
+        if (status == null){
+            return null;
+        }
+        if(status == 0){
+            return 0;
+        }
+        return 1;
     }
+
+
 
     /**
      * 更新购物车商品详情
      * @param shopCarGoodsRelation
      * @throws Exception
      */
-    public void updateShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
-        shopCarGoodsRelationDao.updateShopCarGoodsRelation(shopCarGoodsRelation);
+    public Integer updateShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
+        if (shopCarGoodsRelationManager.updateShopCarGoodsRelation(shopCarGoodsRelation) == null){
+            return null;
+        }
+        if(shopCarGoodsRelationManager.insertGoodsWithNo(shopCarGoodsRelation) == 0){
+            return 0;
+        }
+        return 1;
     }
 
     /**
@@ -49,7 +65,7 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @param shopCarGoodsRelation
      * @throws Exception
      */
-    public void deleteShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
+    public Integer deleteShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
         shopCarGoodsRelationDao.deleteShopCarGoodsRelation(shopCarGoodsRelation);
     }
 
@@ -58,7 +74,7 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @param shopCarGoodsRelations
      * @throws Exception
      */
-    public void batchDeleteShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) throws Exception {
+    public Integer batchDeleteShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) throws Exception {
         shopCarGoodsRelationDao.batchDeleteShopCarGoodsRelations(shopCarGoodsRelations);
     }
 
@@ -78,7 +94,7 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @param shopCarGoodsRelation
      * @throws Exception
      */
-    public void insertGoodsRelation(Long consumerId ,ShopCarGoodsRelation shopCarGoodsRelation) throws Exception{
+    public Integer insertGoodsRelation(Long consumerId ,ShopCarGoodsRelation shopCarGoodsRelation) throws Exception{
         //查找用户购物车商品（通过购物车id + 商品id + 商品size） 如果有则返回的该商品详情
         ShopCarGoodsRelation shopCarGoodsRelation1 = shopCarGoodsRelationDao.findSameGoodsRelation(shopCarGoodsRelation);
         //判断时候有 有则更新， 无则添加0

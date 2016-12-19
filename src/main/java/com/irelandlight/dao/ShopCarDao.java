@@ -20,7 +20,7 @@ public interface ShopCarDao {
      * @throws Exception
      */
     //添加用户购物车(ShopCar) 返回主键
-    public void insertShopCarByShopCar(@Param("shopCar")ShopCar shopCar) throws Exception;
+    public Integer insertShopCarByShopCar(@Param("shopCar")ShopCar shopCar) throws Exception;
 
 
     /**
@@ -29,7 +29,7 @@ public interface ShopCarDao {
      * @throws Exception
      */
     //添加用户购物车(用户id)
-    public void insertShopCarByConsumerId( @Param("consumerId") Long consumerId) throws Exception;
+    public Integer insertShopCarByConsumerId( @Param("consumerId") Long consumerId) throws Exception;
 
     /**
      * 删除用户购物车 deleteConsumerShopCarByConsumerId
@@ -37,14 +37,14 @@ public interface ShopCarDao {
      * @throws Exception
      */
     //删除用户购物车
-    public void deleteShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
+    public Integer deleteShopCarByConsumerId(@Param("consumerId") Long consumerId) throws Exception;
 
     //暂不提供修改用户购物车功能
 
     /**
      * 通过用户Id查询其购物车信息 findShopCarDetailByConsumerId
      * @param consumerId
-     * @return
+     * @return ShopCar
      * @throws Exception
      */
     //通过用户Id查询其购物车信息
@@ -53,7 +53,7 @@ public interface ShopCarDao {
     /**
      * 通过用户Id查找购物车商品详情列表(resultMap) findShopCarGoodsDetailByConsumerId
      * @param consumerId
-     * @return
+     * @return ShopCar
      * @throws Exception
      */
     //通过用户Id查找购物车商品详情列表(resultMap)

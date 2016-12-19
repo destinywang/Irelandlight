@@ -3,12 +3,14 @@ package com.irelandlight.service.impl;
 import com.irelandlight.dao.CouponDao;
 import com.irelandlight.dao.OrderDao;
 import com.irelandlight.dao.OrderGoodsRelationDao;
+import com.irelandlight.manager.OrderManager;
 import com.irelandlight.model.Consumer;
 import com.irelandlight.model.Order;
 import com.irelandlight.service.OrderService;
 import com.irelandlight.service.ShopCarGoodsRelationService;
 import com.irelandlight.util.MakeOrderNum;
 import com.irelandlight.vo.ShopCarOrderVo;
+import com.sun.org.apache.bcel.internal.generic.DMUL;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +27,7 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
     @Resource
-    private OrderDao orderDao;
+    private OrderManager orderManager;
 
     @Resource
     private OrderGoodsRelationDao orderGoodsRelationDao;
@@ -42,8 +44,11 @@ public class OrderServiceImpl implements OrderService {
      * @throws Exception yc
      */
     public List<Order> findAllOrder() throws Exception {
-
-        return orderDao.findAllOrder();
+        List<Order> orders = orderManager.findAllOrder();
+         if (orders == null){
+             return null;
+         }
+         return orders;
     }
 
     /**
@@ -53,7 +58,11 @@ public class OrderServiceImpl implements OrderService {
      * @throws Exception 异常
      */
     public List<Order> findOrderByConsumerId(Long consumerId) throws Exception {
-        return orderDao.findOrderByConsumerId(consumerId);
+        List<Order> orders = orderManager.findOrderByConsumerId(consumerId);
+        if (orders == null){
+            return null;
+        }
+        return orders;
     }
 
     /**
@@ -63,7 +72,11 @@ public class OrderServiceImpl implements OrderService {
      * @throws Exception 异常
      */
     public List<Order> findValidOrderByConsumerId(Long consumerId) throws Exception {
-        return orderDao.findValidOrderByConsumerId(consumerId);
+        List<Order> orders = orderManager.findValidOrderByConsumerId(consumerId);
+        if (orders == null){
+            return null;
+        }
+        return orders;
     }
 
 
@@ -74,7 +87,7 @@ public class OrderServiceImpl implements OrderService {
      * @throws Exception 异常
      */
     public Consumer findAllOrderDetailByConsumerId(Long consumerId) throws Exception {
-        return orderDao.findAllOrderDetailByConsumerId(consumerId);
+        return orderManager.findAllOrderDetailByConsumerId(consumerId);
     }
 
     /**
@@ -85,7 +98,11 @@ public class OrderServiceImpl implements OrderService {
      * @throws Exception 异常
      */
     public Order findOneOrderDetail(Long consumerId ,Long orderId ) throws Exception {
-        return orderDao.findOneOrderDetail(consumerId,orderId);
+        Order order = orderManager.findOneOrderDetail(consumerId,orderId);
+        if(order == null){
+            return null;
+        }
+        return order;
     }
 
     /**
@@ -96,7 +113,11 @@ public class OrderServiceImpl implements OrderService {
      * @throws Exception 异常
      */
     public Consumer findOneStatusOrderDetail(Long consumerId, Integer status) throws Exception {
-        return orderDao.findOneStatusOrderDetail(consumerId,status);
+        Consumer consumer = orderManager.findOneStatusOrderDetail(consumerId, status);
+        if (consumer == null){
+            return null;
+        }
+        return consumer;
     }
 
     /**
@@ -104,8 +125,11 @@ public class OrderServiceImpl implements OrderService {
      * @param order 订单
      * @throws Exception 异常
      */
-    public void insertOrder(Order order) throws Exception {
-        orderDao.insertOrder(order);
+    public Integer insertOrder(Order order) throws Exception {
+        if(orderManager.insertOrder(order) == 1){
+            return 1;
+        }
+        return 0;
     }
 
     /**
@@ -121,14 +145,17 @@ public class OrderServiceImpl implements OrderService {
      *
      */
     @Transactional
-    public void placeAnOrder(ShopCarOrderVo shopCarOrderVo) throws Exception{
+    public Integer placeAnOrder(ShopCarOrderVo shopCarOrderVo) throws Exception{
 
         Order order = shopCarOrderVo.getOrder();
         //利用工具类生成订单号，添加到订单中
         String orderNum = MakeOrderNum.makeOrderNum();
         shopCarOrderVo.getOrder().setOrderNumber(orderNum);
         //生成订单，返回主键
-        insertOrder(shopCarOrderVo.getOrder());
+        if(insertOrder(shopCarOrderVo.getOrder())==1){
+            return 1;
+        }
+
         //添加订单详情
         orderGoodsRelationDao.insertOrderDetail(order.getId() ,shopCarOrderVo.getShopCarGoodsRelations());
         //删除购物车已购商品信息
@@ -136,7 +163,12 @@ public class OrderServiceImpl implements OrderService {
         //删除已用优惠券
         Long couponId = order.getCouponId();
         if (couponId != null){
-            couponDao.deleteCoupon(order.getConsumerId(),couponId);
+            if(couponDao.deleteCoupon(order.getConsumerId(),couponId)==0){
+                System.out.println("优惠券使用失败");
+            }
+        }else {
+            return 1;
         }
+        return 0;
     }
 }
