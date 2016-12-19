@@ -155,6 +155,13 @@
             <artifactId>velocity</artifactId>
             <version>1.7</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/velocity-tools/velocity-tools-generic -->
+        <dependency>
+            <groupId>velocity-tools</groupId>
+            <artifactId>velocity-tools-generic</artifactId>
+            <version>1.2</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.dyuproject.protostuff</groupId>

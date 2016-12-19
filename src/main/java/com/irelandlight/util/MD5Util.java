@@ -49,6 +49,13 @@ public class MD5Util {
         return sBuffer.toString();
     }
 
+    /**
+     * 作为MD5Util类向外暴露的唯一一个接口
+     * 在其内部调用了byteToArrayString和byteToString方法
+     *
+     * @param strObj    需要进行加密的字符串
+     * @return          加密结果
+     */
     public static String getMD5Code(String strObj) {
         String resultString = null;
         try {

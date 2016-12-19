@@ -29,6 +29,7 @@
     <bean id="velocityConfigurer"
           class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
         <property name="resourceLoaderPath" value="/WEB-INF/templates"/>
+        <property name="configLocation" value="classpath:velocity.properties"/>
         <property name="velocityProperties">
             <props>
                 <prop key="input.encoding">utf-8</prop>
@@ -36,14 +37,14 @@
             </props>
         </property>
     </bean>
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/vm/"/>
+    <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="prefix" value="/WEB-INF/templates/"/>
         <property name="suffix" value=".vm"/>
     </bean>
 
     <!-- 4. 扫描web相关的bean -->
     <context:component-scan base-package="com.irelandlight.controller"/>
+    <context:component-scan base-package="com.irelandlight.model"/>
 
     <!-- 5. 注册拦截器 -->
     <mvc:interceptors>
