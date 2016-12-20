@@ -82,39 +82,49 @@ public class GoodsContainerService {
     //批量上架
     //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED,rollbackFor = ContextException.class)
-    public void putawayAllGoods(Map<Long, List<String>> idMappingSize) throws Exception {
+    public boolean putawayAllGoods(Map<Long, List<String>> idMappingSize) throws Exception {
+        boolean tag=false;
         if (idMappingSize != null && !idMappingSize.isEmpty()) {
             List<Long> ids = new ArrayList<Long>();
             ids.addAll(idMappingSize.keySet());
-            goodsMapper.updateGoodsByIds(ids, 1);
-            goodsMapper.updateGoodsByIdsAndSize(idMappingSize, 1);
+            tag= goodsMapper.updateGoodsByIds(ids, 1)==0?false:true;
+            tag= goodsMapper.updateGoodsByIdsAndSize(idMappingSize, 1)==0?false:true;
         } else {
             throw new ContextException("上架失败，请传入尺寸价格映射关系！");
         }
+        return tag;
     }
 
     //批量下架
     //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED,rollbackFor = ContextException.class)
-    public void saleoutAllGoods(Map<Long, List<String>> idMappingSize) throws Exception {
+    public boolean saleoutAllGoods(Map<Long, List<String>> idMappingSize) throws Exception {
+        boolean tag=false;
         if (idMappingSize != null && !idMappingSize.isEmpty()) {
             List<Long> ids = new ArrayList<Long>();
             ids.addAll(idMappingSize.keySet());
-            goodsMapper.updateGoodsByIds(ids, 0);
-            goodsMapper.updateGoodsByIdsAndSize(idMappingSize, 0);
+            tag= goodsMapper.updateGoodsByIds(ids, 0)==0?false:true;
+            tag= goodsMapper.updateGoodsByIdsAndSize(idMappingSize, 0)==0?false:true;
         } else {
             throw new ContextException("下架失败，请传入尺寸价格映射关系！");
         }
+        return tag;
     }
 
     //查找下架商品
     //设置该操作为只读操作，总是以非事务的方式运行，并且会挂起任何已经存在的事务
     @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-    public GoodsDetail queryGoodsById(Long goodsId)throws Exception{
+    public GoodsDetail queryGoodsById(Long goodsId,int pwFlag)throws Exception{
         GoodsDetail goodsDetail=new GoodsDetail();
 
         Goods goodsInfo=goodsMapper.selectGoodsById(goodsId);
-        List<GoodsSizePrice> goodsSizePriceList=goodsMapper.selectPWSizePriceMapByGoodsId(goodsId);
+        List<GoodsSizePrice> goodsSizePriceList=null;
+        if(pwFlag==0){
+            goodsSizePriceList=goodsMapper.selectUPWSizePriceMapByGoodsId(goodsId);
+        }else {
+            goodsSizePriceList=goodsMapper.selectPWSizePriceMapByGoodsId(goodsId);
+        }
+
         String imgHeadUrl=goodsMapper.selectGoodsHeadImgUrlByGoodsId(goodsId);
         if(goodsInfo==null){ throw new ContextException("查找的商品不存在");}
         if(imgHeadUrl==null){throw new ContextException("商品头像缺失");}
@@ -149,7 +159,7 @@ public class GoodsContainerService {
     //添加商品
     //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED,rollbackFor = ContextException.class)
-    private void addGoods(Goods goods, Map<String, Integer> imgMapPosition,Map<String,BigDecimal> sizeMapPrice)throws Exception {
+    public void addGoods(Goods goods, Map<String, Integer> imgMapPosition,Map<String,BigDecimal> sizeMapPrice)throws Exception {
 
         if(goods!=null){
             goodsMapper.insertIntoGoods(goods);

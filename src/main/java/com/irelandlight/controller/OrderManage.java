@@ -1,6 +1,7 @@
 package com.irelandlight.controller;
 
 import com.irelandlight.service.OrderManageService;
+import com.irelandlight.util.ImgeUploadUtil;
 import com.irelandlight.vo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import java.util.StringTokenizer;
 public class OrderManage {
     @Resource
     private OrderManageService orderManageService;
+
 
     @RequestMapping(value = "/queryOrderSimpleInfo",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody

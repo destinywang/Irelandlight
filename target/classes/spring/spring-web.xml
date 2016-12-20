@@ -48,16 +48,7 @@
 
 
     <!-- 3.JSP的显示ViewResolver -->
-    <bean id="velocityConfigurer"
-          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="/WEB-INF/templates" />
-        <property name="velocityProperties">
-            <props>
-                <prop key="input.encoding">utf-8</prop>
-                <prop key="output.encoding">utf-8</prop>
-            </props>
-        </property>
-    </bean>
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/vm/"/>
@@ -66,6 +57,7 @@
 
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="com.irelandlight.controller"/>
+
     <!-- 自定义参数绑定 -->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <!-- 转换器 -->
@@ -76,6 +68,7 @@
             </set>
         </property>
     </bean>
+
     <bean class="com.irelandlight.util.ImgeUploadUtil"></bean>
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver ">
         <property name="maxUploadSize">
@@ -84,4 +77,14 @@
         </property>
     </bean>
 
+    <bean id="velocityConfigurer"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/templates" />
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">utf-8</prop>
+                <prop key="output.encoding">utf-8</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
