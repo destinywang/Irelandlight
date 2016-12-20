@@ -46,13 +46,13 @@
     <select id="queryFilterGoods" parameterType="com.irelandlight.model.vo.FilterGoodsVO" resultMap="GoodsResult">
         <include refid="goodsSelect"/>
         <include refid="goodsWhere"/>
-        <if test="use!=null">
+        <if test="use!=null and use!=''" >
             AND tb_goods.use = #{use}
         </if>
-        <if test="taste!=null">
+        <if test="taste!=null and taste!=''">
             AND tb_goods.taste=#{taste}
         </if>
-        <if test="perference !=null">
+        <if test="perference !=null and perference !=''">
             AND tb_goods.preference=#{perference}
         </if>
         <include refid="goodsOrderBy"/>

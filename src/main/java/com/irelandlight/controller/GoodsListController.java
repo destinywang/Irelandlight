@@ -1,6 +1,7 @@
 package com.irelandlight.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.irelandlight.model.vo.FilterGoodsVO;
 import com.irelandlight.service.GoodsListService;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ import java.util.Map;
 public class GoodsListController {
     @Resource
     private GoodsListService goodsListService;
-    /*
+
     @RequestMapping
     public String queryAllGoods(Model model){
         Map<String,Object> cakeList=goodsListService.queryAllGoods();
@@ -31,26 +32,31 @@ public class GoodsListController {
     }
 
     @RequestMapping
-    public String queryBySearchGoods(HttpServletRequest request, Model model){
-        String searchBox=request.getParameter("searchBox");
+    public String queryBySearchGoods(@RequestBody(required = true)String json, Model model){
+        Map<String,String> search=JSON.parseObject(json,HashMap.class);
+        String searchBox=search.get("searchBox");
         Map<String,Object> cakeList=goodsListService.queryBySearchGoods(searchBox);
         model.addAttribute("cakeList",cakeList);
         return "";
     }
-    */
+
     public String queryBySearchGoods2(String json){
         Map<String,Object>search=JSON.parseObject(json,HashMap.class);
-        System.out.println(search.toString());
+        String searchBox=(String) search.get("searchBox");
+        Map<String,Object> cakeList=goodsListService.queryBySearchGoods(searchBox);
         return "";
     }
 
-    /*
     @RequestMapping
-    public String queryFilterGoods(String json,
-                                   Model model){
-        Map<String,Object>fil=JSON.parseObject(json, HashMap.class);
-        System.out.println(fil.toString());
+    public String queryFilterGoods(@RequestBody(required = true) String json,Model model){
+        Map<String,Object>fils=JSON.parseObject(json,HashMap.class);
+        Map<String,String> f=(Map<String, String>) fils.get("filter");
+        FilterGoodsVO fileter=new FilterGoodsVO();
+        fileter.setTaste(f.get("taste"));
+        fileter.setUse(f.get("use"));
+        fileter.setPerference(f.get("preference"));
+        Map<String,Object> cakeList=goodsListService.queryFilterGoods(fileter);
+        model.addAttribute("cakeList",cakeList);
         return "";
     }
-    */
 }

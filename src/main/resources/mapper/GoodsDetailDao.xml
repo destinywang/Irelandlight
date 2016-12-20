@@ -32,12 +32,12 @@
     </resultMap>
 
     <!--商品轮播图-->
-    <select id="queryGoodsImage" parameterType="int" resultType="com.irelandlight.model.GoodsImage">
+    <select id="queryGoodsImage" parameterType="Long" resultType="com.irelandlight.model.GoodsImage">
         SELECT * FROM tb_goods_image WHERE visibility=0 AND goods_id=#{id} ORDER BY `position`
     </select>
 
     <!--查询商品具体信息-->
-    <select id="queryGoodsDetail" parameterType="int" resultMap="goodsDetail">
+    <select id="queryGoodsDetail" parameterType="Long" resultMap="goodsDetail">
         SELECT tb_goods.id,tb_goods.name,tb_goods.description,tb_goods.quantity
         FROM tb_goods
         WHERE tb_goods.id=#{id}
@@ -45,7 +45,7 @@
              AND tb_goods.is_putaway=0
     </select>
     <!--查询该商品的价格尺寸表-->
-    <select id="querySizePrice" parameterType="int" resultMap="goodsSizePrice">
+    <select id="querySizePrice" parameterType="Long" resultMap="goodsSizePrice">
         SELECT goods_id,price,`size`FROM tb_goods_size
         WHERE visibility=0 AND goods_id=#{id}
         ORDER BY `size`
@@ -54,7 +54,7 @@
     <!--
           查询对该商品的评论（不包括对评论的评论）
           -->
-    <select id="queryCommentGoods" parameterType="int" resultMap="commentGoods">
+    <select id="queryCommentGoods" parameterType="Long" resultMap="commentGoods">
         SELECT tb_comment.content,tb_comment.id,tb_consumer.nick_name
         FROM tb_comment
         INNER JOIN tb_consumer
@@ -74,7 +74,7 @@
     </select>
     -->
     <!--查询评论的评论-->
-    <select id="queryComments" parameterType="int" resultMap="comments">
+    <select id="queryComments" parameterType="Long" resultMap="comments">
         SELECT tb_reply.reply,tb_reply.source_id,a.nick_name from_nick,b.nick_name to_nick,tb_reply.id as reply_id
         FROM tb_comment,tb_reply
         LEFT JOIN
@@ -88,8 +88,8 @@
         AND source_id=tb_comment.id
 </select>
     <!--添加评论-->
-    <insert id="addComment" parameterType="com.irelandlight.model.Comment">
-        INSERT INTO VALUE (`#{id}`,`#{createTime}`,`#{lastUpdate}`,`#{visibility}`,
-        `#{content}`,`#{consumerId}`,`#{productorId}`,`#{goodsId}`,`#{commentedId}`)
+    <insert id="addComment" parameterType="com.irelandlight.model.Reply" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_reply VALUES (`#{id}`,`GETDATE()`,``GETDATE()``,`0`,
+        `#{sourceId}`,`#{reply}`,`#{fromId}`,`#{toId}`)
     </insert>
 </mapper>

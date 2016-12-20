@@ -31,4 +31,13 @@ public class FilterGoodsVO {
     public void setPerference(String perference) {
         this.perference = perference;
     }
+
+    @Override
+    public String toString() {
+        return "FilterGoodsVO{" +
+                "use='" + use + '\'' +
+                ", taste='" + taste + '\'' +
+                ", perference='" + perference + '\'' +
+                '}';
+    }
 }

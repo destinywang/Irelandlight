@@ -35,7 +35,8 @@ public class GoodsListDaoTest {
     @Test
     public void testQueryFilterGoods(){
         FilterGoodsVO filterGoodsVO=new FilterGoodsVO();
-         filterGoodsVO.setPerference("奶油");
+        filterGoodsVO.setPerference("");
+        filterGoodsVO.setUse("吃");
         filterGoodsVO.setTaste("奶油");
         List<GoodsVO> goodsVOs=goodsListDao.queryFilterGoods(filterGoodsVO);
         for(GoodsVO goodsVO:goodsVOs){
