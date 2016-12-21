@@ -58,7 +58,8 @@ public class OrderManageService {
     //修改订单
     //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED,rollbackFor = ContextException.class)
-    public void modifyOrderById(Long orderId, OrderModify modifyOperation) throws Exception{
+    public boolean modifyOrderById(Long orderId, OrderModify modifyOperation) throws Exception{
+        boolean tag=false;
         if(modifyOperation!=null) {
             switch (modifyOperation.getOrderStatus()) {
                 case 0:
@@ -67,25 +68,26 @@ public class OrderManageService {
                 case 3:
                 case 4:
                 case 5:
-                    orderMapper.updateStatus(orderId, modifyOperation.getOrderStatus());
+                    tag=orderMapper.updateStatus(orderId, modifyOperation.getOrderStatus())==0?false:true;
                     break;
                 default:
                     throw new ContextException("输入订单状态错误");
             }
             if((modifyOperation.getTransferBegin() instanceof Date)&&(modifyOperation.getTransferEnd() instanceof Date)){
-                orderMapper.updateTransferBegin(orderId,modifyOperation.getTransferBegin());
-                orderMapper.updateTransferEnd(orderId,modifyOperation.getTransferEnd());
+                tag=orderMapper.updateTransferBegin(orderId,modifyOperation.getTransferBegin())==0?false:true;
+                tag=orderMapper.updateTransferEnd(orderId,modifyOperation.getTransferEnd())==0?false:true;
             }else {
                 throw new ContextException("日期格式错误");
             }
             if(modifyOperation.getTransferWay() instanceof Integer){
-                orderMapper.updateTransferWay(orderId,modifyOperation.getTransferWay());
+                tag=orderMapper.updateTransferWay(orderId,modifyOperation.getTransferWay())==0?false:true;
             }else {
                 throw new ContextException("输入配送方式格式错误");
             }
 
         }
 
+        return tag;
     }
 
 }

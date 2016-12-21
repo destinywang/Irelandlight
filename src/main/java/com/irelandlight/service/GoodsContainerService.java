@@ -139,19 +139,19 @@ public class GoodsContainerService {
     //修改商品信息
     //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED,rollbackFor = ContextException.class)
-    public void modifyGoodsInfoLong(Goods goods, Map<String, Integer> imgMapPosition,Map<String,BigDecimal> sizeMapPrice)throws Exception{
+    public boolean modifyGoodsInfoLong(Goods goods, Map<String, Integer> imgMapPosition,Map<String,BigDecimal> sizeMapPrice)throws Exception{
+        boolean tag=false;
         if(goods!=null){
-            goodsMapper.updateGoods(goods);
+            tag=goodsMapper.updateGoods(goods)==0?false:true;
             if(imgMapPosition!=null){
-                goodsMapper.updateGoodsImg(goods.getId(),imgMapPosition);
+               tag=goodsMapper.updateGoodsImg(goods.getId(),imgMapPosition)==0?false:true;
             }
-            goodsMapper.updateGoodsSizePrice(goods.getId(),sizeMapPrice);
+            tag=goodsMapper.updateGoodsSizePrice(goods.getId(),sizeMapPrice)==0?false:true;
         }else {
             throw new ContextException("请传入商品");
         }
+        return tag;
     }
-
-
 
 
 
@@ -159,18 +159,18 @@ public class GoodsContainerService {
     //添加商品
     //设置事务隔离级别为提交读，传播行为为：若存在事务则加入，若不存在事务则新建事务执行
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED,rollbackFor = ContextException.class)
-    public void addGoods(Goods goods, Map<String, Integer> imgMapPosition,Map<String,BigDecimal> sizeMapPrice)throws Exception {
-
+    public boolean addGoods(Goods goods, Map<String, Integer> imgMapPosition,Map<String,BigDecimal> sizeMapPrice)throws Exception {
+        boolean tag=false;
         if(goods!=null){
-            goodsMapper.insertIntoGoods(goods);
+           goodsMapper.insertIntoGoods(goods);
             if(goods.getId()!=null){
                 goodsMapper.insertIntoGoodsImg(goods.getId(),imgMapPosition);
-                goodsMapper.insertIotoGoodsSizePrice(goods.getId(),sizeMapPrice);
+               tag= goodsMapper.insertIotoGoodsSizePrice(goods.getId(),sizeMapPrice)==0?tag:true;
             }
         }else {
             throw new ContextException("请传入商品信息");
         }
-
+        return tag;
     }
 
 

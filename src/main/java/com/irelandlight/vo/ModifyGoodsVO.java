@@ -1,5 +1,6 @@
 package com.irelandlight.vo;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Map;
  */
 public class ModifyGoodsVO {
     private Long goodsId;
-    private Map<String,Integer> sizeMapPrice;
+    private Map<String,BigDecimal> sizeMapPrice;
 
     public Long getGoodsId() {
         return goodsId;
@@ -17,11 +18,11 @@ public class ModifyGoodsVO {
         this.goodsId = goodsId;
     }
 
-    public Map<String, Integer> getSizeMapPrice() {
+    public Map<String, BigDecimal> getSizeMapPrice() {
         return sizeMapPrice;
     }
 
-    public void setSizeMapPrice(Map<String, Integer> sizeMapPrice) {
+    public void setSizeMapPrice(Map<String, BigDecimal> sizeMapPrice) {
         this.sizeMapPrice = sizeMapPrice;
     }
 }

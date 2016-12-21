@@ -52,13 +52,14 @@ public class OrderManage {
     }
 
     @RequestMapping(value = "/modifyOrder",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView modifyOrder(ModelAndView mv,OrderModify orderModify){
+    @ResponseBody
+    public String modifyOrder(ModelAndView mv,Long orderId,OrderModify orderModify)throws Exception{
         if(paramValidate(orderModify)){
             mv.setViewName("errorPage");
-            return mv;
         }
-        mv.setViewName("");
-        return mv;
+        String message="Modify success!";
+        if(orderManageService.modifyOrderById(orderId,orderModify)){message="Modify success!";}
+        return message;
     }
 
 

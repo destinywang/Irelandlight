@@ -1,14 +1,13 @@
 package com.irelandlight.controller;
 
 import com.irelandlight.manager.ContextException;
+import com.irelandlight.model.Goods;
 import com.irelandlight.service.GoodsContainerService;
 import com.irelandlight.util.ImgeUploadUtil;
-import com.irelandlight.vo.ContainerItem;
-import com.irelandlight.vo.GoodsDetail;
-import com.irelandlight.vo.ItemsInfo;
-import com.irelandlight.vo.ModifyGoodsVO;
+import com.irelandlight.vo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +24,10 @@ public class ContainerManage {
     private GoodsContainerService containerService;
     @Resource
     private ImgeUploadUtil imgeUploadUtil;
+    //七牛云外链地址
+    private final String QINIULINK="http://ohlu5erjk.bkt.clouddn.com/";
+
+
     //展示商品页的基本商品数量统计信息
     @RequestMapping(value = "/queryGoodsSimpleInfo",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
@@ -49,6 +52,7 @@ public class ContainerManage {
         containerItemList=containerService.searchForUnPutawayGoods();
         return containerItemList;
     }
+    //展示已经上架的商品该要信息列表
     @RequestMapping(value = "/queryPutawayGoods",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public List<ContainerItem> showputawayGoods(){
@@ -97,6 +101,39 @@ public class ContainerManage {
         return message;
     }
 
+    //将参数绑定到map时map必须是某个类的子对象，且在前端页面上以 map[key]-value的形式完成前端页面的设置
+    @RequestMapping(value = "/addGoods",method={RequestMethod.POST})
+    @ResponseBody
+    public String addGoods(Goods goods, ModifyGoodsVO goodsSizeMapPrice, MultipartFile[] goodImgs)throws Exception{
+        String message="Add fail!";
+        if(!paramValidate(goods)) return "Parameter Error";
+        if(!paramValidate(goodsSizeMapPrice)) return "Parameter Error";
+        Map<String,Integer>  goodsImgPos=new TreeMap<String, Integer>();
+        String imgName=null;
+        for(int i=0;i<goodImgs.length;i++){
+            imgName=goodImgs[i].getName();
+            if(imgName==null) return "商品图片名称出错";
+            imgName=UUID.randomUUID()+imgName.substring(imgName.lastIndexOf("."));
+            imgeUploadUtil.upLoad(goodImgs[i].getInputStream(),imgName);
+            goodsImgPos.put(QINIULINK+imgName,i);
+        }
+        if(containerService.addGoods(goods,goodsImgPos,goodsSizeMapPrice.getSizeMapPrice())) message="Add success";
+        return message;
+    }
+
+
+    @RequestMapping(value = "/modifyGoodsInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public String modifyGoodsInfo(Goods goods, ModifyGoodsVO goodsSizeMapPrice, ModifyImgVo modifyImgVo)throws Exception{
+        String message="Modify fail!";
+        if(!paramValidate(goods)) return "Parameter Error";
+        if(!paramValidate(goods)) return "Parameter Error";
+        if(!paramValidate(modifyImgVo)) return "Parameter Error";
+        if(containerService.modifyGoodsInfoLong(goods,modifyImgVo.getImgMapPos(),goodsSizeMapPrice.getSizeMapPrice()))
+            message="Modify success!";
+        return message;
+    }
+
 
 
 
@@ -107,5 +144,34 @@ public class ContainerManage {
         model.put("error:",ex.getMessage());
         return model;
     }
+    //参数效验
+    private boolean paramValidate(Goods goods){
+        if(goods == null) return false;
+        if(goods.getName()==null) return false;
+        if(goods.getDescription()==null) return false;
+        if(goods.getPreference()==null) return false;
+        if(goods.getQuantity()==null) return false;
+        if(goods.getSaleCount()==null) return false;
+        if(goods.getUse()==null) return false;
+        if(goods.getTaste()==null) return false;
+        if(goods.getStatus()==null) return false;
+        if(goods.getWeight()==null) return false;
+        return true;
+    }
+    private boolean paramValidate(ModifyGoodsVO goodsSizeMapPrice){
+        if(goodsSizeMapPrice==null||goodsSizeMapPrice.getSizeMapPrice()==null
+                ||goodsSizeMapPrice.getSizeMapPrice().size()==0)
+                        return false;
+        return true;
+    }
+
+    private boolean paramValidate(ModifyImgVo modifyImgVo){
+        if(modifyImgVo==null||modifyImgVo.getImgMapPos()==null
+                ||modifyImgVo.getImgMapPos().size()==0)
+            return false;
+        return true;
+    }
+
+
 
 }
