@@ -1,0 +1,18 @@
+<toolbox>
+    <tool>
+        <key>esc</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.EscapeTool</class>
+    </tool>
+    <tool>
+        <key>date</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+        <parameter name="format" value="yyyy-MM-dd HH:mm:ss"/>
+    </tool>
+    <!--<tool>
+        <key>optionTool</key>
+        <scope>application</scope>
+        <class>com.qunar.fresh.qsurvey.utils.OptionTool</class>
+    </tool>-->
+</toolbox>

@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="aspectjweaver">
-    <CLASSES>
-      <root url="jar://D:/java-jar/spring/aspectjweaver.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

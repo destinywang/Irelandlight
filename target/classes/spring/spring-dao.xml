@@ -6,10 +6,8 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context.xsd">
-    <!-- 配置整合MyBatis -->
-    <!-- 配置数据库相关参数 -->
-    <!-- properties的属性：${url} -->
-    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+
     <!-- 数据库连接池 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <!-- 配置连接池属性 -->
@@ -27,6 +25,11 @@ http://www.springframework.org/schema/context/spring-context.xsd">
         <!-- 当获取连接失败重复次数 -->
         <property name="acquireRetryAttempts" value="2"/>
     </bean>
+
+    <!-- 配置整合MyBatis -->
+    <!-- 配置数据库相关参数 -->
+    <!-- properties的属性：${url} -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <!-- 3:配置SqlSessionFactory对象 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

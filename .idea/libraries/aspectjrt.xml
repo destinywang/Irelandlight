@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="aspectjrt">
-    <CLASSES>
-      <root url="jar://D:/java-jar/spring/aspectjrt.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

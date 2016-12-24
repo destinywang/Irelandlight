@@ -11,8 +11,8 @@ import java.util.Map;
 /**
  * Created by Zichu on 2016/12/19.
  */
-@RequestMapping()
-@ResponseBody
+//@RequestMapping()
+//@ResponseBody
 public class HomePageController{
     @Resource
     private HomePageService homePageService;

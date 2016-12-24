@@ -10,38 +10,101 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd  ">
     <!-- 配置SpringMVC -->
-    <!-- 1.开启SpringMVC注解模式 -->
+    <!-- 1. 开启SpringMVC注解模式 -->
     <!-- 简化配置
-        (1)自动注册DefaultAnnotationHandlerMapping,AnnotationMethonHandlerAdapter
-        (2)默认提供一系列功能：数据绑定、数字和日期的format @NumberFormat,@DataTimeFormat
+        (1) 自动注册DefaultAnnotationHandlerMapping,AnnotationMethonHandlerAdapter
+        (2) 默认提供一系列功能：数据绑定、数字和日期的format @NumberFormat,@DataTimeFormat
             xml和json默认读写支持
     -->
     <mvc:annotation-driven/>
 
-    <!-- 2.servlet-mapping 映射路径："/" -->
+    <!-- 2. servlet-mapping 映射路径："/" -->
     <!-- 静态资源默认servlet配置
-        (1)加入对静态资源的处理
-        (2)允许使用"/"做整体映射
+        (1) 加入对静态资源的处理
+        (2) 允许使用"/"做整体映射
     -->
     <mvc:default-servlet-handler/>
 
-    <!-- 3.JSP的显示ViewResolver -->
-    <bean id="velocityConfigurer"
-          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="/WEB-INF/templates" />
-        <property name="velocityProperties">
+    <!-- 3. 内容协商视图解析器 -->
+    <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/resource"/>
+        <property name="configLocation" value="classpath:velocity.properties"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1"/>
+        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+        <property name="viewResolvers">
+            <list>
+                <!--vm视图解析器-->
+                <bean id="vmViewResolver"
+                      class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+                    <property name="order" value="2"/>
+                    <property name="prefix" value="/WEB-INF/templates/"/>
+                    <property name="suffix" value=".vm"/>
+                    <property name="cache" value="true"/>
+                    <property name="contentType" value="text/html;charset=utf-8"/>
+                    <property name="toolboxConfigLocation" value="classpath:toolbox.xml"/>
+                </bean>
+
+                <!--jsp视图解析器-->
+                <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="order" value="1"/>
+                    <property name="prefix" value="/WEB-INF/jsp/"/>
+                    <property name="suffix" value=".jsp"/>
+                    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+                </bean>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <!--测试json url+.json即可-->
+                <!--<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+                    <property name="objectMapper" ref="jsonObjectMapper"/>
+                </bean>-->
+                <!--测试xml url + .xml即可-->
+                <!--<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+                    <constructor-arg>
+                        <bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+                            <property name="classesToBeBound">
+                                <list>
+                                    <value>com.qunar.fresh.qsurvey.controller.TestController.User</value>
+                                </list>
+                            </property>
+                        </bean>
+                    </constructor-arg>
+                </bean>-->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="contentNegotiationManager"
+          class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <!--是否启用扩展名支持，默认就是true-->
+        <property name="favorPathExtension" value="true"/>
+        <!--是否启用参数支持，默认就是true-->
+        <property name="favorParameter" value="false"/>
+        <!--是否忽略掉accept header，默认就是false-->
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="mediaTypes">
             <props>
-                <prop key="input.encoding">utf-8</prop>
-                <prop key="output.encoding">utf-8</prop>
+                <prop key="json">application/json</prop>
+                <prop key="xml">application/xml</prop>
             </props>
         </property>
     </bean>
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/vm/"/>
-        <property name="suffix" value=".vm"/>
-    </bean>
 
-    <!-- 4.扫描web相关的bean -->
+
+
+
+    <!-- 4. 扫描web相关的bean -->
     <context:component-scan base-package="com.irelandlight.controller"/>
+    <context:component-scan base-package="com.irelandlight.model"/>
+
+    <!-- 5. 注册拦截器 -->
+    <mvc:interceptors>
+        <bean class="com.irelandlight.interceptor.LoginRequiredInterceptor"/>
+        <bean class="com.irelandlight.interceptor.PassportInterceptor"/>
+        <bean class="com.irelandlight.interceptor.ExampleInterceptor"/>
+    </mvc:interceptors>
 </beans>

@@ -25,22 +25,77 @@
     -->
     <mvc:default-servlet-handler/>
 
-    <!-- 3. JSP的显示ViewResolver -->
-    <bean id="velocityConfigurer"
-          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="/WEB-INF/templates"/>
+    <!-- 3. 内容协商视图解析器 -->
+    <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/resource"/>
         <property name="configLocation" value="classpath:velocity.properties"/>
-        <property name="velocityProperties">
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1"/>
+        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+        <property name="viewResolvers">
+            <list>
+                <!--vm视图解析器-->
+                <bean id="vmViewResolver"
+                      class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+                    <property name="order" value="2"/>
+                    <property name="prefix" value="/WEB-INF/templates/"/>
+                    <property name="suffix" value=".vm"/>
+                    <property name="cache" value="true"/>
+                    <property name="contentType" value="text/html;charset=utf-8"/>
+                    <property name="toolboxConfigLocation" value="classpath:toolbox.xml"/>
+                </bean>
+
+                <!--jsp视图解析器-->
+                <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="order" value="1"/>
+                    <property name="prefix" value="/WEB-INF/jsp/"/>
+                    <property name="suffix" value=".jsp"/>
+                    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+                </bean>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <!--测试json url+.json即可-->
+                <!--<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+                    <property name="objectMapper" ref="jsonObjectMapper"/>
+                </bean>-->
+                <!--测试xml url + .xml即可-->
+                <!--<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+                    <constructor-arg>
+                        <bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+                            <property name="classesToBeBound">
+                                <list>
+                                    <value>com.qunar.fresh.qsurvey.controller.TestController.User</value>
+                                </list>
+                            </property>
+                        </bean>
+                    </constructor-arg>
+                </bean>-->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="contentNegotiationManager"
+          class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <!--是否启用扩展名支持，默认就是true-->
+        <property name="favorPathExtension" value="true"/>
+        <!--是否启用参数支持，默认就是true-->
+        <property name="favorParameter" value="false"/>
+        <!--是否忽略掉accept header，默认就是false-->
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="mediaTypes">
             <props>
-                <prop key="input.encoding">utf-8</prop>
-                <prop key="output.encoding">utf-8</prop>
+                <prop key="json">application/json</prop>
+                <prop key="xml">application/xml</prop>
             </props>
         </property>
     </bean>
-    <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
-        <property name="prefix" value="/WEB-INF/templates/"/>
-        <property name="suffix" value=".vm"/>
-    </bean>
+
+
+
 
     <!-- 4. 扫描web相关的bean -->
     <context:component-scan base-package="com.irelandlight.controller"/>

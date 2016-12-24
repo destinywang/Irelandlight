@@ -5,6 +5,10 @@
 <configuration>
     <!-- 配置全局属性 -->
     <settings>
+        <!-- 全局映射器启用缓存 -->
+        <setting name="cacheEnabled" value="true" />
+        <!-- 查询时，关闭关联对象即时加载以提高性能 -->
+        <setting name="lazyLoadingEnabled" value="true" />
         <!-- 使用JDBC的getGeneratedKeys获取数据库自增主键 -->
         <setting name="useGeneratedKeys" value="true" />
         <!-- 使用列别名替换列名 默认：true -->
@@ -12,5 +16,7 @@
         <setting name="useColumnLabel" value="true" />
         <!-- 开启驼峰命名转换：Table(create_time) -> Entity(createTime) -->
         <setting name="mapUnderscoreToCamelCase" value="true" />
+        <!-- 对于批量更新操作缓存SQL以提高性能  -->
+        <setting name="defaultExecutorType" value="BATCH" />
     </settings>
 </configuration>
