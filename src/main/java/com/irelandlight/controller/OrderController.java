@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+import java.util.Observable;
 
 /**
  * Created  with Intellij IDEA.
@@ -26,10 +28,6 @@ public class OrderController {
 
     private static ThreadLocal<Long> consumerId = new ThreadLocal<Long>();
 
-    static {
-        consumerId.set(1002L);
-    }
-
     @Resource
     private OrderService orderService;
 
@@ -42,9 +40,8 @@ public class OrderController {
     //下单
     @RequestMapping("/placeAnOrder")
     public String placeAnOrder( @RequestBody ShopCarOrderVo shopCarOrderVo)throws Exception{
-        //consumerId.set(1002L);
+        consumerId.set(1002L);
         orderService.placeAnOrder(shopCarOrderVo);
-
         return "succeed";
     }
 
@@ -52,9 +49,9 @@ public class OrderController {
     @ResponseBody
     @RequestMapping(value = "/findAllOrderDetail" ,produces = "text/json;charset=utf-8")
     public String allOrderDetail() throws Exception{
-        //consumerId.set(1002L);
-        Consumer consumer = orderService.findAllOrderDetailByConsumerId(consumerId.get());
-
+        consumerId.set(1002L);
+        Map<String,Object> consumerMap = orderService.findAllOrderDetailByConsumerId(consumerId.get());
+        Consumer consumer = (Consumer) consumerMap.get("consumer");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("consumer",consumer);
 
@@ -66,11 +63,10 @@ public class OrderController {
     @RequestMapping(value = "/oneStatusOrderDetail/{status}"  , method = RequestMethod.GET , produces = "text/json;charset=utf-8" )
     public String oneStatusOrderDetail(@PathVariable Integer status) throws Exception{
         //consumerId.set(1002L);
-        Consumer consumer = orderService.findOneStatusOrderDetail(consumerId.get(),status);
-
+        Map<String,Object> consumerMap = orderService.findOneStatusOrderDetail(consumerId.get(),status);
+        Consumer consumer = (Consumer) consumerMap.get("consumer");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("consumer",consumer);
-
         return jsonObject.toJSONString();
     }
 
@@ -78,8 +74,8 @@ public class OrderController {
     @ResponseBody
     @RequestMapping(value = "/oneOrderDetail/{orderId}"  , method = RequestMethod.GET , produces = "text/json;charset=utf-8" )
     public String oneOrderDetail(@PathVariable Long orderId) throws Exception{
-        //consumerId.set(1002L);
-        Order order = orderService.findOneOrderDetail(consumerId.get(),orderId);
+        consumerId.set(1002L);
+        Map<String,Object> order = orderService.findOneOrderDetail(consumerId.get(),orderId);
 
         //Thread thread = Thread.currentThread();
         //System.out.println(thread);
@@ -96,9 +92,9 @@ public class OrderController {
     //生成订单填写页面（地址，优惠券）
     @RequestMapping(value ="/generateOrderPage" , produces = "text/json;charset=utf-8")
     public ModelAndView generateOrderPage() throws Exception {
-        //consumerId.set(1002L);
-        List<Address> addresses = addressService.findAddressByConsumerId(consumerId.get());
-        List<Coupon> coupons = couponService.findCouponByConsumerId(consumerId.get());
+        consumerId.set(1002L);
+        Map<String,Object> addresses = addressService.findAddressByConsumerId(consumerId.get());
+        Map<String,Object> coupons = couponService.findCouponByConsumerId(consumerId.get());
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("addresses",addresses);
         jsonObject.put("coupons",coupons);

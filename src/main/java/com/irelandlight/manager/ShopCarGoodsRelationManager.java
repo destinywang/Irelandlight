@@ -5,7 +5,9 @@ import com.irelandlight.model.ShopCarGoodsRelation;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -14,7 +16,7 @@ import java.util.List;
  * Time: 22:14
  * Description: ShopCarGoodsRelationManager.
  */
-@Component
+@Component("shopCarGoodsRelationManager")
 public class ShopCarGoodsRelationManager {
 
     @Resource
@@ -26,14 +28,21 @@ public class ShopCarGoodsRelationManager {
      * @throws Exception
      */
     //购物车没有需要添加的商品，就直接添加
-    public Integer insertGoodsWithNo(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception{
+    public Map<String,Object> insertGoodsWithNo(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception{
+        Map<String,Object> insertGoods = new HashMap<String,Object>();
         if (shopCarGoodsRelation == null){
-            return null;
+            insertGoods.put("code",1);
+            insertGoods.put("status","无购物车详情信息");
+            return insertGoods;
         }
         if (shopCarGoodsRelationDao.insertGoodsWithNo(shopCarGoodsRelation) == 0){
-            return 0;
+            insertGoods.put("code",2);
+            insertGoods.put("status","插入购物车信息异常");
+            return insertGoods;
         }
-        return 1;
+        insertGoods.put("code",0);
+        insertGoods.put("status","插入购物车信息成功");
+        return insertGoods;
     }
 
 
@@ -45,14 +54,21 @@ public class ShopCarGoodsRelationManager {
      */
     //购物车有需要添加的商品，修改购物车商品信息
     //修改购物车商品信息
-    public Integer updateShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception{
+    public Map<String,Object> updateShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception{
+        Map<String,Object> insertGoods = new HashMap<String,Object>();
         if (shopCarGoodsRelation == null){
-            return null;
+            insertGoods.put("code",1);
+            insertGoods.put("status","无购物车详情信息");
+            return insertGoods;
         }
         if (shopCarGoodsRelationDao.updateShopCarGoodsRelation(shopCarGoodsRelation) == 0){
-            return 0;
+            insertGoods.put("code",2);
+            insertGoods.put("status","修改购物车信息异常");
+            return insertGoods;
         }
-        return 1;
+        insertGoods.put("code",0);
+        insertGoods.put("status","修改购物车信息成功");
+        return insertGoods;
     }
 
     /**
@@ -61,14 +77,21 @@ public class ShopCarGoodsRelationManager {
      * @throws Exception
      */
     //删除购物车详情
-    public Integer deleteShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception{
+    public Map<String,Object> deleteShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception{
+        Map<String,Object> insertGoods = new HashMap<String,Object>();
         if (shopCarGoodsRelation == null){
-            return null;
+            insertGoods.put("code",1);
+            insertGoods.put("status","无购物车详情信息");
+            return insertGoods;
         }
         if (shopCarGoodsRelationDao.deleteShopCarGoodsRelation(shopCarGoodsRelation) == 0){
-            return 0;
+            insertGoods.put("code",2);
+            insertGoods.put("status","删除购物车信息异常");
+            return insertGoods;
         }
-        return 1;
+        insertGoods.put("code",0);
+        insertGoods.put("status","删除购物车信息成功");
+        return insertGoods;
     }
 
     /**
@@ -77,14 +100,21 @@ public class ShopCarGoodsRelationManager {
      * @throws Exception
      */
     //批量删除某购物车中某商品详情
-    public Integer batchDeleteShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) throws  Exception{
-        if (shopCarGoodsRelations == null){
-            return null;
+    public Map<String,Object> batchDeleteShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) throws  Exception{
+        Map<String,Object> insertGoods = new HashMap<String,Object>();
+        if (shopCarGoodsRelations == null || shopCarGoodsRelations.size() <= 0){
+            insertGoods.put("code",1);
+            insertGoods.put("status","无购物车详情信息");
+            return insertGoods;
         }
         if (shopCarGoodsRelationDao.batchDeleteShopCarGoodsRelations(shopCarGoodsRelations) == 0){
-            return 0;
+            insertGoods.put("code",2);
+            insertGoods.put("status","删除购物车信息异常");
+            return insertGoods;
         }
-        return 1;
+        insertGoods.put("code",0);
+        insertGoods.put("status","删除购物车信息成功");
+        return insertGoods;
     }
 
     /**
@@ -94,15 +124,20 @@ public class ShopCarGoodsRelationManager {
      * @throws Exception
      */
     //查找购物车详情
-    public List<ShopCarGoodsRelation> findShopCarGoodsRelationByShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception{
+    public Map<String,Object> findShopCarGoodsRelationByShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws  Exception{
+        Map<String,Object> insertGoods = new HashMap<String,Object>();
+        List<ShopCarGoodsRelation> shopCarGoodsRelations = null;
         if (shopCarGoodsRelation == null){
-            return null;
+            insertGoods.put("code",1);
+            insertGoods.put("status","无购物车详情信息");
+        } else if ((shopCarGoodsRelations = shopCarGoodsRelationDao.findShopCarGoodsRelationByShopCarGoodsRelation(shopCarGoodsRelation))==null){
+            insertGoods.put("code",2);
+            insertGoods.put("status","无购物车详情信息");
+        }else {
+            insertGoods.put("code",0);
+            insertGoods.put("shopCarGoodsRelations",shopCarGoodsRelations);
         }
-        List<ShopCarGoodsRelation> shopCarGoodsRelations = shopCarGoodsRelationDao.findShopCarGoodsRelationByShopCarGoodsRelation(shopCarGoodsRelation);
-        if (shopCarGoodsRelations == null){
-            return null;
-        }
-        return shopCarGoodsRelations;
+        return insertGoods;
     }
 
     /**
@@ -112,14 +147,21 @@ public class ShopCarGoodsRelationManager {
      * @throws Exception
      */
     //查找用户购物车是否有该商品
-    public ShopCarGoodsRelation findSameGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation)throws  Exception{
-        if(shopCarGoodsRelation == null){
-            return null;
+    public Map<String,Object> findSameGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation)throws  Exception{
+        Map<String,Object> findGoods = new HashMap<String,Object>();
+
+        ShopCarGoodsRelation shopCarGoodsRelation1 = null;
+
+        if (shopCarGoodsRelation == null){
+            findGoods.put("code",1);
+            findGoods.put("status","无购物车详情信息");
+        } else if ((shopCarGoodsRelation1 = shopCarGoodsRelationDao.findSameGoodsRelation(shopCarGoodsRelation))==null){
+            findGoods.put("code",2);
+            findGoods.put("status","无购物车详情信息");
+        }else {
+            findGoods.put("code",0);
+            findGoods.put("shopCarGoodsRelation",shopCarGoodsRelation1);
         }
-        ShopCarGoodsRelation shopCarGoodsRelation1 = shopCarGoodsRelationDao.findSameGoodsRelation(shopCarGoodsRelation);
-        if(shopCarGoodsRelation1 == null){
-            return null;
-        }
-        return shopCarGoodsRelation1;
+        return findGoods;
     }
 }

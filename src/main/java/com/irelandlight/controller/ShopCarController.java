@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -38,7 +39,7 @@ public class ShopCarController {
     @RequestMapping("findShopCar")
     public String findShopCarByConsumerId()throws Exception {
         consumerId.set(1002L);
-        ShopCar shopCar = shopCarService.findShopCarDetailByConsumerId(consumerId.get());
+        Map<String,Object> shopCar = shopCarService.findShopCarDetailByConsumerId(consumerId.get());
 
         return JSONObject.toJSONString(shopCar);
     }
@@ -48,7 +49,7 @@ public class ShopCarController {
     @ResponseBody
     public String findShopCarGoodsDetail()throws Exception {
         consumerId.set(1002L);
-        ShopCar shopCarGoodsDetail =  shopCarService.findShopCarGoodsDetailByConsumerId(consumerId.get());
+        Map<String,Object> shopCarGoodsDetail =  shopCarService.findShopCarGoodsDetailByConsumerId(consumerId.get());
         //String shopCarGoodsDetailJson = JSONObject.toJSONString(shopCarGoodsDetail);
         //创建json对象
         JSONObject json = new JSONObject();
@@ -80,5 +81,4 @@ public class ShopCarController {
         code.put("statusCode",1);
         return code.toJSONString();
     }
-
 }

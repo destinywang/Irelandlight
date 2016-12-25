@@ -6,6 +6,7 @@ import com.irelandlight.vo.ShopCarOrderVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -23,7 +24,7 @@ public interface OrderGoodsRelationService {
      * @throws Exception
      */
     //添加订单详情
-    public void insertOrderDetail(Long orderId , List<ShopCarGoodsRelation> shopCarGoodsRelations)throws Exception;
+    public Map<String,Object> insertOrderDetail(Long orderId , List<ShopCarGoodsRelation> shopCarGoodsRelations)throws Exception;
 
     /**
      * 立即购买
@@ -32,6 +33,6 @@ public interface OrderGoodsRelationService {
      */
 
     //立即购买
-    public void buyNow(@Param("orderGoodsRelation")OrderGoodsRelation orderGoodsRelation) throws Exception;
+    public Map<String,Object> buyNow(OrderGoodsRelation orderGoodsRelation) throws Exception;
 
 }

@@ -1,21 +1,18 @@
 package com.irelandlight.service.impl;
 
-import com.irelandlight.dao.CouponDao;
-import com.irelandlight.dao.OrderDao;
-import com.irelandlight.dao.OrderGoodsRelationDao;
-import com.irelandlight.manager.OrderManager;
-import com.irelandlight.model.Consumer;
+import com.irelandlight.manager.*;
 import com.irelandlight.model.Order;
+import com.irelandlight.model.ShopCarGoodsRelation;
 import com.irelandlight.service.OrderService;
-import com.irelandlight.service.ShopCarGoodsRelationService;
 import com.irelandlight.util.MakeOrderNum;
 import com.irelandlight.vo.ShopCarOrderVo;
-import com.sun.org.apache.bcel.internal.generic.DMUL;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -30,106 +27,92 @@ public class OrderServiceImpl implements OrderService {
     private OrderManager orderManager;
 
     @Resource
-    private OrderGoodsRelationDao orderGoodsRelationDao;
+    private OrderGoodsRelationManager orderGoodsRelationManager;
 
     @Resource
-    private ShopCarGoodsRelationService shopCarGoodsRelationService;
+    private ShopCarGoodsRelationManager shopCarGoodsRelationManager;
 
     @Resource
-    private CouponDao couponDao;
+    private CouponManager couponManager;
+
+    @Resource
+    private GoodsManager goodsManager;
 
     /**
      * 查找所有订单 findAllOrder
+     *
      * @return Lise<Order> 订单列表
      * @throws Exception yc
      */
-    public List<Order> findAllOrder() throws Exception {
-        List<Order> orders = orderManager.findAllOrder();
-         if (orders == null){
-             return null;
-         }
-         return orders;
+    public Map<String, Object> findAllOrder() throws Exception {
+        return orderManager.findAllOrder();
     }
 
     /**
-     * 查找某个用户的所有订单 findOrderByConsumerId
+     *  查找某个用户的所有订单 findOrderByConsumerId
      * @param consumerId 用户id
-     * @return Lise<Order> 订单列表
+     * @return Map<String,Object> map
      * @throws Exception 异常
      */
-    public List<Order> findOrderByConsumerId(Long consumerId) throws Exception {
-        List<Order> orders = orderManager.findOrderByConsumerId(consumerId);
-        if (orders == null){
-            return null;
-        }
-        return orders;
+    public Map<String, Object> findOrderByConsumerId(Long consumerId) throws Exception {
+        return orderManager.findOrderByConsumerId(consumerId);
     }
 
     /**
      * 查找用户的有效订单 findValidOrderByConsumerId
+     *
      * @param consumerId 用户id
      * @return List<Order> 订单列表
      * @throws Exception 异常
      */
-    public List<Order> findValidOrderByConsumerId(Long consumerId) throws Exception {
-        List<Order> orders = orderManager.findValidOrderByConsumerId(consumerId);
-        if (orders == null){
-            return null;
-        }
-        return orders;
+    public Map<String, Object> findValidOrderByConsumerId(Long consumerId) throws Exception {
+        return orderManager.findValidOrderByConsumerId(consumerId);
     }
 
 
     /**
      * 查找用户的所有订单详情 findAllOrderDetailByConsumerId
+     *
      * @param consumerId 用户id
      * @return Consumer （resultMap）
      * @throws Exception 异常
      */
-    public Consumer findAllOrderDetailByConsumerId(Long consumerId) throws Exception {
+    public Map<String, Object> findAllOrderDetailByConsumerId(Long consumerId) throws Exception {
         return orderManager.findAllOrderDetailByConsumerId(consumerId);
     }
 
     /**
      * 查找某个订单详情 findOneOrderDetail
+     *
      * @param consumerId 用户id
-     * @param orderId 订单号
+     * @param orderId    订单号
      * @return Order 订单（resultMap）
      * @throws Exception 异常
      */
-    public Order findOneOrderDetail(Long consumerId ,Long orderId ) throws Exception {
-        Order order = orderManager.findOneOrderDetail(consumerId,orderId);
-        if(order == null){
-            return null;
-        }
-        return order;
+    public Map<String, Object> findOneOrderDetail(Long consumerId, Long orderId) throws Exception {
+        return orderManager.findOneOrderDetail(consumerId, orderId);
     }
 
     /**
      * 查找用户某个状态的所有订单详情 findOneStatusOrderDetail
+     *
      * @param consumerId 用户Id
-     * @param status 订单状态
+     * @param status     订单状态
      * @return Consumer （resultMap）
      * @throws Exception 异常
      */
-    public Consumer findOneStatusOrderDetail(Long consumerId, Integer status) throws Exception {
-        Consumer consumer = orderManager.findOneStatusOrderDetail(consumerId, status);
-        if (consumer == null){
-            return null;
-        }
-        return consumer;
+    public Map<String, Object> findOneStatusOrderDetail(Long consumerId, Integer status) throws Exception {
+        return orderManager.findOneStatusOrderDetail(consumerId, status);
     }
 
     /**
      * 新建订单，返回订单主键，用于插入订单详情 insertOrder
+     *
      * @param order 订单
      * @throws Exception 异常
      */
-    public Integer insertOrder(Order order) throws Exception {
-        if(orderManager.insertOrder(order) == 1){
-            return 1;
-        }
-        return 0;
+    public Map<String, Object> insertOrder(Order order) throws Exception {
+        return orderManager.insertOrder(order);
     }
 
     /**
@@ -139,36 +122,98 @@ public class OrderServiceImpl implements OrderService {
      * 为其添加订单号，插入订单详情列表，删除购物车商品详情
      * 完成订单创建。
      * 已过期
-     *
+     * <p>
      * 新下单过程
-     *
      *
      */
     @Transactional
-    public Integer placeAnOrder(ShopCarOrderVo shopCarOrderVo) throws Exception{
-
+    public Map<String, Object> placeAnOrder(ShopCarOrderVo shopCarOrderVo) throws Exception {
+        Map<String, Object> rMap = new HashMap<String, Object>();
         Order order = shopCarOrderVo.getOrder();
+        List<ShopCarGoodsRelation> shopCarGoodsRelations = shopCarOrderVo.getShopCarGoodsRelations();
         //利用工具类生成订单号，添加到订单中
         String orderNum = MakeOrderNum.makeOrderNum();
-        shopCarOrderVo.getOrder().setOrderNumber(orderNum);
-        //生成订单，返回主键
-        if(insertOrder(shopCarOrderVo.getOrder())==1){
-            return 1;
-        }
-
-        //添加订单详情
-        orderGoodsRelationDao.insertOrderDetail(order.getId() ,shopCarOrderVo.getShopCarGoodsRelations());
-        //删除购物车已购商品信息
-        shopCarGoodsRelationService.batchDeleteShopCarGoodsRelations(shopCarOrderVo.getShopCarGoodsRelations());
-        //删除已用优惠券
-        Long couponId = order.getCouponId();
-        if (couponId != null){
-            if(couponDao.deleteCoupon(order.getConsumerId(),couponId)==0){
-                System.out.println("优惠券使用失败");
+        order.setOrderNumber(orderNum);
+        //添加订单
+        // 生成订单，返回主键
+        Map<String, Object> iOrder = insertOrder(order);
+        Integer code = (Integer)iOrder.get("code");
+        if (code == 0){         //添加订单成功
+            //添加订单详情
+            Map<String, Object> iODetail =orderGoodsRelationManager.insertOrderDetail(order.getId(),shopCarGoodsRelations);
+            Integer code1 = (Integer) iODetail.get("code");
+            if(code1 == 0){
+                //删除购物车已购商品信息
+                Map<String, Object> bdel = shopCarGoodsRelationManager.batchDeleteShopCarGoodsRelations(shopCarGoodsRelations);
+                Integer code2 = (Integer)bdel.get("code");
+                if(code2 == 0){
+                    Long couponId = order.getCouponId();
+                    if (couponId != null){
+                        //删除已用优惠券
+                        Map<String, Object> delCoupon = couponManager.deleteCoupon(order.getConsumerId(),couponId);
+                        Integer code3 = (Integer)delCoupon.get("code");
+                        if(code3 == 0){
+                            //修改库存和销量
+                            Map<String, Object> update = goodsManager.updateBatchSaleQuantity(shopCarGoodsRelations);
+                            Integer code4 = (Integer)update.get("code");
+                            if(code4 == 0){
+                                rMap.put("code",0);
+                                rMap.put("status","添加订单商品成功");
+                            }else if(code4 == 1){
+                                rMap.put("code",0);
+                                rMap.put("status","商品列表不存在");
+                            }else {
+                                rMap.put("code",2);
+                                rMap.put("status","更新库存销量失败");
+                            }
+                        }else if(code3 == 1){
+                            rMap.put("code",1);
+                            rMap.put("status","用户不存在");
+                        }else if(code3 == 2){
+                            rMap.put("code",2);
+                            rMap.put("status","优惠券不存在");
+                        }else {
+                            rMap.put("code",3);
+                            rMap.put("status","优惠券删除失败");
+                        }
+                    }else{
+                        Map<String, Object> update = goodsManager.updateBatchSaleQuantity(shopCarGoodsRelations);
+                        Integer code4 = (Integer)update.get("code");
+                        if(code4 == 0){
+                            rMap.put("code", 0);
+                            rMap.put("status","添加订单商品成功");
+                        }else if(code4 == 1){
+                            rMap.put("code", 0);
+                            rMap.put("status" , "商品列表不存在");
+                        }else {
+                            rMap.put("code",2);
+                            rMap.put("status ","更新库存销量失败");
+                        }
+                    }
+                }else if(code2 == 1){
+                    rMap.put("code",1);
+                    rMap.put("status","无购物车详情信息");
+                }else{
+                    rMap.put("code",2);
+                    rMap.put("status","删除购物车信息异常");
+                }
+            }else if(code1 == 1){
+                rMap.put("code",1);
+                rMap.put("status","订单号不存在");
+            }else if (code1 == 2){
+                rMap.put("code",2);
+                rMap.put("status","商品信息不存在");
+            }else {
+                rMap.put("code",3);
+                rMap.put("status","添加订单商品失败");
             }
-        }else {
-            return 1;
+        }else if (code == 1){
+            rMap.put("code",1);
+            rMap.put("status","订单不存在");
+        }else{
+            rMap.put("code",2);
+            rMap.put("status","添加订单失败");
         }
-        return 0;
+        return  rMap;
     }
 }

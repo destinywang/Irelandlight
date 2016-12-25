@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.GoodsDao">
+    <update id="updateBatchSaleQuantity2">
+        update tb_goods
+
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="sale_count = sale_count + case" suffix="end,">
+                <foreach collection="goodsList" item="i" index="index">
+                    <if test="i.goodsId!=null">
+                        when id=#{i.goodsId} then #{i.count}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix=" quantity = quantity - case" suffix="end,">
+                <foreach collection="goodsList" item="i" index="index">
+                    <if test="i.goodsId!=null">
+                        when id=#{i.goodsId} then #{i.count}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="goodsList" separator="or" item="i" index="index">
+            visibility=0 AND id=#{i.goodsId}
+        </foreach>
+    </update>
+
+    <update id="updateBatchSaleQuantity" parameterType="java.util.List">
+
+        <foreach collection="goodsList" item="i" index="index" open="" close="" separator=";">
+            UPDATE tb_goods
+            SET sale_count=sale_count+#{i.count},quantity = quantity-#{i.count}
+            WHERE visibility=0 AND id = #{i.goodsId}
+        </foreach>
+    </update>
+</mapper>

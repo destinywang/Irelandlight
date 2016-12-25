@@ -1,16 +1,17 @@
 package com.irelandlight.service.impl;
 
-import com.irelandlight.dao.ShopCarGoodsRelationDao;
-import com.irelandlight.manager.ShopCarGoodsRealtionManager;
 import com.irelandlight.manager.ShopCarGoodsRelationManager;
+import com.irelandlight.manager.ShopCarManager;
 import com.irelandlight.model.ShopCar;
 import com.irelandlight.model.ShopCarGoodsRelation;
 import com.irelandlight.service.ShopCarGoodsRelationService;
-import com.irelandlight.service.ShopCarService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -23,7 +24,7 @@ import java.util.List;
 public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationService {
 
     @Resource
-    private ShopCarService shopCarService;
+    private ShopCarManager shopCarManager;
 
     @Resource
     private ShopCarGoodsRelationManager shopCarGoodsRelationManager;
@@ -32,15 +33,8 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @param shopCarGoodsRelation
      * @throws Exception
      */
-    public Integer insertGoodsWithNo(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
-        Integer status = shopCarGoodsRelationManager.insertGoodsWithNo(shopCarGoodsRelation);
-        if (status == null){
-            return null;
-        }
-        if(status == 0){
-            return 0;
-        }
-        return 1;
+    public Map<String, Object> insertGoodsWithNo(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
+        return shopCarGoodsRelationManager.insertGoodsWithNo(shopCarGoodsRelation);
     }
 
 
@@ -50,14 +44,8 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @param shopCarGoodsRelation
      * @throws Exception
      */
-    public Integer updateShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
-        if (shopCarGoodsRelationManager.updateShopCarGoodsRelation(shopCarGoodsRelation) == null){
-            return null;
-        }
-        if(shopCarGoodsRelationManager.insertGoodsWithNo(shopCarGoodsRelation) == 0){
-            return 0;
-        }
-        return 1;
+    public Map<String, Object> updateShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
+        return shopCarGoodsRelationManager.updateShopCarGoodsRelation(shopCarGoodsRelation);
     }
 
     /**
@@ -65,8 +53,8 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @param shopCarGoodsRelation
      * @throws Exception
      */
-    public Integer deleteShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
-        shopCarGoodsRelationDao.deleteShopCarGoodsRelation(shopCarGoodsRelation);
+    public Map<String, Object> deleteShopCarGoodsRelation(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
+        return shopCarGoodsRelationManager.deleteShopCarGoodsRelation(shopCarGoodsRelation);
     }
 
     /**
@@ -74,8 +62,8 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @param shopCarGoodsRelations
      * @throws Exception
      */
-    public Integer batchDeleteShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) throws Exception {
-        shopCarGoodsRelationDao.batchDeleteShopCarGoodsRelations(shopCarGoodsRelations);
+    public Map<String, Object> batchDeleteShopCarGoodsRelations(List<ShopCarGoodsRelation> shopCarGoodsRelations) throws Exception {
+        return shopCarGoodsRelationManager.batchDeleteShopCarGoodsRelations(shopCarGoodsRelations);
     }
 
 
@@ -85,8 +73,8 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @return List<ShopCarGoodsRelation> 购物车商品详情列表
      * @throws Exception
      */
-    public List<ShopCarGoodsRelation> findShopCarGoodsRelationByShopCarId(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
-        return shopCarGoodsRelationDao.findShopCarGoodsRelationByShopCarGoodsRelation(shopCarGoodsRelation);
+    public Map<String, Object> findShopCarGoodsRelationByShopCarId(ShopCarGoodsRelation shopCarGoodsRelation) throws Exception {
+        return shopCarGoodsRelationManager.findShopCarGoodsRelationByShopCarGoodsRelation(shopCarGoodsRelation);
     }
 
     /**
@@ -94,17 +82,57 @@ public class ShopCarGoodsRelationServiceImpl implements ShopCarGoodsRelationServ
      * @param shopCarGoodsRelation
      * @throws Exception
      */
-    public Integer insertGoodsRelation(Long consumerId ,ShopCarGoodsRelation shopCarGoodsRelation) throws Exception{
+    @Transactional
+    public Map<String, Object> insertGoodsRelation(Long consumerId ,ShopCarGoodsRelation shopCarGoodsRelation) throws Exception{
         //查找用户购物车商品（通过购物车id + 商品id + 商品size） 如果有则返回的该商品详情
-        ShopCarGoodsRelation shopCarGoodsRelation1 = shopCarGoodsRelationDao.findSameGoodsRelation(shopCarGoodsRelation);
-        //判断时候有 有则更新， 无则添加0
-        if(shopCarGoodsRelation1==null){
-            ShopCar shopCar = shopCarService.findShopCarDetailByConsumerId(consumerId);
-            shopCarGoodsRelation.setShopCarId(shopCar.getId());
-            shopCarGoodsRelationDao.insertGoodsWithNo(shopCarGoodsRelation);
-        }else {
+        Map<String, Object> rMap = new HashMap<String, Object>();
+
+        Map<String, Object> Relation = shopCarGoodsRelationManager.findSameGoodsRelation(shopCarGoodsRelation);
+        Integer code = (Integer) Relation.get("code");
+        if (code == 0){
+            ShopCarGoodsRelation shopCarGoodsRelation1 = (ShopCarGoodsRelation) Relation.get("shopCarGoodsRelation");
             shopCarGoodsRelation1.setCount(shopCarGoodsRelation1.getCount()+shopCarGoodsRelation.getCount());
-            shopCarGoodsRelationDao.updateShopCarGoodsRelation(shopCarGoodsRelation1);
+            Map<String, Object> updateSCGR =shopCarGoodsRelationManager.updateShopCarGoodsRelation(shopCarGoodsRelation1);
+            Integer code1 = (Integer) updateSCGR.get("code");
+            if(code1 == 0){
+                rMap.put("code",0);
+                rMap.put("status","修改购物车商品成功");
+            }else if(code1 == 1){
+                rMap.put("code",1);
+                rMap.put("status","无购物车详情信息");
+            }else {
+                rMap.put("code",2);
+                rMap.put("status","修改购物车信息失败");
+            }
+        }else if(code == 2){
+            Map<String, Object> findGoods = shopCarManager.findShopCarDetailByConsumerId(consumerId);
+            Integer code1 = (Integer) findGoods.get("code");
+            if (code1 == 0){
+                ShopCar shopCar = (ShopCar) findGoods.get("shopCar");
+                shopCarGoodsRelation.setShopCarId(shopCar.getId());
+                Map<String, Object> insertGoods = shopCarGoodsRelationManager.insertGoodsWithNo(shopCarGoodsRelation);
+                Integer code2 = (Integer) insertGoods.get("code");
+                if (code2 == 0){
+                    rMap.put("code",0);
+                    rMap.put("status","向购物车添加商品成功");
+                }else if (code2 == 1){
+                    rMap.put("code",1);
+                    rMap.put("status","无购物车详情信息");
+                }else {
+                    rMap.put("code",2);
+                    rMap.put("status","无购物车详情信息");
+                }
+            }else if (code1 == 1){
+                rMap.put("code",1);
+                rMap.put("status","用户不存在");
+            }else {
+                rMap.put("code",2);
+                rMap.put("status","无购物车信息");
+            }
+        }else {
+            rMap.put("code",1);
+            rMap.put("status","无购物车详情信息");
         }
+        return  rMap;
     }
 }

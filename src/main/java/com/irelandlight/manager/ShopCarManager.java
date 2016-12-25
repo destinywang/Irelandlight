@@ -5,6 +5,8 @@ import com.irelandlight.model.ShopCar;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -13,7 +15,7 @@ import javax.annotation.Resource;
  * Time: 14:28
  * Description: ShopCarManager .
  */
-@Component
+@Component("shopCarManager")
 public class ShopCarManager {
     @Resource
     private ShopCarDao shopCarDao;
@@ -24,20 +26,24 @@ public class ShopCarManager {
      * @throws Exception
      */
     //添加用户购物车(ShopCar) 返回主键
-    public Integer insertShopCarByShopCar(ShopCar shopCar) throws Exception{
+    public Map<String,Object> insertShopCarByShopCar(ShopCar shopCar) throws Exception{
+        Map<String,Object> insertShopCar = new HashMap<String,Object>();
         //参数判断
         if (shopCar == null){
-            System.out.println("购物车");
-            return 0;
+            insertShopCar.put("code",1);
+            insertShopCar.put("status","无购物车信息");
+            return insertShopCar;
         }
-
         //返回值判断
         if(shopCarDao.insertShopCarByShopCar(shopCar) == 0){
-            return 0;
+            insertShopCar.put("code",2);
+            insertShopCar.put("status","插入购物车失败");
+            return insertShopCar;
         }
-        return 1;
+        insertShopCar.put("code",0);
+        insertShopCar.put("status","插入购物车成功");
+        return insertShopCar;
     }
-
 
     /**
      * 添加用户购物车 insertShopCarByConsumerId
@@ -45,16 +51,23 @@ public class ShopCarManager {
      * @throws Exception
      */
     //添加用户购物车(用户id)
-    public Integer insertShopCarByConsumerId(Long consumerId) throws Exception{
-        if(consumerId == null){
-            return 0;
+    public Map<String,Object> insertShopCarByConsumerId(Long consumerId) throws Exception{
+        Map<String,Object> insertShopCar = new HashMap<String,Object>();
+        //参数判断
+        if (consumerId == null||consumerId<0){
+            insertShopCar.put("code",1);
+            insertShopCar.put("status","用户id错误");
+            return insertShopCar;
         }
-
+        //返回值判断
         if(shopCarDao.insertShopCarByConsumerId(consumerId) == 0){
-            return 0;
+            insertShopCar.put("code",2);
+            insertShopCar.put("status","插入购物车失败");
+            return insertShopCar;
         }
-        return 1;
-
+        insertShopCar.put("code",0);
+        insertShopCar.put("status","插入购物车成功");
+        return insertShopCar;
     }
 
     /**
@@ -63,14 +76,23 @@ public class ShopCarManager {
      * @throws Exception
      */
     //删除用户购物车
-    public Integer deleteShopCarByConsumerId(Long consumerId) throws Exception{
-        if (consumerId == null){
-            return 0;
+    public Map<String,Object> deleteShopCarByConsumerId(Long consumerId) throws Exception{
+        Map<String,Object> insertShopCar = new HashMap<String,Object>();
+        //参数判断
+        if (consumerId == null||consumerId<0){
+            insertShopCar.put("code",1);
+            insertShopCar.put("status","用户id错误");
+            return insertShopCar;
         }
-        if (shopCarDao.deleteShopCarByConsumerId(consumerId) == 0){
-            return 0;
+        //返回值判断
+        if(shopCarDao.deleteShopCarByConsumerId(consumerId) == 0){
+            insertShopCar.put("code",2);
+            insertShopCar.put("status","删除购物车失败");
+            return insertShopCar;
         }
-        return 1;
+        insertShopCar.put("code",0);
+        insertShopCar.put("status","删除购物车成功");
+        return insertShopCar;
     }
 
     //暂不提供修改用户购物车功能
@@ -82,15 +104,24 @@ public class ShopCarManager {
      * @throws Exception
      */
     //通过用户Id查询其购物车信息
-    public ShopCar findShopCarDetailByConsumerId(Long consumerId) throws Exception{
-        if (consumerId == null){
-            return null;
+    public Map<String,Object> findShopCarDetailByConsumerId(Long consumerId) throws Exception{
+        Map<String,Object> insertShopCar = new HashMap<String,Object>();
+        ShopCar shopCar =null;
+        //参数判断
+        if (consumerId == null||consumerId<0){
+            insertShopCar.put("code",1);
+            insertShopCar.put("status","用户不存在");
+            return insertShopCar;
         }
-        ShopCar shopCar = shopCarDao.findShopCarDetailByConsumerId(consumerId);
-        if(shopCar == null){
-            return null;
+        //返回值判断
+        if((shopCar = shopCarDao.findShopCarDetailByConsumerId(consumerId)) == null){
+            insertShopCar.put("code",2);
+            insertShopCar.put("status","无购物车信息");
+            return insertShopCar;
         }
-        return shopCar;
+        insertShopCar.put("code",0);
+        insertShopCar.put("shopCar",shopCar);
+        return insertShopCar;
     }
 
     /**
@@ -100,16 +131,23 @@ public class ShopCarManager {
      * @throws Exception
      */
     //通过用户Id查找购物车商品详情列表(resultMap)
-    public ShopCar findShopCarGoodsDetailByConsumerId (Long consumerId) throws Exception{
-        if (consumerId == null){
-            System.out.println("用户不存在");
-            return null;
+    public Map<String,Object> findShopCarGoodsDetailByConsumerId (Long consumerId) throws Exception{
+        Map<String,Object> insertShopCar = new HashMap<String,Object>();
+        ShopCar shopCar =null;
+        //参数判断
+        if (consumerId == null||consumerId<0){
+            insertShopCar.put("code",1);
+            insertShopCar.put("status","用户id错误");
+            return insertShopCar;
         }
-        ShopCar shopCar = shopCarDao.findShopCarGoodsDetailByConsumerId(consumerId);
-        if(shopCar == null){
-            System.out.println("无此购物车信息");
-            return null;
+        //返回值判断
+        if((shopCar = shopCarDao.findShopCarGoodsDetailByConsumerId(consumerId)) == null){
+            insertShopCar.put("code",2);
+            insertShopCar.put("status","无购物车信息");
+            return insertShopCar;
         }
-        return shopCar;
+        insertShopCar.put("code",0);
+        insertShopCar.put("shopCar",shopCar);
+        return insertShopCar;
     }
 }

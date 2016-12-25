@@ -15,7 +15,6 @@ import java.util.List;
  */
 @Repository
 public interface AddressDao {
-
     /**
      * 查询用户的收货地址
      * @return List<Address> 收货地址列表

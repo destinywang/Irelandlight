@@ -17,7 +17,7 @@ import java.util.Map;
  * Time: 22:49
  * Description: orderManager .
  */
-@Component
+@Component("orderManager")
 public class OrderManager {
 
     @Resource

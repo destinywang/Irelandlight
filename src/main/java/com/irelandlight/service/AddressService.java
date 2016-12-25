@@ -3,6 +3,7 @@ package com.irelandlight.service;
 import com.irelandlight.model.Address;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -13,5 +14,5 @@ import java.util.List;
  */
 public interface AddressService {
 
-    public List<Address> findAddressByConsumerId(Long consumerId) throws Exception;
+    public Map<String,Object> findAddressByConsumerId(Long consumerId) throws Exception;
 }

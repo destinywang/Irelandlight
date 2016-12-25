@@ -1,11 +1,10 @@
 package com.irelandlight.service;
 
-import com.irelandlight.model.Coupon;
 import com.irelandlight.test.BaseJunitTest;
 import org.junit.Test;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -21,7 +20,7 @@ public class CouponTest extends BaseJunitTest{
 
     @Test
     public void TestFindCouponByConsumerId() throws Exception{
-        List<Coupon> coupons = couponService .findCouponByConsumerId(1002L);
+        Map<String,Object> coupons = couponService .findCouponByConsumerId(1002L);
         System.out.println(coupons);
     }
 }

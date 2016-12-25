@@ -8,6 +8,7 @@ import org.junit.Test;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -76,7 +77,7 @@ public class ShopCarGoodsRelationTest extends BaseJunitTest {
 
         ShopCarGoodsRelation shopCarGoodsRelation = new ShopCarGoodsRelation();
         shopCarGoodsRelation.setShopCarId(1L);
-        List<ShopCarGoodsRelation> shopCarGoodsRelations = shopCarGoodsRelationService.findShopCarGoodsRelationByShopCarId(shopCarGoodsRelation);
+        Map<String,Object> shopCarGoodsRelations = shopCarGoodsRelationService.findShopCarGoodsRelationByShopCarId(shopCarGoodsRelation);
         System.out.println(shopCarGoodsRelations);
     }
 

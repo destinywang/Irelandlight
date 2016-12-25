@@ -1,7 +1,8 @@
 package com.irelandlight.service;
 
 import com.irelandlight.model.ShopCar;
-import org.apache.ibatis.annotations.Param;
+
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -18,7 +19,7 @@ public interface ShopCarService {
      * @throws Exception
      */
     //添加用户购物车(ShopCar) 返回主键
-    public Integer insertShopCarByShopCar(ShopCar shopCar) throws Exception;
+    public Map<String, Object> insertShopCarByShopCar(ShopCar shopCar) throws Exception;
 
     /**
      * 添加用户购物车 insertShopCarByConsumerId
@@ -26,7 +27,7 @@ public interface ShopCarService {
      * @throws Exception
      */
     //添加用户购物车(用户id) 返回主键
-    public Integer insertShopCarByConsumerId(Long consumerId) throws Exception;
+    public Map<String, Object> insertShopCarByConsumerId(Long consumerId) throws Exception;
 
     /**
      * 删除用户购物车 deleteConsumerShopCarByConsumerId
@@ -34,18 +35,18 @@ public interface ShopCarService {
      * @throws Exception
      */
     //删除用户购物车
-    public Integer deleteShopCarByConsumerId(Long consumerId) throws Exception;
+    public Map<String, Object> deleteShopCarByConsumerId(Long consumerId) throws Exception;
 
     //暂不提供修改用户购物车功能
 
     /**
      * 通过用户Id查找购物车商品详情列表(resultMap) findShopCarGoodsDetailByConsumerId
      * @param consumerId
-     * @return
+     * @return Map<String, Object>
      * @throws Exception
      */
     //通过用户Id查找购物车商品详情列表(resultMap)
-    public ShopCar findShopCarGoodsDetailByConsumerId (Long consumerId) throws Exception;
+    public Map<String, Object> findShopCarGoodsDetailByConsumerId (Long consumerId) throws Exception;
 
     /**
      * 通过用户Id查询其购物车信息 findShopCarDetailByConsumerId
@@ -53,6 +54,6 @@ public interface ShopCarService {
      * @return ShopCar
      * @throws Exception
      */
-    public ShopCar findShopCarDetailByConsumerId(Long consumerId)throws Exception;
+    public Map<String, Object> findShopCarDetailByConsumerId(Long consumerId)throws Exception;
 
 }

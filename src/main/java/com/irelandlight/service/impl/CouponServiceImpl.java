@@ -1,12 +1,11 @@
 package com.irelandlight.service.impl;
 
-import com.irelandlight.dao.CouponDao;
-import com.irelandlight.model.Coupon;
+import com.irelandlight.manager.CouponManager;
 import com.irelandlight.service.CouponService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -19,9 +18,9 @@ import java.util.List;
 public class CouponServiceImpl implements CouponService {
 
     @Resource
-    private CouponDao couponDao;
+    private CouponManager couponManager;
 
-    public List<Coupon> findCouponByConsumerId(Long consumerId) throws Exception {
-        return couponDao.findCouponByConsumerId(consumerId);
+    public Map<String, Object> findCouponByConsumerId(Long consumerId) throws Exception {
+        return couponManager.findCouponByConsumerId(consumerId);
     }
 }

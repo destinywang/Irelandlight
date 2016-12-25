@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -22,7 +23,8 @@ public class AddressTest extends BaseJunitTest {
 
     @Test
     public void testFindAddressByConsumerId() throws Exception {
-       List<Address> addresses = addressService.findAddressByConsumerId(1002L);
-        System.out.println(addresses);
+        Map<String,Object> addresses = addressService.findAddressByConsumerId(1002L);
+        List<Address> addresses1 = (List<Address>) addresses.get("addresses");
+        System.out.println(addresses1);
     }
 }

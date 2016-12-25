@@ -1,9 +1,6 @@
 package com.irelandlight.service;
 
-import com.irelandlight.model.Coupon;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -20,6 +17,6 @@ public interface CouponService {
      * @return List<Coupon> 可用优惠券列表
      * @throws Exception
      */
-    public List<Coupon> findCouponByConsumerId(Long consumerId) throws Exception;
+    public Map<String, Object> findCouponByConsumerId(Long consumerId) throws Exception;
 
 }

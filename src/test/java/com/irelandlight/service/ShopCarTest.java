@@ -35,8 +35,8 @@ public class ShopCarTest extends BaseJunitTest {
     @Test
     public void testFindShopCarGoodsDetailByConsumerId() throws Exception {
         Long consumerId = new Long(1001);
-        ShopCar shopCar = shopCarService.findShopCarGoodsDetailByConsumerId(consumerId);
-        System.out.println(shopCar);
+        shopCarService.findShopCarGoodsDetailByConsumerId(consumerId);
+        //System.out.println(shopCar);
     }
 
     @Test

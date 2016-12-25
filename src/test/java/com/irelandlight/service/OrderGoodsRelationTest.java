@@ -8,6 +8,7 @@ import org.junit.Test;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -38,7 +39,8 @@ public class OrderGoodsRelationTest extends BaseJunitTest {
         shopCarGoodsRelations.add(shopCarGoodsRelation);
         shopCarGoodsRelations.add(shopCarGoodsRelation2);
 
-        //orderGoodsRelationService.insertOrderDetail(2L,shopCarGoodsRelations);
+        Map<String,Object> map = orderGoodsRelationService.insertOrderDetail(2L,shopCarGoodsRelations);
+        System.out.println("code:"+map.get("code")+" & status: "+map.get("status"));
 
     }
 
@@ -49,7 +51,8 @@ public class OrderGoodsRelationTest extends BaseJunitTest {
         orderGoodsRelation.setCount(2);
         orderGoodsRelation.setGoodsId(2L);
         orderGoodsRelation.setSize("3");
-        orderGoodsRelationService.buyNow(orderGoodsRelation);
+        Map<String,Object> map = orderGoodsRelationService.buyNow(orderGoodsRelation);
+        System.out.println("code:"+map.get("code")+" & status: "+map.get("status"));
     }
 
 }

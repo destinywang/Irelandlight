@@ -1,13 +1,12 @@
 package com.irelandlight.service.impl;
 
-import com.irelandlight.dao.AddressDao;
-import com.irelandlight.model.Address;
+import com.irelandlight.manager.AddressManager;
 import com.irelandlight.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -20,15 +19,15 @@ import java.util.List;
 public class AddressServiceImpl implements AddressService {
 
     @Resource
-    private AddressDao addressDao;
+    private AddressManager addressManager;
 
     /**
      * 查找用户收货地址列表 findAddressByConsumerId
      * @param consumerId
-     * @return List<Address> 收货地址列表
+     * @return Map<String, Object> 收货地址列表
      * @throws Exception
      */
-    public List<Address> findAddressByConsumerId(Long consumerId) throws Exception {
-        return addressDao.findAddressByConsumerId(consumerId);
+    public Map<String, Object> findAddressByConsumerId(Long consumerId) throws Exception {
+        return addressManager.findAddressByConsumerId(consumerId);
     }
 }

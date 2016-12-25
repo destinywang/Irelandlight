@@ -16,7 +16,7 @@ import java.util.Map;
  * Time: 12:10
  * Description: 目的... .
  */
-@Component
+@Component("couponManager")
 public class CouponManager {
 
     @Resource
@@ -61,13 +61,11 @@ public class CouponManager {
         if (consumerId == null || consumerId <0){
             delCoupon.put("code",1);
             delCoupon.put("status","用户不存在");
-            //System.out.println("用户不存在");
             return delCoupon;
         }
         if (couponId == null || couponId <0){
             delCoupon.put("code",2);
             delCoupon.put("status","优惠券不存在");
-            //System.out.println("优惠券不存在");
             return delCoupon;
         }
         if(couponDao.deleteCoupon(consumerId,couponId)==0){

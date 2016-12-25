@@ -1,14 +1,13 @@
 package com.irelandlight.service.impl;
 
-import com.irelandlight.dao.ShopCarDao;
-import com.irelandlight.dao.ShopCarGoodsRelationDao;
+import com.irelandlight.manager.ShopCarGoodsRelationManager;
 import com.irelandlight.manager.ShopCarManager;
 import com.irelandlight.model.ShopCar;
 import com.irelandlight.service.ShopCarService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * Created  with Intellij IDEA.
@@ -23,19 +22,13 @@ public class ShopCarServiceImpl implements ShopCarService {
     @Resource
     private ShopCarManager shopCarManager;
 
-    @Resource
-    private ShopCarGoodsRelationDao shopCarGoodsRelationDao;
-
     /**
      * 添加用户购物车 返回主键 insertShopCarByShopCar
      * @param shopCar
      * @throws Exception
      */
-    public Integer insertShopCarByShopCar(ShopCar shopCar) throws Exception {
-        if (shopCarManager.insertShopCarByShopCar(shopCar) == 0){
-            return 0;
-        }
-        return 1;
+    public Map<String, Object> insertShopCarByShopCar(ShopCar shopCar) throws Exception {
+        return shopCarManager.insertShopCarByShopCar(shopCar);
     }
 
     /**
@@ -43,52 +36,38 @@ public class ShopCarServiceImpl implements ShopCarService {
      * @param consumerId
      * @throws Exception
      */
-    public Integer  insertShopCarByConsumerId(Long consumerId) throws Exception {
-       if(shopCarManager.insertShopCarByConsumerId(consumerId) == 0){
-           return 0;
-       }
-       return 1;
+    public Map<String, Object> insertShopCarByConsumerId(Long consumerId) throws Exception {
+       return shopCarManager.insertShopCarByConsumerId(consumerId);
     }
 
     /**
      * 删除用户购物车 deleteShopCarByConsumerId
-     * @param consumerId
+     * @param Map<String, Object>
      * @throws Exception
      */
-    public Integer deleteShopCarByConsumerId(Long consumerId) throws Exception {
-        if(shopCarManager.deleteShopCarByConsumerId(consumerId)==0){
-            return 0;
-        }
-        return 1;
+    public Map<String, Object> deleteShopCarByConsumerId(Long consumerId) throws Exception {
+        return shopCarManager.deleteShopCarByConsumerId(consumerId);
     }
 
     /**
      * 通过用户Id查找购物车商品详情列表(resultMap) findShopCarGoodsDetailByConsumerId
      * @param consumerId
-     * @return
+     * @return Map<String, Object>
      * @throws Exception
      */
     //通过用户Id查找购物车商品详情列表(resultMap)
-    public ShopCar findShopCarGoodsDetailByConsumerId (Long consumerId) throws Exception{
-        ShopCar shopCar = shopCarManager.findShopCarGoodsDetailByConsumerId(consumerId);
-        if (shopCar == null){
-            return null;
-        }
-        return shopCar;
+    public Map<String, Object> findShopCarGoodsDetailByConsumerId (Long consumerId) throws Exception{
+        return shopCarManager.findShopCarGoodsDetailByConsumerId(consumerId);
     }
 
     /**
      * 通过用户Id查询其购物车信息 findShopCarDetailByConsumerId
      * @param consumerId
-     * @return ShopCar
+     * @return Map<String, Object>
      * @throws Exception
      */
-    public ShopCar findShopCarDetailByConsumerId(Long consumerId) throws Exception {
-        ShopCar shopCar = shopCarManager.findShopCarDetailByConsumerId(consumerId);
-        if (shopCar == null){
-            return null;
-        }
-        return shopCar;
+    public Map<String, Object> findShopCarDetailByConsumerId(Long consumerId) throws Exception {
+        return shopCarManager.findShopCarDetailByConsumerId(consumerId);
     }
 
 }

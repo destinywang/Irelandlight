@@ -17,31 +17,25 @@ import java.util.Map;
  * Time: 12:06
  * Description: AddressManager .
  */
-@Component
+@Component("addressManager")
 public class AddressManager {
 
     @Resource
     private AddressDao addressDao;
-    /**
-     * 查询用户的收货地址
-     * @return List<Address> 收货地址列表
-     * @throws Exception 异常
-     */
-    //findAddressByConsumerId
+
     public Map<String,Object> findAddressByConsumerId(@Param("consumerId") Long consumerId)throws Exception{
-        Map<String,Object> map = new HashMap<String,Object>();
+        Map<String,Object> rMap = new HashMap<String,Object>();
         List<Address> addresses;
         if (consumerId == null || consumerId <0){
-            //System.out.println("用户 不存在");
-            map.put("code",1);
-            map.put("status","用户不存在");
+            rMap.put("code",1);
+            rMap.put("status","用户不存在");
         }else if((addresses = addressDao.findAddressByConsumerId(consumerId))==null){
-            map.put("code",2);
-            map.put("status","用户不存在");
+            rMap.put("code",2);
+            rMap.put("status","用户不存在");
         }else {
-            map.put("code",0);
-            map.put("addresses",addresses);
+            rMap.put("code",0);
+            rMap.put("addresses",addresses);
         }
-        return map;
+        return rMap;
     }
 }
