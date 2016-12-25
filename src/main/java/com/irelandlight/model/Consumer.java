@@ -22,6 +22,15 @@ public class Consumer {
     private String email;           //用户邮箱地址
     private String telephone;       //用户联系方式
     private Date birthday;          //用户生日
+    private Integer defaultAddressId; //默认收货地址id
+
+    public Integer getDefaultAddressId() {
+        return defaultAddressId;
+    }
+
+    public void setDefaultAddressId(Integer defaultAddressId) {
+        this.defaultAddressId = defaultAddressId;
+    }
 
     public Long getId() {
         return id;

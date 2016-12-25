@@ -1,32 +1,30 @@
 package com.irelandlight.service.impl;
 
-import com.irelandlight.dao.PersonalInfoDao;
-import com.irelandlight.model.Consumer;
-import com.irelandlight.service.AccountManageService;
+import com.irelandlight.manager.PersonalInfoManager;
 import com.irelandlight.service.PersonalInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by Matt on 2016/12/9.
  */
 @Service
-public class PersonalInfoServiceImpl implements PersonalInfoService{
+public class PersonalInfoServiceImpl implements PersonalInfoService {
 
     @Resource
-    private PersonalInfoDao personalInfoDao;
+    private PersonalInfoManager personalInfoManagerImpl;
 
-    public Consumer findPersonalInfo(Long id) throws Exception {
-        return personalInfoDao.findPersonalInfo(id);
+    public  Map<String,Object> findPersonalInfo(Long consumerId){
+        return personalInfoManagerImpl.findPersonalInfo(consumerId);
     }
 
-    public void changeEmail(Long id, String email) throws Exception {
-        personalInfoDao.updateEmail(id,email);
+    public Map<String, Object> changeEmail(Long consumerId, String email)  {
+        return personalInfoManagerImpl.updateEmail(consumerId, email);
     }
 
-    public void changeNickName(Long id, String nickname) throws Exception {
-        personalInfoDao.updateNickname(id,nickname);
+    public Map<String, Object> changeNickName(Long consumerId, String nickname) {
+        return personalInfoManagerImpl.updateNickname(consumerId, nickname);
     }
 }

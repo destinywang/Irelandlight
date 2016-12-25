@@ -16,20 +16,20 @@ import java.util.List;
 @Repository
 public interface MyHistoryDao {
 
-    public void insertMyHistory(History history) throws Exception;
+    public Integer insertMyHistory(History history);
 
-    public void deleteMyHistory(Long historyId) throws Exception;
+    public Integer deleteMyHistory(Long historyId);
 
-    public List<History> findHistoryTest(Long consumerId) throws Exception;
+    public List<History> findHistoryTest(Long consumerId);
 
-    public Long findExistHistory(History history) throws Exception;
+    public Long findExistHistory(History history);
 
-    public int updateHistoryTime(Long historyId) throws Exception;
+    public Integer updateHistoryTime(Long historyId);
 
-    public int deleteHistoryList(@Param("HistoryId") List<Long> historyId) throws Exception;
+    public Integer deleteHistoryList(@Param("HistoryId") List<Long> historyId);
 
-    public List<GoodDisplay> findMyHistory(Long consuerId) throws Exception;
+    public List<GoodDisplay> findMyHistory(Long consuerId);
 
-    public History findMyHistoryByHistoryId(Long historyId) throws Exception;
+    public History findMyHistoryByHistoryId(Long historyId);
 
 }

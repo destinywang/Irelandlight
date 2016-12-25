@@ -12,11 +12,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegisterDao {
 
-    public int insertNewConsumer(Consumer consumer);
+    public Integer insertNewConsumer(Consumer consumer);
 
-    public void insertShopCar(Long id);
+    public Integer insertShopCar(Long id);
 
-    public int countProductor();
+    public Integer countProductor();
 
-    public void sendWelcome(Long from_id, Long to_id);
+    public Integer sendWelcome(Long from_id, Long to_id);
+
+    public Long findConsumerByUserName(String userName);
 }

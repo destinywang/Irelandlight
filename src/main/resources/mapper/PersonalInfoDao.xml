@@ -8,7 +8,7 @@
     <select id="findPersonalInfo" parameterType="java.lang.Long" resultType="com.irelandlight.model.Consumer">
         SELECT user_name,nick_name,gender,telephone,birthday,email
         FROM tb_consumer
-        WHERE id=#{id}
+        WHERE visibility=0 AND id=#{id}
     </select>
 
     <!--根据cid+昵称修改昵称-->

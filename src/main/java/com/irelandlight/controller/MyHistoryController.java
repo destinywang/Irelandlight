@@ -5,6 +5,7 @@ import com.irelandlight.service.MyHistoryService;
 import com.irelandlight.vo.GoodDisplay;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -25,14 +26,14 @@ public class MyHistoryController {
     private final ThreadLocal<Long> consumerId = new ThreadLocal<Long>();
 
     @RequestMapping(value = "/history", method = {RequestMethod.GET, RequestMethod.POST}, produces = "text/json;charset=UTF-8 ")
-    @ResponseBody
-    public String display() throws Exception {
+    public ModelAndView display() throws Exception {
         consumerId.set(1001l);
+        ModelAndView modelAndView=new ModelAndView();
         List<GoodDisplay> historyList = myHistoryServiceImpl.findMyHistory(consumerId.get());
         System.out.println(historyList);
         JSONObject json = new JSONObject();
         String historyListJson = json.toJSONString(historyList);
-        return historyListJson;
+        return modelAndView;
     }
 
     public void deleteMyHistory(@RequestBody Long historyId)throws Exception{
@@ -41,11 +42,6 @@ public class MyHistoryController {
 
     public void deleteMyHistory(@RequestBody List<Long> historyIdList)throws Exception{
         myHistoryServiceImpl.deleteHistoryList(historyIdList);
-
-    }
-
-    public static void main(String[] args) {
-        System.out.println(3^5);
     }
 
 }

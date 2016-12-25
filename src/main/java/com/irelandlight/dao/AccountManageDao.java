@@ -12,38 +12,42 @@ import java.util.List;
 @Repository
 public interface AccountManageDao {
 
-    /*//注册新用户
-    public void insertNewConsumer(Consumer consumer) throws Exception;*/
-
     //根据cid查找用户名
-    public String findConsumerName(Long id)throws Exception;
+    public String findConsumerName(Long id);
 
     //根据cid查找用户昵称
-    public String findNickName(Long id)throws Exception;
+    public String findNickName(Long id);
 
     //根据cid查找手机号码
-    public String findTelphone(Long id)throws Exception;
+    public String findTelphone(Long id);
 
     //根据cid修改手机号码
-    public void updateTelephone(Long id,String telephone)throws Exception;
+    public Integer updateTelephone(Long id, String telephone);
 
     //根据cid查找原密码
-    public String findPassword(Long id)throws Exception;
+    public String findPassword(Long id);
+
+    //根据cid查找默认收货地址id
+    public Integer findDefaultAddressId(Long id);
+
+    //根据cid查找盐值
+    public String findSalt(Long id);
 
     //根据cid修改密码
-    public void  updatePassword(Long id,String password)throws Exception;
+    public Integer updatePassword(Long id, String password);
 
     //根据cid查找默认收货地址
-    public String findDefaultAddress(Long id)throws Exception;
+    public String findDefaultAddress(Long id);
 
     //根据cid查找默认地址收货人
-    public String findDefaultConsumer(Long id)throws Exception;
+    public String findDefaultConsumer(Long id);
 
     //根据cid查找所有收货地址
-    public List<Address> findAddress(Long id) throws Exception;
+    public List<Address> findAddress(Long id);
 
     //根据cid添加新地址
-    public void insertNewAddress(Address address) throws Exception;
+    public Integer insertNewAddress(Address address);
 
-
+    //根据cid,flag,设置默认收货地址id
+    public Integer updateDefaultAddressId(Long consumerId,Integer defaultAddressId);
 }

@@ -1,7 +1,10 @@
 package com.irelandlight.dao;
 
 import com.irelandlight.model.Consumer;
+import org.omg.CORBA.Object;
 import org.springframework.stereotype.Repository;
+
+import java.util.Map;
 
 /**
  * Created by Matt on 2016/12/9.
@@ -9,10 +12,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonalInfoDao {
 
-    public Consumer findPersonalInfo(Long id)throws Exception;
+    public Consumer findPersonalInfo(Long consumerId);
 
-    public void updateEmail(Long id,String email)throws Exception;
+    public Integer updateEmail(Long consumerId, String email);
 
-    public void updateNickname(Long id,String Nickname)throws Exception;
+    public Integer updateNickname(Long consumerId,String Nickname);
 
 }

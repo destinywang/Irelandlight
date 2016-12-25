@@ -26,7 +26,11 @@
     <select id="countProductor" resultType="int">
         SELECT count(id)
         FROM tb_productor
+        WHERE visibility=0
     </select>
+
+    <!--判断该管理员是否存在-->
+    <select id="productorExist"
 
     <!--注册后像用户发送一条欢迎消息-->
     <insert id="sendWelcome">
@@ -34,5 +38,12 @@
         (visibility,from_id,to_id,content,type)
         VALUES ( 0,#{0},#{1},"欢迎来到IrelandLight",1 )
     </insert>
+
+    <!--根据用户名查找用户-->
+    <select id="findConsumerByUserName" parameterType="String" resultType="Long">
+        SELECT id
+        FROM tb_consumer
+        WHERE user_name=#{userName}
+    </select>
 
 </mapper>

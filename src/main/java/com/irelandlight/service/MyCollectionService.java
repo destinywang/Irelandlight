@@ -5,6 +5,7 @@ import com.irelandlight.vo.GoodDisplay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Matt on 2016/12/9.
@@ -12,21 +13,21 @@ import java.util.List;
 public interface MyCollectionService {
 
     /*返回我的收藏集合*/
-    public List<GoodDisplay> findMyCollection(Long id) throws Exception;
+    public Map<String,Object> findMyCollection(Long id);
 
     /*插入一条我的收藏记录*/
-    public void insertMyCollection(ConsumerGoodsRelation relation,Long consumerId) throws Exception;
+    public Map<String,Object> insertMyCollection(ConsumerGoodsRelation relation, Long consumerId);
 
     /*删除一条我的收藏记录*/
-    public void deleteMyCollection(Long id) throws Exception;
+    public Map<String,Object> deleteMyCollection(Long relationid);
 
     /*添加一条购物车记录*/
-    public void addToShopCarFromCollection(ConsumerGoodsRelation relation) throws Exception;
+    public Map<String,Object> addToShopCarFromCollection(ConsumerGoodsRelation relation);
 
     /*批量删除记录*/
-    public void deleteCollectionList(ArrayList<Long> CollectionIdList) throws Exception;
+    public Map<String,Object> deleteCollectionList(ArrayList<Long> CollectionIdList);
 
     /*批量添加购物车*/
-    public void addToShopCarFromCollectionList(ArrayList<ConsumerGoodsRelation> collection) throws Exception;
+    public Map<String,Object> addToShopCarFromCollectionList(ArrayList<ConsumerGoodsRelation> collection);
 
 }

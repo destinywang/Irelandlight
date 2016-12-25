@@ -2,15 +2,17 @@ package com.irelandlight.service;
 
 import com.irelandlight.model.Consumer;
 
+import java.util.Map;
+
 /**
  * Created by Matt on 2016/12/9.
  */
 public interface PersonalInfoService {
 
-    public Consumer findPersonalInfo(Long id) throws Exception;
+    public Map<String, Object> findPersonalInfo(Long id);
 
-    public void changeEmail(Long id,String email) throws Exception;
+    public Map<String, Object> changeEmail(Long id, String email);
 
-    public void changeNickName(Long id,String nickname) throws Exception;
+    public Map<String, Object> changeNickName(Long id, String nickname);
 
 }

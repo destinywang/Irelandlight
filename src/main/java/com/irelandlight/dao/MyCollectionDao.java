@@ -16,26 +16,26 @@ import java.util.List;
 @Repository
 public interface MyCollectionDao {
 
-    public void insertMyCollection(ConsumerGoodsRelation consumerGoodsRelation)throws Exception;
+    public Integer insertMyCollection(ConsumerGoodsRelation consumerGoodsRelation);
 
-    public void deleteMyCollection(Long relationId)throws Exception;
+    public Integer deleteMyCollection(Long relationId);
 
-    public void addToShopCarFromCollection(ConsumerGoodsRelation consumerGoodsRelation)throws Exception;
+    public Integer addToShopCarFromCollection(ConsumerGoodsRelation consumerGoodsRelation);
 
-    public Long findExistGoods(ConsumerGoodsRelation consumerGoodsRelation)throws Exception;
+    public Long findExistGoods(ConsumerGoodsRelation consumerGoodsRelation);
 
-    public void AddGoodsCount(Long relationId)throws Exception;
+    public Integer AddGoodsCount(Long relationId);
 
-    public void deleteCollectionList(@Param("CollectionIdList") ArrayList<Long> CollectionIdList)throws Exception;
+    public Integer deleteCollectionList(@Param("CollectionIdList") ArrayList<Long> CollectionIdList);
 
     //根据rid批量添加收藏记录至购物车
-    public void addToShopCarFromCollectionList (List<ConsumerGoodsRelation> relationList )throws Exception;
+    public Integer addToShopCarFromCollectionList(List<ConsumerGoodsRelation> relationList);
 
-    public List<GoodDisplay> findMyCollection(@Param("consumerId") Long id ) throws Exception;
+    public List<GoodDisplay> findMyCollection(@Param("consumerId") Long id);
 
-    public List<ConsumerGoodsRelation> findCollectionTest(Long id)throws Exception;
+    public List<ConsumerGoodsRelation> findCollectioninCGRFrom(Long id);
 
     //根据收藏id更新修改时间
-    public void updateLastTime(Long collectionId)throws Exception;
+    public Integer updateLastTime(Long collectionId);
 
 }

@@ -15,6 +15,7 @@ public class GoodDisplay {
 
     private Long goodsId;
     private Long collectionId;
+    private Long historyId;
     private String goodsImgUrl;
     private String goodsName;
     private Float goodsPrice;
@@ -67,6 +68,14 @@ public class GoodDisplay {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public Long getHistoryId() {
+        return historyId;
+    }
+
+    public void setHistoryId(Long historyId) {
+        this.historyId = historyId;
     }
 
     public Date getCreateTime() {
