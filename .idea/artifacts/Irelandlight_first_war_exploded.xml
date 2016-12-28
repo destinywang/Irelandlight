@@ -51,6 +51,7 @@
           <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.8.0" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.6.2" />
           <element id="library" level="project" name="Maven: com.qiniu:happy-dns-java:0.1.4" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.9-atlassian-1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

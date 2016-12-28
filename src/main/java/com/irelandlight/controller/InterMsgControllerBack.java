@@ -7,11 +7,9 @@ import com.irelandlight.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -96,6 +94,7 @@ public class InterMsgControllerBack {
         messageCustom.setFromId(messageCustom.getFromId());
         messageCustom.setToId(messagePicAjax.getToId());
         messageCustom.setType(4);
+        messageCustom.setFromTo(messagePicAjax.getFromTo());
         insertMsg(messageCustom);
     }
 
@@ -113,6 +112,15 @@ public class InterMsgControllerBack {
         JSONObject jsonObject = new JSONObject();
         List<MessageCustom> messageCustomList = interMsgServiceBack.getMsgHistory(consumer_id);
         return jsonObject.toJSONString(messageCustomList);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public ModelAndView HandleException(Exception ex){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("exceptionMessage",ex.getMessage());
+        modelAndView.setViewName("/exceptionPage");
+        return modelAndView;
     }
 
 }

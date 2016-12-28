@@ -34,8 +34,8 @@
     </select>
 
     <insert id="insertMsg" parameterType="com.irelandlight.vo.MessageCustom">
-        INSERT INTO tb_message (create_time, last_update, visibility, from_id, to_id, content, type)
-        VALUES (now(), now(), 0, #{fromId}, #{toId}, #{content}, #{type});
+        INSERT INTO tb_message (create_time, last_update, visibility, from_id, to_id, content, type,from_to)
+        VALUES (now(), now(), 0, #{fromId}, #{toId}, #{content}, #{type},#{fromTo});
     </insert>
 
     <!-- 前台单人客服页面 -->

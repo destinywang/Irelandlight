@@ -71,7 +71,6 @@ public class InterMsgController {
     }
 
     /* 发送消息 */
-    //TODO insert问题
     @RequestMapping("insertMsg")
     public void insertMsg(@RequestBody MessageCustom messageCustom)throws Exception{
         interMsgService.insertMsg(messageCustom);

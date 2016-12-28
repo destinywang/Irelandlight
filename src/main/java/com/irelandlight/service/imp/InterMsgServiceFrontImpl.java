@@ -49,9 +49,7 @@ public class InterMsgServiceFrontImpl implements InterMsgServiceFront {
      * @throws Exception
      */
     public void insertMsg(MessageCustom messageCustom)throws Exception{
-        if(interMsgManagerFront.insertMsg(messageCustom) != 1){
-            throw new InsertException("插入聊天记录异常");
-        }
+        interMsgManagerFront.insertMsg(messageCustom);
     }
 
     public String getOneMsg(Long consumer_id) throws Exception {
@@ -71,9 +69,9 @@ public class InterMsgServiceFrontImpl implements InterMsgServiceFront {
      */
     public MessageHome MsgHomePage(Long consumer_id) throws Exception {
         MessageHome messageHome = new MessageHome();
-        String message = interMsgDaoFront.getOneMsg(consumer_id);
-        OrderCustom order = interMsgDaoFront.getNewDeliver(consumer_id);
-        String news = interMsgDaoFront.getLastestNews();
+        String message = interMsgManagerFront.getOneMsg(consumer_id);
+        OrderCustom order = interMsgManagerFront.getNewDeliver(consumer_id);
+        String news = interMsgManagerFront.getLastestNews();
         messageHome.setMessage(message);
         messageHome.setNews(news);
         messageHome.setOrder(order);
@@ -95,9 +93,9 @@ public class InterMsgServiceFrontImpl implements InterMsgServiceFront {
      */
     public MessageFrontSingle MessageFrontSinglePage(Long consumer_id,Long productor_id)throws Exception{
 
-        String productorName = getProductorName(productor_id);
-        String consumerName = getUserHeadUrl(consumer_id);
-        List<MessageCustom> list = getMsgHistory(consumer_id);
+        String productorName = interMsgManagerFront.getProductorName(productor_id);
+        String consumerName = interMsgManagerFront.getUserHeadUrl(consumer_id);
+        List<MessageCustom> list = interMsgManagerFront.getMsgHistory(consumer_id);
 
         MessageFrontSingle messageFrontSingle = new MessageFrontSingle();
         messageFrontSingle.setMessageList(list);

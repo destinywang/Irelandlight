@@ -44,7 +44,6 @@ public class InterMsgServiceImpl implements InterMsgService {
      * @throws Exception
      */
     public void insertMsg(MessageCustom messageCustom)throws Exception{
-        //TODO  为什么dao层的insert中resultType无法添加,insert影响的行数如何返回
         System.out.println("aaaaaaaaaa");
         System.out.println("aaaaaaaaaa");
         System.out.println("aaaaaaaaaa");
@@ -109,7 +108,8 @@ public class InterMsgServiceImpl implements InterMsgService {
                 interMsgDao.getConsumerList(productor_id);
         for(ConsumerCustomRecently consumer: consumerCustomRecentlyList){
             Long id = consumer.getId();
-            consumer.setContent(interMsgDao.getConsumerContent(id));
+            //TODO
+//            consumer.setContent(interMsgDao.getConsumerContent(id));
         }
         return consumerCustomRecentlyList;
     }

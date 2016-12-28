@@ -9,6 +9,15 @@ public class MessageCustom {
     private Long toId;              //接收方主键
     private String content;         //消息内容
     private Integer type;           //消息类型，0为文本，1为图片
+    private String fromTo;          //
+
+    public String getFromTo() {
+        return fromTo;
+    }
+
+    public void setFromTo(String fromTo) {
+        this.fromTo = fromTo;
+    }
 
     public Long getFromId() {
         return fromId;

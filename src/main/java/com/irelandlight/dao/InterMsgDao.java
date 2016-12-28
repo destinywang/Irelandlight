@@ -18,7 +18,6 @@ public interface InterMsgDao {
 
     public String getLastestNews()throws Exception;
 
-    //TODO insert问题
     public int insertMsg(MessageCustom messageCustom)throws Exception;
 
     public String getOneMsg(Long consumer_id)throws Exception;

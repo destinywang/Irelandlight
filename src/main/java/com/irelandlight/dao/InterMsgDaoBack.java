@@ -14,7 +14,7 @@ public interface InterMsgDaoBack {
     /* 后台逻辑 */
     public List<ConsumerCustomRecently> getConsumerList(Long productor_id)throws Exception;
 
-    public String getConsumerContent(Long consumer_id)throws Exception;
+    public ConsumerCustom  getConsumerContent(Long consumer_id)throws Exception;
 
     public List<NewsHistory> getNewsRecently()throws Exception;
 
@@ -28,8 +28,12 @@ public interface InterMsgDaoBack {
 
     public List<String> getLastMsgTest(List<Long> IdList)throws Exception;
 
-    public void insertMsg(MessageCustom messageCustom)throws Exception;
+    public int insertMsg(MessageCustom messageCustom)throws Exception;
 
     public List<MessageCustom> getMsgHistory(Long consumer_id)throws Exception;
+
+    public List<CsmMsgFromContentType> getConsumerFromToList(Long productor_id)throws Exception;
+
+    public ConsumerBackHome getConsumerBackHomeList(Long consumer_id)throws Exception;
 
 }

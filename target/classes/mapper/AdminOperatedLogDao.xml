@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irelandlight.dao.OperationLogDao">
+
+    <insert id="insertOperationLog" parameterType="com.irelandlight.vo.ProductorLogCustom">
+        INSERT INTO tb_productor_log(create_time, last_update, visibility,productor_id,content)
+        VALUES (now(),now(),0,#{productor_id},#{content})
+    </insert>
+
+</mapper>

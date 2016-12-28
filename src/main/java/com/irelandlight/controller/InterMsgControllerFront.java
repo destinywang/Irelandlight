@@ -1,10 +1,12 @@
 package com.irelandlight.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.irelandlight.exception.InsertException;
 import com.irelandlight.manager.InterMsgManagerFront;
 import com.irelandlight.service.InterMsgServiceFront;
 import com.irelandlight.util.ImgeUploadUtil;
 import com.irelandlight.vo.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +57,7 @@ public class InterMsgControllerFront {
      * 测试完毕
      */
     @RequestMapping("MessageHome")
-    public String MessageHome(Long consumer_id,Model model)throws Exception{
+    public String MessageHome(Long consumer_id,Model model) throws Exception {
         MessageHome messageHome = InterMsgServiceFront.MsgHomePage(consumer_id);
         model.addAttribute("messageHome",messageHome);
         return "/messageFrontHome";
@@ -90,6 +92,7 @@ public class InterMsgControllerFront {
         messageCustom.setFromId(messageCustom.getFromId());
         messageCustom.setToId(messagePicAjax.getToId());
         messageCustom.setType(4);
+        messageCustom.setFromTo(messagePicAjax.getFromTo());
         insertMsg(messageCustom);
     }
 
@@ -107,10 +110,14 @@ public class InterMsgControllerFront {
         return "/CustomeServicePage";
     }
 
+
     @ExceptionHandler(Exception.class)
-    public String HandleException(Exception ex,Model model){
-        model.addAttribute("exceptionMessage",ex.getMessage());
-        return "/ExceptionPage";
+    @ResponseBody
+    public ModelAndView HandleException(Exception ex){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("exceptionMessage",ex.getMessage());
+        modelAndView.setViewName("/exceptionPage");
+        return modelAndView;
     }
 
 }

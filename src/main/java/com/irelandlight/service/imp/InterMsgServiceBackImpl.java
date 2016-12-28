@@ -1,12 +1,14 @@
 package com.irelandlight.service.imp;
 
 import com.irelandlight.dao.InterMsgDaoBack;
+import com.irelandlight.manager.InterMsgManagerBack;
 import com.irelandlight.service.InterMsgServiceBack;
 import com.irelandlight.vo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,18 +20,46 @@ public class InterMsgServiceBackImpl implements InterMsgServiceBack {
     @Resource
     private InterMsgDaoBack interMsgDaoBack;
 
+    @Resource
+    private InterMsgManagerBack interMsgManagerBack;
+
+    /* X */
     @Transactional(rollbackFor = Exception.class)
     public List<ConsumerCustomRecently> getConsumerList(Long productor_id)throws Exception {
         List<ConsumerCustomRecently> consumerCustomRecentlyList =
                 interMsgDaoBack.getConsumerList(productor_id);
         for(ConsumerCustomRecently consumer: consumerCustomRecentlyList){
             Long id = consumer.getId();
-            consumer.setContent(interMsgDaoBack.getConsumerContent(id));
+//            consumer.setContent(interMsgDaoBack.getConsumerContent(id));
         }
         return consumerCustomRecentlyList;
     }
 
-    public String getConsumerContent(Long consumer_id) throws Exception {
+    public List<ConsumerCustomRecently> getConsumerIdList(Long productor_id) throws Exception {
+        List<ConsumerCustomRecently> consumerCustomRecentlyList = new ArrayList<ConsumerCustomRecently>();
+        List<CsmMsgFromContentType> csmMsgList = interMsgDaoBack.getConsumerFromToList(productor_id);
+        List<Long> consumerIdList = new ArrayList<Long>();
+        for (CsmMsgFromContentType csmMsg: csmMsgList){
+            consumerIdList.add(Long.parseLong(csmMsg.getFromTo().substring(1)));
+        }
+        List<ConsumerBackHome> consumerBackHomeList = new ArrayList<ConsumerBackHome>();
+        for (int i=0;i<consumerIdList.size();i++){
+            ConsumerBackHome consumerBackHome = interMsgDaoBack.getConsumerBackHomeList(consumerIdList.get(i));
+            consumerBackHomeList.add(consumerBackHome);
+        }
+        for (int i=0;i<consumerIdList.size();i++){
+            ConsumerCustomRecently consmerCustomerRecently = new ConsumerCustomRecently();
+            consmerCustomerRecently.setContent(csmMsgList.get(i).getContent());
+            consmerCustomerRecently.setType(csmMsgList.get(i).getType());
+            consmerCustomerRecently.setId(consumerBackHomeList.get(i).getId());
+            consmerCustomerRecently.setHeadImgUrl(consumerBackHomeList.get(i).getHeadImgUrl());
+            consmerCustomerRecently.setNickName(consumerBackHomeList.get(i).getNickName());
+            consumerCustomRecentlyList.add(consmerCustomerRecently);
+        }
+        return consumerCustomRecentlyList;
+    }
+
+    public ConsumerCustom getConsumerContent(Long consumer_id) throws Exception {
         return interMsgDaoBack.getConsumerContent(consumer_id);
     }
 
@@ -37,7 +67,7 @@ public class InterMsgServiceBackImpl implements InterMsgServiceBack {
     public MessageBackHome MessageBackHome(Long productor_id) throws Exception {
         MessageBackHome messageBackHome = new MessageBackHome();
         /* 客服用户对象列表 */
-        List<ConsumerCustomRecently> userList = getConsumerList(productor_id);
+        List<ConsumerCustomRecently> userList = getConsumerIdList(productor_id);
         messageBackHome.setUserList(userList);
         /* 最新公告列表 */
         List<NewsHistory> sendAllHistory = getNewsRecently();
@@ -99,10 +129,10 @@ public class InterMsgServiceBackImpl implements InterMsgServiceBack {
      */
     public MessageSingleBack MessageSingleBack(SinglePageParam singlePageParam) throws Exception {
         MessageSingleBack messageSingleBack = new MessageSingleBack();
-        messageSingleBack.setUserinfo(getUserInfo(singlePageParam.getConsumer_id()));
-        messageSingleBack.setPurchaseHistory(getPurchaseHistory(singlePageParam.getConsumer_id()));
-        messageSingleBack.setAdministatorinfo(getProductorInfo(singlePageParam.getProductor_id()));
-        messageSingleBack.setReceive(getMsgHistory(singlePageParam.getConsumer_id()));
+        messageSingleBack.setUserinfo(interMsgManagerBack.getUserInfo(singlePageParam.getConsumer_id()));
+        messageSingleBack.setPurchaseHistory(interMsgManagerBack.getPurchaseHistory(singlePageParam.getConsumer_id()));
+        messageSingleBack.setAdministatorinfo(interMsgManagerBack.getProductorInfo(singlePageParam.getProductor_id()));
+        messageSingleBack.setReceive(interMsgManagerBack.getMsgHistory(singlePageParam.getConsumer_id()));
         return messageSingleBack;
     }
 
@@ -112,7 +142,7 @@ public class InterMsgServiceBackImpl implements InterMsgServiceBack {
      * @throws Exception
      */
     public void insertMsg(MessageCustom messageCustom) throws Exception {
-        interMsgDaoBack.insertMsg(messageCustom);
+        interMsgManagerBack.insertMsg(messageCustom);
     }
 
 

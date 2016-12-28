@@ -14,7 +14,7 @@ public interface InterMsgServiceBack {
     public List<ConsumerCustomRecently> getConsumerList(Long productor_id)throws Exception;
 
     /* 为最近用户列表添加最新的一条聊天内容 */
-    public String getConsumerContent(Long consumer_id)throws Exception;
+    public ConsumerCustom getConsumerContent(Long consumer_id)throws Exception;
 
     /* 后台总页面 */
     public MessageBackHome MessageBackHome(Long productor_id)throws Exception;
@@ -43,5 +43,8 @@ public interface InterMsgServiceBack {
 
     /* 发送一条新消息 */
     public void insertMsg(MessageCustom messageCustom)throws Exception;
+
+    /* 由每个用户最新消息id,获取用户id */
+    public List<ConsumerCustomRecently> getConsumerIdList(Long productor_id)throws Exception;
 
 }

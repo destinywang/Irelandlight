@@ -1,31 +1,13 @@
 package com.irelandlight.vo;
 
 /**
- * Created by lenovo on 2016/12/8.
+ * Created by lenovo on 2016/12/22.
  */
-public class ConsumerCustomRecently {
+public class ConsumerBackHome {
 
     private String nickName;
     private Long id;
     private String headImgUrl;
-    private int type;
-    private String content;
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
 
     public String getNickName() {
         return nickName;
@@ -50,5 +32,4 @@ public class ConsumerCustomRecently {
     public void setHeadImgUrl(String headImgUrl) {
         this.headImgUrl = headImgUrl;
     }
-
 }

@@ -21,6 +21,15 @@ public class MessagePicAjax {
 
     private Long toId;
     private Long fromId;
+    private String fromTo;
+
+    public String getFromTo() {
+        return fromTo;
+    }
+
+    public void setFromTo(String fromTo) {
+        this.fromTo = fromTo;
+    }
 
     public Long getToId() {
         return toId;

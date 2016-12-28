@@ -22,7 +22,7 @@
     </select>
 
     <!-- 获取最近用户对应的最新一条消息 -->
-    <select id="getConsumerContent" parameterType="Long" resultType="String">
+    <select id="getConsumerContent" parameterType="Long" resultType="com.irelandlight.vo.ConsumerCustom">
         SELECT content,type
         FROM tb_message
         WHERE id = (
@@ -78,8 +78,8 @@
 
     <!-- 单人页面给客服发送消息 -->
     <insert id="insertMsg" parameterType="com.irelandlight.vo.MessageCustom">
-        INSERT INTO tb_message (create_time, last_update, visibility, from_id, to_id, content, type)
-        VALUES (now(), now(), 0, #{fromId}, #{toId}, #{content}, #{type});
+        INSERT INTO tb_message (create_time, last_update, visibility, from_id, to_id, content, type,from_to)
+        VALUES (now(), now(), 0, #{fromId}, #{toId}, #{content}, #{type},#{fromTo});
     </insert>
 
     <!-- 单人页面:获取历史消息 -->
@@ -101,6 +101,22 @@
             LIMIT 0,1
         </foreach>
         ORDER BY create_time DESC
+    </select>
+
+    <!-- 通过每个用户最新消息id列表,找到对应的fromTo列表 -->
+    <select id="getConsumerFromToList" parameterType="Long" resultType="com.irelandlight.vo.CsmMsgFromContentType">
+        SELECT from_to,content,type
+        FROM tb_message
+        WHERE id IN(
+        SELECT MAX(id) from tb_message WHERE from_id =#{productor_id} OR to_id=#{productor_id} GROUP BY from_to
+        )
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="getConsumerBackHomeList" parameterType="Long" resultType="com.irelandlight.vo.ConsumerBackHome">
+        SELECT id,head_img_url,nick_name
+        FROM tb_consumer
+        WHERE id = #{consumerId}
     </select>
 
 </mapper>
