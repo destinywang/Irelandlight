@@ -20,7 +20,7 @@
     <update id="deleteCoupon" >
         UPDATE tb_coupon
         SET tb_coupon.visibility = 1
-        WHERE id = #{conponId}
+        WHERE id = #{couponId}
         AND consumer_id = #{consumerId}
     </update>
 

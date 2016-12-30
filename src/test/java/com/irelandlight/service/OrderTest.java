@@ -72,7 +72,6 @@ public class OrderTest extends BaseJunitTest {
         order.setAddressId(2L);
         order.setCouponId(2L);
         order.setGift("小礼物");
-        order.setOrderNumber("cx04141061");
         order.setPayWay(1);
         order.setTransferWay(1);
         order.setTableWareCount(4);
@@ -108,6 +107,7 @@ public class OrderTest extends BaseJunitTest {
         order.setCouponId(2L);
         order.setGift("小礼物");
         order.setOrderNumber("cx04141061");
+        order.setCouponId(4L);
         order.setPayWay(1);
         order.setTransferWay(1);
         order.setTableWareCount(4);

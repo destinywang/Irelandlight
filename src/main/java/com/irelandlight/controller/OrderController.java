@@ -41,8 +41,11 @@ public class OrderController {
     @RequestMapping("/placeAnOrder")
     public String placeAnOrder( @RequestBody ShopCarOrderVo shopCarOrderVo)throws Exception{
         consumerId.set(1002L);
-        orderService.placeAnOrder(shopCarOrderVo);
-        return "succeed";
+        Map<String,Object> map = orderService.placeAnOrder(shopCarOrderVo);
+        if(map.get("code") == "0"){
+            return "succeed";
+        }
+        return "error";
     }
 
     //查找某个用户的所有订单详情

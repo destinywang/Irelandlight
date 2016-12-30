@@ -1,7 +1,6 @@
 package com.irelandlight.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.irelandlight.model.ShopCar;
 import com.irelandlight.model.ShopCarGoodsRelation;
 import com.irelandlight.service.ShopCarGoodsRelationService;
 import com.irelandlight.service.ShopCarService;
@@ -66,7 +65,7 @@ public class ShopCarController {
     @RequestMapping(value = "addShopCar")
     public String addShopCar(@RequestBody ShopCarGoodsRelation shopCarGoodsRelation)throws Exception{
         consumerId.set(1002L);
-        shopCarGoodsRelationService.insertGoodsRelation(consumerId.get() ,shopCarGoodsRelation);
+        Map<String,Object> map = shopCarGoodsRelationService.insertGoodsRelation(consumerId.get() ,shopCarGoodsRelation);
         JSONObject code = new JSONObject();
         code.put("statusCode",1);
         return code.toJSONString();
@@ -76,7 +75,7 @@ public class ShopCarController {
     @ResponseBody
     @RequestMapping(value = "removeGoodsFromShopCar")
     public String removeGoodsFromShopCar(@RequestBody List<ShopCarGoodsRelation> shopCarGoodsRelations)throws Exception{
-        shopCarGoodsRelationService.batchDeleteShopCarGoodsRelations(shopCarGoodsRelations);
+        Map<String,Object> map = shopCarGoodsRelationService.batchDeleteShopCarGoodsRelations(shopCarGoodsRelations);
         JSONObject code = new JSONObject();
         code.put("statusCode",1);
         return code.toJSONString();
