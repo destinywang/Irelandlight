@@ -7,6 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>cake-common Maven Webapp</name>
     <url>http://maven.apache.org</url>
+
     <dependencies>
         <!-- 使用注解的方式运行jUnit，因此改成4.11 -->
         <dependency>
@@ -91,6 +92,13 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.21</version>
+        </dependency>
+
         <!-- 4.Spring依赖 -->
         <!-- (1)核心依赖 -->
         <dependency>
@@ -177,6 +185,25 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+
+        <!--七牛云图片上传-->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>[7.2.0, 7.2.99]</version>
+        </dependency>
+        <!--jquery -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
