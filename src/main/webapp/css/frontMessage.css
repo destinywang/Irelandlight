@@ -1,0 +1,137 @@
+/*??????*/
+.w-20{ width: 20%; }
+.w-90{ width: 90%; }
+.w-95{ width: 95%; }
+.w-80{ width: 80%; }
+.w-60{ width: 60%; }
+.dis-f{ display: flex; }
+
+/*????*/
+.m-c{ margin: 0 auto; }
+.tet-c{ text-align: center;}
+
+/*????*/
+.f-l{  float: left;  }
+.f-r{ float: right; }
+
+/*?????????????*/
+.dis-b{ display: block; }
+.dis-i{ display: inline; }
+
+/*???????*/
+.col-jh{ color: #bd1828; }
+.col-sk{ color: #463130; }
+.col-qh{ color: #b4b0a7; }
+.col-qk{ color: #a1655e; }
+.col-h{ color: #f3383f; }
+.col-sh{ color: #6b6767; }
+
+/*???????*/
+.bg-sk{ background-color: #4e2720; }
+.bg-nh{ background-color: #fef1d5; }
+.bg-qh{ background-color: #fbf6f5; }
+
+/*?????§³*/
+.fs-1{ font-size: 1rem; }
+.fs-2{ font-size: 2rem; }
+.fs-4{ font-size: 4rem; }
+.fs-3{ font-size: 3rem; }
+.fs-1-8{ font-size: 1.8rem; }
+.fs-2-5{ font-size: 2.5rem; }
+.fs-1{ font-size: 1rem; }
+.fs-1{ font-size: 1rem; }
+.fs-1{ font-size: 1rem; }
+.fw{ font-weight: bold; }
+
+
+/*?§Ú?*/
+.lh-2{ line-height: 2rem; }
+.lh-3{ line-height: 3rem; }
+.lh-4{ line-height: 4rem; }
+.lh-7{ line-height: 7rem; }
+.lh-2{ line-height: 2rem; }
+.lh-2{ line-height: 2rem; }
+.lh-2{ line-height: 2rem; }
+.lh-2{ line-height: 2rem; }
+
+.truck{
+    margin: 2rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px #b4b0a7 solid;
+}
+.truck i{
+    display: block;
+    width: 10rem;
+    height: 9rem;
+    font-size: 8rem;
+    line-height: 9rem;
+    text-align: center;
+    float: left;
+    background-color: #fef1d5;
+}
+.icon-wuliu1{
+    color: #96c74c;
+}
+.icon-jikediancanicon17,.icon-xiaoxi1{
+    color: #95524a;
+}
+.truck-p{
+    width: 80%;
+    float: left;
+    padding-left: 2rem;
+}
+.truck-p div{
+    display: flex;
+}
+.truck-p div span{
+    flex: 1;
+    font-size: 2.3rem;
+    line-height: 5rem;
+}
+.truck-p div span:nth-child(1){
+    text-align: left;
+    color: #95524a;
+}
+.truck-p div span:nth-child(2){
+    text-align: right;
+    color: #bfbcbb;
+    margin-right: 2rem;
+}
+.truck-p p{
+    font-size: 2rem;
+    line-height: 4rem;
+    color: #463130;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+footer div{
+    width: 100%;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+footer a{
+    flex: 1;
+    display: block;
+    background-color: #fef1d5;
+    padding-top: 1rem;
+}
+#service,#m-o{
+    display: block;
+    margin: 0 auto;
+    font-size: 4rem;
+    line-height: 5rem;
+    text-align: center;
+    color: #95524a;
+}
+footer p{
+    text-align: center;
+    font-size: 2rem;
+    line-height: 3rem;
+    color: #95524a;
+    padding-bottom: 1rem;
+}
+

@@ -1,10 +1,8 @@
 package com.irelandlight.service;
 
-import com.irelandlight.dao.GoodsListDao;
 import com.irelandlight.manager.GoodsListManager;
 import com.irelandlight.model.vo.FilterGoodsVO;
 import com.irelandlight.model.vo.GoodsVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,7 +18,7 @@ public class GoodsListService {
     @Resource
     private GoodsListManager goodsListManager;
 
-    public Map<String,Object> queryAllGoods() {
+    public List<GoodsVO> queryAllGoods() {
         return goodsListManager.queryAllGoods();
     }
 

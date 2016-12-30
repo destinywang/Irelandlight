@@ -78,4 +78,18 @@ public class Reply {
     public void setToId(Long toId) {
         this.toId = toId;
     }
+
+    @Override
+    public String toString() {
+        return "Reply{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", sourceId=" + sourceId +
+                ", reply='" + reply + '\'' +
+                ", fromId=" + fromId +
+                ", toId=" + toId +
+                '}';
+    }
 }

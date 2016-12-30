@@ -1,0 +1,268 @@
+*{
+    margin:0;
+    padding:0;
+    boder-sizing:boder-box;
+    moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+body{
+    font-size:14px;
+    font-family:Arial,Verdana,Tahoma,"微软雅黑","黑体";
+    line-height:120%;
+    background:#fff;
+    margin-bottom: 0;
+    overflow-x:hidden;
+}
+p,h1,h2,h3,h4,h5,h6,ul,ol,dl,li,form,table{
+    margin:0;padding:0;
+}
+html{
+    font-size: 63.5%;
+}
+
+.all-page{
+    width: 100%;
+}
+header{
+    width:100%;
+    background-color: #fef1d5;
+}
+header .logo{
+    display:block;
+    padding:0 2rem;
+    width: 30%;
+    height: 8rem;
+    float: left;
+    padding-top: 1.4rem;
+}
+header p{
+    width:70%;
+    float:left;
+    text-align: center;
+    line-height: 100px;
+    font-size: 2rem;
+    color:#95524a;
+}
+header a{
+    display: block;
+    float: right;
+}
+#in{
+    display: block;
+    float: right;
+    font-size: 5rem;
+    line-height: 9rem;
+    margin-right: 4rem;
+    color: #95524a;
+}
+#user{
+    display: block;
+    float: right;
+    font-size: 4rem;
+    line-height: 9rem;
+    margin-right: 3rem;
+    color: #95524a;
+}
+
+header img{
+    display: block;
+    float: left;
+}
+.fu{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height:38rem;
+}
+#carousel-figure {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 300%;
+    height:38rem;
+}
+
+#carousel-figure li{
+    width:33.333%;
+    height:38rem;
+    float: left;
+}
+#carousel-figure img{
+    width: 100%;
+    height: 100%;
+}
+#points{
+    width:13%;
+    display: flex;
+    margin: 0 auto;
+}
+#points li{
+    flex: 1;
+    margin: 1rem;
+    height:1.3rem;
+    border: 1px #95524a solid;
+    border-radius: 100%;
+}
+.content{
+    width: 95%;
+    margin: auto;
+}
+
+/*轮播公告*/
+.news{
+    position: relative;
+    height: 4rem;
+}
+#news{
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 1;
+    font-size: 4rem;
+    line-height: 4rem;
+    color: #bd1828;
+}
+.news span:nth-child(1){
+    position: absolute;
+    position: relative;
+    top: 0;
+    left: 4rem;
+    background-color: #ffffa8;
+}
+.news span:nth-child(2){
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.news span{
+    overflow: hidden;
+    height: 4rem;
+}
+.cnt-main{
+    border-top: 1px #b4b0a7 solid;
+
+}
+.cnt-main{
+    padding-bottom: 2rem;
+    padding-left: 4rem;
+}
+.cnt-main li{
+    float: left;
+    width: 26rem;
+    margin: 0 3rem;
+}
+.cnt-main img{
+    display: block;
+    width: 26rem;
+    height: 26rem;
+}
+.cnt-main li p{
+    text-align: center;
+}
+.cnt-main li p:nth-child(2){
+    line-height: 4rem;
+    font-size: 3rem;
+    color: #995850;
+}
+.cnt-main li p:nth-child(3){
+    line-height: 3rem;
+    font-size: 2rem;
+    color: #f3383f;
+}
+.phone{
+    margin-bottom: 11rem;
+}
+footer ul li{
+    flex: 1;
+}
+footer{
+    width: 100%;
+    background-color: #fef1d5;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 1rem 0;
+}
+#n-l,#r-h,#s-c,#u-c{
+    display: block;
+    font-size: 5rem;
+    line-height: 6rem;
+    color: #995850;
+    text-align: center;
+}
+footer p{
+    font-size: 2.8rem;
+    line-height: 3rem;
+    color: #995850;
+    text-align: center;
+}
+
+
+
+
+
+/*padding*/
+.pd-2{ padding: 2rem 0; }
+
+
+
+/*宽度百分比*/
+.w-10{ width: 10%; }
+.w-90{ width: 90%; }
+.w-95{ width: 95%; }
+.w-80{ width: 80%; }
+.w-10{ width: 10%; }
+.dis-f{ display: flex; }
+
+/*居中*/
+.m-c{ margin: 0 auto; }
+.tet-c{ text-align: center;}
+
+
+
+/*浮动*/
+.f-l{  float: left;  }
+.f-r{ float: right; }
+
+/*块状元素内联元素*/
+.dis-b{ display: block; }
+.dis-i{ display: inline; }
+
+/*字体颜色*/
+.col-jh{ color: #bd1828; }
+.col-sk{ color: #463130; }
+.col-qh{ color: #b4b0a7; }
+.col-qk{ color: #a1655e; }
+.col-h{ color: #f3383f; }
+.col-sh{ color: #6b6767; }
+
+/*背景颜色*/
+.bg-sk{ background-color: #4e2720; }
+.bg-nh{ background-color: #fef1d5; }
+.bg-qh{ background-color: #fbf6f5; }
+
+/*字体大小*/
+.fs-1{ font-size: 1rem; }
+.fs-2{ font-size: 2rem; }
+.fs-4{ font-size: 4rem; }
+.fs-3{ font-size: 3rem; }
+.fs-1{ font-size: 1rem; }
+.fs-1{ font-size: 1rem; }
+.fs-1{ font-size: 1rem; }
+.fs-1{ font-size: 1rem; }
+.fs-1{ font-size: 1rem; }
+.fw{ font-weight: bold; }
+
+
+/*行高*/
+.lh-2{ line-height: 2rem; }
+.lh-3{ line-height: 3rem; }
+.lh-4{ line-height: 4rem; }
+.lh-7{ line-height: 7rem; }
+.lh-2{ line-height: 2rem; }
+.lh-2{ line-height: 2rem; }
+.lh-2{ line-height: 2rem; }
+.lh-2{ line-height: 2rem; }
+
+
+

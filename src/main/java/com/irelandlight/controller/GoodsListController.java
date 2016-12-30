@@ -2,6 +2,7 @@ package com.irelandlight.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.irelandlight.model.vo.FilterGoodsVO;
+import com.irelandlight.model.vo.GoodsVO;
 import com.irelandlight.service.GoodsListService;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,39 +26,48 @@ public class GoodsListController {
     @Resource
     private GoodsListService goodsListService;
 
-    @RequestMapping
+    /**
+     * 查询全部商品列表
+     * @param model
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryGoods" ,produces = "text/json;charset=utf-8")
     public String queryAllGoods(Model model){
-        Map<String,Object> cakeList=goodsListService.queryAllGoods();
+        List<GoodsVO> cakeList=goodsListService.queryAllGoods();
         model.addAttribute("cakeList",cakeList);
-        return "";
+        return "goodsList";
     }
 
-    @RequestMapping
-    public String queryBySearchGoods(@RequestBody(required = true)String json, Model model){
-        Map<String,String> search=JSON.parseObject(json,HashMap.class);
-        String searchBox=search.get("searchBox");
+    /**
+     * 根据搜索框查询商品列表
+     * @param searchBox
+     * @param model
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryGoodsBySearchBox",produces = "text/json;charset=utf-8")
+    public String queryBySearchGoods(@RequestBody String searchBox, Model model){
         Map<String,Object> cakeList=goodsListService.queryBySearchGoods(searchBox);
         model.addAttribute("cakeList",cakeList);
-        return "";
+       return "goodsList";
     }
 
-    public String queryBySearchGoods2(String json){
-        Map<String,Object>search=JSON.parseObject(json,HashMap.class);
-        String searchBox=(String) search.get("searchBox");
-        Map<String,Object> cakeList=goodsListService.queryBySearchGoods(searchBox);
-        return "";
-    }
 
-    @RequestMapping
-    public String queryFilterGoods(@RequestBody(required = true) String json,Model model){
-        Map<String,Object>fils=JSON.parseObject(json,HashMap.class);
-        Map<String,String> f=(Map<String, String>) fils.get("filter");
-        FilterGoodsVO fileter=new FilterGoodsVO();
-        fileter.setTaste(f.get("taste"));
-        fileter.setUse(f.get("use"));
-        fileter.setPerference(f.get("preference"));
+
+    /**
+     * 根据筛选框进行搜索全部商品
+     * @param fileter
+     * @param model
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryGooodsByFilter",produces = "text/json;charset=utf-8")
+    public String queryFilterGoods(@RequestBody FilterGoodsVO fileter,Model model){
         Map<String,Object> cakeList=goodsListService.queryFilterGoods(fileter);
         model.addAttribute("cakeList",cakeList);
-        return "";
+        return "goodsList";
     }
+
+
 }

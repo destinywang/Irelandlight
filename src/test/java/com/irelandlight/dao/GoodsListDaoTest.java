@@ -27,7 +27,7 @@ public class GoodsListDaoTest {
     }
     @Test
     public void testQueryBySearchGoods(){
-        List<GoodsVO> goodsVOs=goodsListDao.queryBySearchGoods("哈哈哈");
+        List<GoodsVO> goodsVOs=goodsListDao.queryBySearchGoods("奶油");
         for(GoodsVO goodsVO:goodsVOs){
             System.out.println(goodsVO);
         }

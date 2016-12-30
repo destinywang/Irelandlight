@@ -9,7 +9,7 @@ http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 配置整合MyBatis -->
     <!-- 配置数据库相关参数 -->
     <!-- properties的属性：${url} -->
-    <context:property-placeholder location="classpath:jdbc.properties"/>
+
     <!-- 数据库连接池 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <!-- 配置连接池属性 -->
@@ -39,7 +39,7 @@ http://www.springframework.org/schema/context/spring-context.xsd">
         <!-- 扫描SQL配置文件：mapper需要的xml文件 -->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
-
+    <context:property-placeholder location="classpath:jdbc.properties"/>
     <!-- 配置扫描Dao接口包，动态实现Dao接口，并注入到Spring容器中 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 注入sqlSessionFactory，防止提前错误的初始化 -->

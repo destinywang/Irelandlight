@@ -1,0 +1,82 @@
+/*宽度百分比*/
+.w-90{ width: 90%; }
+.w-95{ width: 95%; }
+
+/*居中*/
+.m-c{ margin: 0 auto; }
+.tet-c{ text-align: center;}
+
+/*浮动*/
+.f-l{  float: left;  }
+.f-r{ float: right; }
+
+
+.content{
+    padding-top: 2rem;
+}
+.service,.user{
+   padding: 1rem 0;
+}
+.service span,.user span{
+    max-width: 83%;
+    font-size: 2rem;
+    line-height: 6rem;
+    color: #95524a;
+}
+.service span{
+    display: block;
+    float: left;
+    padding: 0 0.5rem 0 4.5rem;
+    margin-left: 1.5rem;
+    background: url("../img/seller-words.png");
+    background-size: 100% 100%;
+    background-repeat: repeat-x;
+}
+.service img{
+    display: block;
+    float: left;
+}
+
+.user span{
+    padding: 0 2rem 0 2rem;
+    margin-right: 2rem;
+    display: block;
+    float: right;
+    background: url("../img/user-words.png");
+    background-size: 100% 100%;
+    background-repeat: repeat-x;
+}
+.user img{
+    display: block;
+    float: right;
+}
+.service img,.user img{
+    display: block;
+    width: 6rem;
+    height: 6rem;
+}
+footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #fef1d5;
+}
+footer [type=text]{
+    width: 70%;
+    border: none;
+    outline: medium;
+    font-size: 2rem;
+    line-height: 3rem;
+    margin: 0 2rem;
+    border-radius: 1rem;
+}
+#add,#send{
+    font-size: 3rem;
+    line-height: 4rem;
+    color: #95524a;
+    margin: 0 1.5rem;
+}
+
+

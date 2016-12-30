@@ -28,18 +28,12 @@ public class GoodsListManager {
      *   2.有数据
      * @return
      */
-    public Map<String,Object> queryAllGoods(){
-        Map<String,Object> cakeList=new HashMap<String,Object>();
+
+    public List<GoodsVO> queryAllGoods(){
+
         List<GoodsVO> goodsVOs=goodsListDao.queryAllGoods();
-        if(goodsVOs==null){
-            cakeList.put("code",1);
-            cakeList.put("msg","商品列表为空");
-        }
-        else{
-            cakeList.put("code",0);
-            cakeList.put("goodsList",goodsVOs);
-        }
-        return cakeList;
+
+        return goodsVOs;
     }
 
     /**

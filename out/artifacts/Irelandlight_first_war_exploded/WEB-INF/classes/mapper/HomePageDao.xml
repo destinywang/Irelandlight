@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irelandlight.dao.HomePageDao">
+
+    <resultMap id="newsResult" type="com.irelandlight.model.vo.NewsVO">
+        <result column="content" property="newsContent"/>
+        <result column="title" property="newsTitle"/>
+        <result column="user_name" property="newsProductorName"/>
+    </resultMap>
+
+
+    <resultMap id="goodsResult" type="com.irelandlight.model.vo.GoodsVO">
+        <id column="id" property="goodsId"/>
+        <result column="url" property="goodsImageUrl"/>
+        <result column="name" property="goodsName"/>
+        <result column="min_price" property="goodsPrice"/>
+    </resultMap>
+    <!--查询首页轮播图-->
+    <select id="queryHomePageImage" resultType="com.irelandlight.model.HomePageImage">
+        SELECT * FROM tb_home_rotation WHERE  visibility=0 ORDER BY `position`
+    </select>
+    <!--查询公告-->
+    <select id="queryNews" resultMap="newsResult">
+       SELECT tb_news.content,tb_news.title,tb_productor.user_name
+           FROM tb_news,tb_productor
+           WHERE  tb_news.visibility=0 AND tb_productor.visibility=0
+                 AND tb_news.productor_id=tb_productor.id
+    </select>
+    <!--查询热门商品列表-->
+    <select id="queryHotGoods" resultMap="goodsResult">
+         SELECT tb_goods.id,tb_goods.name,tb_goods_image.url,tb_goods.min_price
+           FROM tb_goods,tb_goods_image
+            WHERE  tb_goods.visibility=0 AND  tb_goods_image.visibility=0
+                 AND  tb_goods.id=tb_goods_image.goods_id
+                  AND  tb_goods_image.`position`=1
+                  AND  tb_goods.is_putaway=0
+             ORDER BY tb_goods.weight DESC ,tb_goods.sale_count DESC
+             LIMIT 0,6
+    </select>
+</mapper>
