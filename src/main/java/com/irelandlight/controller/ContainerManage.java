@@ -51,8 +51,11 @@ public class ContainerManage {
         return itemsInfo;
     }
 
+
     /**
-     *    展示商品页的基本商品数量统计信息,如果不是ajax请求则用这个方法
+     * 展示商品页的基本商品数量统计信息,如果不是ajax请求则用这个方法
+     * @param model
+     * @return
      */
     @RequestMapping(value = "/queryGoodsInfo",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView showGoodsCountInfo(ModelAndView model){
@@ -65,7 +68,8 @@ public class ContainerManage {
 
 
     /**
-     *    查询未上架商品列表在商品上架选项卡显示
+     * 查询未上架商品列表在商品上架选项卡显示
+     * @return List<ContainerItem> 商品信息列表
      */
     @RequestMapping(value = "/queryUnputawayGoods",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
@@ -74,8 +78,10 @@ public class ContainerManage {
         containerItemList=containerService.searchForUnPutawayGoods();
         return containerItemList;
     }
+
     /**
-     *    展示已经上架的商品该要信息列表
+     * 展示已经上架的商品该要信息列表
+     * @return
      */
     @RequestMapping(value = "/queryPutawayGoods",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
@@ -85,8 +91,13 @@ public class ContainerManage {
         return containerItemList;
     }
 
+
     /**
-     *  查找商品详情，绑定参数为上下架标志和商品的Id
+     * 查找商品详情，绑定参数为上下架标志和商品的Id
+     * @param goodsId
+     * @param pwFlag
+     * @return
+     * @throws Exception
      */
     @RequestMapping(value = "/queryGoodsById",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
@@ -96,8 +107,12 @@ public class ContainerManage {
         return goodsDetail;
     }
 
+
     /**
-     *  批量上架，上架成功响应成功，上架失败响应失败
+     * 批量上架，上架成功响应成功，上架失败响应失败
+     * @param goodsVOS
+     * @param resp
+     * @throws Exception
      */
     @RequestMapping(value = "/putawayAllGoods",method = {RequestMethod.POST})
     public void putawayAllGoods(@RequestBody List<ModifyGoodsVO> goodsVOS, HttpServletResponse resp)throws Exception{
@@ -116,7 +131,10 @@ public class ContainerManage {
     }
 
     /**
-     *    批量下架，下架成功返回成功，下架失败返回失败
+     *  批量下架，下架成功返回成功，下架失败返回失败
+     * @param goodsVOS
+     * @return
+     * @throws Exception
      */
     @RequestMapping(value = "/saleoutAllGoods",method = {RequestMethod.POST})
     @ResponseBody
@@ -135,17 +153,22 @@ public class ContainerManage {
 
     /**
      *  将参数绑定到map时map必须是某个类的子对象，且在前端页面上以 map[key]-value的形式完成前端页面的设置
+     * @param goods
+     * @param goodsSizeMapPrice
+     * @param goodImgs
+     * @return
+     * @throws Exception
      */
     @RequestMapping(value = "/addGoods",method={RequestMethod.POST})
     @ResponseBody
-    public String addGoods(Goods goods, ModifyGoodsVO goodsSizeMapPrice, MultipartFile[] goodImgs)throws Exception{
+    public String addGoods(Goods goods, ModifyGoodsVO goodsSizeMapPrice,@RequestParam("goodsImgs") MultipartFile[] goodImgs)throws Exception{
         String message="Add fail!";
         if(!paramValidate(goods)) return "Parameter Error";
         if(!paramValidate(goodsSizeMapPrice)) return "Parameter Error";
         Map<String,Integer>  goodsImgPos=new TreeMap<String, Integer>();
         String imgName=null;
         for(int i=0;i<goodImgs.length;i++){
-            imgName=goodImgs[i].getName();
+            imgName=goodImgs[i].getOriginalFilename();
             if(imgName==null) return "商品图片名称出错";
             imgName=UUID.randomUUID()+imgName.substring(imgName.lastIndexOf("."));
             imgeUploadUtil.upLoad(goodImgs[i].getInputStream(),imgName);
@@ -156,7 +179,12 @@ public class ContainerManage {
     }
 
     /**
-     *
+     * 商品信息修改
+     * @param goods
+     * @param goodsSizeMapPrice
+     * @param modifyImgVo
+     * @return
+     * @throws Exception
      */
     @RequestMapping(value = "/modifyGoodsInfo",method = RequestMethod.POST)
     @ResponseBody
@@ -171,9 +199,67 @@ public class ContainerManage {
     }
 
 
+    @RequestMapping(value = "/xiaofang" ,method = {RequestMethod.GET,RequestMethod.POST})
+    public void resp(HttpServletResponse servletResponse)throws Exception{
+        String temp=" [{\n" +
+                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/267b16d4-36aa-4040-a8e5-a2c88205e2b8.jpg\",\n" +
+                "\t\"address\":\"A号楼\",\n" +
+                "\t\"time\":\"2014-10-10\",\n" +
+                "\t\"id\":1,\n" +
+                "\t\"state\":4},\n" +
+                "\t{\n" +
+                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/9d45443a-89fd-4aff-8563-1e59d835025c.jpg\",\n" +
+                "\t\"address\":\"B号楼\",\n" +
+                "\t\"time\":\"2014-11-10\",\n" +
+                "\t\"id\":2,\n" +
+                "\t\"state\":4},\n" +
+                "\t{\n" +
+                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg\",\n" +
+                "\t\"address\":\"C号楼\",\n" +
+                "\t\"time\":\"2014-11-10\",\n" +
+                "\t\"id\":3,\n" +
+                "\t\"state\":5\n" +
+                "\t}\n" +
+                "]";
+        servletResponse.setContentType("text/html;charset=utf-8");
+        servletResponse.setHeader("Access-Control-Allow-Origin","*");
+        servletResponse.setCharacterEncoding("utf-8");
+        servletResponse.getWriter().println(temp);
+    }
+    @RequestMapping(value = "/anqi" ,method = {RequestMethod.GET,RequestMethod.POST})
+    public void resp2(HttpServletResponse servletResponse)throws Exception{
+        String temp=" [{\n" +
+                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/267b16d4-36aa-4040-a8e5-a2c88205e2b8.jpg\",\n" +
+                "\t\"address\":\"A号楼\",\n" +
+                "\t\"time\":\"2014-10-10\",\n" +
+                "\t\"id\":1,\n" +
+                "\t\"state\":1},\n" +
+                "\t{\n" +
+                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/9d45443a-89fd-4aff-8563-1e59d835025c.jpg\",\n" +
+                "\t\"address\":\"B号楼\",\n" +
+                "\t\"time\":\"2014-11-10\",\n" +
+                "\t\"id\":2,\n" +
+                "\t\"state\":2},\n" +
+                "\t{\n" +
+                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg\",\n" +
+                "\t\"address\":\"C号楼\",\n" +
+                "\t\"time\":\"2014-11-10\",\n" +
+                "\t\"id\":3,\n" +
+                "\t\"state\":3\n" +
+                "\t}\n" +
+                "]";
+        servletResponse.setContentType("text/html;charset=utf-8");
+        servletResponse.setHeader("Access-Control-Allow-Origin","*");
+        servletResponse.setCharacterEncoding("utf-8");
+        servletResponse.getWriter().println(temp);
+    }
+
+
 
     /**
-     *
+     * 货柜管理异常处理
+     * @param ex
+     * @return
      */
     @ExceptionHandler(value = {ContextException.class,RuntimeException.class, BindException.class})
     @ResponseBody
@@ -182,7 +268,12 @@ public class ContainerManage {
         model.put("error:",ex.getMessage());
         return model;
     }
-    //参数效验
+
+    /**
+     * 参数效验
+     * @param goods
+     * @return
+     */
     private boolean paramValidate(Goods goods){
         if(goods == null) return false;
         if(goods.getName()==null) return false;
@@ -196,6 +287,12 @@ public class ContainerManage {
         if(goods.getWeight()==null) return false;
         return true;
     }
+
+    /**
+     * 参数效验
+     * @param goodsSizeMapPrice
+     * @return
+     */
     private boolean paramValidate(ModifyGoodsVO goodsSizeMapPrice){
         if(goodsSizeMapPrice==null||goodsSizeMapPrice.getSizeMapPrice()==null
                 ||goodsSizeMapPrice.getSizeMapPrice().size()==0)
@@ -203,6 +300,12 @@ public class ContainerManage {
         return true;
     }
 
+
+    /**
+     * 参数效验
+     * @param modifyImgVo
+     * @return
+     */
     private boolean paramValidate(ModifyImgVo modifyImgVo){
         if(modifyImgVo==null||modifyImgVo.getImgMapPos()==null
                 ||modifyImgVo.getImgMapPos().size()==0)

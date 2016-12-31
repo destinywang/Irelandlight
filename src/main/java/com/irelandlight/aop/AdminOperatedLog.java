@@ -45,12 +45,12 @@ public class AdminOperatedLog{
         //获取请求对象相关属性
         ServletRequestAttributes servletRequestAttributes=(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
-        //System.out.println(servletRequestAttributes); 打印请求属性对象
-        //HttpServletRequest requestTmp=servletRequestAttributes.getRequest();  获取请求对象
-        //System.out.println(requestTmp.getRequestedSessionId());       获取请求sessionId
-        //System.out.println(requestTmp.getRequestURI());               获取请求uri
-        //System.out.println(requestTmp.getRemoteAddr());               获取请求端的地址
-        //System.out.println(requestTmp.getRemoteHost()+requestTmp.getRemotePort()); 获取远程主机信息和端口号
+        System.out.println(servletRequestAttributes);                           //打印请求属性对象
+        HttpServletRequest requestTmp=servletRequestAttributes.getRequest();    //获取请求对象
+        System.out.println(requestTmp.getRequestedSessionId());                 //获取请求sessionId
+        System.out.println(requestTmp.getRequestURI());                         //获取请求uri
+        System.out.println(requestTmp.getRemoteAddr());                         //获取请求端的地址
+        System.out.println(requestTmp.getRemoteHost()+requestTmp.getRemotePort());   //获取远程主机信息和端口号
 
         //从请求对象中获取session对象
         if(servletRequestAttributes==null){

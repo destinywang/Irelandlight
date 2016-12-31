@@ -25,7 +25,10 @@ public class OrderManage {
     @Resource
     private OrderManageService orderManageService;
 
-
+    /**
+     * 展示订单基本信息
+     * @return OrderInfo
+     */
     @RequestMapping(value = "/queryOrderSimpleInfo",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public OrderInfo showOrderSimpleInfo(){
@@ -33,6 +36,10 @@ public class OrderManage {
         return orderInfo;
     }
 
+    /**
+     * 展示订单信息列表
+     * @return List<OrderSimpleInfo>
+     */
     @RequestMapping(value = "/queryOrderList",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public List<OrderSimpleInfo> showSimpleOrderList(){
@@ -40,6 +47,11 @@ public class OrderManage {
         return orderSimpleInfoList;
     }
 
+    /**
+     * 展示订单的信息，以及订单中所包含的商品基本信息
+     * @param orderId
+     * @return Map<String,Object>
+     */
     @RequestMapping(value = "/queryOrderDetail",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public Map<String,Object> showOrderDetaiByOrderId(@RequestParam("orderId") Long orderId){

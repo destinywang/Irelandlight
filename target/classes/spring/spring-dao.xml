@@ -6,8 +6,7 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 配置整合MyBatis -->
     <!-- 配置数据库相关参数 -->
-    <!-- properties的属性：${url} -->
-    <context:property-placeholder location="classpath:jdbc.properties" />
+
     <!-- 数据库连接池 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <!-- 配置连接池属性 -->
@@ -45,4 +44,6 @@ http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springfr
         <!-- 给出扫描DAO接口包 -->
         <property name="basePackage" value="com.irelandlight.dao"/>
     </bean>
+    <!-- properties的属性：${url} -->
+    <context:property-placeholder location="classpath:jdbc.properties" />
 </beans>
