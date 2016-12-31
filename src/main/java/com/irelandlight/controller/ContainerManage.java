@@ -16,26 +16,44 @@ import java.util.*;
 
 /**
  * Created by mac on 2016/12/13.
+ *
+ *货柜管理模块，根级url /container
+ *
  */
+
 @Controller
 @RequestMapping("/container")
 public class ContainerManage {
+    //服务设置模块
     @Resource
     private GoodsContainerService containerService;
+    //图片上传组件
     @Resource
     private ImgeUploadUtil imgeUploadUtil;
-    //七牛云外链地址
+
+    /**
+     * 七牛云外链地址
+     */
     private final String QINIULINK="http://ohlu5erjk.bkt.clouddn.com/";
 
 
-    //展示商品页的基本商品数量统计信息
+    /**
+     * 展示商品页的基本商品数量统计信息
+     * 包括：商品总数
+     * 已上架商品
+     * 未上架商品
+     * 商品的品论总数
+     */
     @RequestMapping(value = "/queryGoodsSimpleInfo",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public  ItemsInfo showGoodsCountInfo(){
         ItemsInfo itemsInfo=containerService.searchForGoodsCountInfo();
         return itemsInfo;
     }
-    //展示商品页的基本商品数量统计信息,如果不是ajax请求则用这个方法
+
+    /**
+     *    展示商品页的基本商品数量统计信息,如果不是ajax请求则用这个方法
+     */
     @RequestMapping(value = "/queryGoodsInfo",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView showGoodsCountInfo(ModelAndView model){
         ItemsInfo itemsInfo=containerService.searchForGoodsCountInfo();
@@ -44,7 +62,11 @@ public class ContainerManage {
         model.setViewName("");  //待填充,需要前端的页面名称
         return model;
     }
-    //查询未上架商品列表在商品上架选项卡显示
+
+
+    /**
+     *    查询未上架商品列表在商品上架选项卡显示
+     */
     @RequestMapping(value = "/queryUnputawayGoods",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public List<ContainerItem> showUnputawayGoods(){
@@ -52,7 +74,9 @@ public class ContainerManage {
         containerItemList=containerService.searchForUnPutawayGoods();
         return containerItemList;
     }
-    //展示已经上架的商品该要信息列表
+    /**
+     *    展示已经上架的商品该要信息列表
+     */
     @RequestMapping(value = "/queryPutawayGoods",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public List<ContainerItem> showputawayGoods(){
@@ -60,7 +84,10 @@ public class ContainerManage {
         containerItemList=containerService.searchForPutawayGoods();
         return containerItemList;
     }
-    //查找商品详情，绑定参数为上下架标志和商品的Id
+
+    /**
+     *  查找商品详情，绑定参数为上下架标志和商品的Id
+     */
     @RequestMapping(value = "/queryGoodsById",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public GoodsDetail showGoodsDetailById(@RequestParam(value = "goodsId",required = true) Long  goodsId,int pwFlag)throws Exception{
@@ -68,7 +95,10 @@ public class ContainerManage {
         goodsDetail=containerService.queryGoodsById(goodsId,pwFlag);
         return goodsDetail;
     }
-    //批量上架，上架成功响应成功，上架失败响应失败
+
+    /**
+     *  批量上架，上架成功响应成功，上架失败响应失败
+     */
     @RequestMapping(value = "/putawayAllGoods",method = {RequestMethod.POST})
     public void putawayAllGoods(@RequestBody List<ModifyGoodsVO> goodsVOS, HttpServletResponse resp)throws Exception{
         Map<Long,List<String>> map=new HashMap<Long, List<String>>();
@@ -85,7 +115,9 @@ public class ContainerManage {
         resp.getWriter().println(message);
     }
 
-    //批量下架，下架成功返回成功，下架失败返回失败
+    /**
+     *    批量下架，下架成功返回成功，下架失败返回失败
+     */
     @RequestMapping(value = "/saleoutAllGoods",method = {RequestMethod.POST})
     @ResponseBody
     public String saleOutAllGoods(@RequestBody List<ModifyGoodsVO> goodsVOS)throws Exception{
@@ -101,7 +133,9 @@ public class ContainerManage {
         return message;
     }
 
-    //将参数绑定到map时map必须是某个类的子对象，且在前端页面上以 map[key]-value的形式完成前端页面的设置
+    /**
+     *  将参数绑定到map时map必须是某个类的子对象，且在前端页面上以 map[key]-value的形式完成前端页面的设置
+     */
     @RequestMapping(value = "/addGoods",method={RequestMethod.POST})
     @ResponseBody
     public String addGoods(Goods goods, ModifyGoodsVO goodsSizeMapPrice, MultipartFile[] goodImgs)throws Exception{
@@ -121,7 +155,9 @@ public class ContainerManage {
         return message;
     }
 
-
+    /**
+     *
+     */
     @RequestMapping(value = "/modifyGoodsInfo",method = RequestMethod.POST)
     @ResponseBody
     public String modifyGoodsInfo(Goods goods, ModifyGoodsVO goodsSizeMapPrice, ModifyImgVo modifyImgVo)throws Exception{
@@ -136,7 +172,9 @@ public class ContainerManage {
 
 
 
-
+    /**
+     *
+     */
     @ExceptionHandler(value = {ContextException.class,RuntimeException.class, BindException.class})
     @ResponseBody
     public Map<String,Object> goodsExcrptionHandler(Exception ex){

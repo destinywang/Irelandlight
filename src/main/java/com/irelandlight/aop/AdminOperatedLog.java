@@ -21,6 +21,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by mac on 2016/12/6.
+ *
+ * 管理员日志记录模块，记录登陆管理员的操作 IP等等
+ *
  */
 @Component(value = "adminOperatedLog")
 @Aspect
@@ -39,15 +42,15 @@ public class AdminOperatedLog{
     @Before(value = "serviceAspect()")
     public void doBefore(JoinPoint jp){
         System.out.println(jp.getSignature().getName());
+        //获取请求对象相关属性
         ServletRequestAttributes servletRequestAttributes=(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-//
-//        System.out.println(servletRequestAttributes);
-//        HttpServletRequest requestTmp=servletRequestAttributes.getRequest();
-//        System.out.println(requestTmp.getRequestedSessionId());
-//        System.out.println(requestTmp.getRequestURI());
-//        System.out.println(requestTmp.getRemoteAddr());
-//        System.out.println(requestTmp.getRemoteHost()+requestTmp.getRemotePort());
-        //获取请求对象
+
+        //System.out.println(servletRequestAttributes); 打印请求属性对象
+        //HttpServletRequest requestTmp=servletRequestAttributes.getRequest();  获取请求对象
+        //System.out.println(requestTmp.getRequestedSessionId());       获取请求sessionId
+        //System.out.println(requestTmp.getRequestURI());               获取请求uri
+        //System.out.println(requestTmp.getRemoteAddr());               获取请求端的地址
+        //System.out.println(requestTmp.getRemoteHost()+requestTmp.getRemotePort()); 获取远程主机信息和端口号
 
         //从请求对象中获取session对象
         if(servletRequestAttributes==null){
@@ -61,7 +64,9 @@ public class AdminOperatedLog{
             if(productor!=null){
                 //获取远程调用者的ip地址
                 String ip=request.getRemoteAddr();
+                //通过切入点的到目标方法的名称
                 String operation=jp.getSignature().getName();
+                //使用StringBuffer减少字符串对象生成次数
                 StringBuffer para=new StringBuffer();
                 if(jp.getArgs()!=null&&jp.getArgs().length>0){
                     for(int i=0;i<jp.getArgs().length;i++){
