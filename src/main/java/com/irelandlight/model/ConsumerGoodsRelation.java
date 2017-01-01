@@ -12,7 +12,15 @@ public class ConsumerGoodsRelation {
     private Integer visibility;     //是否逻辑删除
     private Long consumerId;        //消费者表主键做逻辑外键
     private Long goodsId;           //商品表主键做逻辑外键
+    private String size;
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
 
     public Long getId() {
         return id;
@@ -60,5 +68,18 @@ public class ConsumerGoodsRelation {
 
     public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
+    }
+
+    @Override
+    public String toString() {
+        return "ConsumerGoodsRelation{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", consumerId=" + consumerId +
+                ", goodsId=" + goodsId +
+                ", size='" + size + '\'' +
+                '}';
     }
 }

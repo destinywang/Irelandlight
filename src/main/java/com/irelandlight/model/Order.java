@@ -1,8 +1,5 @@
 package com.irelandlight.model;
 
-
-
-
 import java.math.BigDecimal;
 import java.util.Date;
 

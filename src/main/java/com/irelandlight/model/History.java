@@ -13,6 +13,18 @@ public class History {
     private Long consumerId;        //消费者表主键做逻辑外键
     private Long goodsId;           //商品表主键做逻辑外键
 
+    @Override
+    public String toString() {
+        return "History{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", consumerId=" + consumerId +
+                ", goodsId=" + goodsId +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

@@ -41,5 +41,16 @@
         <bean class="com.irelandlight.interceptor.LoginRequiredInterceptor"/>
         <bean class="com.irelandlight.interceptor.PassportInterceptor"/>
         <bean class="com.irelandlight.interceptor.ExampleInterceptor"/>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/login"/> <!--TODO:配置拦截器拦截路径-->
+            <bean class="com.irelandlight.interceptor.isLoginIn"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/insert"/> <!--TODO:配置拦截器拦截路径-->
+            <bean class="com.irelandlight.interceptor.insertMyHistory"/> <!--插入浏览记录-->
+        </mvc:interceptor>
     </mvc:interceptors>
+
+
 </beans>

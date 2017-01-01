@@ -2,7 +2,6 @@ package com.irelandlight.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 /**
  * Created by mac on 2016/12/3.
@@ -22,7 +21,6 @@ public class Goods {
     private String size;            //蛋糕尺寸
     private Integer quantity;       //库存
     private Integer saleCount;      //销售量
-    private Integer weight;         //蛋糕权重
 
     public Long getId() {
         return id;
@@ -144,7 +142,7 @@ public class Goods {
         this.weight = weight;
     }
 
-
+    private Integer weight;         //蛋糕权重
 
 
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.RegisterDao">
+
+    <!--默认地址id为0,当查询到default_address_id为0表示没有地址-->
+    <insert id="insertNewConsumer" parameterType="com.irelandlight.model.Consumer">
+      <!-- 返回cid主键 -->
+      <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+          SELECT LAST_INSERT_ID()
+      </selectKey>
+      INSERT INTO tb_consumer
+      ( visibility,user_name,password,salt,nick_name,head_img_url,score,wallet,gender,email,telephone,birthday,default_address_id )
+      VALUES ( 0,#{username},#{password},#{salt},#{nickname},#{headImgurl},0,0,#{gender},#{email},#{telephone},#{birthday},0 )
+    </insert>
+
+    <!--根据cid插入购物车-->
+    <insert id="insertShopCar" parameterType="java.lang.Long">
+        INSERT INTO tb_shop_car
+        ( visibility,consumer_id )
+        VALUES ( 0,#{id} )
+    </insert>
+
+    <!--统计管理员数量,再随机给用户分配一位管理员-->
+    <select id="countProductor" resultType="int">
+        SELECT count(id)
+        FROM tb_productor
+        WHERE visibility=0
+    </select>
+
+    <!--判断该管理员是否存在-->
+    <select id="productorExist"
+
+    <!--注册后像用户发送一条欢迎消息-->
+    <insert id="sendWelcome">
+        INSERT INTO tb_message
+        (visibility,from_id,to_id,content,type)
+        VALUES ( 0,#{0},#{1},"欢迎来到IrelandLight",1 )
+    </insert>
+
+    <!--根据用户名查找用户-->
+    <select id="findConsumerByUserName" parameterType="String" resultType="Long">
+        SELECT id
+        FROM tb_consumer
+        WHERE user_name=#{userName}
+    </select>
+
+</mapper>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irelandlight.dao.AccountManageDao">
+
+    <!--根据cid查找用户名-->
+    <select id="findConsumerName" parameterType="Long" resultType="java.lang.String">
+        SELECT user_name
+        FROM tb_consumer
+        WHERE `visibility`=0 AND `id`=#{id}
+    </select>
+
+    <!--根据cid查找昵称-->
+    <select id="findNickName" parameterType="Long" resultType="java.lang.String">
+        SELECT nick_name
+        FROM tb_consumer
+        WHERE `visibility`=0 AND `id`=#{id}
+    </select>
+
+    <!--根据cid查找用户手机号码-->
+    <select id="findTelphone" parameterType="Long" resultType="java.lang.String">
+        SELECT telephone
+        FROM tb_consumer
+        WHERE `visibility`=0 AND id=#{id}
+    </select>
+
+    <!--根据cid查找默认收货地址-->
+    <select id="findDefaultAddress" parameterType="Long" resultType="java.lang.String">
+        SELECT detail
+        FROM tb_address
+        WHERE `visibility`=0 AND  id = (SELECT default_address_id FROM tb_consumer WHERE id=#{id})
+    </select>
+
+    <!--根据cid查找默认地址收货人-->
+    <select id="findDefaultConsumer" parameterType="Long" resultType="java.lang.String">
+        SELECT consumer_name
+        FROM tb_address
+        WHERE `visibility`=0 AND  id = (SELECT default_address_id FROM tb_consumer WHERE id=#{id})
+    </select>
+
+    <!--根据cid查找默认收货地址id-->
+    <select id="findDefaultAddressId" parameterType="Long" resultType="Integer">
+        SELECT default_address_id
+        FROM tb_consumer
+        WHERE id=#{consumerId}
+    </select>
+
+    <!--根据cid查找用户密码-->
+    <select id="findPassword" parameterType="Long" resultType="java.lang.String">
+        SELECT password
+        FROM tb_consumer
+        WHERE `visibility`=0 AND  id=#{id}
+    </select>
+
+    <!--根据cid查找用户盐值-->
+    <select id="findSalt" parameterType="Long" resultType="java.lang.String">
+        SELECT salt
+        FROM tb_consumer
+        WHERE id=#{consumerId}
+    </select>
+
+    <!--根据cid,新密码修改用户密码-->
+    <update id="updatePassword">
+        UPDATE tb_consumer
+        SET password=#{1}
+        WHERE `visibility`=0 AND  id=#{0}
+    </update>
+
+    <!--根据cid修改用户手机号码-->
+    <update id="updateTelephone">
+        UPDATE tb_consumer
+        SET telephone=#{1}
+        WHERE `visibility`=0 AND  id=#{0}
+    </update>
+
+    <!--根据cid查看收货地址-->
+    <select id="findAddress" parameterType="Long" resultType="com.irelandlight.model.Address">
+        SELECT `id`,province,city,district,street,detail,consumer_name,consumer_phone
+        FROM tb_address
+        WHERE visibility=0 AND consumer_id=#{id}
+    </select>
+
+    <!--根据cid添加新地址-->
+    <insert id="insertNewAddress" parameterType="com.irelandlight.model.Address">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO tb_address
+        (province,city,district,street,post,detail,consumer_id,consumer_name,consumer_phone)
+        VALUES ( #{province},#{city},#{district},#{street},#{post},#{detail},#{consumerId},#{consumerName},#{consumerPhone} )
+    </insert>
+
+    <update id="updateDefaultAddressId" >
+        UPDATE tb_consumer
+        SET default_address_id=#{1}
+        WHERE id=#{0}
+    </update>
+
+</mapper>

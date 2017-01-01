@@ -4,17 +4,21 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Created by mac on 2016/12/3.
+ * Created  with Intellij IDEA.
+ * User: Ele_Chen
+ * Date: 2016/12/3
+ * Time: 10:30
+ * Description: 顾客信息表 .
  */
 public class Consumer {
     private Long id;
     private Date createTime;        //创建时间
     private Date lastUpdate;        //最近一次更新时间
     private Integer visibility;     //是否已删除
-    private String username;        //用户姓名
+    private String userName;        //用户姓名
     private String password;        //密码
     private String salt;            //盐值
-    private String nickname;        //昵称
+    private String nickName;        //昵称
     private String headImgurl;      //头像存储位置
     private Integer score;          //用户积分
     private BigDecimal wallet;      //余额
@@ -22,6 +26,15 @@ public class Consumer {
     private String email;           //用户邮箱地址
     private String telephone;       //用户联系方式
     private Date birthday;          //用户生日
+    private Integer defaultAddressId; //默认收货地址id
+
+    public Integer getDefaultAddressId() {
+        return defaultAddressId;
+    }
+
+    public void setDefaultAddressId(Integer defaultAddressId) {
+        this.defaultAddressId = defaultAddressId;
+    }
 
     public Long getId() {
         return id;
@@ -55,12 +68,12 @@ public class Consumer {
         this.visibility = visibility;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -79,12 +92,12 @@ public class Consumer {
         this.salt = salt;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getHeadImgurl() {
@@ -141,5 +154,26 @@ public class Consumer {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        return "Consumer{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", lastUpdate=" + lastUpdate +
+                ", visibility=" + visibility +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", headImgurl='" + headImgurl + '\'' +
+                ", score=" + score +
+                ", wallet=" + wallet +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", birthday=" + birthday +
+                '}';
     }
 }

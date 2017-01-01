@@ -12,8 +12,10 @@ public class Comment {
     private Integer visibility;     //表示是否已删除
     private String content;         //评论内容
     private Long consumerId;        //消费者表主键做逻辑外键，与productor_id互斥
+    private Long productorId;       //管理者表主键做逻辑外键，与consumer_id互斥
     private Long goodsId;           //商品表主键做逻辑外键
-
+    private Long commentedId;       //评论表主键做逻辑外键，用于存储子环一对多关系
+    private Integer level;          //评论级别
 
     public Long getId() {
         return id;
@@ -63,6 +65,14 @@ public class Comment {
         this.consumerId = consumerId;
     }
 
+    public Long getProductorId() {
+        return productorId;
+    }
+
+    public void setProductorId(Long productorId) {
+        this.productorId = productorId;
+    }
+
     public Long getGoodsId() {
         return goodsId;
     }
@@ -71,5 +81,19 @@ public class Comment {
         this.goodsId = goodsId;
     }
 
+    public Long getCommentedId() {
+        return commentedId;
+    }
 
+    public void setCommentedId(Long commentedId) {
+        this.commentedId = commentedId;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
 }

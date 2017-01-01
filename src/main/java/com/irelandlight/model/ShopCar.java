@@ -3,11 +3,7 @@ package com.irelandlight.model;
 import java.util.Date;
 
 /**
- * Created  with Intellij IDEA.
- * User: Ele_Chen
- * Date: 2016/12/3
- * Time: 10:02
- * Description: 购物车表 .
+ * Created by mac on 2016/12/3.
  */
 public class ShopCar {
 

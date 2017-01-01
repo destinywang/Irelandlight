@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.irelandlight.dao.PersonalInfoDao">
+
+    <select id="findPersonalInfo" parameterType="java.lang.Long" resultType="com.irelandlight.model.Consumer">
+        SELECT user_name,nick_name,gender,telephone,birthday,email
+        FROM tb_consumer
+        WHERE visibility=0 AND id=#{id}
+    </select>
+
+    <!--根据cid+昵称修改昵称-->
+    <update id="updateNickname">
+        UPDATE tb_consumer
+        SET nick_name=#{1}
+        WHERE id=#{0}
+    </update>
+
+    <!--根据cid+邮箱修改邮箱-->
+    <update id="updateEmail" >
+        UPDATE tb_consumer
+        SET email=#{1}
+        WHERE id=#{0}
+    </update>
+
+
+
+    <!--
+        &lt;!&ndash;根据cid查找用户名&ndash;&gt;
+        <select id="findConsumerName" parameterType="java.lang.Long" resultType="java.lang.String">
+            SELECT user_name
+            FROM tb_consumer
+            WHERE `visibility`=0 AND `id`=#{id}
+        </select>
+
+        &lt;!&ndash;根据cid查找昵称&ndash;&gt;
+        <select id="findNickName" parameterType="java.lang.Long" resultType="java.lang.String">
+            SELECT nick_name
+            FROM tb_consumer
+            WHERE `visibility`=0 AND `id`=#{id}
+        </select>
+
+        &lt;!&ndash;根据cid查找性别&ndash;&gt;
+        <select id="findGender" parameterType="java.lang.Long" resultType="java.lang.String">
+            SELECT gender
+            FROM tb_consumer
+            WHERE `id`=#{id}
+        </select>
+
+        &lt;!&ndash;根据cid查找生日&ndash;&gt;
+        <select id="findBirthday" parameterType="java.lang.Long" resultType="java.util.Date">
+            SELECT birthday
+            FROM tb_consumer
+            WHERE `id`=#{id}
+        </select>
+
+        &lt;!&ndash;根据cid查找手机号&ndash;&gt;
+        <select id="findTelphone" parameterType="java.lang.Long" resultType="java.lang.String">
+            SELECT telephone
+            FROM tb_consumer
+            WHERE id=#{id}
+        </select>
+
+        &lt;!&ndash;根据cid查找邮箱&ndash;&gt;
+        <select id="findEmail" parameterType="java.lang.Long" resultType="java.lang.String">
+            SELECT email
+            FROM tb_consumer
+            WHERE `id`=#{id}
+        </select>
+    -->
+
+
+</mapper>
