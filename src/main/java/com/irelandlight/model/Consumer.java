@@ -163,10 +163,10 @@ public class Consumer {
                 ", createTime=" + createTime +
                 ", lastUpdate=" + lastUpdate +
                 ", visibility=" + visibility +
-                ", username='" + username + '\'' +
+                ", username='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", salt='" + salt + '\'' +
-                ", nickname='" + nickname + '\'' +
+                ", nickname='" + nickName + '\'' +
                 ", headImgurl='" + headImgurl + '\'' +
                 ", score=" + score +
                 ", wallet=" + wallet +

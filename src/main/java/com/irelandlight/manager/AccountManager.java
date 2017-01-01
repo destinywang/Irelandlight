@@ -40,9 +40,9 @@ public class AccountManager {
         Map<String, Object> updateStatus = new HashMap<String, Object>();
         String DBold = accountManageDaoImpl.findPassword(consumerId);
         String DBsalt = accountManageDaoImpl.findSalt(consumerId);
-        String before = MD5Util.getMD5(oldPass + DBsalt);
+        String before = MD5Util.getMD5Code(oldPass + DBsalt);
         if (DBold.equals(before)) {
-            Integer updateRow = accountManageDaoImpl.updatePassword(consumerId, MD5Util.getMD5(newPass + DBsalt));
+            Integer updateRow = accountManageDaoImpl.updatePassword(consumerId, MD5Util.getMD5Code(newPass + DBsalt));
             if (updateRow == 1) {
                 updateStatus.put("status", 0);
                 updateStatus.put("msg", "修改密码成功");

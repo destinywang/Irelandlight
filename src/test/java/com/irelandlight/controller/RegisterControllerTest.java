@@ -27,8 +27,8 @@ public class RegisterControllerTest {
 
     public static Consumer build() throws ParseException {
         Consumer consumer=new Consumer();
-        consumer.setUsername("ttt");
-        consumer.setNickname("test");
+        consumer.setUserName("ttt");
+        consumer.setNickName("test");
         //*进行日期转换*//
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         String date="2009-5-3";
