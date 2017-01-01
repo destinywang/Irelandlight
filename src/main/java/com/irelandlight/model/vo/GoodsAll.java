@@ -6,6 +6,7 @@ import java.util.List;
  * Created by Zichu on 2016/12/8.
  */
 public class GoodsAll {
+
     private GoodsInfo goodsInfo;
     private List<SizePrice> sizePrices;
 
