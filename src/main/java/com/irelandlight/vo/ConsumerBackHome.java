@@ -13,9 +13,7 @@ public class ConsumerBackHome {
         return nickName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
+
 
     public Long getId() {
         return id;
