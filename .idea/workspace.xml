@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2800cdd-60e9-48a2-91fc-bd86f71083dd" name="Default" comment="测试:&#10;Git-Reposity-Push指令&#10;为查看Push指令显示的上次push后的时间内,commit的内容&#10;还原上次紧邻的测试">
+    <list default="true" id="d2800cdd-60e9-48a2-91fc-bd86f71083dd" name="Default" comment="测试:&#10;目的是对push后的文件进行回退和回复">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
+    <list id="448fb52c-bfed-4b9d-b964-fc39e6f5f81a" name="Revert: 测试:&#10;目的是对push后的文件进行回退和回复 (8ba6120305b5561984270cafba4aab7b20f5ffed)" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ConsumerBackHome.java" afterPath="$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ConsumerBackHome.java" />
     </list>
     <ignored path="Irelandlight.iws" />
@@ -11,6 +13,7 @@
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <file path="$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ConsumerBackHome.java" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,11 +56,13 @@
       <file leaf-file-name="ConsumerBackHome.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ConsumerBackHome.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="291">
+              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
               <folding>
                 <element signature="e#221#222#0" expanded="true" />
                 <element signature="e#252#253#0" expanded="true" />
+                <element signature="e#300#301#0" expanded="true" />
+                <element signature="e#340#341#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1029,6 +1034,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="d2800cdd-60e9-48a2-91fc-bd86f71083dd" name="Default" comment="" />
+      <changelist id="448fb52c-bfed-4b9d-b964-fc39e6f5f81a" name="Revert: 测试:&#10;目的是对push后的文件进行回退和回复 (8ba6120305b5561984270cafba4aab7b20f5ffed)" comment="" />
       <created>1478358606861</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -1073,7 +1079,7 @@
       <workItem from="1483346914548" duration="398000" />
       <workItem from="1483352522112" duration="280000" />
       <workItem from="1483352845988" duration="511000" />
-      <workItem from="1483615463389" duration="3588000" />
+      <workItem from="1483615463389" duration="3785000" />
     </task>
     <task id="LOCAL-00001" summary="测试:&#10;Git-Reposity-Push指令&#10;为查看Push指令显示的上次push后的时间内,commit的内容&#10;">
       <created>1483617859373</created>
@@ -1089,7 +1095,14 @@
       <option name="project" value="LOCAL" />
       <updated>1483617921854</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="测试:&#10;目的是对push后的文件进行回退和回复">
+      <created>1483619596911</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1483619596911</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1125,7 +1138,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="296779000" />
+    <option name="totallyTimeSpent" value="296976000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1161,7 +1174,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25189108" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25189108" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3262295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1245,7 +1258,9 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="测试:&#10;Git-Reposity-Push指令&#10;为查看Push指令显示的上次push后的时间内,commit的内容&#10;" />
     <MESSAGE value="测试:&#10;Git-Reposity-Push指令&#10;为查看Push指令显示的上次push后的时间内,commit的内容&#10;还原上次紧邻的测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="测试:&#10;Git-Reposity-Push指令&#10;为查看Push指令显示的上次push后的时间内,commit的内容&#10;还原上次紧邻的测试" />
+    <MESSAGE value="测试:&#10;目的是对push后的文件进行回退和回复" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试:&#10;目的是对push后的文件进行回退和回复" />
+    <option name="PRESELECT_EXISTING_CHANGELIST" value="false" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1690,11 +1705,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/irelandlight/vo/ConsumerBackHome.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="291">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
           <folding>
             <element signature="e#221#222#0" expanded="true" />
             <element signature="e#252#253#0" expanded="true" />
+            <element signature="e#300#301#0" expanded="true" />
+            <element signature="e#340#341#0" expanded="true" />
           </folding>
         </state>
       </provider>
