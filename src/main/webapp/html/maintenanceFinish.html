@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>maintenanceFinish</title>
+		<link href="../css/common.css" rel="stylesheet" />
+		<link href="../css/maintenanceFinish.css" rel="stylesheet" />
+		<link href="http://at.alicdn.com/t/font_pvkhzuv1hn2ep14i.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="all-page">
+			<div class="header">
+				<a><i class="iconfont icon-fanhui"></i></a>
+				<p class="title">维保完成</p>
+				<a><i class="iconfont icon-jiajian02"></i></a>
+			</div>
+			<div class="middle">
+				<div class="img">
+					
+					<canvas id="canvas" width="100%" height="160px"></canvas>
+				</div>
+				<p class="picture"><i class="iconfont icon-zhaoxiang"></i><input type="button" id="snap" value="拍照上传"></input></p>
+					
+					<video id="video" width="50%" height="100px" autoplay></video>
+					
+				<p class="maintenance">维保名称：<span class="task-title"> </span></p>
+				<div>
+					<span class="describe">描述：</span>
+					<textarea class="write"></textarea>
+				</div> 
+				<p class="describe"><span >位置：</span><i class="iconfont icon-dingwei"></i><span class="addresss"></span></p>
+				<input type="submit" value="维修完成" class="finish" />
+			</div>
+		</div>
+		<footer class="clearfix">
+			<div class="task">
+				<a href="#"><img src='../img/center.png'></a>
+				<p>任务中心</p>
+			</div>
+			<div class="personal">
+				<a href="#"><img src="../img/personal.png"></a>
+				<p>个人中心</p>
+			</div>
+			<div class="warn">
+				<a href="#"><img src='../img/warn.png'></a>
+				<p>报警</p>
+			</div>
+		</footer>
+		<script src="../js/jquery-1.10.1.min.js"></script>
+		<script src="../js/maintenanceFinish.js"></script>
+	</body>
+	<script>
+    window.addEventListener("DOMContentLoaded", function() {
+        var canvas = document.getElementById("canvas"),//调用canvas接口
+        	
+                context = canvas.getContext("2d"),
+                video = document.getElementById("video"),
+                videoObj = { "video": true },
+                errBack = function(error) {//错误处理
+                    console.log("Video capture error: ", error.code);
+                };
+        if(navigator.getUserMedia) {//调用html5拍摄接口
+            navigator.getUserMedia(videoObj, function(stream) {
+                video.src = stream;//摄像机属于视频流，所以当然要输出到html5的video标签中了
+                video.play();//开始播放
+            }, errBack);
+        } else if(navigator.webkitGetUserMedia) { //WebKit内核调用html5拍摄接口
+            navigator.webkitGetUserMedia(videoObj, function(stream){
+                video.src = window.webkitURL.createObjectURL(stream);//同上
+                video.play();//同上
+            }, errBack);
+        }
+        else if(navigator.mozGetUserMedia) { //moz内核调用html5拍摄接口
+            navigator.mozGetUserMedia(videoObj, function(stream){
+                video.src = window.URL.createObjectURL(stream);//同上
+                video.play();//同上
+            }, errBack);
+        }
+    }, false);
+
+    document.getElementById("snap")
+            .addEventListener("click", function() {//获取拍照按钮绑定事件
+                var canvans = document.getElementById("canvas"),//调用canvas接口
+                        context = canvas.getContext("2d");
+                context.drawImage(video, 0, 0, 640, 480);//调用canvas接口的drawImage方法绘制当前video标签中的静态图片，其实就是截图
+
+                var imgData = canvans.toDataURL();//获取图片的base64格式的数据
+                //这里就可以写上传服务器代码了
+            });
+</script>
+</html>
+

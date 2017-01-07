@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.BindException;
 import java.util.*;
@@ -199,60 +200,111 @@ public class ContainerManage {
     }
 
 
-    @RequestMapping(value = "/xiaofang" ,method = {RequestMethod.GET,RequestMethod.POST})
-    public void resp(HttpServletResponse servletResponse)throws Exception{
-        String temp=" [{\n" +
-                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/267b16d4-36aa-4040-a8e5-a2c88205e2b8.jpg\",\n" +
-                "\t\"address\":\"A号楼\",\n" +
-                "\t\"time\":\"2014-10-10\",\n" +
-                "\t\"id\":1,\n" +
-                "\t\"state\":4},\n" +
-                "\t{\n" +
-                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/9d45443a-89fd-4aff-8563-1e59d835025c.jpg\",\n" +
-                "\t\"address\":\"B号楼\",\n" +
-                "\t\"time\":\"2014-11-10\",\n" +
-                "\t\"id\":2,\n" +
-                "\t\"state\":4},\n" +
-                "\t{\n" +
-                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg\",\n" +
-                "\t\"address\":\"C号楼\",\n" +
-                "\t\"time\":\"2014-11-10\",\n" +
-                "\t\"id\":3,\n" +
-                "\t\"state\":5\n" +
-                "\t}\n" +
-                "]";
+    @RequestMapping(value = "/inquire" ,method = {RequestMethod.GET,RequestMethod.POST})
+    public void resp(HttpServletResponse servletResponse, HttpServletRequest servletRequest)throws Exception{
+        String temp=
+                " [{\n" +
+                        "\t\t\t\t\"Pic\":\"img/A.jpg\",\n" +
+                        "\t\t\t\t\"address\":\"A号楼\",\n" +
+                        "\t\t\t\t\"time\":\"2014-10-10\",\n" +
+                        "\t\t\t\t\"taskNo\":\"000001\",\n" +
+                        "\t\t\t\t\"state\":4},\n" +
+                        "\t\t\t\t{\n" +
+                        "\t\t\t\t\"Pic\":\"B.jpg\",\n" +
+                        "\t\t\t\t\"address\":\"B号楼\",\n" +
+                        "\t\t\t\t\"time\":\"2014-11-10\",\n" +
+                        "\t\t\t\t\"taskNo\":\"000002\",\n" +
+                        "\t\t\t\t\"state\":4},\n" +
+                        "\t\t\t\t{\n" +
+                        "\t\t\t\t\"Pic\":\"C.jpg\",\n" +
+                        "\t\t\t\t\"address\":\"C号楼\",\n" +
+                        "\t\t\t\t\"time\":\"2014-11-10\",\n" +
+                        "\t\t\t\t\"taskNo\":\"000003\",\n" +
+                        "\t\t\t\t\"state\":5\n" +
+                        "\t\t\t\t}\n" +
+                        "\t\t\t]";
+        String msg=servletRequest.getParameter("taskNo");
+
+
+        if(msg!=null){
+            System.out.println(msg);
+        }
         servletResponse.setContentType("text/html;charset=utf-8");
         servletResponse.setHeader("Access-Control-Allow-Origin","*");
         servletResponse.setCharacterEncoding("utf-8");
         servletResponse.getWriter().println(temp);
     }
-    @RequestMapping(value = "/anqi" ,method = {RequestMethod.GET,RequestMethod.POST})
-    public void resp2(HttpServletResponse servletResponse)throws Exception{
+    @RequestMapping(value = "/taskManagement" ,method = {RequestMethod.GET,RequestMethod.POST})
+    public void resp2(HttpServletResponse servletResponse,HttpServletRequest servletRequest)throws Exception{
         String temp=" [{\n" +
-                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/267b16d4-36aa-4040-a8e5-a2c88205e2b8.jpg\",\n" +
-                "\t\"address\":\"A号楼\",\n" +
-                "\t\"time\":\"2014-10-10\",\n" +
-                "\t\"id\":1,\n" +
-                "\t\"state\":1},\n" +
-                "\t{\n" +
-                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/9d45443a-89fd-4aff-8563-1e59d835025c.jpg\",\n" +
-                "\t\"address\":\"B号楼\",\n" +
-                "\t\"time\":\"2014-11-10\",\n" +
-                "\t\"id\":2,\n" +
-                "\t\"state\":2},\n" +
-                "\t{\n" +
-                "\t\"Pic\":\"http://ohlu5erjk.bkt.clouddn.com/f13e0b45-dd44-4156-a417-a1f4b0962dd7.jpg\",\n" +
-                "\t\"address\":\"C号楼\",\n" +
-                "\t\"time\":\"2014-11-10\",\n" +
-                "\t\"id\":3,\n" +
-                "\t\"state\":3\n" +
-                "\t}\n" +
-                "]";
+                "\t\t\t\t\t\"Pic\":\"img/A.jpg\",\n" +
+                "\t\t\t\t\t\"address\":\"A号楼\",\n" +
+                "\t\t\t\t\t\"time\":\"2014-10-10\",\n" +
+                "\t\t\t\t\t\"taskNo\":\"000001\",\n" +
+                "\t\t\t\t\t\"state\":1},\n" +
+                "\t\t\t\t\t{\n" +
+                "\t\t\t\t\t\"Pic\":\"B.jpg\",\n" +
+                "\t\t\t\t\t\"address\":\"B号楼\",\n" +
+                "\t\t\t\t\t\"time\":\"2014-11-10\",\n" +
+                "\t\t\t\t\t\"taskNo\":\"000002\",\n" +
+                "\t\t\t\t\t\"state\":2},\n" +
+                "\t\t\t\t\t{\n" +
+                "\t\t\t\t\t\"Pic\":\"C.jpg\",\n" +
+                "\t\t\t\t\t\"address\":\"C号楼\",\n" +
+                "\t\t\t\t\t\"time\":\"2014-11-10\",\n" +
+                "\t\t\t\t\t\"taskNo\":\"000003\",\n" +
+                "\t\t\t\t\t\"state\":1\n" +
+                "\t\t\t\t\t}]";
+
+        String msg=servletRequest.getParameter("taskNo");
+
+
+        if(msg!=null){
+            System.out.println(msg);
+        }
         servletResponse.setContentType("text/html;charset=utf-8");
         servletResponse.setHeader("Access-Control-Allow-Origin","*");
         servletResponse.setCharacterEncoding("utf-8");
         servletResponse.getWriter().println(temp);
     }
+
+
+
+
+
+    @RequestMapping(value = "/police" ,method = {RequestMethod.GET,RequestMethod.POST})
+    public void resp3(HttpServletResponse servletResponse,HttpServletRequest servletRequest)throws Exception{
+        String temp=" [{\n" +
+                "\t\t\t\t\"Pic\":\"img/A.jpg\",\n" +
+                "\t\t\t\t\"address\":\"A号楼\",\n" +
+                "\t\t\t\t\"time\":\"2014-10-10\",\n" +
+                "\t\t\t\t\"taskNo\":\"000001\",\n" +
+                "\t\t\t\t},\n" +
+                "\t\t\t\t{\n" +
+                "\t\t\t\t\"Pic\":\"B.jpg\",\n" +
+                "\t\t\t\t\"address\":\"B号楼\",\n" +
+                "\t\t\t\t\"time\":\"2014-11-10\",\n" +
+                "\t\t\t\t\"taskNo\":\"000005\",\n" +
+                "\t\t\t\t},\n" +
+                "\t\t\t\t{\n" +
+                "\t\t\t\t\"Pic\":\"C.jpg\",\n" +
+                "\t\t\t\t\"address\":\"C号楼\",\n" +
+                "\t\t\t\t\"time\":\"2014-11-10\",\n" +
+                "\t\t\t\t\"taskNo\":\"000007\",\n" +
+                "\t\t\t\t}\n" +
+                "\t\t\t]";
+        String msg=servletRequest.getParameter("taskNo");
+
+
+        if(msg!=null){
+            System.out.println(msg);
+        }
+        servletResponse.setContentType("text/html;charset=utf-8");
+        servletResponse.setHeader("Access-Control-Allow-Origin","*");
+        servletResponse.setCharacterEncoding("utf-8");
+        servletResponse.getWriter().println(temp);
+    }
+
 
 
 

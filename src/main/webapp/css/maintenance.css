@@ -1,0 +1,80 @@
+.header{
+	background-color: #373b3e;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	z-index: 2;
+	
+}
+.header .icon-fanhui,.header .icon-jiajian02{
+	color: #FFFFFF;
+	font-size: 24px;
+	line-height: 60px;
+}
+.title{
+	flex: 1;
+	text-align: center;
+	line-height: 60px;
+	color: #FFFFFF;
+	font-size: 24px;
+}
+.middle{
+	padding-left: 10%;
+	margin-top: 90px;
+}
+.fireHydrant{
+ 	position: relative;
+ 	left: 50%;
+ 	margin-left: -155px;
+}
+.task{
+	text-align: center;
+	line-height: 200%;
+}
+.describe{
+	padding-top: 20px;
+}
+.content{
+	padding-left: 10%;
+	line-height: 200%;
+}
+.gas{
+	display: flex;
+	flex-direction: row;
+	width: 60%;
+	padding-left: 10%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.gas p{
+	flex: 1;
+}
+.finish{
+	position: relative;
+	left: 50%;
+	margin-left: -50px;
+	background-color: #5cb85c;
+	color: #FFFFFF;
+	margin-top: 50px;
+	margin-bottom: 100px;
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #363b3e;
+    padding: 0.3rem 1rem 0.35rem 1rem;
+}
+footer a{display: block;}
+footer p{font-size:0.9rem;color:#d8dcdf;}
+footer .task{float: left;text-align: center;}
+footer .task img{width: 1.5rem;height: 1.5rem;}
+footer .task p{padding-top:0.5rem;}
+footer .personal{float:right;text-align: center;}
+footer .personal img{width: 1.5rem;height: 1.5rem;}
+footer .personal p{padding-top:0.5rem;}
+footer .warn{position:absolute;top:-18%;left:43%;text-align:center;}
+footer .warn img{width:2.5rem;height: 2.5rem;}
+footer .warn p{padding-top:0.5rem;}
