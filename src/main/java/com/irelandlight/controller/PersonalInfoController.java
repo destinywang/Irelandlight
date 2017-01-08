@@ -25,9 +25,7 @@ public class PersonalInfoController {
     @Resource
     private PersonalInfoService personalInfoServiceImpl;
 
-    private static final ThreadLocal<Long> consumerId = new ThreadLocal<Long>();
-
-    {
+    private static final ThreadLocal<Long> consumerId = new ThreadLocal<Long>();{
         consumerId.set(1001L);
     }
 

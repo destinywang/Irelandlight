@@ -1,7 +1,6 @@
 package com.irelandlight.dao;
 
 import com.irelandlight.model.Address;
-import com.irelandlight.model.Consumer;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
