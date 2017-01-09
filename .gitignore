@@ -24,6 +24,7 @@
 *.ipr
 *.iml
 *.iws
+/out
 
 # test
 /src/test
